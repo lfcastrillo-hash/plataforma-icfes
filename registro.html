@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <div class="container-simple">
+      <h1>Registro de Usuario</h1>
+
+      <input type="text" id="nombreRegistro" placeholder="Nombre completo" />
+      <input type="email" id="correoRegistro" placeholder="Correo" />
+      <input type="password" id="passwordRegistro" placeholder="Contraseña" />
+
+      <select id="rolRegistro">
+        <option value="estudiante">Estudiante</option>
+        <option value="profesor">Profesor</option>
+      </select>
+
+      <button onclick="registrarUsuario()">Registrarse</button>
+
+      <p id="mensajeRegistro" style="margin-top: 15px"></p>
+
+      <a class="back-link" href="index.html">Volver</a>
+    </div>
+
+    <script src="js/auth.js"></script>
+  </body>
+</html>

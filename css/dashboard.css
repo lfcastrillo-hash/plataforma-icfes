@@ -1,0 +1,43 @@
+.dashboard {
+  padding: 40px 10%;
+}
+
+.welcome-box,
+.table-box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.progress {
+  background: #3d8bfd;
+  color: white;
+  text-align: center;
+  padding: 8px;
+}
+
+.quick-access {
+  display: flex;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.table-box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-box th,
+.table-box td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}

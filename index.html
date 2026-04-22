@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plataforma Pre-ICFES</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>Plataforma Pre-ICFES</h1>
+      <nav>
+        <a href="#areas">Áreas</a>
+        <a href="registro.html">Registro</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h2>Prepárate para la Prueba Saber 11</h2>
+        <p>
+          Estudia Matemáticas, Lectura Crítica, Ciencias, Sociales e Inglés
+          desde una sola plataforma.
+        </p>
+        <div class="buttons">
+          <a class="btn" href="#login">Iniciar Sesión</a>
+          <a class="btn secondary" href="#areas">Explorar Áreas</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas" class="cards-section">
+      <h2>Áreas disponibles</h2>
+
+      <div class="cards">
+        <div class="card">Matemáticas</div>
+        <div class="card">Lectura Crítica</div>
+        <div class="card">Ciencias Naturales</div>
+        <div class="card">Sociales y Ciudadanas</div>
+        <div class="card">Inglés</div>
+      </div>
+    </section>
+
+    <section id="login" class="login-box">
+      <h2>Inicio de Sesión</h2>
+
+      <input type="email" id="correo" placeholder="Correo" />
+      <input type="password" id="password" placeholder="Contraseña" />
+
+      <select id="rol">
+        <option value="estudiante">Estudiante</option>
+        <option value="profesor">Profesor</option>
+      </select>
+
+      <button onclick="iniciarSesion()">Ingresar</button>
+    </section>
+
+    <script src="js/auth.js"></script>
+  </body>
+</html>

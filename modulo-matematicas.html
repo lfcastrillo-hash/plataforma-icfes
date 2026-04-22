@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Módulo Matemáticas</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/modulos.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>Matemáticas</h1>
+      <a href="dashboard-estudiante.html">Volver</a>
+    </header>
+
+    <main class="module-container">
+      <div class="topic-card">
+        <h2>Álgebra</h2>
+        <p>Aprende ecuaciones, expresiones y operaciones básicas.</p>
+        <button onclick="marcarTema(this)">Marcar completado</button>
+      </div>
+
+      <div class="topic-card">
+        <h2>Geometría</h2>
+        <p>Figuras, perímetros, áreas y volúmenes.</p>
+        <button onclick="marcarTema(this)">Marcar completado</button>
+      </div>
+
+      <div class="topic-card">
+        <h2>Estadística</h2>
+        <p>Tablas, gráficas y análisis de datos.</p>
+        <button onclick="marcarTema(this)">Marcar completado</button>
+      </div>
+
+      <div class="topic-card reto">
+        <h2>Mini Reto</h2>
+        <p>¿Cuánto es 2x + 3 si x = 4?</p>
+        <button>11</button>
+        <button>8</button>
+        <button>5</button>
+      </div>
+    </main>
+
+    <button class="chat-btn" onclick="abrirChat()">IA</button>
+
+    <script src="js/progreso.js"></script>
+    <script src="js/chat-ia.js"></script>
+  </body>
+</html>

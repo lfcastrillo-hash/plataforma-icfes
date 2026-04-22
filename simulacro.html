@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulacro ICFES</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <div class="container-simple">
+      <h1>Simulacro ICFES</h1>
+
+      <p>Tiempo restante: <span id="timer">25:00</span></p>
+
+      <div class="question-box">
+        <h3>1. ¿Cuál es el resultado de 5 + 3?</h3>
+
+        <label><input type="radio" name="q1" /> 6</label>
+        <label><input type="radio" name="q1" /> 8</label>
+        <label><input type="radio" name="q1" /> 10</label>
+        <label><input type="radio" name="q1" /> 12</label>
+      </div>
+
+      <button onclick="finalizarSimulacro()">Finalizar</button>
+
+      <p id="resultado"></p>
+    </div>
+
+    <script src="js/simulacro.js"></script>
+  </body>
+</html>
