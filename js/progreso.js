@@ -1,14 +1,32 @@
-let progreso = JSON.parse(localStorage.getItem("progresoMatematicas")) || 0;
+function obtenerUsuario() {
+  return JSON.parse(localStorage.getItem("usuarioActivo"));
+}
+
+function obtenerClaveProgreso() {
+  const usuario = obtenerUsuario();
+  return "progresoMatematicas_" + usuario.correo;
+}
+
+function obtenerProgreso() {
+  return JSON.parse(localStorage.getItem(obtenerClaveProgreso())) || 0;
+}
+
+function guardarProgreso(valor) {
+  localStorage.setItem(obtenerClaveProgreso(), JSON.stringify(valor));
+}
 
 function actualizarBarra() {
   const barra = document.querySelector(".progress");
   if (barra) {
+    const progreso = obtenerProgreso();
     barra.style.width = progreso + "%";
     barra.textContent = progreso + "%";
   }
 }
 
 function marcarTema(boton, valor = 30) {
+  let progreso = obtenerProgreso();
+
   if (!boton.classList.contains("completado")) {
     progreso += valor;
     if (progreso > 100) progreso = 100;
@@ -17,12 +35,12 @@ function marcarTema(boton, valor = 30) {
     boton.style.background = "green";
     boton.classList.add("completado");
 
-    localStorage.setItem("progresoMatematicas", JSON.stringify(progreso));
+    guardarProgreso(progreso);
     actualizarBarra();
   }
 }
 
-function responderReto(correcta, boton) {
+function responderReto(correcta) {
   const mensaje = document.getElementById("mensajeReto");
 
   if (correcta) {
