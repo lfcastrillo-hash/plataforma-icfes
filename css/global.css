@@ -1,4 +1,3 @@
-/* --- ESTILOS BASE ORIGINALES --- */
 * {
   margin: 0;
   padding: 0;
@@ -47,17 +46,16 @@ body {
   gap: 15px;
 }
 
-/* --- BOTONES (Mejorados para que no se peguen) --- */
 .btn,
 button {
   background: #123c73;
   color: white;
   border: none;
-  padding: 12px 25px; /* Un poco más de ancho lateral */
+  padding: 12px 25px;
   border-radius: 10px;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block; /* Importante para que respete márgenes */
+  display: inline-block; 
   font-size: 14px;
   transition: background 0.3s;
 }
@@ -71,29 +69,26 @@ button {
   color: #123c73;
 }
 
-/* --- SECCIÓN DE TARJETAS (Arreglo de amontonamiento) --- */
 .cards-section {
   padding: 50px 10%;
 }
 
 .cards {
   display: grid;
-  /* Subimos a 280px para que el texto tenga espacio */
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px; /* Más aire entre tarjetas */
+  gap: 25px; 
   margin-top: 30px;
 }
 
 .card {
   background: white;
-  padding: 35px 25px; /* Más espacio interno arriba y abajo */
+  padding: 35px 25px; 
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   text-decoration: none;
   color: #1b1b1b;
   
-  /* Esto evita que el botón tape el texto */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,7 +108,6 @@ button {
   color: #555;
 }
 
-/* --- OTROS COMPONENTES --- */
 .login-box,
 .container-simple {
   width: 90%;
@@ -156,12 +150,12 @@ button {
   text-align: center;
 }
 
-/* --- ESTILOS TIPO DRIVE PARA VIDEOS --- */
+
 
 .video-preview {
   width: 100%;
   height: 120px;
-  background: #e0e0e0; /* Color gris de fondo */
+  background: #e0e0e0; 
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -182,7 +176,7 @@ button {
   text-align: left !important;
   display: flex;
   flex-direction: column;
-  align-items: flex-start !important; /* Alinea texto a la izquierda */
+  align-items: flex-start !important; 
 }
 
 .card-video h3 {
@@ -190,7 +184,7 @@ button {
   margin-bottom: 10px !important;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Pone los "..." si el nombre es largo */
+  text-overflow: ellipsis; 
   width: 100%;
   color: #333;
 }
@@ -200,4 +194,90 @@ button {
   padding: 8px !important;
   font-size: 13px !important;
   text-align: center;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-nav-icon {
+  width: 40px;
+  height: 40px;
+  background: #3d8bfd;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid white;
+  transition: transform 0.2s ease;
+}
+
+.profile-nav-icon:hover {
+  transform: scale(1.1);
+}
+
+.profile-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+}
+
+.profile-img-big {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #123c73;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 45px;
+  margin: 0 auto 15px;
+  border: 4px solid #3d8bfd;
+}
+
+.grado-tag {
+  background: #3d8bfd;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.stat-item {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+}
+
+.stat-item span {
+  display: block;
+  font-size: 22px;
+  font-weight: bold;
+  color: #123c73;
+}
+
+.stat-item label {
+  font-size: 11px;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

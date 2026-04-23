@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil - Estudiante</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>Mi Perfil</h1>
+      <div class="nav-right">
+        <a href="dashboard-estudiante.html">Volver</a>
+        <a href="perfil.html" class="profile-nav-icon">E</a>
+      </div>
+    </header>
+
+    <section class="cards-section">
+      <div class="profile-header">
+        <div class="profile-img-big">E</div>
+        <h2>Nombre del Estudiante</h2>
+        <span class="grado-tag">Grado 11° - Calendario A</span>
+        <p style="margin-top: 10px; color: #555;">Institución Educativa Técnica</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span>...</span>
+            <label>Talleres Hechos</label>
+          </div>
+          <div class="stat-item">
+            <span>...</span>
+            <label>Meta de Puntaje</label>
+          </div>
+          <div class="stat-item">
+            <span>...h</span>
+            <label>Tiempo de Estudio</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Mis Simulacros</h3>
+          <p>Mira tus resultados anteriores</p>
+          <button onclick="window.location.href='simulacro.html'">Ver Resultados</button>
+        </div>
+        
+        <div class="card">
+          <h3>Configuración</h3>
+          <p>Actualizar correo o foto</p>
+          <button>Editar Perfil</button>
+        </div>
+
+        <div class="card" style="border: 1px solid #ff4d4d;">
+          <h3 style="color: #ff4d4d;">Cerrar Sesión</h3>
+          <p>Salir de la cuenta</p>
+          <a href="index.html" class="btn" style="background: #ff4d4d; border: none;">Salir</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/chat-ia.js"></script>
+  </body>
+</html>
