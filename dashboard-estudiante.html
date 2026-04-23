@@ -27,13 +27,19 @@
         <h2>Áreas de Estudio</h2>
 
         <div class="cards">
-          <a class="card" href="modulo-matematicas.html">Matemáticas</a>
-          <a class="card" href="modulo-matematicas.html">Lectura Crítica</a>
-          <a class="card" href="modulo-matematicas.html">Ciencias Naturales</a>
-          <a class="card" href="modulo-matematicas.html"
+          <a class="card" href="modulo-matematicas.html?area=matematicas"
+            >Matemáticas</a
+          >
+          <a class="card" href="modulo-matematicas.html?area=lectura"
+            >Lectura Crítica</a
+          >
+          <a class="card" href="modulo-matematicas.html?area=ciencias"
+            >Ciencias Naturales</a
+          >
+          <a class="card" href="modulo-matematicas.html?area=sociales"
             >Sociales y Ciudadanas</a
           >
-          <a class="card" href="modulo-matematicas.html">Inglés</a>
+          <a class="card" href="modulo-matematicas.html?area=ingles">Inglés</a>
         </div>
       </section>
 
@@ -46,5 +52,16 @@
     <button class="chat-btn" onclick="abrirChat()">IA</button>
 
     <script src="js/chat-ia.js"></script>
+
+    <script>
+      const usuario = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+      if (!usuario) {
+        window.location.href = "index.html";
+      } else {
+        document.querySelector(".welcome-box h2").textContent =
+          "Bienvenido, " + usuario.nombre;
+      }
+    </script>
   </body>
 </html>
