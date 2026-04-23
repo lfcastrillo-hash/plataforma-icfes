@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICFES Filtrados</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <style>
+      /* Estilo extra solo para esta página para alinear los botones de las sesiones */
+      .sesiones-container {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+      }
+      .btn-sesion {
+        flex: 1; /* Para que ambos botones midan lo mismo */
+        padding: 10px 5px !important;
+        font-size: 13px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>ICFES Filtrados</h1>
+      <a href="cuadernillos.html">Volver</a>
+    </header>
+
+    <section class="cards-section">
+      <div class="cards">
+        
+        <div class="card">
+          <h3>Año 2025</h3>
+          <p>Selecciona la sesión</p>
+          <div class="sesiones-container">
+            <a href="pdfs/2025-sesion1.pdf" target="_blank" class="btn btn-sesion">Primera Sesión</a>
+            <a href="pdfs/2025-sesion2.pdf" target="_blank" class="btn btn-sesion">Segunda Sesión</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Año 2024</h3>
+          <p>Selecciona la sesión</p>
+          <div class="sesiones-container">
+            <a href="pdfs/2024-sesion1.pdf" target="_blank" class="btn btn-sesion">Primera Sesión</a>
+            <a href="pdfs/2024-sesion2.pdf" target="_blank" class="btn btn-sesion">Segunda Sesión</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Año 2023</h3>
+          <p>Selecciona la sesión</p>
+          <div class="sesiones-container">
+            <a href="pdfs/2023-sesion1.pdf" target="_blank" class="btn btn-sesion">Primera Sesión</a>
+            <a href="pdfs/2023-sesion2.pdf" target="_blank" class="btn btn-sesion">Segunda Sesión</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Año 2022</h3>
+          <p>Selecciona la sesión</p>
+          <div class="sesiones-container">
+            <a href="pdfs/2022-sesion1.pdf" target="_blank" class="btn btn-sesion">Primera Sesión</a>
+            <a href="pdfs/2022-sesion2.pdf" target="_blank" class="btn btn-sesion">Segunda Sesión</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <button class="chat-btn" onclick="abrirChat()">IA</button>
+
+    <script src="js/chat-ia.js"></script>
+  </body>
+</html>
