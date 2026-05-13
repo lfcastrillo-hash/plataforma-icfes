@@ -34,47 +34,34 @@
     </main>
 
     <script>
-      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      async function cargarRanking() {
+        try {
+          const respuesta = await fetch("http://localhost:3000/api/ranking");
 
-      const estudiantes = usuarios
-        .filter((u) => u.rol === "estudiante")
-        .map((u) => {
-          const progreso =
-            JSON.parse(
-              localStorage.getItem("progresoMatematicas_" + u.correo),
-            ) || 0;
+          const estudiantes = await respuesta.json();
 
-          return {
-            ...u,
-            progreso,
-          };
-        });
+          const tabla = document.getElementById("tablaEstudiantes");
 
-      
-      estudiantes.sort((a, b) => b.progreso - a.progreso);
+          tabla.innerHTML = "";
 
-      const tabla = document.getElementById("tablaEstudiantes");
+          estudiantes.forEach((est, index) => {
+            const fila = document.createElement("tr");
 
-      if (estudiantes.length === 0) {
-        tabla.innerHTML = `
-      <tr>
-        <td colspan="4">No hay estudiantes registrados</td>
-      </tr>
-    `;
-      } else {
-        estudiantes.forEach((est, index) => {
-          const fila = document.createElement("tr");
+            fila.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${est[0]}</td>
+          <td>${est[1]}</td>
+          <td>${est[2]}%</td>
+        `;
 
-          fila.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${est.nombre}</td>
-        <td>${est.correo}</td>
-        <td>${est.progreso}%</td>
-      `;
-
-          tabla.appendChild(fila);
-        });
+            tabla.appendChild(fila);
+          });
+        } catch (error) {
+          console.log(error);
+        }
       }
+
+      cargarRanking();
     </script>
   </body>
 </html>
