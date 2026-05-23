@@ -131,9 +131,10 @@ async function iniciarSesion() {
       nombre: data.usuario.nombre 
     }));
 
+    // === AQUÍ SE ACTUALIZARON LAS RUTAS AL NUEVO NOMBRE ===
     const destino = rol === "estudiante"
-      ? "dashboard-estudiante.html"
-      : "dashboard-profesor.html";
+      ? "panel-estudiante.html"
+      : "panel-profesor.html";
 
     waterLoaderExito(destino);
 

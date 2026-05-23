@@ -123,14 +123,10 @@ async function seleccionarClase(idClase, nombreClase, elementoNav) {
     });
   }
 
-  document.getElementById("estado-vacio").style.display    = "none";
+  document.getElementById("estado-vacio").style.display     = "none";
   document.getElementById("contenido-clase").style.display = "block";
   document.getElementById("tituloClase").textContent       = `Grupo ${nombreClase}`;
   document.getElementById("busquedaEstudiantes").value = "";
-
-  // Cargar anuncio guardado de la clase
-  const claseEncontrada = listaClasesOriginal.find(c => c.id_clase === idClase);
-  document.getElementById("texto-anuncio").value = (claseEncontrada && claseEncontrada.anuncio) ? claseEncontrada.anuncio : "";
 
   // Resetear íconos de ordenación al cambiar de grupo
   document.getElementById("icon-sort-nombre").textContent = "⇅";
@@ -140,8 +136,13 @@ async function seleccionarClase(idClase, nombreClase, elementoNav) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// POST-IT: PUBLICAR ANUNCIO EN EL MURO
+// POST-IT: PUBLICAR ANUNCIO EN EL MURO (MODAL)
 // ══════════════════════════════════════════════════════════════════════════════
+function abrirModalAnuncio() {
+    document.getElementById("texto-anuncio").value = "";
+    abrirModal("modal-anuncio");
+}
+
 async function guardarAnuncio() {
   if (!claseActivaId) return mostrarToast("Selecciona una clase primero.", "error");
 
@@ -155,27 +156,11 @@ async function guardarAnuncio() {
       body: JSON.stringify({ anuncio: textoAnuncio })
     });
 
-    const data = await response.json();
-
     if (response.ok) {
       mostrarToast("¡Anuncio publicado con éxito!", "success");
-      
-      // Actualizar el estado en memoria para que no se pierda al navegar
-      const index = listaClasesOriginal.findIndex(c => c.id_clase === claseActivaId);
-      if (index !== -1) {
-        listaClasesOriginal[index].anuncio = textoAnuncio;
-      }
-
-      // Animación de éxito en el botón
-      const btn = document.getElementById("btn-anuncio");
-      btn.textContent = "¡Publicado!";
-      btn.style.backgroundColor = "#10b981";
-      setTimeout(() => {
-        btn.textContent = "Publicar Anuncio";
-        btn.style.backgroundColor = "#f59e0b";
-      }, 1800);
+      cerrarModal("modal-anuncio");
     } else {
-      mostrarToast(data.mensaje, "error");
+      mostrarToast("Error al publicar anuncio", "error");
     }
   } catch (error) {
     console.error("Error guardando el anuncio:", error);
@@ -284,7 +269,7 @@ function actualizarStats(estudiantes) {
 }
 
 function mostrarEstadoVacio() {
-  document.getElementById("estado-vacio").style.display    = "block";
+  document.getElementById("estado-vacio").style.display     = "block";
   document.getElementById("contenido-clase").style.display = "none";
   document.getElementById("listaClasesSidebar").innerHTML  = "";
 }
@@ -467,8 +452,8 @@ document.querySelectorAll(".modal-overlay").forEach(overlay => {
 
 function mostrarToast(msg, tipo = "success") {
   const t = document.getElementById("toast");
-  t.textContent  = msg;
-  t.className    = `toast ${tipo}`;
+  t.textContent   = msg;
+  t.className     = `toast ${tipo}`;
   t.style.display = "block";
   setTimeout(() => { t.style.display = "none"; }, 3000);
 }

@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (usuario.lista_clases && usuario.lista_clases.length > 0) {
           usuario.lista_clases.forEach(clase => {
               const a = document.createElement("a");
-              a.href = "dashboard-profesor.html"; 
+              a.href = "panel-profesor.html"; // === ACTUALIZADO ===
               a.textContent = `MÓDULO: GRUPO ${clase.toUpperCase()}`;
               a.style.color = "#0284c7";
               a.style.textDecoration = "none";

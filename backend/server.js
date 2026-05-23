@@ -30,7 +30,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Como server.js está en la carpeta 'backend', usamos '../' para 
 // decirle que tus HTML, CSS y JS están una carpeta más afuera.
 // ====================================================================
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 const PORT = 3000;
 app.listen(PORT, () => {
