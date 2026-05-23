@@ -109,7 +109,6 @@ async function iniciarSesion() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // IMPORTANTE: 'include' asegura que el navegador acepte y guarde la cookie HttpOnly
-      // que envía el servidor en la respuesta.
       credentials: 'include', 
       body: JSON.stringify({ correo, password, rol }),
     });
@@ -120,18 +119,15 @@ async function iniciarSesion() {
       waterLoaderError(data.mensaje);
       return;
     }
-
-    // ELIMINADO: localStorage.setItem("usuarioActivo", ...)
-    // Ya no lo necesitamos, el backend nos dio una cookie segura (token_acceso)
     
-    // Podemos guardar el nombre o el correo solo para mostrarlo visualmente, 
-    // pero NUNCA usamos esto para dar permisos. Los permisos van en la cookie.
+    // AQUÍ ESTABA EL ERROR: Agregamos el tipo_usuario para que el panel lo reconozca
     localStorage.setItem("datosVisionales", JSON.stringify({
       correo: data.usuario.correo, 
-      nombre: data.usuario.nombre 
+      nombre: data.usuario.nombre,
+      tipo_usuario: rol 
     }));
 
-    // === AQUÍ SE ACTUALIZARON LAS RUTAS AL NUEVO NOMBRE ===
+    // === RUTAS ACTUALIZADAS ===
     const destino = rol === "estudiante"
       ? "panel-estudiante.html"
       : "panel-profesor.html";

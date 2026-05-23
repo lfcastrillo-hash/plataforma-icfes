@@ -1016,3 +1016,231 @@ button:hover {
 .card-logout h3 {
   color: #991b1b;
 }
+
+/* ==========================================================================
+   PANEL ESTUDIANTE: NAVBAR, MENÚ DESPLEGABLE Y HAMBURGUESA FINAL
+   ========================================================================== */
+body.dashboard-estudiante {
+  overflow-x: hidden; 
+  background: #f4f7fb;
+  margin: 0; 
+}
+
+/* --- NAVBAR CON GRID PARA CENTRAR TÍTULO --- */
+.navbar-estudiante {
+  display: grid !important; 
+  grid-template-columns: auto 1fr auto !important; /* Izquierda, Centro, Derecha */
+  align-items: center;
+  padding: 0 30px !important; 
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  background: #123c73; 
+  color: white;
+  height: 72px; 
+}
+
+/* --- BOTÓN HAMBURGUESA (CAPA MÁXIMA E INMORTAL) --- */
+.navbar-estudiante .menu-toggle {
+  grid-column: 1;
+  position: relative !important;
+  z-index: 9999 !important; 
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  width: 32px !important;
+  height: 22px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+}
+
+/* Las 3 rayitas blancas obligadas a aparecer */
+.navbar-estudiante .menu-toggle div {
+  background-color: #ffffff !important; 
+  height: 3px !important; 
+  width: 100% !important; 
+  border-radius: 5px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important; 
+  display: block !important;
+  transform-origin: left !important;
+}
+
+/* Animaciones de la X */
+.navbar-estudiante .menu-toggle.active div:first-child { transform: rotate(45deg) !important; }
+.navbar-estudiante .menu-toggle.active div:nth-child(2) { opacity: 0 !important; }
+.navbar-estudiante .menu-toggle.active div:last-child { transform: rotate(-45deg) !important; }
+
+/* Título tirado a la izquierda */
+.navbar-estudiante h1 {
+  grid-column: 2;
+  justify-self: start; /* Lo empuja al inicio */
+  margin-left: 20px; /* Separación del botón */
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  white-space: nowrap; 
+}
+
+/* Usuario a la derecha */
+.navbar-estudiante .nav-right {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* --- SIDEBAR OSCURO Y LIMPIO --- */
+.sidebar-oculta {
+  position: fixed;
+  top: 0;
+  left: -280px; 
+  width: 280px;
+  height: 100vh;
+  background: #1a202c; 
+  box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000; /* Queda por debajo del navbar pero arriba del contenido */
+  padding-top: 90px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-oculta.abierto { left: 0; }
+
+.titulo-panel {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0 25px 15px 25px;
+  border-bottom: 1px solid #2d3748;
+  margin-bottom: 15px;
+}
+
+.sidebar-oculta .nav-item {
+  color: #cbd5e1; 
+  padding: 12px 25px;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-oculta .nav-item:hover {
+  background: #2d3748;
+  color: #fff;
+}
+
+.sidebar-oculta .nav-item.activa {
+  background: #2a3441;
+  color: #fff;
+  border-left-color: #3d8bfd; 
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   LIMPIEZA FINAL DE ICONOS HEREDADOS (SOLO PARA ESTUDIANTE)
+   ========================================================================== */
+/* Forzamos que no salga NINGÚN emoji antes del texto */
+body.dashboard-estudiante .nav-item::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* --- Contenido Principal --- */
+.contenido-dinamico {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+
+/* ==========================================================================
+   13. TARJETAS DE ÁREAS DE ESTUDIO (areas.html)
+   ========================================================================== */
+.titulo-seccion {
+  color: #123c73;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #eef2f7;
+  padding-bottom: 10px;
+}
+
+.card-materia-progreso {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border: 1px solid #eef2f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-materia-progreso:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(18, 60, 115, 0.12) !important;
+}
+
+.card-materia-progreso h4 {
+  color: #123c73;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}
+
+.card-materia-progreso p {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.progreso-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.barra-fondo-area {
+  height: 10px;
+  background: #e4e7ed;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.barra-llena-area {
+  height: 100%;
+  background: #123c73;
+  border-radius: 10px;
+}
+
+.btn-area {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  display: block;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   LIMPIEZA FINAL DE ICONOS HEREDADOS (ACTUALIZADO)
+   ========================================================================== */
+/* Al usar .sidebar-oculta nos aseguramos de que los emojis del profesor 
+   nunca salgan en el panel del estudiante, sin importar en qué HTML estemos */
+.sidebar-oculta .nav-item::before {
+  content: none !important;
+  display: none !important;
+}
