@@ -1,19 +1,22 @@
-const oracledb = require("oracledb");
+const { Pool } = require('pg');
 
-async function conectar() {
-  try {
-    const conexion = await oracledb.getConnection({
-      user: "system",
-      password: "oracle",
-      connectString: "localhost/XE",
-    });
+// 1. Configuración de tus credenciales locales de PostgreSQL
+const pool = new Pool({
+  user: 'postgres',            // 👈 ¡Corregido! Aquí va el nombre de usuario (usualmente 'postgres')
+  host: 'localhost',           // Servidor local
+  database: 'WEB',             // El nombre de la base de datos que creaste en tu pgAdmin
+  password: 'admin123',        // Tu contraseña de Postgres
+  port: 5432,                  // Puerto por defecto de PostgreSQL
+});
 
-    console.log("Conectado a Oracle");
-
-    return conexion;
-  } catch (error) {
-    console.log("Error de conexión:", error);
+// 2. Verificación automática de la conexión al iniciar el servidor
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('❌ Error de conexión en PostgreSQL:', err.stack);
+  } else {
+    console.log('⚡ ¡Conectado con éxito a PostgreSQL local!');
   }
-}
+});
 
-module.exports = conectar;
+// Exportamos el pool directamente para usarlo en los controladores
+module.exports = pool;

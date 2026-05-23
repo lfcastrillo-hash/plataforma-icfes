@@ -1,67 +1,163 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard Profesor</title>
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/dashboard.css" />
-  </head>
-  <body>
-    <header class="navbar">
-      <h1>Panel del Profesor</h1>
-      <a href="index.html">Cerrar sesión</a>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel del Profesor - ICFES Prep</title>
+  <link rel="stylesheet" href="css/global.css" />
+</head>
+<body class="dashboard-profesor">
 
-    <main class="dashboard">
-      <section class="welcome-box">
-        <h2>Ranking de estudiantes</h2>
-        <p>Ordenados por progreso en Matemáticas</p>
-      </section>
+  <header class="navbar">
+    <h1>Panel del Profesor</h1>
+    <div class="nav-right">
+      <div style="display: flex; align-items: center; gap: 10px; color: white;">
+        <span id="nav-nombre-profesor" style="font-size:14px; opacity:0.85;"></span>
+        <a href="perfil-profesor.html" id="nav-avatar" class="profile-nav-icon" style="background:#3d8bfd; margin: 0; cursor: pointer; text-decoration: none;">P</a>
+      </div>
+      <a href="#" onclick="cerrarSesion()" style="font-size:13px; opacity:0.85; margin-left: 20px;">Cerrar sesión</a>
+    </div>
+  </header>
 
-      <section class="table-box">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Progreso</th>
-            </tr>
-          </thead>
-          <tbody id="tablaEstudiantes"></tbody>
-        </table>
-      </section>
-    </main>
+  <main class="main-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h3>Mis Clases</h3>
+        <button class="btn-compact" title="Nueva clase" onclick="abrirModalCrearClase()">＋</button>
+      </div>
+      <div class="search-box-compact">
+        <input type="text" id="busquedaClases" placeholder="Buscar clase..." oninput="filtrarClasesSidebar(this.value)" />
+        <button>🔍</button>
+      </div>
+      <nav class="sidebar-nav" id="listaClasesSidebar">
+      </nav>
+    </aside>
 
-    <script>
-      async function cargarRanking() {
-        try {
-          const respuesta = await fetch("http://localhost:3000/api/ranking");
+    <section class="content-panel">
+      <div id="estado-vacio" style="display:none;">
+        <div class="empty-state">
+          <h2>Aún no tienes clases creadas</h2>
+          <p>Crea tu primer grupo para empezar a gestionar estudiantes y ver su progreso.</p>
+          <button class="btn btn-primary" onclick="abrirModalCrearClase()">＋ Crear mi primera clase</button>
+        </div>
+      </div>
 
-          const estudiantes = await respuesta.json();
+      <div id="contenido-clase" style="display:none;">
+        <header class="content-header" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+          <div>
+            <h2 id="tituloClase">Grupo —</h2>
+            <p id="codigoAcceso" style="font-size:13px; color:#888; margin-top:4px;"></p>
+          </div>
+          <div class="content-actions" style="display: flex; gap: 10px; align-items: center;">
+            <div class="search-box-compact" style="margin: 0; width: 220px;">
+              <input type="text" id="busquedaEstudiantes" placeholder="Buscar estudiante..." oninput="filtrarEstudiantesTabla(this.value)" />
+            </div>
+            <button class="btn btn-secondary" onclick="confirmarEliminarClase()">🗑 Eliminar clase</button>
+            <button class="btn btn-primary" onclick="abrirModalAgregarEstudiante()">＋ Agregar estudiante</button>
+          </div>
+        </header>
 
-          const tabla = document.getElementById("tablaEstudiantes");
+        <div id="caja-anuncio" style="background-color: #fffbeb; border-left: 5px solid #f59e0b; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <h4 style="color: #b45309; margin: 0; font-size: 15px;"> Muro de Anuncios del Grupo</h4>
+            </div>
+            <textarea id="texto-anuncio" rows="2" placeholder="Escribe un anuncio para esta clase (Ej: Recuerden estudiar mañana)..." style="width: 100%; padding: 12px; border: 1px solid #fcd34d; border-radius: 6px; background: white; resize: vertical; font-size: 14px; margin-bottom: 10px; outline: none;"></textarea>
+            <div style="text-align: right;">
+                <button onclick="guardarAnuncio()" id="btn-anuncio" style="background-color: #f59e0b; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 13px; transition: background 0.2s;">
+                    Publicar Anuncio
+                </button>
+            </div>
+        </div>
 
-          tabla.innerHTML = "";
+        <div class="stats-row" id="statsRow">
+          <div class="stat-card">
+            <span class="stat-num" id="statTotal">0</span>
+            <span class="stat-label">Estudiantes</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statPromedio">0%</span>
+            <span class="stat-label">Promedio progreso</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statTop">—</span>
+            <span class="stat-label">Mejor estudiante</span>
+          </div>
+        </div>
 
-          estudiantes.forEach((est, index) => {
-            const fila = document.createElement("tr");
+        <div class="table-box-compact">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th onclick="ordenarColumna('nombre')" style="cursor: pointer; user-select: none;" title="Ordenar por Nombre">
+                    Nombre <span id="icon-sort-nombre" style="font-size: 11px; color: #aaa;">⇅</span>
+                </th>
+                <th style="color: #444; font-weight: bold;">Correo</th>
+                <th onclick="ordenarColumna('puntaje')" style="cursor: pointer; user-select: none;" title="Ordenar por Progreso">
+                    Progreso <span id="icon-sort-puntaje" style="font-size: 11px; color: #aaa;">⇅</span>
+                </th>
+                <th style="width: 80px;">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="tablaEstudiantes">
+            </tbody>
+          </table>
+          <div id="tabla-vacia" style="display:none;" class="tabla-empty-msg">
+            No hay estudiantes en este grupo aún.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-            fila.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${est[0]}</td>
-          <td>${est[1]}</td>
-          <td>${est[2]}%</td>
-        `;
+  <div id="modal-crear-clase" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Nueva Clase</h3>
+        <button class="modal-close" onclick="cerrarModal('modal-crear-clase')">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>Nombre del grupo</label>
+        <input type="text" id="input-nombre-clase" placeholder="Ej: 11U1, Grupo A, Matemáticas..." maxlength="40" />
+        <p id="error-crear-clase" class="modal-error" style="display:none;"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="cerrarModal('modal-crear-clase')">Cancelar</button>
+        <button class="btn btn-primary" onclick="crearClase()">Crear clase</button>
+      </div>
+    </div>
+  </div>
 
-            tabla.appendChild(fila);
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      }
+  <div id="modal-agregar-estudiante" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Agregar Estudiante</h3>
+        <button class="modal-close" onclick="cerrarModal('modal-agregar-estudiante')">✕</button>
+      </div>
+      <div class="modal-body">
+        <label>Correo del estudiante registrado</label>
+        <input type="email" id="input-correo-estudiante" placeholder="correo@ejemplo.com" />
+        <p id="error-agregar-estudiante" class="modal-error" style="display:none;"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="cerrarModal('modal-agregar-estudiante')">Cancelar</button>
+        <button class="btn btn-primary" onclick="agregarEstudiante()">Agregar</button>
+      </div>
+    </div>
+  </div>
 
-      cargarRanking();
-    </script>
-  </body>
+  <div id="modal-buscar-estudiante" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Resultado de búsqueda</h3>
+        <button class="modal-close" onclick="cerrarModal('modal-buscar-estudiante')">✕</button>
+      </div>
+      <div class="modal-body" id="resultado-busqueda">
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" style="display:none;"></div>
+
+  <script src="js/dashboard-profesor.js"></script>
+</body>
 </html>

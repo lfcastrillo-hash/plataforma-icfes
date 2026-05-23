@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. ESTILOS GENERALES Y BASE
+   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
@@ -10,6 +13,9 @@ body {
   color: #1b1b1b;
 }
 
+/* ==========================================================================
+   2. BARRA DE NAVEGACIÓN (NAVBAR)
+   ========================================================================== */
 .navbar {
   background: #123c73;
   color: white;
@@ -19,49 +25,38 @@ body {
   padding: 18px 40px;
 }
 
+.navbar h1 {
+  font-size: 1.5rem;
+}
+
 .navbar a {
   color: white;
   text-decoration: none;
   margin-left: 20px;
 }
 
-.hero {
-  padding: 80px 10%;
-  background: linear-gradient(135deg, #123c73, #3d8bfd);
-  color: rgb(254, 251, 251);
-}
-
-.hero h2 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  max-width: 600px;
-  margin-bottom: 20px;
-}
-
-.buttons {
-  display: flex;
-  gap: 15px;
-}
-
+/* ==========================================================================
+   3. BOTONES Y COMPONENTES COMUNES
+   ========================================================================== */
 .btn,
 button {
   background: #123c73;
   color: white;
   border: none;
-  padding: 12px 25px;
+  padding: 14px 30px;
   border-radius: 10px;
   cursor: pointer;
   text-decoration: none;
   display: inline-block; 
-  font-size: 14px;
-  transition: background 0.3s;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
-.btn:hover, button:hover {
+.btn:hover,
+button:hover {
   background: #1a56a6;
+  transform: translateY(-2px);
 }
 
 .secondary {
@@ -69,88 +64,209 @@ button {
   color: #0d3972;
 }
 
+.secondary:hover {
+  background: #f4f7fb;
+  color: #123c73;
+}
+
+.btn-full {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* ==========================================================================
+   4. DISEÑO HERO (DOS COLUMNAS: TEXTO + FOTO EN CUADRO | FORMULARIO)
+   ========================================================================== */
+.hero {
+  padding: 60px 8%;
+  background: linear-gradient(135deg, #123c73, #3d8bfd);
+  min-height: calc(100vh - 72px); 
+  display: flex;
+  align-items: center;
+}
+
+.hero-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Columna Izquierda */
+.hero-left {
+  flex: 1;
+  max-width: 550px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-left h2 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-left h2 span {
+  font-size: 1.6rem;
+  font-weight: normal;
+  opacity: 0.9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Control de tamaño de tu imagen dentro del cuadro */
+.hero-img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: contain;
+}
+
+/* Columna Derecha (Tarjeta Blanca Directa) */
+.hero-right {
+  flex: 1;
+  max-width: 420px;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-card {
+  background: white;
+  width: 100%;
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.5s ease;
+}
+
+.auth-card h2 {
+  color: #123c73;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+.auth-card input,
+.auth-card select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 14px;
+  border: 1px solid #dcdfe6;
+  border-radius: 10px;
+  font-size: 14px;
+  background: #f8fafc;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-card input:focus,
+.auth-card select:focus {
+  border-color: #3d8bfd;
+  background: white;
+}
+
+.switch-form {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.switch-form a {
+  color: #3d8bfd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Animación sutil de entrada para la tarjeta */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   5. SECCIÓN DE TARJETAS
+   ========================================================================== */
 .cards-section {
-  padding: 50px 10%;
+  padding: 60px 10%;
+}
+
+.cards-section h2 {
+  color: #123c73;
+  margin-bottom: 20px;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px; 
   margin-top: 30px;
 }
 
 .card {
   background: white;
-  padding: 35px 25px; 
+  padding: 40px 20px; 
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(5, 5, 5, 0.08);
-  text-decoration: none;
-  color: #070707;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px; 
+  box-shadow: 0 5px 15px rgba(5, 5, 5, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #eef2f7;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(18, 60, 115, 0.1);
 }
 
 .card h3 {
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.3;
+  font-size: 1.3rem;
+  color: #123c73;
 }
 
 .card p {
-  margin: 0;
+  margin-top: 10px;
   font-size: 0.95rem;
   color: #555;
+  line-height: 1.5;
 }
 
-.login-box,
-.container-simple {
-  width: 90%;
-  max-width: 450px;
-  margin: 50px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+/* ==========================================================================
+   6. EXTENSIONES DE USUARIO Y DASHBOARDS (VÍDEOS, PERFIL, ETC.)
+   ========================================================================== */
+.nav-right { 
+  display: flex; 
+  align-items: center; 
+  gap: 15px; 
 }
 
-.login-box input,
-.login-box select,
-.container-simple input,
-.container-simple select {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.profile-nav-icon { 
+  width: 40px; 
+  height: 40px; 
+  background: #3d8bfd; 
+  color: white; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  text-decoration: none; 
+  font-weight: bold; 
+  border: 2px solid white; 
+  transition: transform 0.2s ease; 
 }
 
-.chat-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #3d8bfd;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.profile-nav-icon:hover { 
+  transform: scale(1.1); 
 }
-
-.back-link {
-  display: block;
-  margin-top: 15px;
-  text-align: center;
-}
-
-
 
 .video-preview {
   width: 100%;
@@ -195,89 +311,708 @@ button {
   font-size: 13px !important;
   text-align: center;
 }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+
+/* ==========================================================================
+   7. RESPONSIVE DESIGN (PANTALLAS MEDIANAS Y CELULARES)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: 40px 5%;
+  }
+
+  .hero-container {
+    flex-direction: column;
+    gap: 35px;
+    text-align: center;
+  }
+
+  .hero-left {
+    max-width: 100%;
+  }
+
+  .hero-left h2 {
+    font-size: 2rem;
+  }
+
+  .hero-right {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
-.profile-nav-icon {
-  width: 40px;
-  height: 40px;
-  background: #3d8bfd;
-  color: white;
-  border-radius: 50%;
+/* ==========================================================================
+   8. COMPONENTES DEL DASHBOARD DEL PROFESOR
+   ========================================================================== */
+.header-clases {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.welcome-box-ranking {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.card-clase {
+  cursor: pointer;
+  border: 2px solid transparent !important;
+}
+
+.card-clase.activa {
+  border-color: #123c73 !important;
+  background: #fdfdfd;
+}
+
+/* Manejo de la columna y el contenedor de la barra dentro de la tabla */
+.col-progreso {
+  width: 40%;
+}
+
+.progreso-celda {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-decoration: none;
+  gap: 12px;
+}
+
+/* El riel o fondo de la barra */
+.barra-fondo {
+  background-color: #e4e7ed;
+  border-radius: 20px;
+  height: 14px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* El relleno que progresa */
+.barra-llena {
+  background-color: #123c73;
+  height: 100%;
+  border-radius: 20px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.porcentaje-texto {
   font-weight: bold;
-  border: 2px solid white;
-  transition: transform 0.2s ease;
-}
-
-.profile-nav-icon:hover {
-  transform: scale(1.1);
-}
-
-.profile-header {
-  text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-}
-
-.profile-img-big {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #123c73;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 45px;
-  margin: 0 auto 15px;
-  border: 4px solid #3d8bfd;
-}
-
-.grado-tag {
-  background: #3d8bfd;
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
   font-size: 14px;
-  font-weight: bold;
-  display: inline-block;
-  margin-top: 5px;
+  color: #123c73;
+  min-width: 45px;
+  text-align: right;
 }
 
-.stats-grid {
+/* ==========================================================================
+   DASHBOARD PROFESOR - DISEÑO COMPACTO Y SIDEBAR
+   ========================================================================== */
+
+/* Ajustes globales del cuerpo del dashboard */
+.dashboard-profesor body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Contenedor principal Grid: Sidebar y Content */
+.main-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: 240px 1fr;
+  height: calc(100vh - 72px);
+  background: #fdfdfd;
+}
+
+/* ==========================================================================
+   SIDEBAR (BARRA LATERAL)
+   ========================================================================== */
+.sidebar {
+  background: white;
+  border-right: 1px solid #eef2f7;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
-  margin-top: 25px;
 }
 
-.stat-item {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid #eee;
-}
-
-.stat-item span {
-  display: block;
-  font-size: 22px;
-  font-weight: bold;
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #123c73;
 }
 
-.stat-item label {
-  font-size: 11px;
-  color: #777;
+.sidebar-header h3 {
+  font-size: 1.1rem;
+}
+
+/* El elemento de búsqueda compacto en sidebar */
+.search-box-compact {
+  display: flex;
+  gap: 5px;
+  border: 1px solid #dcdfe6;
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: #f8fafc;
+}
+
+.search-box-compact input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13px;
+  color: #333;
+}
+
+.search-box-compact input:focus {
+  outline: none;
+}
+
+.search-box-compact button {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Lista de navegación de clases */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.nav-item {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background: #f4f7fb;
+  color: #123c73;
+}
+
+.nav-item.activa {
+  background: #123c73;
+  color: white;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   PANEL DE CONTENIDO PRINCIPAL
+   ========================================================================== */
+.content-panel {
+  padding: 30px;
+  overflow-y: auto;
+  background: #f4f7fb;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.content-header h2 {
+  color: #123c73;
+  font-size: 1.4rem;
+}
+
+.content-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   COMPONENTES COMPACTOS Y ACCIONES
+   ========================================================================== */
+
+/* Tabla compacta */
+.table-box-compact {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table-box-compact table th, 
+.table-box-compact table td {
+  padding: 12px 15px;
+  font-size: 14px;
+}
+
+.progreso-celda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.barra-fondo {
+  background-color: #e4e7ed;
+  border-radius: 10px;
+  height: 10px;
+  width: 100%;
+}
+
+.barra-llena {
+  background-color: #123c73;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.porcentaje-texto {
+  font-size: 12px;
+  color: #123c73;
+  font-weight: bold;
+}
+
+/* Botones y columna de acciones */
+.col-accion {
+  text-align: center;
+  width: 60px;
+}
+
+.btn-danger {
+  background-color: #c62828 !important;
+}
+
+/* Botones compactos (tipo icono) */
+.btn-compact {
+  padding: 4px 10px;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   9. EXTENSIONES EXCLUSIVAS - PANEL DEL PROFESOR DINÁMICO
+   ========================================================================== */
+
+/* ── Tarjetas de Estadísticas superiores (Stats) ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 2px 8px rgba(18, 60, 115, 0.07);
+  border-left: 4px solid #123c73;
+}
+
+.stat-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #123c73;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #888;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Mejoras estéticas para la navegación del Sidebar ── */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-item::before { 
+  content: "📂"; 
+  font-size: 13px; 
+}
+
+.nav-item.activa::before { 
+  content: "📖"; 
+}
+
+/* ── Avisos de tabla vacía o sin alumnos ── */
+.tabla-empty-msg {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* ── Estado Inicial cuando el profesor no tiene ningún salón creado ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  gap: 16px;
+}
+
+.empty-icon { 
+  font-size: 64px; 
+}
+
+.empty-state h2 {
+  color: #123c73;
+  font-size: 1.4rem;
+}
+
+.empty-state p {
+  color: #888;
+  font-size: 15px;
+  max-width: 380px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   10. COMPONENTES DE INTERFAZ MODERNOS (MODALES, TOASTS Y BÚSQUEDAS)
+   ========================================================================== */
+
+/* ── Capa de fondo oscura para los Modales (Overlay) ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 40, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.2s ease;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Caja contenedora del Modal ── */
+.modal-box {
+  background: white;
+  border-radius: 16px;
+  width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: slideUpModal 0.25s ease;
+  overflow: hidden;
+}
+
+@keyframes slideUpModal {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.modal-header h3 {
+  color: #123c73;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: none !important;
+  border: none !important;
+  font-size: 18px !important;
+  color: #aaa !important;
+  cursor: pointer !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  transform: none !important;
+  box-shadow: none !important;
+  display: inline-block;
+  width: auto !important;
+}
+
+.modal-close:hover { 
+  color: #c62828 !important; 
+  background: #fdecea !important; 
+}
+
+.modal-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-body label {
+  font-size: 13px;
+  color: #555;
+  font-weight: 600;
+}
+
+.modal-body input {
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border: 1.5px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  background: #f8fafc !important;
+  outline: none !important;
+  margin: 0 !important;
+}
+
+.modal-body input:focus {
+  border-color: #3d8bfd !important;
+  background: white !important;
+}
+
+.modal-error {
+  font-size: 13px;
+  color: #c62828;
+  font-weight: 600;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #eef2f7;
+}
+
+/* ── Despliegue de Resultados de la barra de búsqueda superior ── */
+.result-estudiante {
+  background: #f4f7fb;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.result-estudiante .nombre {
+  font-weight: 700;
+  color: #123c73;
+  font-size: 15px;
+}
+
+.result-estudiante .correo {
+  font-size: 13px;
+  color: #666;
+}
+
+.result-clase-tag {
+  display: inline-block;
+  background: #123c73;
+  color: white;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.no-result {
+  text-align: center;
+  color: #aaa;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+/* ── Notificaciones flotantes elegantes (Toasts) ── */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #123c73;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(18, 60, 115, 0.25);
+  z-index: 2000;
+  animation: toastIn 0.3s ease;
+}
+
+.toast.error { background: #c62828; }
+.toast.success { background: #1D9E75; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   X. SECCIÓN DE PERFILES (ESTUDIANTE Y PROFESOR)
+   ========================================================================== */
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.profile-card-header {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Contenedor de la foto de perfil grande */
+.avatar-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 15px auto;
+}
+
+.profile-img-big {
+  width: 100%;
+  height: 100%;
+  background: #3d8bfd;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(61, 139, 253, 0.3);
+  object-fit: cover;
+}
+
+/* 📷 BOTÓN FLOTANTE PARA CAMBIAR LA FOTO (ACTUALIZADO - SOLO LA CÁMARA) 📷 */
+.btn-change-photo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: transparent !important; /* Quitamos el fondo azul/blanco */
+  border: none !important;            /* Sin bordes */
+  padding: 0 !important;              /* Quitamos todo el espaciado base */
+  border-radius: 0 !important;        /* Quitamos esquinas redondeadas */
+  box-shadow: none !important;        /* Quitamos sombras si las hubiera */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;                    /* Hacemos la camarita más grande */
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7)); /* Sombra para resaltar */
+}
+
+.btn-change-photo:hover {
+  transform: scale(1.15) !important;
+  background: transparent !important;
+}
+
+.btn-change-photo:focus {
+  outline: none;
+}
+
+.profile-card-header h2 {
+  font-size: 1.8rem;
+  color: #1a202c;
+  margin-bottom: 5px;
+}
+
+.role-tag {
+  display: inline-block;
+  background: #e1effe;
+  color: #1a56db;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.institution-text {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Grid de métricas generales del perfil */
+.stats-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.stat-profile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-profile-item span {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #123c73;
+}
+
+.stat-profile-item label {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Bloques de Configuración y Acciones */
+.cards-profile-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.profile-action-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-action-card h3 {
+  font-size: 1.2rem;
+  color: #1a202c;
+  margin-bottom: 8px;
+}
+
+.profile-action-card p {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* Tarjeta especial para salir */
+.card-logout {
+  border-color: #fca5a5;
+  background: #fffdfd;
+}
+
+.card-logout h3 {
+  color: #991b1b;
 }

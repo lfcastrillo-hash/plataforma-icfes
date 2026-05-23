@@ -1,60 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plataforma Pre-ICFES</title>
+    <title>ICFES-Prep</title>
     <link rel="stylesheet" href="css/global.css" />
   </head>
   <body>
+    
     <header class="navbar">
-      <h1>Plataforma Pre-ICFES</h1>
-      <nav>
-        <a href="#areas">Áreas</a>
-        <a href="registro.html">Registro</a>
-      </nav>
+      <h1>ICFES-Prep</h1>
     </header>
 
     <section class="hero">
-      <div>
-        <h2>Prepárate para la Prueba Saber 11</h2>
-        <p>
-          Estudia Matemáticas, Lectura Crítica, Ciencias, Sociales e Inglés
-          desde una sola plataforma.
-        </p>
-        <div class="buttons">
-          <a class="btn" href="#login">Iniciar Sesión</a>
-          <a class="btn secondary" href="#areas">Explorar Áreas</a>
+      <div class="hero-container">
+        
+        <div class="hero-left">
+          <h2>¿Le tienes miedo al ICFES? <br><span>No te preocupes, estás en el lugar correcto.</span></h2>
+          
+          <div class="hero-image-card">
+            <img src="img/icfesLogito.png" alt="Logotipo ICFES-Prep" class="hero-img" />
+          </div>
         </div>
+
+        <div class="hero-right">
+          <div class="auth-card">
+            
+            <!-- LOADER 500 AGUA -->
+            <div id="water-loader" style="display:none; flex-direction:column; align-items:center; gap:16px; padding: 10px 0 20px;">
+              <svg id="svg500" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg" style="width:200px; height:auto; overflow:visible;">
+                <defs>
+                  <clipPath id="clip500">
+                    <text x="110" y="100" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="100" letter-spacing="-4">500</text>
+                  </clipPath>
+                </defs>
+                <text x="110" y="100" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="100" letter-spacing="-4" fill="#dcdfe6">500</text>
+                <g clip-path="url(#clip500)">
+                  <rect id="water-rect" x="-10" y="110" width="240" height="120" fill="#3d8bfd" opacity="0.85"/>
+                  <path id="wave-path" fill="#3d8bfd" opacity="0.95"/>
+                </g>
+              </svg>
+              <p id="loader-msg" style="font-size:14px; color:#123c73; font-weight:bold; min-height:20px;">Verificando...</p>
+            </div>
+
+            <div id="hero-login-form" class="auth-form-active">
+              <h2>Inicio de Sesión</h2>
+              <input type="email" id="correo" placeholder="Correo electrónico" />
+              <input type="password" id="password" placeholder="Contraseña" />
+              <select id="rol">
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+              </select>
+              <button class="btn btn-full" onclick="iniciarSesion()">Ingresar</button>
+              <p class="switch-form">¿No tienes cuenta? <a href="#" onclick="alternarHeroForm('registro')">Regístrate aquí</a></p>
+            </div>
+
+            <div id="hero-registro-form" style="display: none;">
+              <h2>Crear Cuenta</h2>
+              <input type="text" id="reg-nombre" placeholder="Nombre Completo" />
+              <input type="email" id="reg-correo" placeholder="Correo electrónico" />
+              <input type="password" id="reg-password" placeholder="Contraseña" />
+              <select>
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+              </select>
+              <button class="btn btn-full" onclick="registrarUsuario()">Registrarse</button>
+              <p class="switch-form">¿Ya tienes cuenta? <a href="#" onclick="alternarHeroForm('login')">Inicia sesión</a></p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
-    </section>
-
-    <section id="areas" class="cards-section">
-      <h2>Áreas disponibles</h2>
-
-      <div class="cards">
-        <div class="card">Matemáticas</div>
-        <div class="card">Lectura Crítica</div>
-        <div class="card">Ciencias Naturales</div>
-        <div class="card">Sociales y Ciudadanas</div>
-        <div class="card">Inglés</div>
-      </div>
-    </section>
-
-    <section id="login" class="login-box">
-      <h2>Inicio de Sesión</h2>
-
-      <input type="email" id="correo" placeholder="Correo" />
-      <input type="password" id="password" placeholder="Contraseña" />
-
-      <select id="rol">
-        <option value="estudiante">Estudiante</option>
-        <option value="profesor">Profesor</option>
-      </select>
-
-      <button onclick="iniciarSesion()">Ingresar</button>
     </section>
 
     <script src="js/auth.js"></script>
+    <script src="js/water-loader.js"></script>
   </body>
 </html>
