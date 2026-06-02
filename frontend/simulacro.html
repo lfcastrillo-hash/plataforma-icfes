@@ -2,21 +2,1065 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Simulacro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulacro ICFES – Matemáticas</title>
     <link rel="stylesheet" href="css/global.css" />
+    <style>
+      /* ── Layout general ── */
+      body {
+        background: #f4f7fb;
+      }
+
+      .sim-header {
+        background: linear-gradient(135deg, #123c73, #1a56a6);
+        color: white;
+        padding: 22px 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .sim-header h1 {
+        font-size: 1.4rem;
+        margin: 0;
+      }
+      .sim-header a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 13px;
+      }
+
+      /* Pantalla de inicio */
+      .pantalla {
+        display: none;
+      }
+      .pantalla.activa {
+        display: block;
+      }
+
+      .inicio-wrap {
+        max-width: 680px;
+        margin: 50px auto;
+        padding: 0 20px;
+        text-align: center;
+      }
+      .inicio-wrap h2 {
+        color: #123c73;
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+      }
+      .inicio-wrap p {
+        color: #64748b;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .info-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 14px;
+        margin-bottom: 35px;
+      }
+      .info-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        border: 1px solid #eef2f7;
+      }
+      .info-card .valor {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #123c73;
+      }
+      .info-card .etq {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 4px;
+      }
+
+      /* Selector de subtema */
+      .subtema-select {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 28px;
+      }
+      .subtema-btn {
+        background: #f4f7fb;
+        color: #123c73;
+        border: 2px solid #e2e8f0;
+        border-radius: 25px;
+        padding: 8px 20px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .subtema-btn:hover,
+      .subtema-btn.sel {
+        background: #123c73;
+        color: white;
+        border-color: #123c73;
+        transform: none;
+      }
+
+      /* ── Barra de progreso del simulacro ── */
+      .sim-progress-wrap {
+        background: white;
+        padding: 16px 40px;
+        border-bottom: 1px solid #eef2f7;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .sim-progress-bar {
+        flex: 1;
+        background: #e4e7ed;
+        border-radius: 20px;
+        height: 10px;
+        min-width: 100px;
+        overflow: hidden;
+      }
+      .sim-progress-fill {
+        background: #123c73;
+        height: 100%;
+        border-radius: 20px;
+        transition: width 0.4s ease;
+        width: 0%;
+      }
+      .sim-info-row {
+        display: flex;
+        gap: 18px;
+        font-size: 13px;
+        color: #555;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .chip {
+        background: #e0e7ff;
+        color: #3730a3;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      /* Temporizador */
+      #timer {
+        background: #123c73;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        min-width: 70px;
+        text-align: center;
+      }
+      #timer.urgente {
+        background: #dc2626;
+      }
+
+      /* ── Tarjeta de pregunta ── */
+      .pregunta-wrap {
+        max-width: 760px;
+        margin: 36px auto;
+        padding: 0 20px;
+      }
+      .pregunta-card {
+        background: white;
+        border-radius: 16px;
+        padding: 32px 36px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+        margin-bottom: 18px;
+      }
+      .pregunta-num {
+        font-size: 12px;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+      .pregunta-enunciado {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.6;
+        margin-bottom: 24px;
+      }
+      .opciones-lista {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .op-btn {
+        background: #f8fafc;
+        color: #334155;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 14px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .op-btn .letra {
+        background: #e2e8f0;
+        color: #334155;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 800;
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+      .op-btn:hover {
+        background: #e0e7ff;
+        border-color: #818cf8;
+        transform: none;
+      }
+      .op-btn:hover .letra {
+        background: #818cf8;
+        color: white;
+      }
+      .op-btn.seleccionada {
+        background: #e0e7ff;
+        border-color: #4f46e5;
+      }
+      .op-btn.seleccionada .letra {
+        background: #4f46e5;
+        color: white;
+      }
+      .op-btn.correcta {
+        background: #dcfce7 !important;
+        border-color: #16a34a !important;
+      }
+      .op-btn.correcta .letra {
+        background: #16a34a !important;
+        color: white !important;
+      }
+      .op-btn.incorrecta {
+        background: #fee2e2 !important;
+        border-color: #dc2626 !important;
+      }
+      .op-btn.incorrecta .letra {
+        background: #dc2626 !important;
+        color: white !important;
+      }
+      .op-btn:disabled {
+        cursor: default;
+      }
+
+      /* Feedback inline */
+      .feedback-inline {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 10px;
+        padding: 14px 18px;
+        font-size: 14px;
+        color: #15803d;
+        line-height: 1.6;
+        display: none;
+        margin-top: 6px;
+      }
+      .feedback-inline.malo {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #991b1b;
+      }
+
+      /* Botón siguiente */
+      .btn-siguiente-wrap {
+        text-align: right;
+        margin-top: 6px;
+      }
+      #btnSiguiente {
+        display: none;
+        padding: 13px 32px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 12px;
+      }
+
+      /* ── Pantalla de resultados ── */
+      .resultado-wrap {
+        max-width: 680px;
+        margin: 50px auto;
+        padding: 0 20px;
+      }
+      .resultado-hero {
+        text-align: center;
+        background: white;
+        border-radius: 16px;
+        padding: 40px 32px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+        margin-bottom: 24px;
+      }
+      .puntaje-circulo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #123c73, #3d8bfd);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+      .puntaje-circulo .num {
+        font-size: 2rem;
+        font-weight: 800;
+      }
+      .puntaje-circulo .de {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+      .resultado-hero h2 {
+        color: #123c73;
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+      .resultado-hero p {
+        color: #64748b;
+        font-size: 15px;
+      }
+
+      .stats-result {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .stat-r {
+        background: white;
+        border-radius: 12px;
+        padding: 18px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .stat-r .v {
+        font-size: 1.7rem;
+        font-weight: 800;
+      }
+      .stat-r .l {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 4px;
+      }
+      .v.verde {
+        color: #16a34a;
+      }
+      .v.rojo {
+        color: #dc2626;
+      }
+      .v.azul {
+        color: #123c73;
+      }
+
+      /* Revisión de respuestas */
+      .revision-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid #e2e8f0;
+      }
+      .revision-card.bien {
+        border-left-color: #16a34a;
+      }
+      .revision-card.mal {
+        border-left-color: #dc2626;
+      }
+      .revision-card.omit {
+        border-left-color: #f59e0b;
+      }
+      .rev-encabezado {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .rev-enunciado {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.5;
+        flex: 1;
+      }
+      .rev-icono {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .rev-detalle {
+        font-size: 13px;
+        color: #555;
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+      .rev-detalle strong {
+        color: #123c73;
+      }
+
+      .btns-final {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .sim-header {
+          padding: 18px 20px;
+        }
+        .pregunta-card {
+          padding: 22px 18px;
+        }
+        .stats-result {
+          grid-template-columns: 1fr 1fr;
+        }
+        .info-cards {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="container-simple">
-      <h1>Simulacro ICFES</h1>
-      <p id="contador">Pregunta 1 de 5</p>
-
-      <div id="pregunta"></div>
-
-      <button onclick="siguiente()">Siguiente</button>
-
-      <p id="resultado"></p>
+    <!-- Navbar -->
+    <div class="sim-header">
+      <h1>📝 Simulacro ICFES – Matemáticas</h1>
+      <a href="areas.html">← Volver</a>
     </div>
 
-    <script src="js/simulacro.js"></script>
+    <div id="simulacros-container"></div>
+    <!-- ═══ PANTALLA 1: INICIO ═══ -->
+    <div class="pantalla activa" id="pantalla-inicio">
+      <div class="inicio-wrap">
+        <h2>Simulacro de Matemáticas</h2>
+        <p>
+          Pon a prueba tus conocimientos con preguntas de nivel ICFES Saber
+          11.<br />
+          Selecciona los temas que deseas incluir y comienza.
+        </p>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="valor" id="n-preguntas">40</div>
+            <div class="etq">Preguntas</div>
+          </div>
+          <div class="info-card">
+            <div class="valor">60</div>
+            <div class="etq">Minutos</div>
+          </div>
+          <div class="info-card">
+            <div class="valor">5</div>
+            <div class="etq">Temas</div>
+          </div>
+          <div class="info-card">
+            <div class="valor">A–D</div>
+            <div class="etq">Opciones</div>
+          </div>
+        </div>
+
+        <p style="font-weight: 700; color: #123c73; margin-bottom: 12px">
+          Filtrar por tema (opcional):
+        </p>
+        <div class="subtema-select">
+          <button
+            class="subtema-btn sel"
+            onclick="toggleSubtema(this, 'todos')"
+          >
+            Todos
+          </button>
+          <button class="subtema-btn" onclick="toggleSubtema(this, 'numerico')">
+            Pensamiento Numérico
+          </button>
+          <button class="subtema-btn" onclick="toggleSubtema(this, 'algebra')">
+            Álgebra
+          </button>
+          <button
+            class="subtema-btn"
+            onclick="toggleSubtema(this, 'geometria')"
+          >
+            Geometría
+          </button>
+          <button
+            class="subtema-btn"
+            onclick="toggleSubtema(this, 'estadistica')"
+          >
+            Estadística
+          </button>
+          <button class="subtema-btn" onclick="toggleSubtema(this, 'calculo')">
+            Cálculo y Funciones
+          </button>
+        </div>
+
+        <button
+          onclick="iniciarSimulacro()"
+          style="padding: 16px 48px; font-size: 16px; border-radius: 12px"
+        >
+          ▶ Comenzar Simulacro
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ PANTALLA 2: PREGUNTA ═══ -->
+    <div class="pantalla" id="pantalla-pregunta">
+      <div class="sim-progress-wrap">
+        <div class="sim-info-row">
+          <span
+            >Pregunta <strong id="numActual">1</strong> de
+            <strong id="totalPreg">40</strong></span
+          >
+          <span class="chip" id="chipTema">—</span>
+        </div>
+        <div class="sim-progress-bar">
+          <div class="sim-progress-fill" id="simFill"></div>
+        </div>
+        <div id="timer">30:00</div>
+      </div>
+
+      <div class="pregunta-wrap">
+        <div class="pregunta-card">
+          <div class="pregunta-num" id="pregNum">Pregunta 1 · Matemáticas</div>
+          <div class="pregunta-enunciado" id="enunciadoTexto"></div>
+          <div class="opciones-lista" id="opcionesLista"></div>
+          <div class="feedback-inline" id="feedbackInline"></div>
+        </div>
+        <div class="btn-siguiente-wrap">
+          <button id="btnSiguiente" onclick="siguientePregunta()">
+            Siguiente →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PANTALLA 3: RESULTADOS ═══ -->
+    <div class="pantalla" id="pantalla-resultado">
+      <div class="resultado-wrap">
+        <div class="resultado-hero">
+          <div class="puntaje-circulo">
+            <div class="num" id="resNum">0</div>
+            <div class="de" id="resDe">de 20</div>
+          </div>
+          <h2 id="resTitulo">¡Buen intento!</h2>
+          <p id="resDesc">Revisa las respuestas para mejorar.</p>
+        </div>
+
+        <div class="stats-result">
+          <div class="stat-r">
+            <div class="v verde" id="resCorrectas">0</div>
+            <div class="l">✅ Correctas</div>
+          </div>
+          <div class="stat-r">
+            <div class="v rojo" id="resIncorrectas">0</div>
+            <div class="l">❌ Incorrectas</div>
+          </div>
+          <div class="stat-r">
+            <div class="v" style="color: #f59e0b" id="resOmitidas">0</div>
+            <div class="l">⏭ Omitidas</div>
+          </div>
+        </div>
+
+        <h3 style="color: #123c73; margin-bottom: 16px">Revisión detallada</h3>
+        <div id="revisionContenido"></div>
+
+        <div class="btns-final">
+          <button onclick="reiniciarSimulacro()" style="padding: 13px 28px">
+            🔄 Nuevo Simulacro
+          </button>
+          <a
+            href="modulo-matematicas.html?area=matematicas"
+            style="
+              padding: 13px 28px;
+              border-radius: 10px;
+              text-decoration: none;
+              background: #f4f7fb;
+              color: #123c73;
+              font-weight: 700;
+              font-size: 15px;
+              display: inline-block;
+            "
+            >📖 Estudiar temas</a
+          >
+          <a
+            href="areas.html"
+            style="
+              padding: 13px 28px;
+              border-radius: 10px;
+              text-decoration: none;
+              background: #f4f7fb;
+              color: #123c73;
+              font-weight: 700;
+              font-size: 15px;
+              display: inline-block;
+            "
+            >← Volver a áreas</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+                        // ── Verificación de sesión ────────────────────────────────────────────────
+                        const sesion = JSON.parse(localStorage.getItem("datosVisionales") || localStorage.getItem("usuarioActivo") || "{}");
+                        if (!sesion.correo) {
+                          window.location.href = "index.html";
+                        }
+                          window.addEventListener(
+                          "DOMContentLoaded",
+                          cargarSimulacros
+                        );
+
+                        // ═══════════════════════════════════════════════════════════════════════════
+                        //  BANCO DE PREGUNTAS  (40 preguntas, 8 por tema, nivel Saber 11)
+                        // ═══════════════════════════════════════════════════════════════════════════
+                        const BANCO = [
+                          // ── PENSAMIENTO NUMÉRICO (8 preguntas) ──────────────────────────────────
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'La suma de tres números enteros consecutivos es 72. ¿Cuál es el mayor?',
+                           opciones:['A) 22','B) 23','C) 25','D) 26'],correcta:2,
+                           explicacion:'Sean n, n+1, n+2. 3n+3=72 → n=23. El mayor es n+2=25.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'Simplifica: (2³ × 2⁴) / 2⁵',
+                           opciones:['A) 2','B) 4','C) 8','D) 16'],correcta:1,
+                           explicacion:'2^(3+4−5) = 2² = 4.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'Si log₂(x) = 5, ¿cuánto vale x?',
+                           opciones:['A) 10','B) 16','C) 32','D) 25'],correcta:2,
+                           explicacion:'log₂(x)=5 ⟺ 2⁵=x → x=32.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'Un artículo costaba $45.000. Lo rebajaron un 20%. ¿Cuál es el precio final?',
+                           opciones:['A) $34.000','B) $36.000','C) $38.000','D) $40.000'],correcta:1,
+                           explicacion:'Descuento = 45.000×0,20 = 9.000. Precio final = 36.000.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'Resuelve: |3x − 6| = 9',
+                           opciones:['A) x = 5','B) x = 5 y x = −1','C) x = −1','D) x = 3 y x = −3'],correcta:1,
+                           explicacion:'3x−6=9 → x=5; o 3x−6=−9 → x=−1. Ambas soluciones.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'$500.000 al 8% de interés compuesto anual. ¿Cuánto habrá después de 2 años?',
+                           opciones:['A) $580.000','B) $583.200','C) $600.000','D) $540.000'],correcta:1,
+                           explicacion:'M = 500.000×(1,08)² = 500.000×1,1664 = $583.200.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'8 impresoras imprimen 600 páginas en 5 horas. ¿Cuántas páginas imprimen 6 impresoras en 3 horas?',
+                           opciones:['A) 250','B) 300','C) 270','D) 360'],correcta:2,
+                           explicacion:'Regla de tres compuesta: 600 × (6/8) × (3/5) = 270.'},
+                          {tema:'numerico',temaLabel:'Pensamiento Numérico',
+                           enunciado:'Usando log 2 ≈ 0,301 y log 3 ≈ 0,477, ¿cuánto es log(72)?',
+                           opciones:['A) 1,556','B) 1,857','C) 1,778','D) 2,301'],correcta:1,
+                           explicacion:'72 = 2³×3². log72 = 3(0,301)+2(0,477) = 0,903+0,954 = 1,857.'},
+
+                          // ── ÁLGEBRA (8 preguntas) ────────────────────────────────────────────────
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'¿Para qué valor de x se cumple que 5x − 3 = 2x + 9?',
+                           opciones:['A) x = 2','B) x = 3','C) x = 4','D) x = 6'],correcta:2,
+                           explicacion:'5x−2x = 9+3 → 3x=12 → x=4.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'Las raíces de x² − 7x + 12 = 0 son:',
+                           opciones:['A) 2 y 6','B) 3 y 4','C) −3 y −4','D) 1 y 12'],correcta:1,
+                           explicacion:'(x−3)(x−4)=0 → x=3 y x=4. Suma=7 ✓, producto=12 ✓.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'El discriminante de 3x² − 4x + 2 = 0 indica que tiene:',
+                           opciones:['A) Dos raíces reales distintas','B) Una raíz doble','C) No tiene raíces reales','D) Una raíz entera'],correcta:2,
+                           explicacion:'Δ = 16 − 24 = −8 < 0 → no hay raíces reales.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'Factoriza completamente: 3x³ − 12x',
+                           opciones:['A) 3x(x−2)(x+2)','B) 3(x³−4x)','C) x(3x²−12)','D) 3x²(x−4)'],correcta:0,
+                           explicacion:'3x³−12x = 3x(x²−4) = 3x(x−2)(x+2).'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'¿Cuál es el conjunto solución de x² − 5x + 4 ≤ 0?',
+                           opciones:['A) x ≤ 1 o x ≥ 4','B) 1 ≤ x ≤ 4','C) x < 1 o x > 4','D) −4 ≤ x ≤ −1'],correcta:1,
+                           explicacion:'Raíces x=1 y x=4. Como a>0 la parábola es negativa entre las raíces: 1 ≤ x ≤ 4.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'La edad de Ana es el triple de la de Luis. En 6 años la suma será 52. ¿Cuántos años tiene Luis?',
+                           opciones:['A) 8','B) 10','C) 12','D) 14'],correcta:1,
+                           explicacion:'Luis=x, Ana=3x. (x+6)+(3x+6)=52 → 4x=40 → x=10.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'Si y varía directamente con x² y y = 18 cuando x = 3, ¿cuánto es y cuando x = 5?',
+                           opciones:['A) 30','B) 40','C) 50','D) 45'],correcta:2,
+                           explicacion:'y=kx² → k=18/9=2. Cuando x=5: y=2×25=50.'},
+                          {tema:'algebra',temaLabel:'Álgebra',
+                           enunciado:'Desarrolla: (2x − 3)²',
+                           opciones:['A) 4x² − 9','B) 4x² − 12x + 9','C) 4x² + 12x + 9','D) 2x² − 6x + 9'],correcta:1,
+                           explicacion:'(2x−3)² = 4x² − 2(2x)(3) + 9 = 4x² − 12x + 9.'},
+
+                          // ── GEOMETRÍA (8 preguntas) ──────────────────────────────────────────────
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'Un triángulo rectángulo tiene catetos 5 y 12 cm. ¿Cuánto mide la hipotenusa?',
+                           opciones:['A) 11 cm','B) 12,5 cm','C) 13 cm','D) 17 cm'],correcta:2,
+                           explicacion:'c² = 25+144 = 169 → c = 13 cm.'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'¿Cuál es el área de un trapecio con bases 6 m y 10 m, y altura 4 m?',
+                           opciones:['A) 24 m²','B) 28 m²','C) 32 m²','D) 40 m²'],correcta:2,
+                           explicacion:'A = ((6+10)/2)×4 = 8×4 = 32 m².'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'Un cilindro tiene radio 5 cm y altura 8 cm. ¿Cuál es su volumen? (π ≈ 3,14)',
+                           opciones:['A) 502,4 cm³','B) 628 cm³','C) 785 cm³','D) 1.256 cm³'],correcta:1,
+                           explicacion:'V = π×25×8 = 3,14×200 = 628 cm³.'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'Sen 30° = 1/2. Si la hipotenusa mide 20 cm, ¿cuánto mide el cateto opuesto a 30°?',
+                           opciones:['A) 5,77 cm','B) 10 cm','C) 8,66 cm','D) 20 cm'],correcta:1,
+                           explicacion:'sen30° = CO/hipotenusa → 1/2 = CO/20 → CO = 10 cm.'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'Un cuadrado tiene diagonal de 10 cm. ¿Cuál es su área?',
+                           opciones:['A) 25 cm²','B) 40 cm²','C) 50 cm²','D) 100 cm²'],correcta:2,
+                           explicacion:'d = l√2 → l = 10/√2. Área = l² = 100/2 = 50 cm².'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'Dos triángulos semejantes tienen razón 1:3. Si el área del pequeño es 8 cm², ¿cuál es el área del grande?',
+                           opciones:['A) 24 cm²','B) 48 cm²','C) 72 cm²','D) 96 cm²'],correcta:2,
+                           explicacion:'Razón de áreas = k² = 9. Área grande = 8×9 = 72 cm².'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'¿Cuál es el volumen de una esfera de radio 3 cm? (π ≈ 3,14)',
+                           opciones:['A) 28,3 cm³','B) 56,5 cm³','C) 113,1 cm³','D) 150,8 cm³'],correcta:2,
+                           explicacion:'V = (4/3)π(3)³ = (4/3)(3,14)(27) = 113,1 cm³.'},
+                          {tema:'geometria',temaLabel:'Geometría',
+                           enunciado:'La distancia entre los puntos A(1, 2) y B(4, 6) es:',
+                           opciones:['A) 3','B) 4','C) 5','D) 7'],correcta:2,
+                           explicacion:'d = √[(4−1)²+(6−2)²] = √[9+16] = √25 = 5.'},
+
+                          // ── ESTADÍSTICA Y PROBABILIDAD (8 preguntas) ─────────────────────────────
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'Notas: 3,5 – 4,0 – 3,0 – 4,5 – 4,0. ¿Cuál es la media?',
+                           opciones:['A) 3,7','B) 3,8','C) 4,0','D) 3,9'],correcta:1,
+                           explicacion:'(3,5+4,0+3,0+4,5+4,0)/5 = 19/5 = 3,8.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'En una bolsa hay 4 bolas rojas, 3 azules y 3 verdes. ¿Cuál es P(no roja)?',
+                           opciones:['A) 2/5','B) 3/5','C) 4/10','D) 7/10'],correcta:1,
+                           explicacion:'Total=10. No rojas=6. P=6/10=3/5.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'Datos ordenados: 12, 15, 18, 21, 24. ¿Cuál es la mediana?',
+                           opciones:['A) 15','B) 18','C) 19','D) 21'],correcta:1,
+                           explicacion:'Con 5 datos, la mediana es el 3.er dato: 18.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'P(A)=0,4 y P(B)=0,3, eventos independientes. ¿Cuánto es P(A∩B)?',
+                           opciones:['A) 0,7','B) 0,1','C) 0,12','D) 0,58'],correcta:2,
+                           explicacion:'Independientes: P(A∩B) = P(A)×P(B) = 0,4×0,3 = 0,12.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'Se lanza un dado. ¿Cuál es la probabilidad de obtener un número mayor que 4?',
+                           opciones:['A) 1/6','B) 1/3','C) 1/2','D) 2/3'],correcta:1,
+                           explicacion:'Números >4: {5,6}. P = 2/6 = 1/3.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'P(A)=0,6, P(B)=0,5, P(A∩B)=0,3. ¿Cuánto es P(A∪B)?',
+                           opciones:['A) 0,5','B) 0,7','C) 0,8','D) 1,1'],correcta:2,
+                           explicacion:'P(A∪B) = 0,6+0,5−0,3 = 0,8.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'El rango de los datos {4, 7, 3, 9, 12, 5} es:',
+                           opciones:['A) 6','B) 8','C) 9','D) 12'],correcta:2,
+                           explicacion:'Rango = valor máximo − valor mínimo = 12 − 3 = 9.'},
+                          {tema:'estadistica',temaLabel:'Estadística y Probabilidad',
+                           enunciado:'En una clase de 30 alumnos, 18 aprobaron matemáticas y 15 aprobaron español. 8 aprobaron ambas. ¿Cuántos aprobaron al menos una materia?',
+                           opciones:['A) 23','B) 25','C) 28','D) 33'],correcta:1,
+                           explicacion:'|M∪E| = 18+15−8 = 25 alumnos.'},
+
+                          // ── CÁLCULO Y FUNCIONES (8 preguntas) ────────────────────────────────────
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'f(x) = 2x² − 8x + 6. ¿En qué valor de x alcanza su mínimo?',
+                           opciones:['A) x = 1','B) x = 2','C) x = 3','D) x = 4'],correcta:1,
+                           explicacion:'f'(x) = 4x−8 = 0 → x=2. (a=2>0, es mínimo).'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'¿Cuál es la ecuación de la recta que pasa por (0, 3) con pendiente −2?',
+                           opciones:['A) y = 2x − 3','B) y = −2x + 3','C) y = 3x − 2','D) y = −3x + 2'],correcta:1,
+                           explicacion:'y = mx+b con m=−2 y b=3: y = −2x+3.'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'La función f(x) = −x² + 4x − 3. ¿Cuál es el vértice?',
+                           opciones:['A) (2, 1)','B) (−2, 1)','C) (2, −1)','D) (4, 3)'],correcta:0,
+                           explicacion:'x_v = −4/(2×(−1)) = 2. y_v = −4+8−3 = 1. Vértice (2, 1).'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'La pendiente de la recta que pasa por (−1, 2) y (3, 10) es:',
+                           opciones:['A) 1','B) 2','C) 3','D) 4'],correcta:1,
+                           explicacion:'m = (10−2)/(3−(−1)) = 8/4 = 2.'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'Si y varía inversamente con x, y y = 8 cuando x = 3, ¿cuánto vale y cuando x = 6?',
+                           opciones:['A) 16','B) 4','C) 2','D) 12'],correcta:1,
+                           explicacion:'y=k/x → k=24. Cuando x=6: y=24/6=4.'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'Si f(x) = 3x−1 y g(x) = x+4, ¿cuánto es f(g(2))?',
+                           opciones:['A) 11','B) 17','C) 5','D) 14'],correcta:1,
+                           explicacion:'g(2)=6. f(6)=3(6)−1=17.'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'¿Cuál es el dominio de la función f(x) = √(x − 3)?',
+                           opciones:['A) x < 3','B) x ≤ 3','C) x ≥ 3','D) x > 3'],correcta:2,
+                           explicacion:'La expresión bajo la raíz debe ser ≥ 0: x−3 ≥ 0 → x ≥ 3.'},
+                          {tema:'calculo',temaLabel:'Cálculo y Funciones',
+                           enunciado:'Una función cuadrática tiene vértice (3, −4) y abre hacia arriba. ¿Cuántas intersecciones tiene con el eje x?',
+                           opciones:['A) Ninguna','B) Una','C) Dos','D) Infinitas'],correcta:2,
+                           explicacion:'El vértice está por debajo del eje x (y=−4<0) y abre hacia arriba, por lo tanto corta el eje x en dos puntos.'},
+                        ];
+
+                        // ═══════════════════════════════════════════════════════════════════════════
+                        //  ESTADO DEL SIMULACRO
+                        // ═══════════════════════════════════════════════════════════════════════════
+                        let preguntasFiltradas = [];
+                        let indicePregunta = 0;
+                        let respuestas = [];          // {correcta: bool, omitida: bool, idx: number}
+                        let subtemaActivo = 'todos';
+                        let timerInterval = null;
+                        let segundosRestantes = 60 * 60;
+                        let respondioActual = false;
+
+                        // ── Selector de subtemas ──────────────────────────────────────────────────
+                        function toggleSubtema(btn, tema) {
+                          document.querySelectorAll('.subtema-btn').forEach(b => b.classList.remove('sel'));
+                          btn.classList.add('sel');
+                          subtemaActivo = tema;
+                        }
+
+                        async function cargarSimulacros() {
+                    const correo = sesion.correo;
+
+                    const res = await fetch(
+                      `http://localhost:3000/api/progreso-general/${correo}`
+                    );
+
+                    const data = await res.json();
+
+                    const contenedor =
+                      document.getElementById("simulacros-container");
+
+                    contenedor.innerHTML = `
+
+                      <div class="info-card">
+                        <h3>Simulacro Nivel 1</h3>
+                        ${
+                          data.simulacro1
+                            ? `<button onclick="iniciarNivel(1)">Entrar</button>`
+                            : `<button disabled>Se desbloquea al 50%</button>`
+                        }
+                      </div>
+
+                      <div class="info-card">
+                        <h3>Simulacro Nivel 2</h3>
+                        ${
+                          data.simulacro2
+                            ? `<button onclick="iniciarNivel(2)">Entrar</button>`
+                            : `<button disabled>Se desbloquea al 75%</button>`
+                        }
+                      </div>
+
+                      <div class="info-card">
+                        <h3>Simulacro ICFES Real</h3>
+                        ${
+                          data.simulacro3
+                            ? `<button onclick="iniciarNivel(3)">Entrar</button>`
+                            : `<button disabled>Se desbloquea al 100%</button>`
+                        }
+                      </div>
+
+                    `;
+                  }
+
+                  function iniciarNivel(nivel) {
+
+              localStorage.setItem(
+                "nivelSimulacro",
+                nivel
+              );
+
+              iniciarSimulacro();
+            }
+
+
+                        // ── Iniciar simulacro ─────────────────────────────────────────────────────
+                        function iniciarSimulacro() {
+                          if (subtemaActivo === 'todos') {
+                            preguntasFiltradas = [...BANCO];
+                          } else {
+                            preguntasFiltradas = BANCO.filter(p => p.tema === subtemaActivo);
+                          }
+
+                          // Mezclar aleatoriamente
+                          for (let i = preguntasFiltradas.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [preguntasFiltradas[i], preguntasFiltradas[j]] = [preguntasFiltradas[j], preguntasFiltradas[i]];
+                          }
+
+                          indicePregunta = 0;
+                          respuestas = [];
+                          segundosRestantes = 60 * 60;
+                          respondioActual = false;
+
+                          document.getElementById('totalPreg').textContent = preguntasFiltradas.length;
+                          document.getElementById('resDe').textContent = `de ${preguntasFiltradas.length}`;
+
+                          mostrarPantalla('pantalla-pregunta');
+                          cargarPregunta();
+                          iniciarTimer();
+                        }
+
+                        // ── Timer ─────────────────────────────────────────────────────────────────
+                        function iniciarTimer() {
+                          clearInterval(timerInterval);
+                          timerInterval = setInterval(() => {
+                            segundosRestantes--;
+                            const m = String(Math.floor(segundosRestantes / 60)).padStart(2, '0');
+                            const s = String(segundosRestantes % 60).padStart(2, '0');
+                            document.getElementById('timer').textContent = `${m}:${s}`;
+                            if (segundosRestantes <= 60) document.getElementById('timer').classList.add('urgente');
+                            if (segundosRestantes <= 0) {
+                              clearInterval(timerInterval);
+                              finalizarSimulacro();
+                            }
+                          }, 1000);
+                        }
+
+                        // ── Cargar pregunta actual ────────────────────────────────────────────────
+                        function cargarPregunta() {
+                          respondioActual = false;
+                          const p = preguntasFiltradas[indicePregunta];
+                          const total = preguntasFiltradas.length;
+                          const progPct = Math.round((indicePregunta / total) * 100);
+
+                          document.getElementById('numActual').textContent = indicePregunta + 1;
+                          document.getElementById('pregNum').textContent = `Pregunta ${indicePregunta + 1} · ${p.temaLabel}`;
+                          document.getElementById('chipTema').textContent = p.temaLabel;
+                          document.getElementById('enunciadoTexto').textContent = p.enunciado;
+                          document.getElementById('simFill').style.width = progPct + '%';
+
+                          // Feedback y botón siguiente
+                          const fb = document.getElementById('feedbackInline');
+                          fb.style.display = 'none';
+                          fb.className = 'feedback-inline';
+                          document.getElementById('btnSiguiente').style.display = 'none';
+
+                          // Generar opciones
+                          const lista = document.getElementById('opcionesLista');
+                          lista.innerHTML = '';
+                          const letras = ['A', 'B', 'C', 'D'];
+                          p.opciones.forEach((op, i) => {
+                            const btn = document.createElement('button');
+                            btn.className = 'op-btn';
+                            btn.innerHTML = `<span class="letra">${letras[i]}</span> ${op.slice(3)}`;
+                            btn.onclick = () => elegirRespuesta(btn, i);
+                            lista.appendChild(btn);
+                          });
+                        }
+
+                        // ── Elegir respuesta ──────────────────────────────────────────────────────
+                        function elegirRespuesta(btnElegido, idx) {
+                          if (respondioActual) return;
+                          respondioActual = true;
+
+                          const p = preguntasFiltradas[indicePregunta];
+                          const botones = document.querySelectorAll('#opcionesLista .op-btn');
+                          const esCorrecta = idx === p.correcta;
+
+                          botones.forEach((b, i) => {
+                            b.disabled = true;
+                            if (i === p.correcta) b.classList.add('correcta');
+                          });
+
+                          if (!esCorrecta) btnElegido.classList.add('incorrecta');
+
+                          // Feedback
+                          const fb = document.getElementById('feedbackInline');
+                          if (esCorrecta) {
+                            fb.textContent = '✅ ¡Correcto! ' + p.explicacion;
+                            fb.className = 'feedback-inline';
+                          } else {
+                            fb.textContent = '❌ Incorrecto. ' + p.explicacion;
+                            fb.className = 'feedback-inline malo';
+                          }
+                          fb.style.display = 'block';
+
+                          respuestas.push({ correcta: esCorrecta, omitida: false, idx: indicePregunta });
+                          document.getElementById('btnSiguiente').style.display = 'inline-block';
+                        }
+
+                        // ── Siguiente pregunta ────────────────────────────────────────────────────
+                        function siguientePregunta() {
+                          // Si no respondió, marcar como omitida
+                          if (!respondioActual) {
+                            respuestas.push({ correcta: false, omitida: true, idx: indicePregunta });
+                          }
+
+                          indicePregunta++;
+                          if (indicePregunta < preguntasFiltradas.length) {
+                            cargarPregunta();
+                          } else {
+                            finalizarSimulacro();
+                          }
+                        }
+
+                        // ── Finalizar y mostrar resultados ────────────────────────────────────────
+                        function finalizarSimulacro() {
+                          clearInterval(timerInterval);
+
+                          const total = preguntasFiltradas.length;
+                          const correctas  = respuestas.filter(r => r.correcta).length;
+                          const omitidas   = total - respuestas.length + respuestas.filter(r => r.omitida).length;
+                          const incorrectas = total - correctas - omitidas;
+                          const pct = Math.round((correctas / total) * 100);
+
+                          // Circulo y estadísticas
+                          document.getElementById('resNum').textContent = correctas;
+                          document.getElementById('resDe').textContent = `de ${total}`;
+                          document.getElementById('resCorrectas').textContent = correctas;
+                          document.getElementById('resIncorrectas').textContent = incorrectas;
+                          document.getElementById('resOmitidas').textContent = omitidas;
+
+                          // Título motivacional
+                          let titulo, desc;
+                          if (pct >= 80)      { titulo = '🎉 ¡Excelente resultado!'; desc = 'Dominas muy bien las Matemáticas. ¡Sigue así!'; }
+                          else if (pct >= 60) { titulo = '👍 ¡Buen trabajo!'; desc = 'Vas bien. Repasa los temas con errores para mejorar.'; }
+                          else if (pct >= 40) { titulo = '📚 Sigue practicando'; desc = 'Revisa los conceptos y vuelve a intentarlo.'; }
+                          else                { titulo = '💪 No te rindas'; desc = 'Estudia el módulo de Matemáticas y practica de nuevo.'; }
+
+                          document.getElementById('resTitulo').textContent = titulo;
+                          document.getElementById('resDesc').textContent = desc;
+
+                          // Revisión detallada
+                          const rev = document.getElementById('revisionContenido');
+                          rev.innerHTML = '';
+                          preguntasFiltradas.forEach((p, i) => {
+                            const r = respuestas.find(r => r.idx === i);
+                            let cls, icono, textoResp;
+                            if (!r || r.omitida) { cls = 'omit'; icono = '⏭'; textoResp = 'No respondida'; }
+                            else if (r.correcta)  { cls = 'bien'; icono = '✅'; textoResp = 'Respuesta correcta'; }
+                            else                  { cls = 'mal';  icono = '❌'; textoResp = 'Respuesta incorrecta'; }
+
+                            rev.innerHTML += `
+                              <div class="revision-card ${cls}">
+                                <div class="rev-encabezado">
+                                  <div class="rev-enunciado">${i+1}. ${p.enunciado}</div>
+                                  <div class="rev-icono">${icono}</div>
+                                </div>
+                                <div class="rev-detalle">
+                                  <strong>${textoResp}.</strong> ${p.explicacion}
+                                </div>
+                              </div>`;
+                          });
+
+                          mostrarPantalla('pantalla-resultado');
+                        }
+
+                        // ── Reiniciar simulacro ───────────────────────────────────────────────────
+                        function reiniciarSimulacro() {
+                          mostrarPantalla('pantalla-inicio');
+                        }
+
+                        // ── Helpers ───────────────────────────────────────────────────────────────
+                        function mostrarPantalla(id) {
+                          document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+                          document.getElementById(id).classList.add('activa');
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+    </script>
   </body>
 </html>

@@ -1,115 +1,232 @@
 /* ==========================================================================
    panel-estudiante.js
-   Lógica del panel del estudiante: cargar perfil, progreso general, 
-   y mostrar anuncios de sus clases (desde Supabase).
+   Lógica del panel del estudiante
    ========================================================================== */
+
 const API = "http://localhost:3000/api";
 
-// ── 1. Verificar Sesión (Actualizado para evitar bloqueos) ───────────────────
-// Busca en datosVisionales, y si no está, busca en el viejo usuarioActivo por compatibilidad
-const sesion = JSON.parse(localStorage.getItem("datosVisionales") || localStorage.getItem("usuarioActivo") || "{}");
+// ─────────────────────────────────────────────────────────────
+// Verificar sesión
+// ─────────────────────────────────────────────────────────────
+const sesion = JSON.parse(
+  localStorage.getItem("datosVisionales") ||
+    localStorage.getItem("usuarioActivo") ||
+    "{}",
+);
 
-// Validamos solo el correo principal para no expulsarlo injustamente
 if (!sesion.correo) {
   window.location.href = "index.html";
 }
 
+// ─────────────────────────────────────────────────────────────
+// Cargar datos
+// ─────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
   const correo = sesion.correo || "";
   const SERVER_URL = "http://localhost:3000";
 
-  // Mostrar el correo en la barra superior
-  document.getElementById("nav-nombre-estudiante").textContent = correo;
+  // Mostrar correo en navbar
+  const navNombre = document.getElementById("nav-nombre-estudiante");
 
-  // ── 2. Cargar Datos del Perfil (Nombre, Foto, Progreso) ──────────────────
+  if (navNombre) {
+    navNombre.textContent = correo;
+  }
+
   try {
-    const response = await fetch(`${API}/perfil/${encodeURIComponent(correo)}`, {
-        credentials: 'include'
-    });
+    const response = await fetch(
+      `${API}/perfil/${encodeURIComponent(correo)}`,
+      {
+        credentials: "include",
+      },
+    );
 
     if (response.ok) {
       const usuario = await response.json();
-      
-      // Saludo
-      const nombreMostrar = usuario.nombre ? usuario.nombre.split(' ')[0] : 'Estudiante';
-      document.getElementById("saludo-estudiante").textContent = `¡Hola, ${nombreMostrar}!`;
 
-      // Progreso (asumiendo que viene en el perfil, o lo calculamos)
+      const nombreMostrar = usuario.nombre
+        ? usuario.nombre.split(" ")[0]
+        : "Estudiante";
+
+      // Saludo
+      const saludo = document.getElementById("saludo-estudiante");
+
+      if (saludo) {
+        saludo.textContent = `¡Hola, ${nombreMostrar}!`;
+      }
+
+      // Progreso
       const progreso = usuario.puntaje || 0;
-      document.getElementById("barra-progreso-general").style.width = `${progreso}%`;
-      document.getElementById("texto-progreso-general").textContent = `${progreso}%`;
+
+      const barra = document.getElementById("barra-progreso-general");
+
+      if (barra) {
+        barra.style.width = `${progreso}%`;
+      }
+
+      const textoProgreso = document.getElementById("texto-progreso-general");
+
+      if (textoProgreso) {
+        textoProgreso.textContent = `${progreso}%`;
+      }
 
       // Avatar
-      if (usuario.foto_perfil) {
-        document.getElementById("nav-avatar").innerHTML = 
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">`;
-      } else {
-        document.getElementById("nav-avatar").textContent = (usuario.nombre || correo).charAt(0).toUpperCase();
+      const avatar = document.getElementById("nav-avatar");
+
+      if (avatar) {
+        if (usuario.foto_perfil) {
+          avatar.innerHTML = `
+            <img
+              src="${SERVER_URL}${usuario.foto_perfil}"
+              style="
+                width:100%;
+                height:100%;
+                border-radius:50%;
+                object-fit:cover;
+                display:block;
+              "
+            >
+          `;
+        } else {
+          avatar.textContent = (usuario.nombre || correo)
+            .charAt(0)
+            .toUpperCase();
+        }
       }
     } else {
-      document.getElementById("saludo-estudiante").textContent = `¡Hola!`;
-      document.getElementById("nav-avatar").textContent = correo.charAt(0).toUpperCase();
+      console.warn("No se pudo cargar el perfil:", response.status);
+
+      const saludo = document.getElementById("saludo-estudiante");
+
+      if (saludo) {
+        saludo.textContent = "¡Hola!";
+      }
+
+      const avatar = document.getElementById("nav-avatar");
+
+      if (avatar) {
+        avatar.textContent = correo.charAt(0).toUpperCase();
+      }
     }
   } catch (error) {
     console.error("Error al cargar perfil:", error);
-    document.getElementById("saludo-estudiante").textContent = `¡Hola!`;
+
+    const saludo = document.getElementById("saludo-estudiante");
+
+    if (saludo) {
+      saludo.textContent = "¡Hola!";
+    }
   }
 
-  // ── 3. Cargar Anuncios de las clases del estudiante ──────────────────────
   cargarAnunciosEstudiante();
 });
 
+// ─────────────────────────────────────────────────────────────
+// Cargar anuncios
+// ─────────────────────────────────────────────────────────────
 async function cargarAnunciosEstudiante() {
-    try {
-        const res = await fetch(`${API}/estudiante/anuncios?correo=${encodeURIComponent(sesion.correo)}`, {
-            credentials: 'include'
-        });
-        const data = await res.json();
+  try {
+    const res = await fetch(
+      `${API}/estudiante/anuncios?correo=${encodeURIComponent(sesion.correo)}`,
+      {
+        credentials: "include",
+      },
+    );
 
-        if (data.success && data.anuncios && data.anuncios.length > 0) {
-            const contenedor = document.getElementById("contenedor-anuncios");
-            contenedor.innerHTML = ""; // Limpiar
-            contenedor.style.display = "block"; // Mostrar contenedor
+    const data = await res.json();
 
-            data.anuncios.forEach(clase => {
-                if(clase.anuncio && clase.anuncio.trim() !== "") {
-                    const htmlAnuncio = `
-                        <div style="background-color: #fffbeb; border-left: 5px solid #f59e0b; padding: 20px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <h4 style="color: #b45309; margin: 0; font-size: 15px;">📌 Anuncio de ${clase.nombre_clase}</h4>
-                            </div>
-                            <p style="color: #555; margin: 0; font-size: 15px; line-height: 1.5; white-space: pre-wrap;">${clase.anuncio}</p>
-                        </div>
-                    `;
-                    contenedor.innerHTML += htmlAnuncio;
-                }
-            });
+    const contenedor = document.getElementById("contenedor-anuncios");
+
+    if (!contenedor) return;
+
+    if (data.success && data.anuncios && data.anuncios.length > 0) {
+      contenedor.innerHTML = "";
+      contenedor.style.display = "block";
+
+      data.anuncios.forEach((clase) => {
+        if (clase.anuncio && clase.anuncio.trim() !== "") {
+          contenedor.innerHTML += `
+            <div
+              style="
+                background-color:#fffbeb;
+                border-left:5px solid #f59e0b;
+                padding:20px;
+                border-radius:8px;
+                margin-bottom:25px;
+                box-shadow:0 2px 5px rgba(0,0,0,0.05);
+              "
+            >
+              <div
+                style="
+                  display:flex;
+                  justify-content:space-between;
+                  align-items:center;
+                  margin-bottom:8px;
+                "
+              >
+                <h4
+                  style="
+                    color:#b45309;
+                    margin:0;
+                    font-size:15px;
+                  "
+                >
+                  📌 Anuncio de ${clase.nombre_clase}
+                </h4>
+              </div>
+
+              <p
+                style="
+                  color:#555;
+                  margin:0;
+                  font-size:15px;
+                  line-height:1.5;
+                  white-space:pre-wrap;
+                "
+              >
+                ${clase.anuncio}
+              </p>
+            </div>
+          `;
         }
-    } catch (error) {
-        console.error("Error cargando anuncios:", error);
+      });
     }
+  } catch (error) {
+    console.error("Error cargando anuncios:", error);
+  }
 }
 
-// ── 4. Cerrar Sesión ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Cerrar sesión
+// ─────────────────────────────────────────────────────────────
 async function cerrarSesion() {
-    try {
-        await fetch(`${API}/logout`, {
-            method: 'POST',
-            credentials: 'include'
-        });
-        localStorage.removeItem('datosVisionales');
-        localStorage.removeItem('usuarioActivo'); // Limpiamos también el viejo por si acaso
-        window.location.href = "index.html";
-    } catch (error) {
-        console.error("Error al cerrar sesión", error);
-    }
+  try {
+    await fetch(`${API}/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    localStorage.removeItem("datosVisionales");
+    localStorage.removeItem("usuarioActivo");
+
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Error al cerrar sesión", error);
+  }
 }
 
-// ── 5. Interfaz: Menú Desplegable (Hamburguesa) ──────────────────────────────
+// ─────────────────────────────────────────────────────────────
+// Menú hamburguesa
+// ─────────────────────────────────────────────────────────────
 function toggleMenu() {
-  const menu = document.getElementById('sidebar-menu');
-  const btn = document.getElementById('btn-menu');
-  
-  menu.classList.toggle('abierto');
-  btn.classList.toggle('active');
+  const menu = document.getElementById("sidebar-menu");
+
+  const btn = document.getElementById("btn-menu");
+
+  if (menu) {
+    menu.classList.toggle("abierto");
+  }
+
+  if (btn) {
+    btn.classList.toggle("active");
+  }
 }

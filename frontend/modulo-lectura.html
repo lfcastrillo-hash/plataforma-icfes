@@ -1,0 +1,2598 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Módulo de Lectura Crítica – ICFES Prep</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <style>
+      body {
+        background: #f4f7fb;
+      }
+      .modulo-header {
+        background: linear-gradient(135deg, #6b21a8, #9333ea);
+        color: #fff;
+        padding: 28px 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+      .modulo-header h1 {
+        font-size: 1.7rem;
+        margin: 0;
+      }
+      .modulo-header p {
+        margin: 4px 0 0;
+        opacity: 0.85;
+        font-size: 14px;
+      }
+      .progreso-global-wrap {
+        min-width: 220px;
+      }
+      .progreso-global-wrap label {
+        font-size: 13px;
+        opacity: 0.85;
+      }
+      .progreso-global-barra {
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        height: 14px;
+        margin-top: 6px;
+        overflow: hidden;
+      }
+      .progreso-global-fill {
+        background: #e9d5ff;
+        height: 100%;
+        border-radius: 20px;
+        transition: width 0.7s ease;
+        width: 0%;
+      }
+      .progreso-global-txt {
+        font-size: 13px;
+        margin-top: 4px;
+        opacity: 0.9;
+      }
+      .temas-nav {
+        display: flex;
+        gap: 10px;
+        padding: 18px 10%;
+        background: #fff;
+        border-bottom: 2px solid #eef2f7;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .temas-nav button {
+        background: #f4f7fb;
+        color: #6b21a8;
+        border: 2px solid #e2e8f0;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .temas-nav button:hover,
+      .temas-nav button.activo {
+        background: #6b21a8;
+        color: #fff;
+        border-color: #6b21a8;
+        transform: none;
+      }
+      .temas-nav button.completado-nav {
+        border-color: #16a34a;
+        color: #16a34a;
+      }
+      .temas-nav button.completado-nav.activo {
+        background: #16a34a;
+        color: #fff;
+        border-color: #16a34a;
+      }
+      .tema-seccion {
+        display: none;
+        padding: 38px 10%;
+        animation: fadeIn 0.3s ease;
+      }
+      .tema-seccion.visible {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .tema-titulo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 6px;
+      }
+      .tema-titulo h2 {
+        color: #6b21a8;
+        font-size: 1.45rem;
+        margin: 0;
+      }
+      .badge-completado {
+        background: #dcfce7;
+        color: #16a34a;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        display: none;
+      }
+      .tema-subtitulo {
+        color: #64748b;
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+      .concepto-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 26px;
+        margin-bottom: 18px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        border-left: 4px solid #9333ea;
+      }
+      .concepto-card h3 {
+        color: #6b21a8;
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+      .concepto-card p {
+        color: #444;
+        line-height: 1.7;
+        margin-bottom: 8px;
+      }
+      .formula-box {
+        background: #faf5ff;
+        border-radius: 8px;
+        padding: 13px 16px;
+        font-family: monospace;
+        font-size: 14px;
+        color: #4a1d96;
+        margin: 10px 0;
+        border: 1px solid #ddd6fe;
+        line-height: 1.8;
+      }
+      .ejemplo-box {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 13px 16px;
+        margin-top: 10px;
+        border: 1px dashed #cbd5e1;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.65;
+      }
+      .ejemplo-box strong {
+        color: #6b21a8;
+      }
+      .tip-box {
+        background: #fefce8;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-top: 10px;
+        border: 1px solid #fde68a;
+        font-size: 13px;
+        color: #92400e;
+        line-height: 1.6;
+      }
+      .texto-fragmento {
+        background: #fff8f0;
+        border-radius: 10px;
+        padding: 18px 22px;
+        margin: 12px 0;
+        border-left: 4px solid #f59e0b;
+        font-style: italic;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.8;
+      }
+      .texto-fragmento cite {
+        display: block;
+        font-style: normal;
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
+      }
+      .ejercicios-titulo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 32px 0 18px;
+      }
+      .ejercicios-titulo h3 {
+        color: #6b21a8;
+        font-size: 1.15rem;
+        margin: 0;
+      }
+      .ejercicios-titulo span {
+        background: #ede9fe;
+        color: #5b21b6;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+      .ejercicio-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 22px 26px;
+        margin-bottom: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+      }
+      .ejercicio-texto {
+        background: #faf5ff;
+        border-radius: 8px;
+        padding: 14px 18px;
+        font-size: 14px;
+        color: #333;
+        line-height: 1.8;
+        margin-bottom: 14px;
+        border: 1px solid #ddd6fe;
+        font-style: italic;
+      }
+      .ejercicio-card .enunciado {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 14px;
+        line-height: 1.55;
+      }
+      .opciones-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+        margin-bottom: 10px;
+      }
+      .opcion-btn {
+        background: #f4f7fb;
+        color: #334155;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 11px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        font-weight: 600;
+      }
+      .opcion-btn:hover {
+        background: #ede9fe;
+        border-color: #a78bfa;
+        transform: none;
+      }
+      .opcion-btn.correcta {
+        background: #dcfce7 !important;
+        border-color: #16a34a !important;
+        color: #15803d !important;
+      }
+      .opcion-btn.incorrecta {
+        background: #fee2e2 !important;
+        border-color: #dc2626 !important;
+        color: #dc2626 !important;
+      }
+      .opcion-btn:disabled {
+        cursor: default;
+      }
+      .feedback-ejercicio {
+        font-size: 13px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        display: none;
+        margin-top: 6px;
+        line-height: 1.55;
+      }
+      .feedback-ejercicio.correcto {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .feedback-ejercicio.incorrecto {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .btn-completar-tema {
+        background: #6b21a8;
+        color: #fff;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 32px;
+        transition: all 0.3s;
+      }
+      .btn-completar-tema:hover {
+        background: #7e22ce;
+        transform: translateY(-2px);
+      }
+      .btn-completar-tema.ya-completado {
+        background: #16a34a;
+        cursor: default;
+        transform: none;
+      }
+      .nav-temas-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 38px;
+        padding-top: 22px;
+        border-top: 2px solid #eef2f7;
+      }
+      .nav-temas-footer button {
+        padding: 11px 22px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+      @media (max-width: 768px) {
+        .opciones-grid {
+          grid-template-columns: 1fr;
+        }
+        .modulo-header,
+        .temas-nav,
+        .tema-seccion {
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <h1>📚 Módulo de Lectura Crítica</h1>
+      <a href="areas.html">← Volver a Áreas</a>
+    </header>
+
+    <div class="modulo-header">
+      <div>
+        <h1>Lectura Crítica – Saber 11</h1>
+        <p>
+          5 temas · 45+ conceptos · 40 ejercicios tipo ICFES con textos reales
+        </p>
+      </div>
+      <div class="progreso-global-wrap">
+        <label>Progreso del módulo</label>
+        <div class="progreso-global-barra">
+          <div class="progreso-global-fill" id="barraGlobal"></div>
+        </div>
+        <div class="progreso-global-txt" id="textoGlobal">
+          0 de 5 temas completados
+        </div>
+      </div>
+    </div>
+
+    <nav class="temas-nav">
+      <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">
+        1. Comprensión Textual
+      </button>
+      <button onclick="mostrarTema(1)" id="btn-tema-1">
+        2. Tipos de Texto
+      </button>
+      <button onclick="mostrarTema(2)" id="btn-tema-2">
+        3. Modos Discursivos
+      </button>
+      <button onclick="mostrarTema(3)" id="btn-tema-3">
+        4. Literatura y Contexto
+      </button>
+      <button onclick="mostrarTema(4)" id="btn-tema-4">
+        5. Pensamiento Crítico
+      </button>
+    </nav>
+
+    <!-- ══════════════════════════════════════════
+     TEMA 1 – COMPRENSIÓN TEXTUAL
+══════════════════════════════════════════ -->
+    <section class="tema-seccion visible" id="tema-0">
+      <div class="tema-titulo">
+        <h2>📖 Comprensión Textual</h2>
+        <span class="badge-completado" id="badge-0">✓ Completado</span>
+      </div>
+      <p class="tema-subtitulo">
+        Niveles de lectura, estructura del texto, significado de palabras y
+        párrafos, e inferencias.
+      </p>
+
+      <div class="concepto-card">
+        <h3>1.1 Los Tres Niveles de Lectura</h3>
+        <div class="formula-box">
+          Nivel 1 → LITERAL: ¿qué dice el texto? → Identificar información
+          explícita, hechos, datos, definiciones. → Responder: quién, qué,
+          cuándo, dónde. Nivel 2 → INFERENCIAL: ¿qué quiere decir el texto? →
+          Deducir información implícita, relacionar ideas, interpretar. →
+          Reconocer causa-efecto, comparaciones, intenciones del autor. Nivel 3
+          → CRÍTICO-INTERTEXTUAL: ¿qué tan válido es lo que dice? → Evaluar
+          argumentos, juzgar el punto de vista, comparar fuentes. → Detectar
+          sesgos, falacias y valorar la posición del autor.
+        </div>
+        <div class="tip-box">
+          💡 El ICFES exige principalmente los niveles 2 y 3. El nivel 1 es
+          base, pero rara vez es la respuesta correcta en preguntas de selección
+          múltiple complejas.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.2 Idea Principal e Ideas Secundarias</h3>
+        <p>
+          <strong>Idea principal:</strong> el mensaje central que el autor
+          quiere transmitir. Puede estar explícita (en una oración temática) o
+          implícita (hay que deducirla).
+        </p>
+        <p>
+          <strong>Ideas secundarias:</strong> apoyan, ejemplifican, amplían o
+          contrastan la idea principal. Son desarrollos del tema central.
+        </p>
+        <div class="formula-box">
+          Estrategia para hallar la idea principal: 1. Lee todo el párrafo/texto
+          completo. 2. Pregunta: ¿de qué trata principalmente? 3. Verifica:
+          ¿todas las demás ideas giran alrededor de esta? 4. Si una oración es
+          demasiado específica → es idea secundaria.
+        </div>
+        <div class="ejemplo-box">
+          <strong>Texto:</strong> "La deforestación avanza en la Amazonia. Cada
+          año se pierden miles de hectáreas. Esto destruye hábitats y acelera el
+          calentamiento global."<br />
+          <strong>Idea principal:</strong> La deforestación en la Amazonia tiene
+          consecuencias ambientales graves.<br />
+          <strong>Ideas secundarias:</strong> Pérdida de hectáreas / Destrucción
+          de hábitats / Calentamiento global.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.3 Significado de Palabras por Contexto</h3>
+        <p>
+          El ICFES frecuentemente pregunta por el sentido de una palabra
+          <em>en el contexto del texto</em>. No siempre es la acepción más común
+          del diccionario.
+        </p>
+        <div class="formula-box">
+          Estrategia: 1. Lee la oración completa donde aparece la palabra. 2.
+          Identifica qué idea expresa el párrafo circundante. 3. Sustituye la
+          palabra por cada opción y evalúa cuál preserva el sentido. 4. Descarta
+          las que cambian el significado del fragmento.
+        </div>
+        <div class="ejemplo-box">
+          <strong
+            >"La crisis económica corroía lentamente la esperanza de los
+            ciudadanos."</strong
+          ><br />
+          "Corroer" aquí significa:
+          <strong>debilitar/destruir gradualmente</strong> (no oxidar
+          físicamente).
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.4 Estructura del Párrafo y del Texto</h3>
+        <p>
+          Un párrafo bien construido tiene:
+          <strong>oración temática</strong> (plantea la idea),
+          <strong>oraciones de desarrollo</strong> (explican/argumentan) y
+          <strong>oración de cierre</strong> (concluye o enlaza).
+        </p>
+        <div class="formula-box">
+          Estructura textual global: Introducción → Desarrollo → Conclusión
+          (textos expositivos/argumentativos) Planteamiento → Nudo → Desenlace
+          (textos narrativos) Tesis → Argumento 1, 2, 3 → Conclusión (textos
+          argumentativos)
+        </div>
+        <div class="tip-box">
+          💡 Los conectores revelan la estructura: "sin embargo/pero"
+          (contraste), "por lo tanto/así" (consecuencia),
+          "primero/luego/finalmente" (secuencia), "por ejemplo/es decir"
+          (ilustración).
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.5 Inferencias y Presuposiciones</h3>
+        <p>
+          <strong>Inferencia:</strong> conclusión que el lector deduce a partir
+          de lo que está en el texto, aunque no esté dicho explícitamente.
+        </p>
+        <p>
+          <strong>Presuposición:</strong> información que el texto da por
+          sentada sin decirla.
+        </p>
+        <div class="ejemplo-box">
+          <strong>Texto:</strong> "Después de la guerra, el país tardó décadas
+          en recuperarse."<br />
+          <strong>Inferencia:</strong> Hubo una guerra que causó daños
+          significativos.<br />
+          <strong>Presuposición:</strong> El país existía antes de la guerra.
+        </div>
+        <div class="formula-box">
+          Pregunta tipo ICFES: "Del texto se puede inferir que…" → La respuesta
+          correcta NO está escrita literalmente pero SÍ se deduce lógicamente. →
+          Descarta opciones que exigen información externa al texto. → Descarta
+          opciones que contradicen lo que dice el texto.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.6 El Tema, el Asunto y la Tesis</h3>
+        <div class="formula-box">
+          Tema: de qué trata el texto (sustantivo o frase nominal) → "La
+          amistad", "La contaminación del agua" Asunto: enfoque específico del
+          tema → "Los efectos de la amistad en la salud mental" Tesis: posición
+          del autor sobre el asunto (evaluativo/argumentativo) → "La amistad
+          genuina mejora significativamente la salud mental"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.7 Coherencia y Cohesión</h3>
+        <p>
+          <strong>Coherencia:</strong> lógica interna del texto. Las ideas se
+          relacionan y no se contradicen.
+        </p>
+        <p>
+          <strong>Cohesión:</strong> mecanismos lingüísticos que unen las
+          oraciones: pronombres, conectores, sinónimos, elipsis.
+        </p>
+        <div class="ejemplo-box">
+          <strong>Cohesión por referencia:</strong> "Pedro llegó tarde.
+          <u>Él</u> no se disculpó." (él → Pedro)<br />
+          <strong>Cohesión por conectores:</strong> "Estudió mucho;
+          <u>sin embargo</u>, reprobó."<br />
+          <strong>Cohesión por sustitución léxica:</strong> "El perro ladró. El
+          <u>animal</u> asustó a todos."
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.8 La Progresión Temática</h3>
+        <p>
+          Estudia cómo el tema avanza a lo largo del texto. En el ICFES suelen
+          preguntar por el orden lógico de párrafos o por cuál oración no encaja
+          en un texto.
+        </p>
+        <div class="formula-box">
+          Tipos de progresión: Lineal: el rema (info nueva) de cada oración se
+          convierte en tema de la siguiente. Paralela: varias oraciones
+          desarrollan el mismo tema central. Derivada: de un hiper-tema se
+          derivan sub-temas.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>1.9 Resumen y Paráfrasis</h3>
+        <p>
+          <strong>Resumen:</strong> reduce el texto a sus ideas esenciales sin
+          agregar información. Debe ser fiel al original.
+        </p>
+        <p>
+          <strong>Paráfrasis:</strong> reescribe el texto con las propias
+          palabras del lector, conservando el significado.
+        </p>
+        <div class="tip-box">
+          💡 En el ICFES, las opciones de respuesta suelen ser paráfrasis de lo
+          que dice el texto. Aprende a reconocer cuál paráfrasis conserva el
+          significado original y cuál lo distorsiona o agrega información.
+        </div>
+      </div>
+
+      <div class="ejercicios-titulo">
+        <h3>Ejercicios tipo ICFES</h3>
+        <span>8 preguntas</span>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-0">
+        <div class="ejercicio-texto">
+          "La música clásica, lejos de ser un pasatiempo elitista, ha demostrado
+          en numerosos estudios tener efectos positivos sobre el desarrollo
+          cognitivo de los niños. La exposición temprana a Bach, Mozart o
+          Beethoven estimula áreas del cerebro relacionadas con las matemáticas
+          y el lenguaje."
+        </div>
+        <div class="enunciado">
+          1. ¿Cuál es la idea principal del fragmento?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+            A) Bach, Mozart y Beethoven son los mejores compositores.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 0, true)">
+            B) La música clásica favorece el desarrollo cognitivo infantil.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+            C) La música clásica es un pasatiempo elitista.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+            D) Los niños deben escuchar música desde temprana edad.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-0">
+          ✓ B es la idea principal: el texto argumenta que la música clásica
+          tiene efectos positivos en el desarrollo cognitivo. A y C son detalles
+          o ideas refutadas. D es demasiado general y no captura el argumento
+          central.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-1">
+        <div class="ejercicio-texto">
+          "El río que alguna vez fue espejo de cielos y bosques ahora arrastra
+          los residuos de una ciudad que creció sin planificación. Sus aguas,
+          antes cristalinas, hoy reflejan el descuido colectivo."
+        </div>
+        <div class="enunciado">
+          2. En el fragmento anterior, la expresión "espejo de cielos y bosques"
+          se usa para indicar que el río:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 1, true)">
+            A) Tenía aguas transparentes que reflejaban la naturaleza
+            circundante.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+            B) Era un lago pequeño rodeado de vegetación.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+            C) Servía como fuente de agua para los bosques aledaños.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+            D) Tenía forma de espejo rectangular.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-1">
+          ✓ La expresión es una metáfora: "espejo" indica que las aguas eran tan
+          claras que reflejaban el paisaje. El texto lo confirma con "aguas
+          cristalinas".
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-2">
+        <div class="ejercicio-texto">
+          "A pesar de los avances tecnológicos, la soledad es uno de los
+          problemas más graves de la era moderna. Las redes sociales conectan
+          digitalmente pero no siempre emocionalmente."
+        </div>
+        <div class="enunciado">3. Del fragmento se puede inferir que:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+            A) La tecnología es nociva para la salud.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+            B) Las redes sociales no sirven para nada.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 2, true)">
+            C) La conexión digital no garantiza bienestar emocional.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+            D) Los avances tecnológicos generan soledad.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-2">
+          ✓ C se deduce directamente: el texto distingue entre conexión digital
+          y conexión emocional. A y B exageran lo que dice el texto. D confunde
+          causa y efecto: el texto dice que la soledad existe "a pesar de" los
+          avances, no "a causa de" ellos.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-3">
+        <div class="ejercicio-texto">
+          "El lenguaje no es solo un medio de comunicación; es también una forma
+          de ver el mundo. Cada idioma divide la realidad de manera diferente."
+        </div>
+        <div class="enunciado">
+          4. ¿Cuál de las siguientes opciones resume mejor el fragmento?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+            A) Hablar varios idiomas mejora la comunicación.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 3, true)">
+            B) El idioma que hablamos moldea nuestra percepción de la realidad.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+            C) Todos los idiomas son igualmente eficientes.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+            D) El lenguaje es la herramienta más importante del ser humano.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-3">
+          ✓ B parafrasea fielmente el texto: el lenguaje no solo comunica sino
+          que da forma a cómo percibimos la realidad. A, C y D agregan ideas que
+          no están en el texto.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-4">
+        <div class="ejercicio-texto">
+          "Los científicos advirtieron que, de continuar el ritmo actual de
+          emisiones, las temperaturas globales podrían aumentar hasta 3 °C para
+          el año 2100. Esta cifra, aparentemente pequeña, significaría el
+          colapso de ecosistemas enteros."
+        </div>
+        <div class="enunciado">
+          5. La función del adverbio "aparentemente" en el texto es:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+            A) Confirmar que 3 °C es una cifra insignificante.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 4, true)">
+            B) Señalar que algo que parece poco en realidad tiene graves
+            consecuencias.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+            C) Indicar que los científicos no están seguros de sus datos.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+            D) Restar importancia al cambio climático.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-4">
+          ✓ "Aparentemente" introduce una contradicción: la cifra parece pequeña
+          pero sus consecuencias son enormes. Este recurso establece un
+          contraste entre apariencia y realidad.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-5">
+        <div class="ejercicio-texto">
+          "Los videojuegos han sido señalados como causantes de violencia en los
+          jóvenes. ________, múltiples investigaciones no han encontrado una
+          relación causal directa entre jugar videojuegos y comportamientos
+          agresivos."
+        </div>
+        <div class="enunciado">
+          6. ¿Cuál conector llena mejor el espacio en blanco para mantener la
+          coherencia del texto?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+            A) Por esta razón
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+            B) Además
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 5, true)">
+            C) Sin embargo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+            D) Por ejemplo
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-5">
+          ✓ "Sin embargo" introduce una contraposición: la primera oración
+          plantea una acusación y la segunda la refuta. "Por esta razón"
+          implicaría causalidad (lo contrario). "Además" y "Por ejemplo" son de
+          adición/ilustración.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-6">
+        <div class="ejercicio-texto">
+          "Llegó a la ciudad con los bolsillos vacíos pero el corazón lleno de
+          ilusiones. Cada esquina le parecía una promesa. Con el tiempo, la
+          ciudad fue vaciando sus ilusiones para llenar sus bolsillos."
+        </div>
+        <div class="enunciado">
+          7. ¿Qué figura retórica predomina en el fragmento?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+            A) Hipérbole
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 6, true)">
+            B) Quiasmo (inversión paralela)
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+            C) Anáfora
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+            D) Alegoría
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-6">
+          ✓ El quiasmo invierte los términos: "bolsillos vacíos / corazón lleno"
+          → "ilusiones vacías / bolsillos llenos". Esta inversión cruzada de
+          elementos es la figura central del fragmento.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-0-7">
+        <div class="ejercicio-texto">
+          "El agua cubre el 71 % de la superficie terrestre. Sin embargo, solo
+          el 3 % es agua dulce, y de ese porcentaje, aproximadamente el 2 % está
+          congelado en los polos. Esto significa que menos del 1 % del agua del
+          planeta está disponible para el consumo humano."
+        </div>
+        <div class="enunciado">
+          8. ¿Cuál es el propósito principal de este texto?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+            A) Promover el ahorro de agua.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 7, true)">
+            B) Informar sobre la escasez real del agua potable en el planeta.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+            C) Explicar por qué los polos tienen agua congelada.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+            D) Comparar el agua salada con el agua dulce.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-0-7">
+          ✓ El texto expone datos para mostrar que, a pesar de la abundancia
+          aparente de agua, el agua disponible para el consumo es mínima. El
+          propósito es informar sobre la escasez. A sería un propósito
+          persuasivo, no presente aquí.
+        </div>
+      </div>
+
+      <button
+        class="btn-completar-tema"
+        id="btnCompletar-0"
+        onclick="completarTema(0)"
+      >
+        ✓ Marcar tema como completado
+      </button>
+      <div class="nav-temas-footer">
+        <span></span>
+        <button onclick="mostrarTema(1)">Siguiente: Tipos de Texto →</button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     TEMA 2 – TIPOS DE TEXTO
+══════════════════════════════════════════ -->
+    <section class="tema-seccion" id="tema-1">
+      <div class="tema-titulo">
+        <h2>📄 Tipos de Texto y sus Características</h2>
+        <span class="badge-completado" id="badge-1">✓ Completado</span>
+      </div>
+      <p class="tema-subtitulo">
+        Texto narrativo, descriptivo, expositivo, argumentativo e instructivo:
+        estructura, función y recursos.
+      </p>
+
+      <div class="concepto-card">
+        <h3>2.1 Texto Narrativo</h3>
+        <p>
+          Cuenta hechos reales o ficticios que ocurren en un tiempo y espacio
+          determinados. Usa verbos de acción y conectores temporales.
+        </p>
+        <div class="formula-box">
+          Elementos: Narrador: quien cuenta (1.ª persona = protagonista; 3.ª =
+          omnisciente) Personajes: protagonistas, antagonistas, secundarios
+          Tiempo: lineal, retrospectivo (analepsis/flashback), prospectivo
+          (prolepsis) Espacio: físico y psicológico Trama: situación inicial →
+          conflicto → clímax → desenlace
+        </div>
+        <div class="ejemplo-box">
+          <strong>Subgéneros:</strong> cuento, novela, crónica, leyenda, fábula,
+          mito, anécdota.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.2 Texto Descriptivo</h3>
+        <p>
+          Presenta características de personas, lugares, objetos o fenómenos.
+          Predominan los adjetivos, el verbo ser/estar y el presente.
+        </p>
+        <div class="formula-box">
+          Tipos: Prosopografía: descripción física de una persona Etopeya:
+          descripción psicológica/moral Retrato: física + psicológica
+          Topografía: descripción de un lugar Objetiva: sin valoraciones del
+          autor Subjetiva: incluye impresiones y emociones del autor
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.3 Texto Expositivo</h3>
+        <p>
+          Presenta información de manera objetiva para explicar un tema. Su
+          propósito es informar y explicar, no convencer.
+        </p>
+        <div class="formula-box">
+          Características: → Lenguaje claro, preciso y objetivo → Uso de
+          definiciones, ejemplos, comparaciones, datos → Estructura:
+          introducción - desarrollo - conclusión → Conectores: "es decir", "por
+          ejemplo", "en primer lugar", "esto significa" Tipos: enciclopédico,
+          científico, periodístico (noticia), didáctico
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.4 Texto Argumentativo</h3>
+        <p>
+          Defiende una tesis (posición) mediante argumentos. Busca convencer o
+          persuadir al lector.
+        </p>
+        <div class="formula-box">
+          Estructura básica: Tesis → Argumentos de apoyo → Conclusión
+          (reiteración de la tesis) Tipos de argumentos: De autoridad: cita a
+          expertos o fuentes reconocidas De ejemplo: usa casos concretos para
+          ilustrar De analogía: compara con algo similar conocido Causal:
+          explica causas y efectos Estadístico: usa datos numéricos De
+          refutación: anticipa y rebate contraargumentos
+        </div>
+        <div class="tip-box">
+          💡 El ICFES pregunta mucho sobre texto argumentativo: identificar la
+          tesis, evaluar la solidez de los argumentos y detectar falacias
+          lógicas.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.5 Texto Instructivo y Procedural</h3>
+        <p>
+          Indica cómo realizar una acción paso a paso. Usa verbos en imperativo
+          o infinitivo.
+        </p>
+        <div class="formula-box">
+          Ejemplos: recetas, manuales, instrucciones de uso, protocolos.
+          Características: → Verbos en imperativo: "agregue", "mezcle",
+          "presione" → Uso de numeración o viñetas para marcar pasos → Lenguaje
+          directo y sin ambigüedades
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.6 Texto Conversacional y Dialógico</h3>
+        <p>
+          Reproduce el intercambio verbal entre dos o más participantes. Incluye
+          el diálogo literario (en la novela o el teatro) y la conversación
+          cotidiana.
+        </p>
+        <div class="formula-box">
+          Características: → Turnos de habla marcados por rayas (—) o comillas →
+          Presencia de deixis: "yo", "tú", "aquí", "ahora" → Registro variado
+          según contexto: formal o informal
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.7 Texto Multimodal e Icónico</h3>
+        <p>
+          Combina lenguaje verbal con imágenes, gráficas, tablas o íconos. En el
+          ICFES pueden aparecer caricaturas, afiches o infografías.
+        </p>
+        <div class="formula-box">
+          Preguntas frecuentes sobre textos multimodales: → ¿Qué denuncia o
+          mensaje transmite la caricatura? → ¿Qué relación hay entre el texto
+          escrito y la imagen? → ¿A qué público va dirigido el afiche? → ¿Qué
+          elementos visuales refuerzan el mensaje verbal?
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>2.8 Intención Comunicativa y Funciones del Lenguaje</h3>
+        <div class="formula-box">
+          Función referencial/informativa: transmitir información objetiva
+          Función apelativa/conativa: influir en el receptor (publicidad,
+          discursos) Función expresiva/emotiva: expresar sentimientos del emisor
+          (poesía, diario) Función poética/estética: cuidar la forma del mensaje
+          (literatura) Función fática: verificar el canal (¿aló?, ¿me escuchas?)
+          Función metalingüística: hablar sobre el lenguaje mismo ("sustantivo
+          significa...")
+        </div>
+      </div>
+
+      <div class="ejercicios-titulo">
+        <h3>Ejercicios tipo ICFES</h3>
+        <span>8 preguntas</span>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-0">
+        <div class="ejercicio-texto">
+          "Para preparar el arroz: primero, lave el arroz con agua fría hasta
+          que el agua salga clara. Luego, por cada taza de arroz añada dos de
+          agua. Coloque a fuego medio hasta hervir y reduzca a fuego bajo por 18
+          minutos. Finalmente, deje reposar tapado por 5 minutos."
+        </div>
+        <div class="enunciado">
+          1. Este texto pertenece principalmente al tipo:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+            A) Narrativo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+            B) Argumentativo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 0, true)">
+            C) Instructivo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+            D) Expositivo
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-0">
+          ✓ Es un texto instructivo: usa verbos en imperativo ("lave", "añada",
+          "coloque"), conectores de secuencia ("primero", "luego", "finalmente")
+          y describe pasos para realizar una acción.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-1">
+        <div class="ejercicio-texto">
+          "Debemos prohibir el uso de plásticos de un solo uso. Según la ONU,
+          más de 8 millones de toneladas de plástico llegan al océano cada año.
+          Los animales marinos mueren por ingerirlos, los ecosistemas se
+          deterioran y, en última instancia, el plástico termina en nuestra
+          cadena alimentaria."
+        </div>
+        <div class="enunciado">
+          2. En el texto anterior, la frase "Según la ONU" cumple la función de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+            A) Narrar un acontecimiento histórico.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 1, true)">
+            B) Apoyar la tesis con un argumento de autoridad.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+            C) Describir el estado de los océanos.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+            D) Presentar un punto de vista contrario a la tesis.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-1">
+          ✓ Citar a la ONU es un argumento de autoridad: se usa una fuente
+          reconocida para dar credibilidad a la posición que defiende el texto
+          (prohibir los plásticos de un solo uso).
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-2">
+        <div class="ejercicio-texto">
+          "Era un hombre de unos cincuenta años, de espesa barba gris, frente
+          amplia surcada de arrugas profundas y ojos pequeños pero muy vivos,
+          del color del acero en un día nublado."
+        </div>
+        <div class="enunciado">3. Este fragmento es un ejemplo de:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+            A) Etopeya
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 2, true)">
+            B) Prosopografía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+            C) Topografía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+            D) Retrato
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-2">
+          ✓ La prosopografía describe rasgos físicos externos de una persona
+          (barba, frente, ojos). La etopeya describe cualidades internas. El
+          retrato combina ambas. Aquí solo hay descripción física →
+          prosopografía.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-3">
+        <div class="ejercicio-texto">
+          "¡Compra ya el nuevo XPhone Pro! Más rápido, más inteligente, más tú.
+          Con una cámara de 200 megapíxeles, nunca más perderás un momento
+          perfecto. ¿A qué esperas?"
+        </div>
+        <div class="enunciado">
+          4. La función del lenguaje predominante en este texto es:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+            A) Referencial
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+            B) Expresiva
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 3, true)">
+            C) Apelativa
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+            D) Poética
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-3">
+          ✓ La función apelativa/conativa busca influir en la conducta del
+          receptor. Lo evidencian el imperativo "¡Compra ya!", la pregunta
+          retórica "¿A qué esperas?" y la segunda persona ("más tú").
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-4">
+        <div class="ejercicio-texto">
+          "La fotosíntesis es el proceso por el cual las plantas transforman la
+          energía luminosa del sol en energía química almacenada en glucosa.
+          Para ello utilizan el CO₂ del aire, el agua del suelo y la clorofila
+          de sus hojas."
+        </div>
+        <div class="enunciado">
+          5. ¿Cuál es el propósito comunicativo de este texto?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+            A) Persuadir al lector de la importancia de las plantas.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 4, true)">
+            B) Explicar de forma objetiva cómo funciona la fotosíntesis.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+            C) Narrar la historia del descubrimiento de la fotosíntesis.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+            D) Instruir al lector sobre cómo cultivar plantas.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-4">
+          ✓ Es un texto expositivo: explica un proceso natural de forma objetiva
+          usando definición y descripción de elementos. No hay valoración ni
+          instrucción.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-5">
+        <div class="ejercicio-texto">
+          "[Caricatura: un político con traje lujoso riega una planta con
+          billetes. La planta da frutos que son también billetes. Al fondo,
+          ciudadanos con ropa humilde observan hambrientos.]"
+        </div>
+        <div class="enunciado">
+          6. ¿Cuál es el mensaje central de la caricatura descrita?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+            A) Los políticos trabajan arduamente por el bienestar.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 5, true)">
+            B) El poder político se usa para enriquecerse, ignorando la pobreza.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+            C) La agricultura es la base de la economía.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+            D) Los billetes son la raíz de todos los problemas sociales.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-5">
+          ✓ La caricatura denuncia la corrupción: el político "invierte" (riega
+          con dinero) para obtener más dinero, mientras la ciudadanía sufre
+          pobreza. Es una crítica política visual clásica.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-6">
+        <div class="ejercicio-texto">
+          "—¿Qué te pasa? Te noto raro hoy.<br />—No es nada. Solo estoy
+          cansado.<br />—¿Seguro? Llevas días así."
+        </div>
+        <div class="enunciado">7. El tipo de texto anterior es:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+            A) Expositivo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 6, true)">
+            B) Conversacional/dialógico
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+            C) Argumentativo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+            D) Descriptivo
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-6">
+          ✓ El uso de rayas para marcar turnos de habla, la presencia de dos
+          interlocutores y el intercambio de mensajes definen al texto
+          conversacional/dialógico.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-1-7">
+        <div class="ejercicio-texto">
+          "Algunos argumentan que la pena de muerte disuade el crimen. Sin
+          embargo, estadísticas de países que la aplican muestran tasas de
+          homicidios similares o incluso superiores a países abolicionistas. La
+          evidencia empírica, por tanto, no respalda dicha hipótesis."
+        </div>
+        <div class="enunciado">
+          8. En el texto, el autor usa la estrategia de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+            A) Narrar un caso histórico sobre la pena de muerte.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 7, true)">
+            B) Refutar un argumento contrario con evidencia estadística.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+            C) Describir el sistema judicial de distintos países.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+            D) Proponer un nuevo sistema penal alternativo.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-1-7">
+          ✓ El autor presenta primero el argumento contrario ("algunos
+          argumentan que..."), luego lo refuta con estadísticas ("sin
+          embargo..."). Esta es la estructura de refutación, frecuente en textos
+          argumentativos.
+        </div>
+      </div>
+
+      <button
+        class="btn-completar-tema"
+        id="btnCompletar-1"
+        onclick="completarTema(1)"
+      >
+        ✓ Marcar tema como completado
+      </button>
+      <div class="nav-temas-footer">
+        <button onclick="mostrarTema(0)">← Comprensión Textual</button>
+        <button onclick="mostrarTema(2)">Siguiente: Modos Discursivos →</button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     TEMA 3 – MODOS DISCURSIVOS Y FIGURAS RETÓRICAS
+══════════════════════════════════════════ -->
+    <section class="tema-seccion" id="tema-2">
+      <div class="tema-titulo">
+        <h2>🗣️ Modos Discursivos y Figuras Retóricas</h2>
+        <span class="badge-completado" id="badge-2">✓ Completado</span>
+      </div>
+      <p class="tema-subtitulo">
+        Figuras literarias, recursos del lenguaje, argumento y falacias lógicas.
+      </p>
+
+      <div class="concepto-card">
+        <h3>3.1 Figuras de Dicción (Fonéticas)</h3>
+        <div class="formula-box">
+          Aliteración: repetición de sonidos iguales "Tres tristes tigres tragan
+          trigo" Onomatopeya: palabras que imitan sonidos "El murmullo del río",
+          "el zumbido de las abejas" Paronomasia: palabras semejantes en sonido,
+          distintas en significado "No es lo mismo cazar que casar"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.2 Figuras de Pensamiento (Semánticas)</h3>
+        <div class="formula-box">
+          Metáfora: identificar A con B sin comparación explícita "Sus ojos son
+          dos soles" / "La vida es un sueño" Símil/Comparación: A es como/parece
+          B "Valiente como un león" Hipérbole: exageración con fin expresivo
+          "Lloré un río de lágrimas" Personificación/Prosopopeya: atribuir
+          cualidades humanas a animales o cosas "El viento susurraba secretos"
+          Antítesis: contraste entre ideas opuestas "Fue un éxito espléndido /
+          fue un rotundo fracaso" Oxímoron: unión de dos conceptos
+          contradictorios "Silencio ensordecedor", "sol negro" Ironía: decir lo
+          contrario de lo que se piensa "¡Qué puntual eres!" (cuando llegó
+          tarde) Eufemismo: suavizar una realidad dura "Falleció" por "murió"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.3 Figuras de Construcción (Sintácticas)</h3>
+        <div class="formula-box">
+          Anáfora: repetición de palabras al inicio de oraciones "Vine, vi,
+          vencí" / "No por mucho madrugar amanece más temprano" Epífora:
+          repetición al final de oraciones "Fui feliz, amé, y fui feliz"
+          Quiasmo: inversión de términos en oraciones paralelas "No vivo para
+          comer, sino como para vivir" Elipsis: omisión de palabras
+          sobreentendidas "Juan estudia medicina y María [estudia] derecho"
+          Paralelismo: oraciones con la misma estructura sintáctica "El amor
+          mueve montañas; la fe mueve mares" Asíndeton: supresión de
+          conjunciones "Vine, vi, vencí" Polisíndeton: repetición de
+          conjunciones "Y ríe y llora y canta y sueña"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.4 Falacias Lógicas</h3>
+        <p>
+          Una falacia es un razonamiento incorrecto que parece válido. El ICFES
+          puede pedir identificar cuándo un argumento es falaz.
+        </p>
+        <div class="formula-box">
+          Ad hominem: atacar a la persona, no al argumento "No lo escuches, él
+          no fue a la universidad" Hombre de paja: distorsionar el argumento del
+          oponente para refutarlo "Quieres reducir el ejército = quieres dejar
+          al país indefenso" Pendiente resbaladiza: A causará inevitablemente Z
+          sin pruebas "Si legalizamos el cannabis, luego querrán legalizar todo"
+          Apelación a la mayoría: es verdad porque todos lo creen "Todo el mundo
+          usa celular, así que debes usarlo" Falsa dicotomía: presentar solo dos
+          opciones cuando hay más "O estás con nosotros o estás contra nosotros"
+          Post hoc: A ocurrió antes de B, entonces A causó B "Después de que
+          llegó el nuevo alcalde subió la delincuencia"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.5 El Narrador y sus Tipos</h3>
+        <div class="formula-box">
+          Narrador protagonista (1.ª persona): cuenta su propia historia "Yo
+          llegué al pueblo una tarde de lluvia..." Narrador testigo (1.ª
+          persona): cuenta lo que presenció "Yo vi cómo él cruzó la calle..."
+          Narrador omnisciente (3.ª persona): sabe todo, incluso pensamientos
+          "Él pensó que nadie lo notaría, pero se equivocaba" Narrador limitado
+          (3.ª persona): solo sabe lo que percibe externamente "Él entró, miró a
+          su alrededor y salió sin decir nada"
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.6 El Punto de Vista y la Objetividad</h3>
+        <p>
+          El punto de vista del autor filtra la información. Un texto puede ser
+          objetivo (periodismo de datos) o subjetivo (editorial, ensayo).
+        </p>
+        <div class="formula-box">
+          Marcadores de subjetividad: → Adjetivos valorativos: "lamentable",
+          "brillante", "peligroso" → Verbos de opinión: "creo", "considero",
+          "estimo" → Adverbios: "claramente", "desafortunadamente",
+          "evidentemente" → Exclamaciones e interrogaciones retóricas
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.7 El Argumento y su Validez</h3>
+        <div class="formula-box">
+          Argumento válido: la conclusión se sigue lógicamente de las premisas.
+          Argumento sólido: válido Y con premisas verdaderas. Premisa:
+          afirmación que sirve de base. Conclusión: lo que se desprende de las
+          premisas. Ejemplo: P1: Todos los humanos son mortales. P2: Sócrates es
+          humano. C: Por lo tanto, Sócrates es mortal. (válido y sólido)
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>3.8 Recursos del Lenguaje Publicitario y Político</h3>
+        <div class="formula-box">
+          Eslogan: frase breve y memorable que resume el mensaje Eufemismo:
+          suaviza realidades negativas ("ajuste fiscal" = recortes) Repetición:
+          refuerza el mensaje ("Sí se puede, sí se puede") Generalización: habla
+          en nombre de todos ("Los colombianos queremos...") Carga emocional:
+          apela a sentimientos (miedo, orgullo, nostalgia) Lenguaje inclusivo:
+          "nosotros", "juntos", "nuestra comunidad"
+        </div>
+      </div>
+
+      <div class="ejercicios-titulo">
+        <h3>Ejercicios tipo ICFES</h3>
+        <span>8 preguntas</span>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-0">
+        <div class="ejercicio-texto">
+          "Sus palabras eran cuchillos que atravesaban el corazón."
+        </div>
+        <div class="enunciado">
+          1. La figura retórica presente en el fragmento es:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+            A) Hipérbole
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 0, true)">
+            B) Metáfora
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+            C) Símil
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+            D) Personificación
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-0">
+          ✓ Es una metáfora: identifica directamente las "palabras" con
+          "cuchillos" sin usar "como" o "parece". Si dijera "sus palabras eran
+          como cuchillos" sería un símil.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-1">
+        <div class="ejercicio-texto">
+          "No debemos escuchar sus propuestas económicas. ¡Si ni siquiera
+          terminó la universidad!"
+        </div>
+        <div class="enunciado">2. El argumento anterior es un ejemplo de:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 1, true)">
+            A) Falacia ad hominem
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+            B) Argumento de autoridad
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+            C) Argumento estadístico
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+            D) Falacia de pendiente resbaladiza
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-1">
+          ✓ Ad hominem: en vez de refutar las propuestas económicas, se ataca la
+          formación académica de la persona. El argumento es inválido porque la
+          credibilidad personal no determina la calidad de las ideas.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-2">
+        <div class="ejercicio-texto">
+          "Lloré, grité, supliqué, pero nadie me escuchó."
+        </div>
+        <div class="enunciado">
+          3. La ausencia de conjunciones entre los verbos es un recurso llamado:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+            A) Polisíndeton
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 2, true)">
+            B) Asíndeton
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+            C) Anáfora
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+            D) Elipsis
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-2">
+          ✓ El asíndeton suprime los nexos/conjunciones entre elementos de una
+          enumeración, generando un ritmo rápido e intenso. El polisíndeton hace
+          lo contrario: repite las conjunciones ("y lloré y grité y supliqué").
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-3">
+        <div class="ejercicio-texto">
+          "El candidato A propone reducir el gasto militar. El candidato B
+          afirma en televisión: 'Mi rival quiere dejar al país sin defensa y
+          entregarlo a los delincuentes'."
+        </div>
+        <div class="enunciado">
+          4. La afirmación del candidato B es un ejemplo de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+            A) Argumento de analogía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 3, true)">
+            B) Falacia del hombre de paja
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+            C) Argumento causal válido
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+            D) Apelación a la mayoría
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-3">
+          ✓ El candidato B distorsiona la propuesta real (reducir el gasto) para
+          hacer creer que quiere dejar el país indefenso. Eso es el "hombre de
+          paja": atacar una versión deformada del argumento real.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-4">
+        <div class="ejercicio-texto">
+          "Dichoso el árbol que es apenas sensitivo, y más la piedra dura,
+          porque esa ya no siente..."
+        </div>
+        <div class="enunciado">
+          5. En el verso de Rubén Darío, atribuir sensaciones al árbol y a la
+          piedra es un ejemplo de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+            A) Hipérbole
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+            B) Ironía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 4, true)">
+            C) Personificación
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+            D) Metáfora
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-4">
+          ✓ La personificación (prosopopeya) atribuye cualidades humanas
+          (sentir, sensitividad) a elementos inanimados (árbol, piedra). Es una
+          de las figuras más frecuentes en la poesía modernista de Darío.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-5">
+        <div class="ejercicio-texto">
+          "No preguntes qué puede hacer tu país por ti; pregunta qué puedes
+          hacer tú por tu país." — J. F. Kennedy
+        </div>
+        <div class="enunciado">
+          6. La figura de construcción presente en la cita es:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+            A) Anáfora
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 5, true)">
+            B) Quiasmo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+            C) Elipsis
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+            D) Paralelismo simple
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-5">
+          ✓ Es un quiasmo: los elementos se invierten entre las dos oraciones: A
+          (país) → B (ti) / B (tú) → A (país). Esta inversión cruzada (ABBA) es
+          la marca definitoria del quiasmo.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-6">
+        <div class="ejercicio-texto">
+          "El protagonista narró: 'Esa noche, mientras caminaba por el callejón
+          oscuro, sentí que alguien me seguía. Mi corazón latía desbocado. Giré
+          y no había nadie. Sin embargo, la sensación persistía'."
+        </div>
+        <div class="enunciado">7. El narrador de este fragmento es:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 6, true)">
+            A) Protagonista en primera persona
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+            B) Omnisciente en tercera persona
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+            C) Testigo en primera persona
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+            D) Limitado en tercera persona
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-6">
+          ✓ El narrador usa primera persona ("sentí", "mi corazón", "giré") y
+          cuenta su propia experiencia. Es el protagonista de los hechos, no un
+          testigo externo.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-2-7">
+        <div class="ejercicio-texto">
+          "Claramente, el gobierno ha fallado en su gestión. Desafortunadamente,
+          los ciudadanos seguirán pagando las consecuencias."
+        </div>
+        <div class="enunciado">
+          8. ¿Cuál de los siguientes elementos indica que el texto es subjetivo?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+            A) El uso de verbos en pasado
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 7, true)">
+            B) Los adverbios "claramente" y "desafortunadamente"
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+            C) La mención al gobierno y a los ciudadanos
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+            D) La extensión de las oraciones
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-2-7">
+          ✓ "Claramente" y "desafortunadamente" son adverbios de
+          actitud/valoración: revelan la postura del autor. Son marcadores de
+          subjetividad típicos del discurso de opinión.
+        </div>
+      </div>
+
+      <button
+        class="btn-completar-tema"
+        id="btnCompletar-2"
+        onclick="completarTema(2)"
+      >
+        ✓ Marcar tema como completado
+      </button>
+      <div class="nav-temas-footer">
+        <button onclick="mostrarTema(1)">← Tipos de Texto</button>
+        <button onclick="mostrarTema(3)">Siguiente: Literatura →</button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     TEMA 4 – LITERATURA Y CONTEXTO HISTÓRICO
+══════════════════════════════════════════ -->
+    <section class="tema-seccion" id="tema-3">
+      <div class="tema-titulo">
+        <h2>📚 Literatura y Contexto Histórico-Cultural</h2>
+        <span class="badge-completado" id="badge-3">✓ Completado</span>
+      </div>
+      <p class="tema-subtitulo">
+        Géneros literarios, movimientos, autores colombianos y latinoamericanos,
+        e intertextualidad.
+      </p>
+
+      <div class="concepto-card">
+        <h3>4.1 Los Géneros Literarios</h3>
+        <div class="formula-box">
+          NARRATIVA: cuenta hechos en prosa Épica / Novela / Cuento / Crónica /
+          Leyenda / Mito / Fábula LÍRICA: expresa sentimientos en verso Oda /
+          Elegía / Soneto / Himno / Romance DRAMÁTICA: textos para representar
+          Tragedia / Comedia / Drama / Auto sacramental ENSAYO: reflexión
+          subjetiva sobre cualquier tema Características: tesis personal,
+          libertad de forma, lenguaje culto
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.2 Movimientos Literarios Clave</h3>
+        <div class="formula-box">
+          Clasicismo (Antigüedad-Renacimiento): orden, equilibrio, imitación de
+          grecolatinos Romanticismo (s. XIX): emoción, libertad, naturaleza,
+          héroe rebelde Realismo/Naturalismo (s. XIX): representación objetiva
+          de la realidad social Modernismo (fin s. XIX - ini s. XX):
+          refinamiento estético, simbolismo, Rubén Darío Vanguardias (s. XX):
+          ruptura, experimentación (surrealismo, dadaísmo, ultraísmo) Boom
+          Latinoamericano (1960-70): realismo mágico, García Márquez, Vargas
+          Llosa Literatura contemporánea: posmodernismo, metaficción, hibridez
+          de géneros
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.3 Autores Colombianos Fundamentales</h3>
+        <div class="formula-box">
+          Gabriel García Márquez: "Cien años de soledad", "El amor en los
+          tiempos del cólera" → Realismo mágico / Macondo / soledad y tiempo
+          circular Tomás Carrasquilla: costumbrismo antioqueño, "La marquesa de
+          Yolombó" Jorge Isaacs: romanticismo, "María" (1867) León de Greiff:
+          vanguardia, experimentación lingüística Álvaro Mutis: "Maqroll el
+          Gaviero", poesía y narrativa Héctor Abad Faciolince: "El olvido que
+          seremos" Piedad Bonnett: poesía contemporánea colombiana
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.4 El Realismo Mágico</h3>
+        <p>
+          Corriente literaria donde eventos mágicos o sobrenaturales son
+          narrados con la misma naturalidad que los hechos cotidianos, sin que
+          los personajes se sorprendan.
+        </p>
+        <div class="formula-box">
+          Características: → Lo mágico se presenta como natural y cotidiano →
+          Mezcla de mito, leyenda y realidad social → Tiempo no lineal, historia
+          circular → Crítica política y social cifrada en lo fantástico →
+          Ambientación latinoamericana o caribeña Autores: García Márquez
+          (Colombia), Asturias (Guatemala), Rulfo (México)
+        </div>
+        <div class="texto-fragmento">
+          "Muchos años después, frente al pelotón de fusilamiento, el coronel
+          Aureliano Buendía había de recordar aquella tarde remota en que su
+          padre lo llevó a conocer el hielo."
+          <cite>— Gabriel García Márquez, Cien años de soledad</cite>
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.5 La Poesía: Estructura y Recursos</h3>
+        <div class="formula-box">
+          Verso: cada línea del poema Estrofa: conjunto de versos (cuarteto = 4,
+          terceto = 3, soneto = 14) Rima consonante: coinciden vocales Y
+          consonantes desde la última vocal tónica Rima asonante: solo coinciden
+          las vocales Ritmo: distribución de sílabas acentuadas Métrica: conteo
+          de sílabas (con sinalefa, diéresis, etc.) Soneto: 14 versos
+          endecasílabos (2 cuartetos + 2 tercetos)
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.6 Intertextualidad</h3>
+        <p>
+          Relación entre textos: un texto alude, cita, parodia o reescribe otro
+          texto anterior.
+        </p>
+        <div class="formula-box">
+          Tipos: Cita: fragmento literal de otra obra Alusión: referencia
+          indirecta a otra obra o autor Parodia: imitación con fin cómico o
+          crítico Pastiche: imitación del estilo de otro autor Reescritura:
+          nueva versión de un texto clásico (p. ej., versiones modernas de
+          mitos)
+        </div>
+        <div class="ejemplo-box">
+          <strong>Ejemplo:</strong> "Ser o no ser" aparece citado en
+          publicidades, películas y canciones → intertextualidad con
+          Shakespeare.<br />
+          <strong>En el ICFES:</strong> pueden mostrar un texto moderno que
+          reescribe un mito griego y preguntar qué función cumple esa relación.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.7 El Contexto Histórico y su Influencia</h3>
+        <p>
+          La literatura siempre refleja el contexto de su producción: guerras,
+          revoluciones, procesos sociales, movimientos filosóficos.
+        </p>
+        <div class="formula-box">
+          Romanticismo → Independencias latinoamericanas (s. XIX)
+          Realismo/Naturalismo → Industrialización y clases sociales (fin s.
+          XIX) Vanguardias → Primera Guerra Mundial, crisis del optimismo
+          (1914-1930) Boom latinoamericano → Dictaduras, Revolución Cubana
+          (1960-1970) Literatura contemporánea → Globalización, posconflicto,
+          migración (s. XXI)
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>4.8 Géneros Discursivos no Literarios con Valor Cultural</h3>
+        <div class="formula-box">
+          Crónica periodística: mezcla de narración y reportaje (Tomás González,
+          Martín Caparrós) Ensayo: reflexión argumentada sin metodología
+          científica (Montaigne, Borges) Testimonio: narración en primera
+          persona de experiencias históricas Autobiografía y memorias:
+          reconstrucción de la propia vida Carta: intercambio epistolar con
+          valor histórico y literario
+        </div>
+      </div>
+
+      <div class="ejercicios-titulo">
+        <h3>Ejercicios tipo ICFES</h3>
+        <span>8 preguntas</span>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-0">
+        <div class="ejercicio-texto">
+          "Muchos años después, frente al pelotón de fusilamiento, el coronel
+          Aureliano Buendía había de recordar aquella tarde remota en que su
+          padre lo llevó a conocer el hielo."
+        </div>
+        <div class="enunciado">
+          1. El fragmento anterior es característico del realismo mágico porque:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+            A) Describe un evento sobrenatural imposible de creer.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 0, true)">
+            B) Combina naturalidad narrativa con temporalidad no lineal y un
+            detalle cotidiano (el hielo) tratado como maravilloso.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+            C) Narra la historia de un militar en una guerra.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+            D) Usa un lenguaje poético y lleno de metáforas.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-0">
+          ✓ El realismo mágico en García Márquez mezcla el tiempo (recuerda el
+          futuro desde el pasado), trata algo cotidiano (el hielo) como una
+          experiencia asombrosa, y narra situaciones extremas (pelotón de
+          fusilamiento) con naturalidad.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-1">
+        <div class="ejercicio-texto">
+          "Era un río de lágrimas aquel llanto. Un mar de pena. Sus ojos, dos
+          fuentes inagotables, vertiendo océanos de dolor."
+        </div>
+        <div class="enunciado">
+          2. La figura retórica predominante en el fragmento es:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+            A) Personificación
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 1, true)">
+            B) Hipérbole
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+            C) Antítesis
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+            D) Oxímoron
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-1">
+          ✓ La hipérbole exagera para dar más fuerza expresiva: comparar el
+          llanto con un río, un mar, un océano es una exageración deliberada.
+          Aunque hay metáforas implícitas, la hipérbole es la figura dominante.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-2">
+        <div class="ejercicio-texto">
+          "En 'María' de Jorge Isaacs, el protagonista Efraín debe partir a
+          estudiar a Europa, dejando atrás a su amada. El amor imposible, la
+          naturaleza como espejo del alma y el sentimiento de pérdida son
+          centrales en la obra."
+        </div>
+        <div class="enunciado">
+          3. La obra "María" pertenece al movimiento literario del:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+            A) Realismo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 2, true)">
+            B) Romanticismo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+            C) Modernismo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+            D) Boom latinoamericano
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-2">
+          ✓ El romanticismo se caracteriza por el amor idealizado e imposible,
+          la naturaleza como reflejo del estado emocional del personaje y el
+          sentimiento de melancolía y pérdida. "María" (1867) es la obra cumbre
+          del romanticismo colombiano.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-3">
+        <div class="ejercicio-texto">
+          "Un escritor contemporáneo tituló su novela 'La Odisea del barrio' y
+          narró las aventuras de un joven que intenta regresar a su hogar en una
+          ciudad violenta, enfrentando múltiples obstáculos y personajes que lo
+          ayudan o traicionan."
+        </div>
+        <div class="enunciado">
+          4. La relación entre esta novela contemporánea y "La Odisea" de Homero
+          es un ejemplo de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+            A) Plagio literario
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+            B) Parodia
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 3, true)">
+            C) Intertextualidad por reescritura
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+            D) Pastiche
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-3">
+          ✓ Es una reescritura intertextual: el autor actualiza la estructura
+          narrativa de "La Odisea" (viaje de regreso, obstáculos, aliados) a un
+          contexto urbano contemporáneo. No es parodia porque no busca el efecto
+          cómico, ni pastiche porque no imita el estilo homérico.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-4">
+        <div class="ejercicio-texto">
+          "Vino el desamor, y con él la soledad; vino la soledad, y con ella el
+          silencio; vino el silencio, y con él la muerte lenta del alma."
+        </div>
+        <div class="enunciado">5. La figura de construcción presente es:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+            A) Asíndeton
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 4, true)">
+            B) Concatenación (o gradación encadenada)
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+            C) Quiasmo
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+            D) Anáfora simple
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-4">
+          ✓ La concatenación (anadiplosis) encadena las oraciones tomando el
+          último elemento de una como inicio de la siguiente: desamor → soledad
+          → silencio → muerte. Crea un efecto de progresión inevitable.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-5">
+        <div class="ejercicio-texto">
+          "El cuento 'Un día de estos' de García Márquez narra cómo un dentista
+          obliga al alcalde corrupto a soportar una extracción dolorosa sin
+          anestesia, diciéndole que le cobra 'la cuenta de veinte muertos'."
+        </div>
+        <div class="enunciado">6. ¿Cuál es el tema central del cuento?</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+            A) El dolor físico de una extracción dental.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 5, true)">
+            B) La revancha del pueblo contra el poder político corrupto.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+            C) La mala práctica de los dentistas rurales.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+            D) La violencia física como solución a los problemas.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-5">
+          ✓ García Márquez usa la situación dental como metáfora del equilibrio
+          de poder: el dentista, representante del pueblo, logra someter
+          momentáneamente al alcalde corrupto. Es crítica política disfrazada de
+          anécdota cotidiana.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-6">
+        <div class="ejercicio-texto">
+          "Era pálido y delgado, con grandes ojos verdes que parecían ver más
+          allá de las cosas visibles."
+        </div>
+        <div class="enunciado">
+          7. El fragmento anterior corresponde a una descripción de tipo:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+            A) Etopeya
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 6, true)">
+            B) Prosopografía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+            C) Topografía
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+            D) Retrato completo
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-6">
+          ✓ Describe rasgos físicos (pálido, delgado, ojos verdes) →
+          prosopografía. "Ver más allá de las cosas visibles" es una cualidad
+          atribuida a sus ojos (físico), no una caracterización psicológica
+          directa.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-3-7">
+        <div class="ejercicio-texto">
+          "Las vanguardias literarias del siglo XX surgieron en un contexto de
+          crisis: la Primera Guerra Mundial había destruido la fe en la razón y
+          el progreso que caracterizaba al siglo XIX."
+        </div>
+        <div class="enunciado">
+          8. Según el texto, las vanguardias del siglo XX se explican
+          principalmente por:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+            A) El deseo de imitar los movimientos literarios del siglo XIX.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 7, true)">
+            B) La crisis de valores tras la Primera Guerra Mundial.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+            C) El surgimiento de nuevas tecnologías de comunicación.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+            D) La influencia de la literatura latinoamericana en Europa.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-3-7">
+          ✓ El texto dice explícitamente que la guerra "destruyó la fe en la
+          razón y el progreso". Esta crisis es la causa directa que explica la
+          ruptura vanguardista con las formas y valores anteriores.
+        </div>
+      </div>
+
+      <button
+        class="btn-completar-tema"
+        id="btnCompletar-3"
+        onclick="completarTema(3)"
+      >
+        ✓ Marcar tema como completado
+      </button>
+      <div class="nav-temas-footer">
+        <button onclick="mostrarTema(2)">← Modos Discursivos</button>
+        <button onclick="mostrarTema(4)">
+          Siguiente: Pensamiento Crítico →
+        </button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+     TEMA 5 – PENSAMIENTO CRÍTICO Y EVALUACIÓN
+══════════════════════════════════════════ -->
+    <section class="tema-seccion" id="tema-4">
+      <div class="tema-titulo">
+        <h2>🧠 Pensamiento Crítico y Evaluación de Textos</h2>
+        <span class="badge-completado" id="badge-4">✓ Completado</span>
+      </div>
+      <p class="tema-subtitulo">
+        Evaluar argumentos, detectar sesgos, comparar posiciones y construir
+        postura propia.
+      </p>
+
+      <div class="concepto-card">
+        <h3>5.1 Evaluación de Argumentos</h3>
+        <p>
+          No basta con identificar un argumento; hay que valorar si es sólido,
+          si las premisas son verdaderas y si la conclusión se sigue
+          lógicamente.
+        </p>
+        <div class="formula-box">
+          Preguntas para evaluar un argumento: 1. ¿La conclusión se sigue
+          lógicamente de las premisas? (validez) 2. ¿Las premisas son verdaderas
+          o verificables? (solidez) 3. ¿Se omite información relevante?
+          (completitud) 4. ¿Hay un salto lógico injustificado? (non sequitur) 5.
+          ¿El argumento apela solo a emociones sin razones? (falacia emotiva)
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.2 Identificar la Postura del Autor</h3>
+        <p>
+          Todo texto argumentativo tiene una postura (tesis). Identificarla
+          requiere reconocer qué defiende el autor y con qué argumentos.
+        </p>
+        <div class="formula-box">
+          Pistas para identificar la postura: → La tesis suele estar en el
+          primer o último párrafo → Busca verbos de opinión: "considero",
+          "defiendo", "es claro que" → Observa qué argumentos reciben más
+          espacio y énfasis → ¿Contra qué postura contraria arguye el autor?
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.3 Sesgos Cognitivos en los Textos</h3>
+        <div class="formula-box">
+          Sesgo de confirmación: solo cita evidencia que apoya su posición Sesgo
+          de selección: elige una muestra no representativa Generalización
+          apresurada: saca conclusiones de pocos casos Sesgo de autoridad:
+          acepta todo lo que dice un experto sin cuestionarlo Cherry-picking:
+          elige solo los datos convenientes, omite los contrarios Lenguaje
+          cargado emocionalmente: usa palabras con fuerte carga afectiva para
+          influir sin argumentos racionales ("terrorista" vs "combatiente")
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.4 Comparar Textos y Posiciones</h3>
+        <p>
+          El ICFES puede presentar dos textos con posiciones contrarias o
+          complementarias y preguntar por sus semejanzas, diferencias o el punto
+          de acuerdo.
+        </p>
+        <div class="formula-box">
+          Estrategia de comparación: 1. Identifica la tesis de cada texto. 2.
+          Identifica los argumentos principales de cada uno. 3. Busca puntos de
+          acuerdo (si existen). 4. Identifica la diferencia fundamental. 5.
+          Evalúa cuál posición está mejor sustentada.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.5 Lectura entre Líneas: Lo Implícito</h3>
+        <p>
+          Los textos dicen más de lo que expresan literalmente. Lo implícito
+          incluye supuestos, valores, ideologías y mensajes no dichos.
+        </p>
+        <div class="formula-box">
+          Preguntas que activan la lectura crítica: → ¿Qué supone el autor que
+          el lector ya sabe o acepta? → ¿Qué voces están ausentes o silenciadas
+          en el texto? → ¿Qué intereses puede tener el autor al escribir esto? →
+          ¿A quién beneficia o perjudica la postura del texto? → ¿Qué
+          consecuencias tendría aceptar la tesis del autor?
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.6 Estrategias para el Día del Examen</h3>
+        <div class="formula-box">
+          ANTES de leer las preguntas: → Lee el texto completo una vez, marcando
+          ideas principales. → Identifica: ¿qué tipo de texto es? ¿Cuál es su
+          propósito? AL responder: → Lee primero la pregunta, luego relee el
+          fragmento pertinente. → Elimina las opciones claramente incorrectas. →
+          Desconfía de opciones con "siempre", "nunca", "todos", "jamás". → La
+          respuesta correcta suele ser la más matizada y precisa. → Si pregunta
+          por "inferencia", la respuesta NO debe estar literal en el texto. → Si
+          pregunta por "idea principal", la respuesta no debe ser ni muy general
+          ni muy específica.
+        </div>
+        <div class="tip-box">
+          💡 En Lectura Crítica NO hay que saber de memoria datos ni fechas.
+          Todo está en el texto. La clave es leer con atención y razonar bien.
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.7 La Construcción de Sentido Global</h3>
+        <p>
+          El sentido de un texto no está solo en sus partes sino en la relación
+          entre ellas. Preguntarse por el "para qué" del texto ayuda a construir
+          el sentido global.
+        </p>
+        <div class="formula-box">
+          Niveles de comprensión global: Local: el significado de una palabra o
+          frase Global: el significado del párrafo o sección Total: el
+          significado del texto completo Intertextual: el significado en
+          relación con otros textos/contextos
+        </div>
+      </div>
+
+      <div class="concepto-card">
+        <h3>5.8 El Ensayo como Ejercicio de Pensamiento Crítico</h3>
+        <p>
+          El ensayo es el género del pensamiento libre. Combina argumentación,
+          narración, descripción y reflexión en un texto personal y subjetivo.
+        </p>
+        <div class="formula-box">
+          Características del ensayo: → Tema: cualquiera (científico,
+          filosófico, literario, cotidiano) → Extensión: variable, sin reglas
+          fijas → Voz: primera persona, tono personal y directo → Estructura:
+          libre, pero coherente → Propósito: proponer una reflexión, no
+          demostrar una verdad absoluta Ensayistas clave: Montaigne (padre del
+          ensayo), Borges, Octavio Paz, Estanislao Zuleta
+        </div>
+      </div>
+
+      <div class="ejercicios-titulo">
+        <h3>Ejercicios tipo ICFES</h3>
+        <span>8 preguntas</span>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-0">
+        <div class="ejercicio-texto">
+          "Texto 1: 'Las redes sociales destruyen la capacidad de concentración
+          de los jóvenes. Los estudios muestran que el tiempo promedio de
+          atención se ha reducido a 8 segundos.' Texto 2: 'Las redes sociales
+          desarrollan nuevas habilidades cognitivas como la multitarea y el
+          procesamiento visual rápido, adaptando el cerebro al entorno
+          digital.'"
+        </div>
+        <div class="enunciado">
+          1. ¿En qué punto están de acuerdo ambos textos?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+            A) Las redes sociales son perjudiciales para los jóvenes.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 0, true)">
+            B) Las redes sociales modifican las habilidades cognitivas de los
+            jóvenes.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+            C) Los jóvenes deben reducir el uso de redes sociales.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+            D) La multitarea es una habilidad negativa.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-0">
+          ✓ Ambos textos reconocen que las redes sociales generan cambios
+          cognitivos, aunque difieren en la valoración: el primero los ve
+          negativamente (reducción de atención), el segundo positivamente
+          (nuevas habilidades). El punto de acuerdo es que sí hay cambio
+          cognitivo.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-1">
+        <div class="ejercicio-texto">
+          "En Colombia la gente no lee. Pregunté a diez personas en el bus si
+          habían leído un libro este año y nueve dijeron que no. Eso prueba que
+          somos un país sin cultura literaria."
+        </div>
+        <div class="enunciado">
+          2. El argumento anterior comete la falacia de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 1, true)">
+            A) Generalización apresurada
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+            B) Ad hominem
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+            C) Pendiente resbaladiza
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+            D) Apelación a la autoridad
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-1">
+          ✓ Generalización apresurada: se saca una conclusión sobre todo un país
+          ("Colombia") a partir de una muestra mínima e insuficiente (10
+          personas en un bus). La muestra no es representativa de los 50+
+          millones de colombianos.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-2">
+        <div class="ejercicio-texto">
+          "El gobierno anunció medidas de 'optimización del gasto público' que
+          incluyen la reducción del presupuesto en salud y educación."
+        </div>
+        <div class="enunciado">
+          3. El uso de "optimización del gasto público" en lugar de "recortes"
+          es un ejemplo de:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+            A) Argumento de autoridad
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 2, true)">
+            B) Eufemismo con intención ideológica
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+            C) Metáfora literaria
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+            D) Definición técnica neutral
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-2">
+          ✓ El eufemismo "optimización del gasto" suaviza la realidad de los
+          recortes. Es una estrategia de lenguaje político para presentar
+          medidas impopulares de forma más aceptable, ocultando el impacto real.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-3">
+        <div class="ejercicio-texto">
+          "Todo ciudadano tiene el deber de participar en política. Abstenerse
+          de votar es una forma de participación que también expresa una postura
+          política."
+        </div>
+        <div class="enunciado">4. ¿Qué postura defiende el texto?</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+            A) El voto es obligatorio en una democracia.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+            B) No votar es un acto irresponsable.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 3, true)">
+            C) Toda conducta frente a las elecciones constituye una postura
+            política.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+            D) Los ciudadanos deben votar siempre por el candidato mejor
+            preparado.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-3">
+          ✓ El texto matiza la participación política: no solo votar es
+          participar. La abstención también comunica algo. La postura es que
+          cualquier conducta frente al proceso electoral tiene un significado
+          político.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-4">
+        <div class="ejercicio-texto">
+          "Las mejores universidades del mundo están en Estados Unidos, así que
+          la educación en ese país debe ser la mejor del mundo."
+        </div>
+        <div class="enunciado">
+          5. El argumento anterior es problemático porque:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 4, true)">
+            A) Confunde las partes con el todo: las mejores universidades no
+            implican que todo el sistema sea el mejor.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+            B) Ataca a otras naciones sin argumentos.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+            C) Usa datos estadísticos no verificados.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+            D) No incluye un argumento de autoridad válido.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-4">
+          ✓ Es la falacia de composición: asumir que lo que es verdad de las
+          partes (mejores universidades) también lo es del todo (sistema
+          educativo completo). Un país puede tener élites educativas excelentes
+          y al mismo tiempo un sistema general deficiente.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-5">
+        <div class="ejercicio-texto">
+          "El autor dedica tres párrafos a describir las fallas del sistema de
+          salud colombiano, menciona brevemente un logro y concluye que 'el
+          sistema es un fracaso total'."
+        </div>
+        <div class="enunciado">
+          6. La conducta del autor puede identificarse como:
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+            A) Argumentación equilibrada y objetiva
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 5, true)">
+            B) Sesgo de selección (cherry-picking)
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+            C) Argumento causal válido
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+            D) Uso correcto de la refutación
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-5">
+          ✓ Cherry-picking: el autor selecciona predominantemente evidencia
+          negativa (tres párrafos) y minimiza la positiva (mención breve) para
+          llegar a una conclusión totalizante ("fracaso total"). No hay
+          equilibrio en el tratamiento de la evidencia.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-6">
+        <div class="ejercicio-texto">
+          "Según la encuesta, el 65 % de los encuestados apoya la propuesta. La
+          muestra fue de 200 personas en un centro comercial un domingo."
+        </div>
+        <div class="enunciado">
+          7. ¿Qué debilidad tiene este argumento estadístico?
+        </div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+            A) El porcentaje (65 %) es demasiado bajo para ser significativo.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 6, true)">
+            B) La muestra no es representativa de toda la población.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+            C) No se cita la fuente de la encuesta.
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+            D) El número de encuestados (200) es siempre insuficiente.
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-6">
+          ✓ Encuestar solo en un centro comercial un domingo sesga la muestra
+          hacia personas con cierto perfil socioeconómico y disponibilidad de
+          tiempo. No es representativo de toda la diversidad social. Este es un
+          sesgo de selección muestral.
+        </div>
+      </div>
+
+      <div class="ejercicio-card" id="ej-4-7">
+        <div class="ejercicio-texto">
+          "Si permitimos el matrimonio entre personas del mismo sexo, después
+          querrán casarse con animales, y luego con objetos. No podemos abrir
+          esa puerta."
+        </div>
+        <div class="enunciado">8. El argumento anterior es un ejemplo de:</div>
+        <div class="opciones-grid">
+          <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+            A) Falacia ad hominem
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+            B) Apelación a la mayoría
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 7, true)">
+            C) Falacia de la pendiente resbaladiza
+          </button>
+          <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+            D) Argumento de analogía
+          </button>
+        </div>
+        <div class="feedback-ejercicio" id="fb-4-7">
+          ✓ La pendiente resbaladiza asume que aceptar A inevitablemente llevará
+          a B, C y Z, sin demostrar que esa cadena sea necesaria o probable.
+          Aquí se asume que el matrimonio igualitario inevitablemente lleva a
+          consecuencias extremas sin ninguna evidencia lógica.
+        </div>
+      </div>
+
+      <button
+        class="btn-completar-tema"
+        id="btnCompletar-4"
+        onclick="completarTema(4)"
+      >
+        ✓ Marcar tema como completado
+      </button>
+
+      <div
+        id="moduloCompletado"
+        style="
+          display: none;
+          margin-top: 30px;
+          background: linear-gradient(135deg, #6b21a8, #9333ea);
+          color: white;
+          border-radius: 16px;
+          padding: 32px;
+          text-align: center;
+        "
+      >
+        <div style="font-size: 3rem">🎉</div>
+        <h2 style="margin: 12px 0 8px">¡Felicitaciones!</h2>
+        <p style="opacity: 0.9; font-size: 15px">
+          Completaste todo el módulo de Lectura Crítica.<br />¡Estás listo para
+          el ICFES!
+        </p>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+          "
+        >
+          <a
+            href="simulacro-lectura.html"
+            style="
+              background: white;
+              color: #6b21a8;
+              padding: 12px 28px;
+              border-radius: 10px;
+              font-weight: 700;
+              text-decoration: none;
+              font-size: 14px;
+            "
+            >Ir al Simulacro →</a
+          >
+          <a
+            href="areas.html"
+            style="
+              background: rgba(255, 255, 255, 0.2);
+              color: white;
+              padding: 12px 28px;
+              border-radius: 10px;
+              font-weight: 700;
+              text-decoration: none;
+              font-size: 14px;
+            "
+            >Ver otras áreas</a
+          >
+        </div>
+      </div>
+
+      <div class="nav-temas-footer">
+        <button onclick="mostrarTema(3)">← Literatura</button>
+        <span></span>
+      </div>
+    </section>
+
+    <button
+      onclick="abrirChat()"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        border: none;
+        background: #6b21a8;
+        cursor: pointer;
+      "
+    >
+      🤖
+    </button>
+    <script src="js/chat-ia.js"></script>
+    <script>
+      const sesion = JSON.parse(
+        localStorage.getItem("datosVisionales") ||
+          localStorage.getItem("usuarioActivo") ||
+          "{}",
+      );
+      if (!sesion.correo) window.location.href = "index.html";
+
+      const TOTAL_TEMAS = 5;
+      let temasCompletados = JSON.parse(
+        localStorage.getItem("lec_completados") || "[]",
+      );
+
+      window.addEventListener("DOMContentLoaded", () => {
+        temasCompletados.forEach((idx) => marcarUICompletado(idx));
+        actualizarProgreso();
+      });
+
+      function mostrarTema(idx) {
+        document
+          .querySelectorAll(".tema-seccion")
+          .forEach((s) => s.classList.remove("visible"));
+        document
+          .querySelectorAll(".temas-nav button")
+          .forEach((b) => b.classList.remove("activo"));
+        document.getElementById(`tema-${idx}`).classList.add("visible");
+        document.getElementById(`btn-tema-${idx}`).classList.add("activo");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function responder(btn, tema, ejercicio, esCorrecta) {
+        const card = document.getElementById(`ej-${tema}-${ejercicio}`);
+        const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
+        card.querySelectorAll(".opcion-btn").forEach((b) => {
+          b.disabled = true;
+          if (b.getAttribute("onclick").includes(",true)"))
+            b.classList.add("correcta");
+        });
+        btn.classList.add(esCorrecta ? "correcta" : "incorrecta");
+        feedback.className = `feedback-ejercicio ${esCorrecta ? "correcto" : "incorrecto"}`;
+        feedback.style.display = "block";
+      }
+
+      async function completarTema(idx) {
+        if (temasCompletados.includes(idx)) return;
+        temasCompletados.push(idx);
+        localStorage.setItem(
+          "lec_completados",
+          JSON.stringify(temasCompletados),
+        );
+        marcarUICompletado(idx);
+        actualizarProgreso();
+        try {
+          if (sesion.correo) {
+            await fetch("http://localhost:3000/api/progreso", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                correo: sesion.correo, area:"lectura",
+                progreso: Math.round(
+                  (temasCompletados.length / TOTAL_TEMAS) * 100,
+                ),
+              }),
+            });
+          }
+        } catch (e) {}
+        if (temasCompletados.length === TOTAL_TEMAS)
+          document.getElementById("moduloCompletado").style.display = "block";
+      }
+
+      function marcarUICompletado(idx) {
+        const btn = document.getElementById(`btnCompletar-${idx}`);
+        const badge = document.getElementById(`badge-${idx}`);
+        const navBtn = document.getElementById(`btn-tema-${idx}`);
+        if (btn) {
+          btn.textContent = "✓ Tema completado";
+          btn.classList.add("ya-completado");
+        }
+        if (badge) badge.style.display = "inline-block";
+        if (navBtn) navBtn.classList.add("completado-nav");
+      }
+
+      function actualizarProgreso() {
+        const n = temasCompletados.length;
+        document.getElementById("barraGlobal").style.width =
+          Math.round((n / TOTAL_TEMAS) * 100) + "%";
+        document.getElementById("textoGlobal").textContent =
+          `${n} de ${TOTAL_TEMAS} temas completados`;
+      }
+    </script>
+  </body>
+</html>
