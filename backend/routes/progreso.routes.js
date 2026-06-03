@@ -1,13 +1,17 @@
 const express = require("express");
 
+const router = express.Router();
+
 const {
   guardarProgreso,
+  obtenerProgreso,
   obtenerRanking,
 } = require("../controllers/progreso.controller");
 
-const router = express.Router();
-
 router.post("/progreso", guardarProgreso);
+
+router.get("/progreso/:correo", obtenerProgreso);
+
 router.get("/ranking", obtenerRanking);
 
 module.exports = router;

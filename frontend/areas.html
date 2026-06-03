@@ -1,147 +1,220 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Áreas de Estudio - ICFES Prep</title>
-  <link rel="stylesheet" href="css/global.css" />
-</head>
-<body>
-  
-  <header class="navbar navbar-estudiante">
-    <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Áreas de Estudio - ICFES Prep</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body>
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+
+      <h1>Áreas</h1>
+
+      <div class="nav-right">
+        <div
+          style="display: flex; align-items: center; gap: 10px; color: white"
+        >
+          <span
+            id="nav-nombre-estudiante"
+            style="font-size: 14px; opacity: 0.85"
+          ></span>
+          <a
+            href="perfil-estudiante.html"
+            id="nav-avatar"
+            class="profile-nav-icon"
+            style="
+              background: #3d8bfd;
+              margin: 0;
+              cursor: pointer;
+              text-decoration: none;
+            "
+            >E</a
+          >
+        </div>
+        <a
+          href="#"
+          onclick="cerrarSesion()"
+          style="font-size: 13px; opacity: 0.85; margin-left: 20px"
+          >Cerrar sesión</a
+        >
+      </div>
+    </header>
+
+    <aside class="sidebar-oculta" id="sidebar-menu">
+      <div class="titulo-panel">Panel</div>
+      <nav style="display: flex; flex-direction: column; gap: 5px">
+        <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        <a href="areas.html" class="nav-item activa">Áreas</a>
+        <a href="clases_grabadas.html" class="nav-item">Clases Grabadas</a>
+        <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
+        <a href="simulacro.html" class="nav-item">Simulacros</a>
+        <a href="#" class="nav-item">Material Extra</a>
+      </nav>
+    </aside>
+
+    <main class="contenido-dinamico" id="contenido-principal">
+      <h3 class="titulo-seccion">Mis Áreas de Estudio</h3>
+
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+        "
+      >
+        <div class="card-materia-progreso">
+          <div>
+            <h4>Matemáticas</h4>
+            <p>Álgebra, cálculo, geometría y estadística.</p>
+          </div>
+          <div>
+            <div class="progreso-header">
+              <span>Progreso del módulo</span>
+              <span id="txt-progreso-matematicas">0%</span>
+            </div>
+            <div class="barra-fondo-area">
+              <div
+                id="barra-matematicas"
+                class="barra-llena-area"
+                style="width: 0%; transition: width 1s ease"
+              ></div>
+            </div>
+            <a
+              href="modulo-matematicas.html?area=matematicas"
+              class="btn btn-area"
+              >Estudiar Área</a
+            >
+          </div>
+        </div>
+
+        <div class="card-materia-progreso">
+          <div>
+            <h4>Lectura Crítica</h4>
+            <p>Comprensión de textos, filosofía y literatura.</p>
+          </div>
+          <div>
+            <div class="progreso-header">
+              <span>Progreso del módulo</span>
+              <span id="txt-progreso-lectura">0%</span>
+            </div>
+            <div class="barra-fondo-area">
+              <div
+                id="barra-lectura"
+                class="barra-llena-area"
+                style="width: 0%; transition: width 1s ease"
+              ></div>
+            </div>
+            <a href="modulo-lectura.html" class="btn btn-area">Estudiar Área</a>
+          </div>
+        </div>
+
+        <div class="card-materia-progreso">
+          <div>
+            <h4>Ciencias Naturales</h4>
+            <p>Física, química, biología y CTS.</p>
+          </div>
+          <div>
+            <div class="progreso-header">
+              <span>Progreso del módulo</span>
+              <span id="txt-progreso-ciencias">0%</span>
+            </div>
+            <div class="barra-fondo-area">
+              <div
+                id="barra-ciencias"
+                class="barra-llena-area"
+                style="width: 0%; transition: width 1s ease"
+              ></div>
+            </div>
+            <a href="modulo-ciencias.html?area=ciencias" class="btn btn-area"
+              >Estudiar Área</a
+            >
+          </div>
+        </div>
+
+        <div class="card-materia-progreso">
+          <div>
+            <h4>Sociales y Ciudadanas</h4>
+            <p>Historia, geografía, constitución y competencias.</p>
+          </div>
+          <div>
+            <div class="progreso-header">
+              <span>Progreso del módulo</span>
+              <span id="txt-progreso-sociales">0%</span>
+            </div>
+            <div class="barra-fondo-area">
+              <div
+                id="barra-sociales"
+                class="barra-llena-area"
+                style="width: 0%; transition: width 1s ease"
+              ></div>
+            </div>
+            <a href="modulo-sociales.html?area=sociales" class="btn btn-area"
+              >Estudiar Área</a
+            >
+          </div>
+        </div>
+
+        <div class="card-materia-progreso">
+          <div>
+            <h4>Inglés</h4>
+            <p>Gramática, vocabulario y comprensión lectora.</p>
+          </div>
+          <div>
+            <div class="progreso-header">
+              <span>Progreso del módulo</span>
+              <span id="txt-progreso-ingles">0%</span>
+            </div>
+            <div class="barra-fondo-area">
+              <div
+                id="barra-ingles"
+                class="barra-llena-area"
+                style="width: 0%; transition: width 1s ease"
+              ></div>
+            </div>
+            <a href="modulo-matematicas.html?area=ingles" class="btn btn-area"
+              >Estudiar Área</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <button
+      class="chat-btn"
+      onclick="abrirChat()"
+      style="
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        border: none;
+        background: #3d8bfd;
+        cursor: pointer;
+      "
+    >
+      🤖
     </button>
-    
-    <h1>Áreas</h1>
-    
-    <div class="nav-right">
-      <div style="display: flex; align-items: center; gap: 10px; color: white;">
-        <span id="nav-nombre-estudiante" style="font-size:14px; opacity:0.85;"></span>
-        <a href="perfil.html" id="nav-avatar" class="profile-nav-icon" style="background:#3d8bfd; margin: 0; cursor: pointer; text-decoration: none;">E</a>
-      </div>
-      <a href="#" onclick="cerrarSesion()" style="font-size:13px; opacity:0.85; margin-left: 20px;">Cerrar sesión</a>
-    </div>
-  </header>
 
-  <aside class="sidebar-oculta" id="sidebar-menu">
-    <div class="titulo-panel">Panel</div>
-    <nav style="display: flex; flex-direction: column; gap: 5px;">
-      <a href="panel-estudiante.html" class="nav-item">Inicio</a>
-      <a href="areas.html" class="nav-item activa">Áreas</a>
-      <a href="clases_grabadas.html" class="nav-item">Clases Grabadas</a>
-      <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
-      <a href="simulacro.html" class="nav-item">Simulacros</a>
-      <a href="#" class="nav-item">Material Extra</a>
-    </nav>
-  </aside>
-
-<main class="contenido-dinamico" id="contenido-principal">
-    <h3 class="titulo-seccion">Mis Áreas de Estudio</h3>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-      
-      <div class="card-materia-progreso">
-        <div>
-          <h4>Matemáticas</h4>
-          <p>Álgebra, cálculo, geometría y estadística.</p>
-        </div>
-        <div>
-          <div class="progreso-header">
-            <span>Progreso del módulo</span>
-            <span id="txt-progreso-matematicas">0%</span>
-          </div>
-          <div class="barra-fondo-area">
-            <div id="barra-matematicas" class="barra-llena-area" style="width: 0%; transition: width 1s ease;"></div>
-          </div>
-          <a href="modulo-matematicas.html?area=matematicas" class="btn btn-area">Estudiar Área</a>
-        </div>
-      </div>
-
-      <div class="card-materia-progreso">
-        <div>
-          <h4>Lectura Crítica</h4>
-          <p>Comprensión de textos, filosofía y literatura.</p>
-        </div>
-        <div>
-          <div class="progreso-header">
-            <span>Progreso del módulo</span>
-            <span id="txt-progreso-lectura">0%</span>
-          </div>
-          <div class="barra-fondo-area">
-            <div id="barra-lectura" class="barra-llena-area" style="width: 0%; transition: width 1s ease;"></div>
-          </div>
-          <a href="modulo-matematicas.html?area=lectura" class="btn btn-area">Estudiar Área</a>
-        </div>
-      </div>
-
-      <div class="card-materia-progreso">
-        <div>
-          <h4>Ciencias Naturales</h4>
-          <p>Física, química, biología y CTS.</p>
-        </div>
-        <div>
-          <div class="progreso-header">
-            <span>Progreso del módulo</span>
-            <span id="txt-progreso-ciencias">0%</span>
-          </div>
-          <div class="barra-fondo-area">
-            <div id="barra-ciencias" class="barra-llena-area" style="width: 0%; transition: width 1s ease;"></div>
-          </div>
-          <a href="modulo-matematicas.html?area=ciencias" class="btn btn-area">Estudiar Área</a>
-        </div>
-      </div>
-
-      <div class="card-materia-progreso">
-        <div>
-          <h4>Sociales y Ciudadanas</h4>
-          <p>Historia, geografía, constitución y competencias.</p>
-        </div>
-        <div>
-          <div class="progreso-header">
-            <span>Progreso del módulo</span>
-            <span id="txt-progreso-sociales">0%</span>
-          </div>
-          <div class="barra-fondo-area">
-            <div id="barra-sociales" class="barra-llena-area" style="width: 0%; transition: width 1s ease;"></div>
-          </div>
-          <a href="modulo-matematicas.html?area=sociales" class="btn btn-area">Estudiar Área</a>
-        </div>
-      </div>
-
-      <div class="card-materia-progreso">
-        <div>
-          <h4>Inglés</h4>
-          <p>Gramática, vocabulario y comprensión lectora.</p>
-        </div>
-        <div>
-          <div class="progreso-header">
-            <span>Progreso del módulo</span>
-            <span id="txt-progreso-ingles">0%</span>
-          </div>
-          <div class="barra-fondo-area">
-            <div id="barra-ingles" class="barra-llena-area" style="width: 0%; transition: width 1s ease;"></div>
-          </div>
-          <a href="modulo-matematicas.html?area=ingles" class="btn btn-area">Estudiar Área</a>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <button class="chat-btn" onclick="abrirChat()" style="position: fixed; bottom: 20px; right: 20px; border-radius: 50%; width: 60px; height: 60px; font-size: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; border: none; background: #3d8bfd; cursor: pointer;">🤖</button>
-  
-  <script src="js/chat-ia.js"></script>
-  <script src="js/panel-estudiante.js"></script>
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('sidebar-menu');
-      const btn = document.getElementById('btn-menu');
-      menu.classList.toggle('abierto');
-      btn.classList.toggle('active');
-    }
-  </script>
-</body>
+    <script src="js/chat-ia.js"></script>
+    <script src="js/panel-estudiante.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("sidebar-menu");
+        const btn = document.getElementById("btn-menu");
+        menu.classList.toggle("abierto");
+        btn.classList.toggle("active");
+      }
+    </script>
+  </body>
 </html>
