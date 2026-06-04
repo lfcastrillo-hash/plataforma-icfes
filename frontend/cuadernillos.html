@@ -6,44 +6,58 @@
     <title>Material de Estudio</title>
     <link rel="stylesheet" href="css/global.css" />
   </head>
-  <body>
-    <header class="navbar">
+  <body class="dashboard-estudiante">
+    
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
       <h1>Material de Estudio</h1>
-      <a href="panel-estudiante.html">Volver</a>
+      <div class="nav-right">
+        <a href="panel-estudiante.html" style="color: white; text-decoration: none; font-size: 14px; opacity: 0.85;">Volver al Inicio</a>
+      </div>
     </header>
 
-    <section class="cards-section">
-      <div class="cards">
-        <div class="card">
-          <h3>Cuadernillos Entrenando</h3>
-          <button onclick="window.location.href = 'entrenando.html'">
-            Ver
-          </button>
-        </div>
+    <aside class="sidebar-oculta" id="sidebar-menu">
+      <div class="titulo-panel">Panel</div>
+      <nav style="display: flex; flex-direction: column; gap: 5px;">
+        <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        <a href="areas.html" class="nav-item">Áreas</a>
+        <a href="cuadernillos.html" class="nav-item activa">Cuadernillos</a>
+        <a href="simulacro.html" class="nav-item">Simulacros</a>
+      </nav>
+    </aside>
 
-        <div class="card">
-          <h3>ICFES Filtrados</h3>
-          <button onclick="window.location.href = 'filtros.html'">Ver</button>
-        </div>
+    <main class="contenido-dinamico" id="contenido-principal">
+      <section class="cards-section">
+        <div class="cards">
+          <div class="card">
+            <h3>Cuadernillos Entrenando</h3>
+            <button onclick="window.location.href = 'entrenando.html'">
+              Ver
+            </button>
+          </div>
 
-        <div class="card">
-          <h3>Clases Grabadas</h3>
-          <button onclick="window.location.href = 'clases_grabadas.html'">
-            Ver
-          </button>
-        </div>
+          <div class="card">
+            <h3>ICFES Filtrados</h3>
+            <button onclick="window.location.href = 'filtros.html'">Ver</button>
+          </div>
 
-        <div class="card">
-          <h3>Más Cuadernillos</h3>
-          <button onclick="window.location.href = 'mas-material.html'">
-            Ver
-          </button>
-        </div>
-      </div>
-    </section>
+          </div>
+      </section>
+    </main>
 
-    <button class="chat-btn" onclick="abrirChat()">IA</button>
-
+    <button class="chat-btn" onclick="abrirChat()">✨</button>
     <script src="js/chat-ia.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById('sidebar-menu');
+        const btn = document.getElementById('btn-menu');
+        menu.classList.toggle('abierto');
+        btn.classList.toggle('active');
+      }
+    </script>
   </body>
 </html>

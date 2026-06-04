@@ -46,15 +46,16 @@
       </div>
     </header>
 
-    <aside class="sidebar-oculta" id="sidebar-menu">
+   <aside class="sidebar-oculta" id="sidebar-menu">
       <div class="titulo-panel">Panel</div>
-      <nav style="display: flex; flex-direction: column; gap: 5px">
+      <nav style="display: flex; flex-direction: column; gap: 5px;">
+        
         <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        
         <a href="areas.html" class="nav-item activa">Áreas</a>
-        <a href="clases_grabadas.html" class="nav-item">Clases Grabadas</a>
+        
         <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
         <a href="simulacro.html" class="nav-item">Simulacros</a>
-        <a href="#" class="nav-item">Material Extra</a>
       </nav>
     </aside>
 
@@ -185,26 +186,7 @@
       </div>
     </main>
 
-    <button
-      class="chat-btn"
-      onclick="abrirChat()"
-      style="
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        font-size: 24px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        z-index: 9999;
-        border: none;
-        background: #3d8bfd;
-        cursor: pointer;
-      "
-    >
-      🤖
-    </button>
+    <button class="chat-btn" onclick="abrirChat()">✨</button>
 
     <script src="js/chat-ia.js"></script>
     <script src="js/panel-estudiante.js"></script>

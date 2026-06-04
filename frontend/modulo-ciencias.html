@@ -18,7 +18,6 @@
       body {
         background: #f0fdf4;
       }
-
       /* ── HEADER ── */
       .modulo-header {
         background: linear-gradient(135deg, #065f46, #059669);
@@ -65,7 +64,6 @@
         margin-top: 4px;
         opacity: 0.9;
       }
-
       /* ── NAV ── */
       .temas-nav {
         display: flex;
@@ -105,7 +103,6 @@
         color: #fff;
         border-color: #059669;
       }
-
       /* ── SECCIONES ── */
       .tema-seccion {
         display: none;
@@ -150,7 +147,6 @@
         font-size: 14px;
         margin-bottom: 28px;
       }
-
       /* ── CARDS ── */
       .concepto-card {
         background: #fff;
@@ -214,7 +210,6 @@
         color: #1e40af;
         line-height: 1.6;
       }
-
       /* ── EJERCICIOS ── */
       .ejercicios-titulo {
         display: flex;
@@ -311,7 +306,6 @@
         background: #fee2e2;
         color: #991b1b;
       }
-
       /* ── BOTONES FOOTER ── */
       .btn-completar-tema {
         background: #065f46;
@@ -360,7 +354,6 @@
         background: #065f46;
         color: #fff;
       }
-
       /* ── TABLA PERIÓDICA / DATOS especiales ── */
       .tabla-mini {
         display: grid;
@@ -384,7 +377,6 @@
         font-weight: 400;
         color: #555;
       }
-
       @media (max-width: 768px) {
         .opciones-grid {
           grid-template-columns: 1fr;
@@ -398,1005 +390,1091 @@
       }
     </style>
   </head>
-  <body>
-    <header class="navbar">
+  
+  <body class="dashboard-estudiante">
+    
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+      </button>
       <h1>🔬 Módulo de Ciencias Naturales</h1>
-      <a href="areas.html">← Volver a Áreas</a>
+      <div class="nav-right">
+        <a href="areas.html" style="color: white; text-decoration: none; font-size: 14px;">← Volver a Áreas</a>
+      </div>
     </header>
 
-    <div class="modulo-header">
-      <div>
-        <h1>Ciencias Naturales – Saber 11</h1>
-        <p>
-          5 temas · 50+ conceptos · 40 ejercicios tipo ICFES · Biología, Química
-          y Física
-        </p>
-      </div>
-      <div class="progreso-global-wrap">
-        <label>Progreso del módulo</label>
-        <div class="progreso-global-barra">
-          <div class="progreso-global-fill" id="barraGlobal"></div>
-        </div>
-        <div class="progreso-global-txt" id="textoGlobal">
-          0 de 5 temas completados
-        </div>
-      </div>
-    </div>
+    <aside class="sidebar-oculta" id="sidebar-menu">
+      <div class="titulo-panel">Panel</div>
+      <nav style="display: flex; flex-direction: column; gap: 5px;">
+        <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        <a href="areas.html" class="nav-item activa">Áreas</a>
+        <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
+        <a href="simulacro.html" class="nav-item">Simulacros</a>
+      </nav>
+    </aside>
 
-    <nav class="temas-nav">
-      <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">
-        1. Célula y Vida
-      </button>
-      <button onclick="mostrarTema(1)" id="btn-tema-1">
-        2. Genética y Evolución
-      </button>
-      <button onclick="mostrarTema(2)" id="btn-tema-2">3. Química</button>
-      <button onclick="mostrarTema(3)" id="btn-tema-3">4. Física</button>
-      <button onclick="mostrarTema(4)" id="btn-tema-4">
-        5. Ecosistemas y Ambiente
-      </button>
-    </nav>
-
-    <!-- ══════════════════════════════════════════
-     TEMA 1 – CÉLULA, BIOLOGÍA MOLECULAR Y FISIOLOGÍA
-══════════════════════════════════════════ -->
-    <section class="tema-seccion visible" id="tema-0">
-      <div class="tema-titulo">
-        <h2>🦠 Célula, Biología Molecular y Fisiología</h2>
-        <span class="badge-completado" id="badge-0">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">
-        Estructura celular, organelos, metabolismo, ADN, división celular y
-        sistemas del cuerpo humano.
-      </p>
-
-      <div class="concepto-card">
-        <h3>1.1 La Célula: Unidad de la Vida</h3>
-        <p>
-          Toda célula proviene de otra célula (Teoría Celular). Existen dos
-          grandes tipos:
-        </p>
-        <div class="formula-box">
-          CÉLULA PROCARIOTA (bacterias, arqueas): → Sin núcleo definido (ADN
-          circular en el citoplasma) → Sin organelos membranosos → Tamaño: 1–10
-          µm → Ejemplos: Escherichia coli, Staphylococcus CÉLULA EUCARIOTA
-          (animales, plantas, hongos, protistas): → Núcleo delimitado por
-          membrana nuclear → Organelos membranosos especializados → Tamaño:
-          10–100 µm → Puede ser animal o vegetal
+    <main class="contenido-dinamico" id="contenido-principal">
+      
+      <div class="modulo-header">
+        <div>
+          <h1>Ciencias Naturales – Saber 11</h1>
+          <p>
+            5 temas · 50+ conceptos · 40 ejercicios tipo ICFES · Biología,
+            Química y Física
+          </p>
         </div>
-        <div class="tip-box">
-          💡 Diferencia clave en el ICFES: las células vegetales tienen pared
-          celular (celulosa), cloroplastos y vacuola central grande. Las
-          animales no tienen pared celular ni cloroplastos.
+        <div class="progreso-global-wrap">
+          <label>Progreso del módulo</label>
+          <div class="progreso-global-barra">
+            <div class="progreso-global-fill" id="barraGlobal"></div>
+          </div>
+          <div class="progreso-global-txt" id="textoGlobal">
+            0 de 5 temas completados
+          </div>
         </div>
       </div>
 
-      <div class="concepto-card">
-        <h3>1.2 Organelos Celulares y sus Funciones</h3>
-        <div class="formula-box">
-          Núcleo: contiene el ADN; dirige la síntesis de proteínas Mitocondria:
-          respiración celular → produce ATP ("central energética") Ribosoma:
-          síntesis de proteínas (en RER o libre en citoplasma) RE rugoso:
-          síntesis y transporte de proteínas (tiene ribosomas) RE liso: síntesis
-          de lípidos y detoxificación Aparato Golgi: modificación, empaque y
-          distribución de proteínas Lisosoma: digestión intracelular (enzimas
-          hidrolíticas) Cloroplasto: fotosíntesis (solo en células vegetales y
-          algas) Vacuola: almacenamiento (central y grande en vegetales)
-          Membrana: control del transporte (bicapa de fosfolípidos)
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.3 Transporte a través de la Membrana</h3>
-        <div class="formula-box">
-          TRANSPORTE PASIVO (sin gasto de ATP – a favor del gradiente): Difusión
-          simple: moléculas pequeñas y apolares (O₂, CO₂) Difusión facilitada:
-          proteínas canal o transportadoras (glucosa, iones) Ósmosis: agua de
-          menor [soluto] a mayor [soluto] TRANSPORTE ACTIVO (con gasto de ATP –
-          contra el gradiente): Bomba Na⁺/K⁺: 3 Na⁺ salen, 2 K⁺ entran →
-          esencial en neuronas Endocitosis: la célula engloba partículas
-          (fagocitosis, pinocitosis) Exocitosis: la célula secreta vesículas al
-          exterior
-        </div>
-        <div class="ejemplo-box">
-          <strong>Ósmosis en la práctica:</strong> Si una célula animal se pone
-          en solución hipotónica (menos solutos que el interior), el agua entra
-          → la célula se hincha y puede estallar (lisis). En solución
-          hipertónica, el agua sale → la célula se encoge (crenación).
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.4 Metabolismo Celular: Fotosíntesis y Respiración</h3>
-        <div class="formula-box">
-          FOTOSÍNTESIS (solo en organismos con cloroplastos): 6CO₂ + 6H₂O +
-          energía lumínica → C₆H₁₂O₆ + 6O₂ Fase luminosa: en tilacoides →
-          captura de luz, produce ATP y NADPH Fase oscura (Calvin): en estroma →
-          fija CO₂ y produce glucosa RESPIRACIÓN CELULAR AEROBIA (en
-          mitocondrias): C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36–38 ATP Glucólisis:
-          citoplasma → 2 piruvatos + 2 ATP Ciclo de Krebs: matriz mitocondrial →
-          CO₂ + NADH Cadena transportadora: membrana interna → produce la mayor
-          parte del ATP FERMENTACIÓN (sin O₂ – anaerobia): Láctica: C₆H₁₂O₆ → 2
-          ácido láctico + 2 ATP (músculos, Lactobacillus) Alcohólica: C₆H₁₂O₆ →
-          2 etanol + 2CO₂ + 2 ATP (levaduras)
-        </div>
-        <div class="tip-box">
-          💡 Clave ICFES: la fotosíntesis CONSUME CO₂ y PRODUCE O₂. La
-          respiración CONSUME O₂ y PRODUCE CO₂. Son procesos complementarios
-          pero ocurren en orgánulos distintos.
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.5 División Celular: Mitosis y Meiosis</h3>
-        <div class="formula-box">
-          MITOSIS (división somática): → Produce 2 células hijas idénticas a la
-          madre → Mantiene el número de cromosomas (2n → 2n) → Fases: Profase →
-          Metafase → Anafase → Telofase → Citocinesis → Función: crecimiento,
-          regeneración, reproducción asexual MEIOSIS (división reproductiva): →
-          Produce 4 células haploides (gametos) → Reduce a la mitad el número de
-          cromosomas (2n → n) → Meiosis I: separa cromosomas homólogos → Meiosis
-          II: separa cromátidas hermanas → Función: reproducción sexual, genera
-          variabilidad genética → Ocurre: gónadas (testículos y ovarios)
-        </div>
-        <div class="dato-box">
-          📌 Humanos: 2n = 46 cromosomas (23 pares). Gametos: n = 23 cromosomas.
-          Fecundación: 23 + 23 = 46.
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.6 ADN, ARN y Síntesis de Proteínas</h3>
-        <div class="formula-box">
-          ADN (Ácido Desoxirribonucleico): → Doble hélice, bases nitrogenadas:
-          A-T / C-G → Portador de la información genética → Replicación:
-          semiconservativa (cada hebra sirve de molde) FLUJO DE INFORMACIÓN
-          GENÉTICA (Dogma Central): ADN → (transcripción) → ARNm → (traducción)
-          → Proteína ARNm: mensajero – lleva el código del núcleo al ribosoma
-          ARNt: transferencia – trae aminoácidos al ribosoma ARNr: ribosomal –
-          forma parte del ribosoma Codón: tripleta de bases en el ARNm (ej. AUG
-          = metionina = inicio) Anticodón: tripleta complementaria en el ARNt
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.7 Sistemas del Cuerpo Humano</h3>
-        <div class="formula-box">
-          Sistema nervioso: neuronas, sinapsis, SNC (encéfalo + médula) y SNP
-          Sistema endocrino: glándulas, hormonas (insulina, adrenalina,
-          tiroxina) Sistema circulatorio: corazón (4 cámaras), arteria → capilar
-          → vena Sistema respiratorio: pulmones, alvéolos (intercambio O₂/CO₂)
-          Sistema digestivo: boca → esófago → estómago → intestino delgado
-          (absorción) Sistema excretor: riñón → nefronas → filtran sangre →
-          orina Sistema inmune: linfocitos B (anticuerpos), T (citotóxicos),
-          fagocitos
-        </div>
-        <div class="tip-box">
-          💡 El ICFES frecuentemente pregunta por la relación entre sistemas: p.
-          ej., cómo el sistema nervioso regula el endocrino (eje
-          hipotálamo-hipófisis), o cómo el circulatorio transporta nutrientes
-          absorbidos por el digestivo.
-        </div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.8 Reproducción y Desarrollo</h3>
-        <div class="formula-box">
-          Reproducción asexual: mitosis → clones (gemación, fragmentación,
-          esporulación) Reproducción sexual: meiosis + fecundación →
-          variabilidad genética Desarrollo embrionario: Fecundación → Cigoto →
-          Mórula → Blástula → Gástrula → Organogénesis Capas germinativas:
-          Ectodermo → piel, sistema nervioso Mesodermo → músculos, huesos,
-          sistema circulatorio Endodermo → pulmones, hígado, tracto digestivo
-        </div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3>
-        <span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-0">
-        <div class="ejercicio-texto">
-          Una célula se coloca en una solución con mayor concentración de
-          solutos que su interior. Se observa que la célula pierde agua y su
-          membrana se separa de la pared celular.
-        </div>
-        <div class="enunciado">
-          1. El fenómeno descrito se denomina plasmólisis. ¿En qué tipo de
-          solución se encuentra la célula?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
-            A) Solución isotónica
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 0, true)">
-            B) Solución hipertónica
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
-            C) Solución hipotónica
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
-            D) Solución tampón
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-0">
-          ✓ En una solución hipertónica (mayor concentración de solutos que el
-          interior celular), el agua sale de la célula por ósmosis. Esto causa
-          la plasmólisis en células vegetales. En solución hipotónica ocurre lo
-          contrario: el agua entra y la célula se turgenta o puede lisar.
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-1">
-        <div class="ejercicio-texto">
-          Un investigador tapa completamente las hojas de una planta durante 48
-          horas y luego mide el almidón producido. Compara con una planta
-          control expuesta a la luz.
-        </div>
-        <div class="enunciado">
-          2. ¿Qué resultado esperaría en la planta con las hojas tapadas y por
-          qué?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
-            A) Mayor cantidad de almidón, porque sin luz la planta ahorra
-            energía.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 1, true)">
-            B) Menor cantidad de almidón, porque sin luz no puede realizarse la
-            fotosíntesis.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
-            C) La misma cantidad, porque la planta fabrica almidón con el agua
-            del suelo.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
-            D) Menor cantidad de almidón, porque sin luz la respiración se
-            detiene.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-1">
-          ✓ La fotosíntesis requiere energía lumínica para fijar el CO₂ y
-          producir glucosa, que luego se almacena como almidón. Sin luz, la fase
-          luminosa no ocurre (no se produce ATP ni NADPH), por lo que la fase de
-          Calvin tampoco puede funcionar y no se sintetiza glucosa. D es
-          incorrecto porque la respiración celular no depende de la luz.
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-2">
-        <div class="ejercicio-texto">
-          Durante el proceso de meiosis, en la profase I ocurre el
-          entrecruzamiento (crossing-over) entre cromosomas homólogos.
-        </div>
-        <div class="enunciado">
-          3. ¿Cuál es la importancia biológica del crossing-over?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
-            A) Duplicar el número de cromosomas para la siguiente generación.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
-            B) Asegurar que los gametos tengan el número diploide de cromosomas.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 2, true)">
-            C) Generar nuevas combinaciones de alelos, aumentando la
-            variabilidad genética.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
-            D) Eliminar los cromosomas defectuosos antes de la fecundación.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-2">
-          ✓ El crossing-over intercambia segmentos entre cromosomas homólogos,
-          creando cromosomas recombinantes con nuevas combinaciones alélicas.
-          Esta variabilidad es fundamental para la evolución y la adaptación de
-          las especies. No duplica cromosomas (eso lo hace la replicación del
-          ADN en la fase S).
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-3">
-        <div class="ejercicio-texto">
-          Un gen codifica para la enzima que convierte el aminoácido
-          fenilalanina en tirosina. Una mutación en ese gen hace que la enzima
-          sea no funcional.
-        </div>
-        <div class="enunciado">
-          4. ¿Cuál es la consecuencia directa de esta mutación a nivel
-          molecular?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
-            A) El ARNm no puede ser transcrito desde el ADN mutado.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 3, true)">
-            B) La fenilalanina se acumula porque no puede ser convertida en
-            tirosina.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
-            C) El ribosoma deja de sintetizar todas las proteínas de la célula.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
-            D) La mitocondria deja de producir ATP en ausencia de la enzima.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-3">
-          ✓ Esta es la base de la fenilcetonuria (PKU): la enzima fenilalanina
-          hidroxilasa no funcional impide convertir fenilalanina en tirosina,
-          acumulando fenilalanina en sangre. A es incorrecta porque la
-          transcripción aún puede ocurrir, pero la proteína resultante no tendrá
-          actividad enzimática.
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-4">
-        <div class="ejercicio-texto">
-          La bomba sodio-potasio (Na⁺/K⁺-ATPasa) transporta 3 iones Na⁺ hacia
-          afuera y 2 iones K⁺ hacia adentro de la célula por cada ciclo.
-        </div>
-        <div class="enunciado">
-          5. ¿Por qué este transporte se clasifica como activo y no pasivo?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
-            A) Porque utiliza proteínas de membrana para funcionar.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
-            B) Porque mueve iones en la misma dirección del gradiente de
-            concentración.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 4, true)">
-            C) Porque mueve iones contra su gradiente de concentración,
-            requiriendo ATP.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
-            D) Porque solo funciona en células nerviosas y musculares.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-4">
-          ✓ El transporte activo mueve sustancias contra su gradiente de
-          concentración (de baja a alta concentración), lo que requiere energía
-          en forma de ATP. La difusión facilitada también usa proteínas (A),
-          pero va a favor del gradiente y no requiere ATP.
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-5">
-        <div class="ejercicio-texto">
-          Un atleta realiza un esfuerzo físico muy intenso durante un sprint de
-          100 metros. Sus células musculares consumen el oxígeno disponible más
-          rápido de lo que el sistema circulatorio puede suministrarlo.
-        </div>
-        <div class="enunciado">
-          6. ¿Qué proceso metabólico predomina en sus células musculares durante
-          este esfuerzo extremo?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
-            A) Fotosíntesis en los cloroplastos musculares.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
-            B) Respiración aerobia con alta producción de ATP.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 5, true)">
-            C) Fermentación láctica, que produce ácido láctico y solo 2 ATP por
-            glucosa.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
-            D) Fermentación alcohólica, liberando etanol en la sangre.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-5">
-          ✓ Cuando el O₂ escasea, las células musculares recurren a la
-          fermentación láctica para regenerar el NAD⁺ y continuar la glucólisis.
-          Este proceso produce ácido láctico (responsable del ardor muscular) y
-          solo 2 ATP por glucosa, muy poco comparado con los 36–38 ATP de la
-          respiración aerobia.
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-6">
-        <div class="ejercicio-texto">
-          En un experimento de transcripción, una hebra molde de ADN tiene la
-          secuencia: 3'-TACGGATCC-5'.
-        </div>
-        <div class="enunciado">
-          7. ¿Cuál será la secuencia del ARNm transcrito a partir de esta hebra
-          molde?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
-            A) 3'-TACGGATCC-5'
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
-            B) 3'-AUGCCUAGG-5'
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 6, true)">
-            C) 5'-AUGCCUAGG-3'
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
-            D) 5'-ATGCCTACC-3'
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-6">
-          ✓ La ARN polimerasa lee la hebra molde de 3' a 5' y sintetiza el ARNm
-          de 5' a 3'. Las reglas de complementariedad cambian: A del ADN → U en
-          el ARN; T del ADN → A en el ARN; G → C; C → G. La hebra molde
-          3'-TACGGATCC-5' produce el ARNm 5'-AUGCCUAGG-3'. D tiene T en lugar de
-          U (error típico en el ICFES).
-        </div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-7">
-        <div class="ejercicio-texto">
-          El sistema inmune produce anticuerpos específicos contra un antígeno
-          determinado. Cuando la misma persona se expone por segunda vez al
-          mismo patógeno, la respuesta inmune es más rápida y más intensa.
-        </div>
-        <div class="enunciado">
-          8. ¿Qué células son responsables de esta respuesta secundaria más
-          eficiente?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
-            A) Glóbulos rojos que almacenan anticuerpos en el torrente
-            sanguíneo.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
-            B) Células NK (natural killer) que destruyen cualquier célula
-            extraña.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 7, true)">
-            C) Células B de memoria, que recuerdan el antígeno y activan una
-            respuesta rápida.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
-            D) Macrófagos que fagocitan el antígeno sin necesidad de
-            reconocimiento previo.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-7">
-          ✓ Las células B de memoria (y T de memoria) se forman durante la
-          respuesta primaria y persisten en el organismo. En una segunda
-          exposición al mismo antígeno, se activan rápidamente y producen
-          grandes cantidades de anticuerpos específicos. Este es el fundamento
-          biológico de las vacunas.
-        </div>
-      </div>
-
-      <button
-        class="btn-completar-tema"
-        id="btnCompletar-0"
-        onclick="completarTema(0)"
-      >
-        ✓ Marcar tema como completado
-      </button>
-      <div class="nav-temas-footer">
-        <span></span>
-        <button onclick="mostrarTema(1)">
-          Siguiente: Genética y Evolución →
+      <nav class="temas-nav">
+        <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">
+          1. Célula y Vida
         </button>
-      </div>
-    </section>
+        <button onclick="mostrarTema(1)" id="btn-tema-1">
+          2. Genética y Evolución
+        </button>
+        <button onclick="mostrarTema(2)" id="btn-tema-2">3. Química</button>
+        <button onclick="mostrarTema(3)" id="btn-tema-3">4. Física</button>
+        <button onclick="mostrarTema(4)" id="btn-tema-4">
+          5. Ecosistemas y Ambiente
+        </button>
+      </nav>
 
-    <!-- ══════════════════════════════════════════
-     TEMA 2 – GENÉTICA Y EVOLUCIÓN
-══════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-1">
-      <div class="tema-titulo">
-        <h2>🧬 Genética y Evolución</h2>
-        <span class="badge-completado" id="badge-1">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">
-        Leyes de Mendel, herencia, mutaciones, teoría de la evolución y
-        biodiversidad.
-      </p>
+      <section class="tema-seccion visible" id="tema-0">
+        <div class="tema-titulo">
+          <h2>🦠 Célula, Biología Molecular y Fisiología</h2>
+          <span class="badge-completado" id="badge-0">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Estructura celular, organelos, metabolismo, ADN, división celular y
+          sistemas del cuerpo humano.
+        </p>
 
-      <div class="concepto-card">
-        <h3>2.1 Leyes de Mendel</h3>
-        <div class="formula-box">
-          LEY DE SEGREGACIÓN (1.ª ley): → Los alelos de un gen se separan
-          durante la meiosis → Cada gameto recibe solo un alelo de cada par →
-          Cruce monohíbrido Aa × Aa → 1 AA : 2 Aa : 1 aa (proporción genotípica
-          1:2:1) → Proporción fenotípica: 3 dominante : 1 recesivo LEY DE
-          DISTRIBUCIÓN INDEPENDIENTE (2.ª ley): → Los alelos de genes en
-          cromosomas diferentes se distribuyen al azar → Cruce dihíbrido AaBb ×
-          AaBb → proporción fenotípica 9:3:3:1 → Excepciones: genes ligados (en
-          el mismo cromosoma) no se distribuyen independientemente
+        <div class="concepto-card">
+          <h3>1.1 La Célula: Unidad de la Vida</h3>
+          <p>
+            Toda célula proviene de otra célula (Teoría Celular). Existen dos
+            grandes tipos:
+          </p>
+          <div class="formula-box">
+            CÉLULA PROCARIOTA (bacterias, arqueas):
+            <br />→ Sin núcleo definido (ADN circular en el citoplasma) <br />→
+            Sin organelos membranosos <br />→ Tamaño: 1–10 µm <br />→ Ejemplos:
+            Escherichia coli, Staphylococcus<br /><br />
+            CÉLULA EUCARIOTA (animales, plantas, hongos, protistas): <br />→
+            Núcleo delimitado por membrana nuclear <br />→ Organelos membranosos
+            especializados <br />→ Tamaño: 10–100 µm <br />→ Puede ser animal o
+            vegetal
+          </div>
+          <div class="tip-box">
+            💡 Diferencia clave en el ICFES: las células vegetales tienen pared
+            celular (celulosa), cloroplastos y vacuola central grande. Las
+            animales no tienen pared celular ni cloroplastos.
+          </div>
         </div>
-        <div class="ejemplo-box">
-          <strong>Cuadro de Punnett (Aa × Aa):</strong><br />
-          &nbsp;&nbsp;&nbsp;&nbsp;| A | a<br />
-          A | AA | Aa<br />
-          a | Aa | aa<br />
-          Resultado: 25% AA, 50% Aa, 25% aa → fenotípicamente: 75% dominante,
-          25% recesivo
-        </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.2 Tipos de Herencia</h3>
-        <div class="formula-box">
-          Dominancia completa: un alelo enmascara completamente al otro
-          Dominancia incompleta: heterocigoto tiene fenotipo intermedio (Rojo ×
-          Blanco = Rosa) Codominancia: ambos alelos se expresan simultáneamente
-          (grupos sanguíneos AB) Alelos múltiples: más de dos alelos en la
-          población (grupos ABO: Iᴬ, Iᴮ, i) Herencia ligada al sexo: genes en el
-          cromosoma X (daltonismo, hemofilia) → Hombre (XY): un solo alelo X →
-          si es recesivo, se expresa → Mujer (XX): necesita dos alelos recesivos
-          para expresarse Herencia poligénica: varios genes controlan un
-          carácter (estatura, color de piel)
+        <div class="concepto-card">
+          <h3>1.2 Organelos Celulares y sus Funciones</h3>
+          <div class="formula-box">
+            Núcleo: contiene el ADN; dirige la síntesis de proteínas<br />
+            Mitocondria: respiración celular → produce ATP ("central
+            energética")<br />
+            Ribosoma: síntesis de proteínas (en RER o libre en citoplasma)<br />
+            RE rugoso: síntesis y transporte de proteínas (tiene ribosomas)<br />
+            RE liso: síntesis de lípidos y detoxificación<br />
+            Aparato Golgi: modificación, empaque y distribución de proteínas<br />
+            Lisosoma: digestión intracelular (enzimas hidrolíticas)<br />
+            Cloroplasto: fotosíntesis (solo en células vegetales y algas)<br />
+            Vacuola: almacenamiento (central y grande en vegetales)<br />
+            Membrana: control del transporte (bicapa de fosfolípidos)
+          </div>
         </div>
-        <div class="dato-box">
-          📌 Grupos sanguíneos: Iᴬ e Iᴮ son codominantes entre sí y dominantes
-          sobre i. Grupo A = IᴬIᴬ o Iᴬi; Grupo B = IᴮIᴮ o Iᴮi; Grupo AB = IᴬIᴮ;
-          Grupo O = ii.
-        </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.3 Mutaciones Genéticas</h3>
-        <div class="formula-box">
-          MUTACIONES GÉNICAS (cambio en la secuencia de ADN): Sustitución
-          puntual: un nucleótido reemplaza a otro → Silenciosa: mismo aminoácido
-          (código degenerado) → Missense: aminoácido diferente (puede cambiar la
-          proteína) → Nonsense: codón de parada prematuro → proteína truncada
-          Inserción / Deleción: desplazamiento del marco de lectura (frameshift)
-          → Muy graves, alteran todos los aminoácidos posteriores MUTACIONES
-          CROMOSÓMICAS: Numéricas: trisomía 21 (síndrome de Down, 47 cromosomas)
-          Estructurales: deleción, inversión, translocación Agentes mutagénicos:
-          radiación UV, rayos X, benceno, virus, errores en replicación
+        <div class="concepto-card">
+          <h3>1.3 Transporte a través de la Membrana</h3>
+          <div class="formula-box">
+            TRANSPORTE PASIVO (sin gasto de ATP – a favor del gradiente):<br />
+            Difusión simple: moléculas pequeñas y apolares (O₂, CO₂)<br />
+            Difusión facilitada: proteínas canal o transportadoras (glucosa,
+            iones)<br />
+            Ósmosis: agua de menor [soluto] a mayor [soluto]<br /><br />
+            TRANSPORTE ACTIVO (con gasto de ATP – contra el gradiente):<br />
+            Bomba Na⁺/K⁺: 3 Na⁺ salen, 2 K⁺ entran → esencial en neuronas<br />
+            Endocitosis: la célula engloba partículas (fagocitosis,
+            pinocitosis)<br />
+            Exocitosis: la célula secreta vesículas al exterior
+          </div>
+          <div class="ejemplo-box">
+            <strong>Ósmosis en la práctica:</strong> Si una célula animal se pone
+            en solución hipotónica (menos solutos que el interior), el agua entra
+            → la célula se hincha y puede estallar (lisis). En solución
+            hipertónica, el agua sale → la célula se encoge (crenación).
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.4 Teoría de la Evolución</h3>
-        <div class="formula-box">
-          DARWIN – WALLACE (selección natural): 1. Variación: los individuos de
-          una población varían en sus rasgos 2. Herencia: los rasgos se
-          transmiten a la descendencia 3. Sobreproducción: se producen más
-          individuos de los que sobreviven 4. Selección: los individuos con
-          rasgos más adaptativos sobreviven y se reproducen más 5. Cambio
-          gradual: acumulación de cambios → nuevas especies (especiación)
-          EVIDENCIAS DE LA EVOLUCIÓN: → Registro fósil: formas de vida extintas
-          y transicionales → Anatomía comparada: estructuras homólogas y
-          análogas → Embriología comparada: embriones similares entre
-          vertebrados → Biogeografía: distribución de especies en zonas aisladas
-          → Biología molecular: similitud de ADN/ARN entre especies relacionadas
+        <div class="concepto-card">
+          <h3>1.4 Metabolismo Celular: Fotosíntesis y Respiración</h3>
+          <div class="formula-box">
+            FOTOSÍNTESIS (solo en organismos con cloroplastos):<br />
+            6CO₂ + 6H₂O + energía lumínica → C₆H₁₂O₆ + 6O₂<br />
+            Fase luminosa: en tilacoides → captura de luz, produce ATP y NADPH<br />
+            Fase oscura (Calvin): en estroma → fija CO₂ y produce glucosa<br /><br />
+            RESPIRACIÓN CELULAR AEROBIA (en mitocondrias):<br />
+            C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36–38 ATP<br />
+            Glucólisis: citoplasma → 2 piruvatos + 2 ATP<br />
+            Ciclo de Krebs: matriz mitocondrial → CO₂ + NADH<br />
+            Cadena transportadora: membrana interna → produce la mayor parte del
+            ATP<br /><br />
+            FERMENTACIÓN (sin O₂ – anaerobia):<br />
+            Láctica: C₆H₁₂O₆ → 2 ácido láctico + 2 ATP (músculos,
+            Lactobacillus)<br />
+            Alcohólica: C₆H₁₂O₆ → 2 etanol + 2CO₂ + 2 ATP (levaduras)
+          </div>
+          <div class="tip-box">
+            💡 Clave ICFES: la fotosíntesis CONSUME CO₂ y PRODUCE O₂. La
+            respiración CONSUME O₂ y PRODUCE CO₂. Son procesos complementarios
+            pero ocurren en orgánulos distintos.
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.5 Especiación y Biodiversidad</h3>
-        <div class="formula-box">
-          Especiación alopátrica: separación geográfica → aislamiento
-          reproductivo Especiación simpátrica: en la misma área por divergencia
-          ecológica o poliplodia Barreras al flujo génico: Premating: diferentes
-          épocas de reproducción, comportamiento, hábitat Postmating:
-          incompatibilidad gamética, híbridos inviables o estériles (ej. mula)
-          Deriva genética: cambios aleatorios en frecuencias alélicas (más
-          efecto en poblaciones pequeñas) Cuello de botella: reducción drástica
-          de la población → pérdida de variabilidad genética Efecto fundador:
-          nueva población formada por pocos individuos
+        <div class="concepto-card">
+          <h3>1.5 División Celular: Mitosis y Meiosis</h3>
+          <div class="formula-box">
+            MITOSIS (división somática):<br />
+            → Produce 2 células hijas idénticas a la madre<br />
+            → Mantiene el número de cromosomas (2n → 2n)<br />
+            → Fases: Profase → Metafase → Anafase → Telofase → Citocinesis<br />
+            → Función: crecimiento, regeneración, reproducción asexual<br /><br />
+            MEIOSIS (división reproductiva):<br />
+            → Produce 4 células haploides (gametos)<br />
+            → Reduce a la mitad el número de cromosomas (2n → n)<br />
+            → Meiosis I: separa cromosomas homólogos<br />
+            → Meiosis II: separa cromátidas hermanas<br />
+            → Función: reproducción sexual, genera variabilidad genética<br />
+            → Ocurre: gónadas (testículos y ovarios)
+          </div>
+          <div class="dato-box">
+            📌 Humanos: 2n = 46 cromosomas (23 pares). Gametos: n = 23 cromosomas.
+            Fecundación: 23 + 23 = 46.
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.6 Clasificación y Taxonomía</h3>
-        <div class="formula-box">
-          Sistema de clasificación de Linneo (jerarquía): Dominio → Reino → Filo
-          → Clase → Orden → Familia → Género → Especie Dominios: Bacteria,
-          Archaea, Eukarya Reinos eucariotas: Animalia, Plantae, Fungi, Protista
-          Nomenclatura binomial: Género especie (en cursiva) Homo sapiens, Canis
-          lupus familiaris, Felis catus Criterio de especie biológica: grupo de
-          organismos que pueden reproducirse entre sí y producir descendencia
-          fértil en condiciones naturales
+        <div class="concepto-card">
+          <h3>1.6 ADN, ARN y Síntesis de Proteínas</h3>
+          <div class="formula-box">
+            ADN (Ácido Desoxirribonucleico):<br />
+            → Doble hélice, bases nitrogenadas: A-T / C-G<br />
+            → Portador de la información genética<br />
+            → Replicación: semiconservativa (cada hebra sirve de molde)<br /><br />
+            FLUJO DE INFORMACIÓN GENÉTICA (Dogma Central):<br />
+            ADN → (transcripción) → ARNm → (traducción) → Proteína<br /><br />
+            ARNm: mensajero – lleva el código del núcleo al ribosoma<br />
+            ARNt: transferencia – trae aminoácidos al ribosoma<br />
+            ARNr: ribosomal – forma parte del ribosoma<br />
+            Codón: tripleta de bases en el ARNm (ej. AUG = metionina = inicio)<br />
+            Anticodón: tripleta complementaria en el ARNt
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>2.7 Biotecnología y Genética Aplicada</h3>
-        <div class="formula-box">
-          PCR (Reacción en Cadena de la Polimerasa): amplifica fragmentos de ADN
-          Electroforesis en gel: separa fragmentos de ADN por tamaño Ingeniería
-          genética: inserción de genes de una especie en otra (OGM) Clonación:
-          reproducción de un organismo con el mismo ADN del donante CRISPR-Cas9:
-          edición precisa del genoma → corrección de enfermedades genéticas
-          Terapia génica: corrección de genes defectuosos en células del
-          paciente Aplicaciones: insulina recombinante, vacunas, diagnóstico
-          forense, cultivos resistentes a plagas, tratamiento de enfermedades
-          hereditarias
+        <div class="concepto-card">
+          <h3>1.7 Sistemas del Cuerpo Humano</h3>
+          <div class="formula-box">
+            Sistema nervioso: neuronas, sinapsis, SNC (encéfalo + médula) y SNP<br />
+            Sistema endocrino: glándulas, hormonas (insulina, adrenalina,
+            tiroxina)<br />
+            Sistema circulatorio: corazón (4 cámaras), arteria → capilar →
+            vena<br />
+            Sistema respiratorio: pulmones, alvéolos (intercambio O₂/CO₂)<br />
+            Sistema digestivo: boca → esófago → estómago → intestino delgado
+            (absorción)<br />
+            Sistema excretor: riñón → nefronas → filtran sangre → orina<br />
+            Sistema inmune: linfocitos B (anticuerpos), T (citotóxicos), fagocitos
+          </div>
+          <div class="tip-box">
+            💡 El ICFES frecuentemente pregunta por la relación entre sistemas: p.
+            ej., cómo el sistema nervioso regula el endocrino (eje
+            hipotálamo-hipófisis), o cómo el circulatorio transporta nutrientes
+            absorbidos por el digestivo.
+          </div>
         </div>
-      </div>
 
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3>
-        <span>8 preguntas</span>
-      </div>
+        <div class="concepto-card">
+          <h3>1.8 Reproducción y Desarrollo</h3>
+          <div class="formula-box">
+            Reproducción asexual: mitosis → clones (gemación, fragmentación,
+            esporulación)<br />
+            Reproducción sexual: meiosis + fecundación → variabilidad genética<br />
+            Desarrollo embrionario: Fecundación → Cigoto → Mórula → Blástula →
+            Gástrula → Organogénesis<br />
+            Capas germinativas:<br />
+            Ectodermo → piel, sistema nervioso<br />
+            Mesodermo → músculos, huesos, sistema circulatorio<br />
+            Endodermo → pulmones, hígado, tracto digestivo
+          </div>
+        </div>
 
-      <div class="ejercicio-card" id="ej-1-0">
-        <div class="ejercicio-texto">
-          En un cultivo de guisantes, una planta de semilla amarilla (YY) se
-          cruza con una planta de semilla verde (yy). El color amarillo es
-          dominante sobre el verde.
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
         </div>
-        <div class="enunciado">
-          1. ¿Cuál será el fenotipo de la generación F1 (hijos directos de este
-          cruce)?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
-            A) 50% amarillo y 50% verde
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 0, true)">
-            B) 100% amarillo (todos heterocigotos Yy)
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
-            C) 75% amarillo y 25% verde
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
-            D) 100% verde (el recesivo domina en F1)
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-0">
-          ✓ Al cruzar YY × yy, todos los gametos del padre son Y y todos los de
-          la madre son y. Todos los hijos serán Yy (heterocigotos). Como Y es
-          dominante, todos expresarán el fenotipo amarillo. La proporción 3:1
-          aparece en F2 (Yy × Yy), no en F1.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-1">
-        <div class="ejercicio-texto">
-          La hemofilia es una enfermedad hereditaria ligada al cromosoma X,
-          causada por un alelo recesivo (Xʰ). Una mujer portadora (XᴴXʰ) tiene
-          hijos con un hombre sano (XᴴY).
+        <div class="ejercicio-card" id="ej-0-0">
+          <div class="ejercicio-texto">
+            Una célula se coloca en una solución con mayor concentración de solutos
+            que su interior. Se observa que la célula pierde agua y su membrana se
+            separa de la pared celular.
+          </div>
+          <div class="enunciado">
+            1. El fenómeno descrito se denomina plasmólisis. ¿En qué tipo de
+            solución se encuentra la célula?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              A) Solución isotónica
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, true)">
+              B) Solución hipertónica
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              C) Solución hipotónica
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              D) Solución tampón
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-0">
+            ✓ En una solución hipertónica (mayor concentración de solutos que el
+            interior celular), el agua sale de la célula por ósmosis. Esto causa la
+            plasmólisis en células vegetales. En solución hipotónica ocurre lo
+            contrario: el agua entra y la célula se turgenta o puede lisar.
+          </div>
         </div>
-        <div class="enunciado">
-          2. ¿Qué proporción de sus hijos varones tendrá hemofilia?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
-            A) 0% (los varones no pueden tener hemofilia si la madre es
-            portadora)
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
-            B) 25% de todos los hijos
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 1, true)">
-            C) 50% de los hijos varones
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
-            D) 100% de los hijos varones
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-1">
-          ✓ Los gametos de la madre son: Xᴴ o Xʰ (50% cada uno). Los gametos del
-          padre: Xᴴ o Y. Los varones reciben el Y del padre, así que su único X
-          viene de la madre. El 50% recibirá Xᴴ (sano) y el 50% recibirá Xʰ
-          (hemofílico). Del total de hijos, el 25% serán varones hemofílicos.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-2">
-        <div class="ejercicio-texto">
-          Se analiza el ADN mitocondrial de varias especies de felinos. Se
-          encuentra que el ADN del puma y del guepardo difieren en un 3%,
-          mientras que el puma y el gato doméstico difieren en un 12%.
+        <div class="ejercicio-card" id="ej-0-1">
+          <div class="ejercicio-texto">
+            Un investigador tapa completamente las hojas de una planta durante 48
+            horas y luego mide el almidón producido. Compara con una planta control
+            expuesta a la luz.
+          </div>
+          <div class="enunciado">
+            2. ¿Qué resultado esperaría en la planta con las hojas tapadas y por
+            qué?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              A) Mayor cantidad de almidón, porque sin luz la planta ahorra
+              energía.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, true)">
+              B) Menor cantidad de almidón, porque sin luz no puede realizarse la
+              fotosíntesis.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              C) La misma cantidad, porque la planta fabrica almidón con el agua
+              del suelo.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              D) Menor cantidad de almidón, porque sin luz la respiración se
+              detiene.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-1">
+            ✓ La fotosíntesis requiere energía lumínica para fijar el CO₂ y
+            producir glucosa, que luego se almacena como almidón. Sin luz, la fase
+            luminosa no ocurre (no se produce ATP ni NADPH), por lo que la fase de
+            Calvin tampoco puede funcionar y no se sintetiza glucosa. D es
+            incorrecto porque la respiración celular no depende de la luz.
+          </div>
         </div>
-        <div class="enunciado">
-          3. ¿Qué conclusión se puede extraer de estos datos moleculares?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
-            A) El gato doméstico es más primitivo que el puma y el guepardo.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 2, true)">
-            B) El puma y el guepardo comparten un ancestro común más reciente
-            que el que comparten con el gato doméstico.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
-            C) El puma evolucionó a partir del guepardo hace poco tiempo.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
-            D) El gato doméstico no pertenece a la familia de los felinos.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-2">
-          ✓ Una menor diferencia en el ADN indica un parentesco más cercano y un
-          ancestro común más reciente. La biología molecular es una evidencia de
-          la evolución: a mayor similitud genética, mayor cercanía evolutiva.
-          Puma y guepardo divergieron más recientemente que cualquiera de ellos
-          con el gato doméstico.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-3">
-        <div class="ejercicio-texto">
-          Una mutación por inserción agrega un nucleótido extra en la posición 5
-          de un gen que tiene 90 nucleótidos. La proteína resultante es
-          completamente diferente de la original a partir del aminoácido 2.
+        <div class="ejercicio-card" id="ej-0-2">
+          <div class="ejercicio-texto">
+            Durante el proceso de meiosis, en la profase I ocurre el
+            entrecruzamiento (crossing-over) entre cromosomas homólogos.
+          </div>
+          <div class="enunciado">
+            3. ¿Cuál es la importancia biológica del crossing-over?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              A) Duplicar el número de cromosomas para la siguiente generación.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              B) Asegurar que los gametos tengan el número diploide de cromosomas.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, true)">
+              C) Generar nuevas combinaciones de alelos, aumentando la variabilidad
+              genética.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              D) Eliminar los cromosomas defectuosos antes de la fecundación.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-2">
+            ✓ El crossing-over intercambia segmentos entre cromosomas homólogos,
+            creando cromosomas recombinantes con nuevas combinaciones alélicas. Esta
+            variabilidad es fundamental para la evolución y la adaptación de las
+            especies. No duplica cromosomas (eso lo hace la replicación del ADN en
+            la fase S).
+          </div>
         </div>
-        <div class="enunciado">4. ¿Por qué la proteína es tan diferente?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
-            A) Porque la inserción destruye el ribosoma que traduce el ARNm.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 3, true)">
-            B) Porque la inserción desplaza el marco de lectura (frameshift),
-            cambiando todos los codones posteriores.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
-            C) Porque el nucleótido extra crea un codón de parada inmediatamente
-            después.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
-            D) Porque la mutación impide la transcripción del gen mutado.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-3">
-          ✓ Las inserciones o deleciones de un número de nucleótidos no múltiplo
-          de 3 causan un desplazamiento del marco de lectura (frameshift). Como
-          los codones se leen de 3 en 3, insertar un nucleótido cambia todos los
-          codones desde el punto de inserción en adelante, alterando
-          radicalmente la secuencia de aminoácidos de la proteína.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-4">
-        <div class="ejercicio-texto">
-          En las Islas Galápagos, Darwin observó que los pinzones de distintas
-          islas tenían picos de formas muy diferentes, adaptados al tipo de
-          alimento disponible en cada isla.
+        <div class="ejercicio-card" id="ej-0-3">
+          <div class="ejercicio-texto">
+            Un gen codifica para la enzima que convierte el aminoácido fenilalanina
+            en tirosina. Una mutación en ese gen hace que la enzima sea no
+            funcional.
+          </div>
+          <div class="enunciado">
+            4. ¿Cuál es la consecuencia directa de esta mutación a nivel molecular?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              A) El ARNm no puede ser transcrito desde el ADN mutado.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, true)">
+              B) La fenilalanina se acumula porque no puede ser convertida en
+              tirosina.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              C) El ribosoma deja de sintetizar todas las proteínas de la célula.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              D) La mitocondria deja de producir ATP en ausencia de la enzima.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-3">
+            ✓ Esta es la base de la fenilcetonuria (PKU): la enzima fenilalanina
+            hidroxilasa no funcional impide convertir fenilalanina en tirosina,
+            acumulando fenilalanina en sangre. A es incorrecta porque la
+            transcripción aún puede ocurrir, pero la proteína resultante no tendrá
+            actividad enzimática.
+          </div>
         </div>
-        <div class="enunciado">5. Este fenómeno es un ejemplo de:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
-            A) Convergencia evolutiva: especies no relacionadas desarrollan
-            estructuras similares.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 4, true)">
-            B) Radiación adaptativa: una especie ancestral da origen a múltiples
-            especies adaptadas a nichos diferentes.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
-            C) Deriva genética: cambios aleatorios sin presión selectiva en
-            poblaciones pequeñas.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
-            D) Lamarckismo: los pinzones desarrollaron los picos por esfuerzo y
-            uso continuo.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-4">
-          ✓ La radiación adaptativa ocurre cuando una especie coloniza un nuevo
-          ambiente con múltiples nichos ecológicos disponibles, originando
-          múltiples especies especializadas. Los pinzones de Darwin son el
-          ejemplo clásico de especiación alopátrica + radiación adaptativa. La
-          convergencia evolutiva (A) es el caso opuesto: especies no
-          relacionadas adquieren rasgos similares por presiones ambientales
-          parecidas.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-5">
-        <div class="ejercicio-texto">
-          El síndrome de Down (trisomía 21) ocurre cuando una persona tiene tres
-          copias del cromosoma 21 en lugar de dos. Esto ocurre por un error
-          durante la división celular.
+        <div class="ejercicio-card" id="ej-0-4">
+          <div class="ejercicio-texto">
+            La bomba sodio-potasio (Na⁺/K⁺-ATPasa) transporta 3 iones Na⁺ hacia
+            afuera y 2 iones K⁺ hacia adentro de la célula por cada ciclo.
+          </div>
+          <div class="enunciado">
+            5. ¿Por qué este transporte se clasifica como activo y no pasivo?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              A) Porque utiliza proteínas de membrana para funcionar.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              B) Porque mueve iones en la misma dirección del gradiente de
+              concentración.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, true)">
+              C) Porque mueve iones contra su gradiente de concentración,
+              requiriendo ATP.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              D) Porque solo funciona en células nerviosas y musculares.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-4">
+            ✓ El transporte activo mueve sustancias contra su gradiente de
+            concentración (de baja a alta concentración), lo que requiere energía en
+            forma de ATP. La difusión facilitada también usa proteínas (A), pero va
+            a favor del gradiente y no requiere ATP.
+          </div>
         </div>
-        <div class="enunciado">
-          6. ¿En qué proceso y en qué fase puede ocurrir este error?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
-            A) En la mitosis, durante la telofase, cuando las células se dividen
-            incorrectamente.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 5, true)">
-            B) En la meiosis, por no disyunción: los cromosomas homólogos no se
-            separan correctamente.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
-            C) En la replicación del ADN, cuando el cromosoma 21 se copia tres
-            veces.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
-            D) En la fecundación, cuando dos espermatozoides fertilizan el mismo
-            óvulo.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-5">
-          ✓ La no disyunción es el fallo en la separación de cromosomas
-          homólogos durante la meiosis I (o cromátidas en la meiosis II),
-          produciendo gametos con un cromosoma extra (n+1). Cuando ese gameto se
-          une a uno normal (n), el cigoto tiene 2n+1 = trisomía. Puede ocurrir
-          en la meiosis materna o paterna.
-        </div>
-      </div>
 
-      <div class="ejercicio-card" id="ej-1-6">
-        <div class="ejercicio-texto">
-          Una pareja tiene grupo sanguíneo A (Iᴬi) y grupo sanguíneo B (Iᴮi)
-          respectivamente.
+        <div class="ejercicio-card" id="ej-0-5">
+          <div class="ejercicio-texto">
+            Un atleta realiza un esfuerzo físico muy intenso durante un sprint de
+            100 metros. Sus células musculares consumen el oxígeno disponible más
+            rápido de lo que el sistema circulatorio puede suministrarlo.
+          </div>
+          <div class="enunciado">
+            6. ¿Qué proceso metabólico predomina en sus células musculares durante
+            este esfuerzo extremo?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              A) Fotosíntesis en los cloroplastos musculares.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              B) Respiración aerobia con alta producción de ATP.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, true)">
+              C) Fermentación láctica, que produce ácido láctico y solo 2 ATP por
+              glucosa.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              D) Fermentación alcohólica, liberando etanol en la sangre.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-5">
+            ✓ Cuando el O₂ escasea, las células musculares recurren a la
+            fermentación láctica para regenerar el NAD⁺ y continuar la glucólisis.
+            Este proceso produce ácido láctico (responsable del ardor muscular) y
+            solo 2 ATP por glucosa, muy poco comparado con los 36–38 ATP de la
+            respiración aerobia.
+          </div>
         </div>
-        <div class="enunciado">
-          7. ¿Qué grupos sanguíneos pueden tener sus hijos?
+
+        <div class="ejercicio-card" id="ej-0-6">
+          <div class="ejercicio-texto">
+            En un experimento de transcripción, una hebra molde de ADN tiene la
+            secuencia: 3'-TACGGATCC-5'.
+          </div>
+          <div class="enunciado">
+            7. ¿Cuál será la secuencia del ARNm transcrito a partir de esta hebra
+            molde?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              A) 3'-TACGGATCC-5'
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              B) 3'-AUGCCUAGG-5'
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, true)">
+              C) 5'-AUGCCUAGG-3'
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              D) 5'-ATGCCTACC-3'
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-6">
+            ✓ La ARN polimerasa lee la hebra molde de 3' a 5' y sintetiza el ARNm
+            de 5' a 3'. Las reglas de complementariedad cambian: A del ADN → U en el
+            ARN; T del ADN → A en el ARN; G → C; C → G. La hebra molde
+            3'-TACGGATCC-5' produce el ARNm 5'-AUGCCUAGG-3'. D tiene T en lugar de
+            U (error típico en el ICFES).
+          </div>
         </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
-            A) Solo A y B
+
+        <div class="ejercicio-card" id="ej-0-7">
+          <div class="ejercicio-texto">
+            El sistema inmune produce anticuerpos específicos contra un antígeno
+            determinado. Cuando la misma persona se expone por segunda vez al mismo
+            patógeno, la respuesta inmune es más rápida y más intensa.
+          </div>
+          <div class="enunciado">
+            8. ¿Qué células son responsables de esta respuesta secundaria más
+            eficiente?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              A) Glóbulos rojos que almacenan anticuerpos en el torrente sanguíneo.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              B) Células NK (natural killer) que destruyen cualquier célula
+              extraña.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, true)">
+              C) Células B de memoria, que recuerdan el antígeno y activan una
+              respuesta rápida.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              D) Macrófagos que fagocitan el antígeno sin necesidad de
+              reconocimiento previo.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-7">
+            ✓ Las células B de memoria (y T de memoria) se forman durante la
+            respuesta primaria y persisten en el organismo. En una segunda
+            exposición al mismo antígeno, se activan rápidamente y producen grandes
+            cantidades de anticuerpos específicos. Este es el fundamento biológico
+            de las vacunas.
+          </div>
+        </div>
+
+        <button class="btn-completar-tema" id="btnCompletar-0" onclick="completarTema(0)">
+          ✓ Marcar tema como completado
+        </button>
+
+        <div class="nav-temas-footer">
+          <span></span>
+          <button onclick="mostrarTema(1)">
+            Siguiente: Genética y Evolución →
           </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
-            B) Solo AB y O
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 6, true)">
-            C) A, B, AB y O (los cuatro grupos son posibles)
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
-            D) Solo A, B y AB (el grupo O es imposible)
-          </button>
         </div>
-        <div class="feedback-ejercicio" id="fb-1-6">
-          ✓ Cruce Iᴬi × Iᴮi: los gametos posibles son Iᴬ, i (padre) e Iᴮ, i
-          (madre). Combinaciones: IᴬIᴮ (AB), Iᴬi (A), Iᴮi (B), ii (O). Los
-          cuatro grupos son igualmente posibles, cada uno con 25% de
-          probabilidad.
-        </div>
-      </div>
+      </section>
 
-      <div class="ejercicio-card" id="ej-1-7">
-        <div class="ejercicio-texto">
-          Una población de ratones vive en un campo abierto. Un evento
-          catastrófico (inundación) elimina al 95% de la población, dejando solo
-          10 ratones sobrevivientes con una frecuencia alélica diferente a la
-          población original.
+      <section class="tema-seccion" id="tema-1">
+        <div class="tema-titulo">
+          <h2>🧬 Genética y Evolución</h2>
+          <span class="badge-completado" id="badge-1">✓ Completado</span>
         </div>
-        <div class="enunciado">
-          8. ¿Qué fenómeno evolutivo describe mejor esta situación?
-        </div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
-            A) Selección natural, porque sobrevivieron los más aptos.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 7, true)">
-            B) Efecto cuello de botella, porque la reducción drástica de la
-            población cambia al azar las frecuencias alélicas.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
-            C) Flujo génico, porque los alelos se movieron de una población a
-            otra.
-          </button>
-          <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
-            D) Especiación simpátrica, porque la nueva población está en el
-            mismo lugar.
-          </button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-7">
-          ✓ El cuello de botella es una forma de deriva genética: una catástrofe
-          reduce drásticamente el tamaño de la población, y la nueva población
-          refleja las frecuencias alélicas de los pocos sobrevivientes (no de la
-          población original). Esto puede fijar alelos raros o eliminar alelos
-          comunes al azar, sin que sea por selección natural (los sobrevivientes
-          no fueron "más aptos", solo tuvieron suerte).
-        </div>
-      </div>
+        <p class="tema-subtitulo">
+          Leyes de Mendel, herencia, mutaciones, teoría de la evolución y
+          biodiversidad.
+        </p>
 
-      <button
-        class="btn-completar-tema"
-        id="btnCompletar-1"
-        onclick="completarTema(1)"
-      >
-        ✓ Marcar tema como completado
-      </button>
-      <div class="nav-temas-footer">
-        <button onclick="mostrarTema(0)">← Célula y Vida</button>
-        <button onclick="mostrarTema(2)">Siguiente: Química →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════
-     TEMA 3 – QUÍMICA
-══════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-2">
-      <div class="tema-titulo">
-        <h2>⚗️ Química: Materia, Reacciones y Soluciones</h2>
-        <span class="badge-completado" id="badge-2">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">
-        Estructura atómica, tabla periódica, enlace químico, reacciones,
-        soluciones y química orgánica.
-      </p>
-
-      <div class="concepto-card">
-        <h3>3.1 Estructura Atómica</h3>
-        <div class="formula-box">
-          Átomo: núcleo (protones + neutrones) + electrones en orbitales Número
-          atómico (Z): número de protones = identifica el elemento Número másico
-          (A): protones + neutrones Neutrones = A – Z ISÓTOPOS: mismo Z,
-          diferente número de neutrones ¹²C (6p, 6n) y ¹⁴C (6p, 8n) → mismo
-          elemento, masa diferente ¹⁴C es radiactivo → datación de fósiles (vida
-          media = 5 730 años) Iones: Cationes (+): pierden electrones (Na → Na⁺)
-          Aniones (–): ganan electrones (Cl → Cl⁻) Niveles de energía: 1s² 2s²
-          2p⁶ 3s²... (regla de Aufbau)
+        <div class="concepto-card">
+          <h3>2.1 Leyes de Mendel</h3>
+          <div class="formula-box">
+            LEY DE SEGREGACIÓN (1.ª ley):<br />
+            → Los alelos de un gen se separan durante la meiosis<br />
+            → Cada gameto recibe solo un alelo de cada par<br />
+            → Cruce monohíbrido Aa × Aa → 1 AA : 2 Aa : 1 aa (proporción genotípica
+            1:2:1)<br />
+            → Proporción fenotípica: 3 dominante : 1 recesivo<br /><br />
+            LEY DE DISTRIBUCIÓN INDEPENDIENTE (2.ª ley):<br />
+            → Los alelos de genes en cromosomas diferentes se distribuyen al
+            azar<br />
+            → Cruce dihíbrido AaBb × AaBb → proporción fenotípica 9:3:3:1<br />
+            → Excepciones: genes ligados (en el mismo cromosoma) no se distribuyen
+            independientemente
+          </div>
+          <div class="ejemplo-box">
+            <strong>Cuadro de Punnett (Aa × Aa):</strong><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;| A | a<br />
+            A | AA | Aa<br />
+            a | Aa | aa<br />
+            Resultado: 25% AA, 50% Aa, 25% aa → fenotípicamente: 75% dominante, 25%
+            recesivo
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>3.2 Tabla Periódica y Tendencias</h3>
-        <div class="formula-box">
-          Grupos (columnas): misma configuración de electrones de valencia →
-          Propiedades químicas similares → Grupo 1 (alcalinos): Li, Na, K → muy
-          reactivos, 1 e⁻ de valencia → Grupo 17 (halógenos): F, Cl, Br, I → 7
-          e⁻ de valencia, muy electronegativos → Grupo 18 (nobles): He, Ne, Ar →
-          inertes, 8 e⁻ de valencia (octeto completo) Periodos (filas): mismo
-          número de niveles de energía TENDENCIAS PERIÓDICAS (izquierda a
-          derecha y abajo a arriba): Electronegatividad: aumenta → (F es la más
-          electronegativa) Radio atómico: disminuye → Energía de ionización:
-          aumenta → Carácter metálico: disminuye →
+        <div class="concepto-card">
+          <h3>2.2 Tipos de Herencia</h3>
+          <div class="formula-box">
+            Dominancia completa: un alelo enmascara completamente al otro<br />
+            Dominancia incompleta: heterocigoto tiene fenotipo intermedio (Rojo ×
+            Blanco = Rosa)<br />
+            Codominancia: ambos alelos se expresan simultáneamente (grupos
+            sanguíneos AB)<br />
+            Alelos múltiples: más de dos alelos en la población (grupos ABO: Iᴬ,
+            Iᴮ, i)<br />
+            Herencia ligada al sexo: genes en el cromosoma X (daltonismo,
+            hemofilia)<br />
+            → Hombre (XY): un solo alelo X → si es recesivo, se expresa<br />
+            → Mujer (XX): necesita dos alelos recesivos para expresarse<br />
+            Herencia poligénica: varios genes controlan un carácter (estatura,
+            color de piel)
+          </div>
+          <div class="dato-box">
+            📌 Grupos sanguíneos: Iᴬ e Iᴮ son codominantes entre sí y dominantes
+            sobre i. Grupo A = IᴬIᴬ o Iᴬi; Grupo B = IᴮIᴮ o Iᴮi; Grupo AB = IᴬIᴮ;
+            Grupo O = ii.
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>3.3 Enlace Químico</h3>
-        <div class="formula-box">
-          ENLACE IÓNICO: → Metal + no metal → transferencia de electrones →
-          Forma redes cristalinas sólidas a temperatura ambiente → Alta
-          temperatura de fusión, conducen electricidad disueltos → Ejemplo: NaCl
-          (Na⁺ + Cl⁻) ENLACE COVALENTE: → No metal + no metal → comparten
-          electrones → Simple: 1 par compartido (H–H) → Doble: 2 pares
-          compartidos (O=O) → Triple: 3 pares compartidos (N≡N) → Polar:
-          diferencia de electronegatividad > 0,4 (H₂O, HCl) → Apolar: diferencia
-          de electronegatividad ≤ 0,4 (CH₄, H₂) ENLACE METÁLICO: → Metales →
-          electrones deslocalizados ("mar de electrones") → Explica
-          conductividad eléctrica y maleabilidad
+        <div class="concepto-card">
+          <h3>2.3 Mutaciones Genéticas</h3>
+          <div class="formula-box">
+            MUTACIONES GÉNICAS (cambio en la secuencia de ADN):<br />
+            Sustitución puntual: un nucleótido reemplaza a otro<br />
+            → Silenciosa: mismo aminoácido (código degenerado)<br />
+            → Missense: aminoácido diferente (puede cambiar la proteína)<br />
+            → Nonsense: codón de parada prematuro → proteína truncada<br />
+            Inserción / Deleción: desplazamiento del marco de lectura
+            (frameshift)<br />
+            → Muy graves, alteran todos los aminoácidos posteriores<br /><br />
+            MUTACIONES CROMOSÓMICAS:<br />
+            Numéricas: trisomía 21 (síndrome de Down, 47 cromosomas)<br />
+            Estructurales: deleción, inversión, translocación<br />
+            Agentes mutagénicos: radiación UV, rayos X, benceno, virus, errores en
+            replicación
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>3.4 Reacciones Químicas y Estequiometría</h3>
-        <div class="formula-box">
-          TIPOS DE REACCIONES: Síntesis: A + B → AB (2H₂ + O₂ → 2H₂O)
-          Descomposición: AB → A + B (2H₂O → 2H₂ + O₂) Sustitución simple: A +
-          BC → AC + B (Zn + 2HCl → ZnCl₂ + H₂) Sustitución doble: AB + CD → AD +
-          CB (NaCl + AgNO₃ → AgCl↓ + NaNO₃) Combustión: hidrocarburo + O₂ → CO₂
-          + H₂O LEY DE CONSERVACIÓN DE LA MASA (Lavoisier): La masa de los
-          reactivos = masa de los productos → Las ecuaciones deben balancearse
-          (mismo número de átomos a cada lado) MOL Y CANTIDAD DE SUSTANCIA: 1
-          mol = 6,022 × 10²³ partículas (número de Avogadro) Masa molar: masa en
-          gramos de 1 mol de sustancia (ej. H₂O = 18 g/mol)
+        <div class="concepto-card">
+          <h3>2.4 Teoría de la Evolución</h3>
+          <div class="formula-box">
+            DARWIN – WALLACE (selección natural):<br />
+            1. Variación: los individuos de una población varían en sus rasgos<br />
+            2. Herencia: los rasgos se transmiten a la descendencia<br />
+            3. Sobreproducción: se producen más individuos de los que
+            sobreviven<br />
+            4. Selección: los individuos con rasgos más adaptativos sobreviven y se
+            reproducen más<br />
+            5. Cambio gradual: acumulación de cambios → nuevas especies
+            (especiación)<br /><br />
+            EVIDENCIAS DE LA EVOLUCIÓN:<br />
+            → Registro fósil: formas de vida extintas y transicionales<br />
+            → Anatomía comparada: estructuras homólogas y análogas<br />
+            → Embriología comparada: embriones similares entre vertebrados<br />
+            → Biogeografía: distribución de especies en zonas aisladas<br />
+            → Biología molecular: similitud de ADN/ARN entre especies relacionadas
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>3.5 Ácidos, Bases y pH</h3>
-        <div class="formula-box">
-          Ácido de Brønsted-Lowry: dona protones H⁺ Base de Brønsted-Lowry:
-          acepta protones H⁺ ESCALA DE pH (0–14): pH < 7: ácido (mayor [H⁺]) →
-          HCl, vinagre, jugo gástrico pH = 7: neutro → agua pura pH > 7:
-          básico/alcalino (menor [H⁺]) → NaOH, jabón, bicarbonato pH = –log[H⁺]
-          → Cada unidad de pH representa una diferencia de ×10 en [H⁺] → pH 3
-          tiene 10 veces más H⁺ que pH 4 Neutralización: ácido + base → sal +
-          agua HCl + NaOH → NaCl + H₂O Indicadores: sustancias que cambian de
-          color según el pH Tornasol: rojo en ácido, azul en base Fenolftaleína:
-          incolora en ácido, rosa en base
+        <div class="concepto-card">
+          <h3>2.5 Especiación y Biodiversidad</h3>
+          <div class="formula-box">
+            Especiación alopátrica: separación geográfica → aislamiento
+            reproductivo<br />
+            Especiación simpátrica: en la misma área por divergencia ecológica o
+            poliplodia<br />
+            Barreras al flujo génico:<br />
+            Premating: diferentes épocas de reproducción, comportamiento, hábitat<br />
+            Postmating: incompatibilidad gamética, híbridos inviables o estériles
+            (ej. mula)<br />
+            Deriva genética: cambios aleatorios en frecuencias alélicas (más efecto
+            en poblaciones pequeñas)<br />
+            Cuello de botella: reducción drástica de la población → pérdida de
+            variabilidad genética<br />
+            Efecto fundador: nueva población formada por pocos individuos
+          </div>
         </div>
-      </div>
 
-      <div class="concepto-card">
-        <h3>3.6 Soluciones y Concentración</h3>
-        <div class="formula-box">
-          Solución = soluto disuelto en solvente Solubilidad: máxima cantidad de
-          soluto que se disuelve a cierta temperatura Concentraciones: %
-          masa/masa = (masa soluto / masa solución) × 100 Molaridad (M) = moles
-          de soluto / litros de solución Molalidad (m) = moles de soluto / kg de
-          solvente Propiedades coligativas (dependen del número de partículas):
-          → Descenso del punto de congelación → Elevación del punto de
-          ebullición → Presión osmótica → Descenso de la presión de vapor
+        <div class="concepto-card">
+          <h3>2.6 Clasificación y Taxonomía</h3>
+          <div class="formula-box">
+            Sistema de clasificación de Linneo (jerarquía):<br />
+            Dominio → Reino → Filo → Clase → Orden → Familia → Género → Especie<br />
+            Dominios: Bacteria, Archaea, Eukarya<br />
+            Reinos eucariotas: Animalia, Plantae, Fungi, Protista<br />
+            Nomenclatura binomial: Género especie (en cursiva)<br />
+            Homo sapiens, Canis lupus familiaris, Felis catus<br />
+            Criterio de especie biológica: grupo de organismos que pueden
+            reproducirse entre sí y producir descendencia fértil en condiciones
+            naturales
+          </div>
         </div>
-      </div>
-    </section>
+
+        <div class="concepto-card">
+          <h3>2.7 Biotecnología y Genética Aplicada</h3>
+          <div class="formula-box">
+            PCR (Reacción en Cadena de la Polimerasa): amplifica fragmentos de
+            ADN<br />
+            Electroforesis en gel: separa fragmentos de ADN por tamaño<br />
+            Ingeniería genética: inserción de genes de una especie en otra (OGM)<br />
+            Clonación: reproducción de un organismo con el mismo ADN del
+            donante<br />
+            CRISPR-Cas9: edición precisa del genoma → corrección de enfermedades
+            genéticas<br />
+            Terapia génica: corrección de genes defectuosos en células del
+            paciente<br />
+            Aplicaciones: insulina recombinante, vacunas, diagnóstico forense,
+            cultivos resistentes a plagas, tratamiento de enfermedades hereditarias
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-0">
+          <div class="ejercicio-texto">
+            En un cultivo de guisantes, una planta de semilla amarilla (YY) se
+            cruza con una planta de semilla verde (yy). El color amarillo es
+            dominante sobre el verde.
+          </div>
+          <div class="enunciado">
+            1. ¿Cuál será el fenotipo de la generación F1 (hijos directos de este
+            cruce)?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              A) 50% amarillo y 50% verde
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, true)">
+              B) 100% amarillo (todos heterocigotos Yy)
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              C) 75% amarillo y 25% verde
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              D) 100% verde (el recesivo domina en F1)
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-0">
+            ✓ Al cruzar YY × yy, todos los gametos del padre son Y y todos los de la
+            madre son y. Todos los hijos serán Yy (heterocigotos). Como Y es
+            dominante, todos expresarán el fenotipo amarillo. La proporción 3:1
+            aparece en F2 (Yy × Yy), no en F1.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-1">
+          <div class="ejercicio-texto">
+            La hemofilia es una enfermedad hereditaria ligada al cromosoma X,
+            causada por un alelo recesivo (Xʰ). Una mujer portadora (XᴴXʰ) tiene
+            hijos con un hombre sano (XᴴY).
+          </div>
+          <div class="enunciado">
+            2. ¿Qué proporción de sus hijos varones tendrá hemofilia?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              A) 0% (los varones no pueden tener hemofilia si la madre es portadora)
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              B) 25% de todos los hijos
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, true)">
+              C) 50% de los hijos varones
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              D) 100% de los hijos varones
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-1">
+            ✓ Los gametos de la madre son: Xᴴ o Xʰ (50% cada uno). Los gametos del
+            padre: Xᴴ o Y. Los varones reciben el Y del padre, así que su único X
+            viene de la madre. El 50% recibirá Xᴴ (sano) y el 50% recibirá Xʰ
+            (hemofílico). Del total de hijos, el 25% serán varones hemofílicos.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-2">
+          <div class="ejercicio-texto">
+            Se analiza el ADN mitocondrial de varias especies de felinos. Se
+            encuentra que el ADN del puma y del guepardo difieren en un 3%,
+            mientras que el puma y el gato doméstico difieren en un 12%.
+          </div>
+          <div class="enunciado">
+            3. ¿Qué conclusión se puede extraer de estos datos moleculares?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              A) El gato doméstico es más primitivo que el puma y el guepardo.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, true)">
+              B) El puma y el guepardo comparten un ancestro común más reciente que
+              el que comparten con el gato doméstico.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              C) El puma evolucionó a partir del guepardo hace poco tiempo.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              D) El gato doméstico no pertenece a la familia de los felinos.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-2">
+            ✓ Una menor diferencia en el ADN indica un parentesco más cercano y un
+            ancestro común más reciente. La biología molecular es una evidencia de
+            la evolución: a mayor similitud genética, mayor cercanía evolutiva. Puma
+            y guepardo divergieron más recientemente que cualquiera de ellos con el
+            gato doméstico.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-3">
+          <div class="ejercicio-texto">
+            Una mutación por inserción agrega un nucleótido extra en la posición 5
+            de un gen que tiene 90 nucleótidos. La proteína resultante es
+            completamente diferente de la original a partir del aminoácido 2.
+          </div>
+          <div class="enunciado">4. ¿Por qué la proteína es tan diferente?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              A) Porque la inserción destruye el ribosoma que traduce el ARNm.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, true)">
+              B) Porque la inserción desplaza el marco de lectura (frameshift),
+              cambiando todos los codones posteriores.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              C) Porque el nucleótido extra crea un codón de parada inmediatamente
+              después.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              D) Porque la mutación impide la transcripción del gen mutado.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-3">
+            ✓ Las inserciones o deleciones de un número de nucleótidos no múltiplo
+            de 3 causan un desplazamiento del marco de lectura (frameshift). Como
+            los codones se leen de 3 en 3, insertar un nucleótido cambia todos los
+            codones desde el punto de inserción en adelante, alterando radicalmente
+            la secuencia de aminoácidos de la proteína.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-4">
+          <div class="ejercicio-texto">
+            En las Islas Galápagos, Darwin observó que los pinzones de distintas
+            islas tenían picos de formas muy diferentes, adaptados al tipo de
+            alimento disponible en cada isla.
+          </div>
+          <div class="enunciado">5. Este fenómeno es un ejemplo de:</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              A) Convergencia evolutiva: especies no relacionadas desarrollan
+              estructuras similares.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, true)">
+              B) Radiación adaptativa: una especie ancestral da origen a múltiples
+              especies adaptadas a nichos diferentes.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              C) Deriva genética: cambios aleatorios sin presión selectiva en
+              poblaciones pequeñas.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              D) Lamarckismo: los pinzones desarrollaron los picos por esfuerzo y
+              uso continuo.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-4">
+            ✓ La radiación adaptativa ocurre cuando una especie coloniza un nuevo
+            ambiente con múltiples nichos ecológicos disponibles, originando
+            múltiples especies especializadas. Los pinzones de Darwin son el ejemplo
+            clásico de especiación alopátrica + radiación adaptativa. La
+            convergencia evolutiva (A) es el caso opuesto: especies no relacionadas
+            adquieren rasgos similares por presiones ambientales parecidas.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-5">
+          <div class="ejercicio-texto">
+            El síndrome de Down (trisomía 21) ocurre cuando una persona tiene tres
+            copias del cromosoma 21 en lugar de dos. Esto ocurre por un error
+            durante la división celular.
+          </div>
+          <div class="enunciado">
+            6. ¿En qué proceso y en qué fase puede ocurrir este error?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              A) En la mitosis, durante la telofase, cuando las células se dividen
+              incorrectamente.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, true)">
+              B) En la meiosis, por no disyunción: los cromosomas homólogos no se
+              separan correctamente.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              C) En la replicación del ADN, cuando el cromosoma 21 se copia tres
+              veces.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              D) En la fecundación, cuando dos espermatozoides fertilizan el mismo
+              óvulo.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-5">
+            ✓ La no disyunción es el fallo en la separación de cromosomas homólogos
+            durante la meiosis I (o cromátidas en la meiosis II), produciendo
+            gametos con un cromosoma extra (n+1). Cuando ese gameto se une a uno
+            normal (n), el cigoto tiene 2n+1 = trisomía. Puede ocurrir en la meiosis
+            materna o paterna.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-6">
+          <div class="ejercicio-texto">
+            Una pareja tiene grupo sanguíneo A (Iᴬi) y grupo sanguíneo B (Iᴮi)
+            respectivamente.
+          </div>
+          <div class="enunciado">
+            7. ¿Qué grupos sanguíneos pueden tener sus hijos?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              A) Solo A y B
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              B) Solo AB y O
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, true)">
+              C) A, B, AB y O (los cuatro grupos son posibles)
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              D) Solo A, B y AB (el grupo O es imposible)
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-6">
+            ✓ Cruce Iᴬi × Iᴮi: los gametos posibles son Iᴬ, i (padre) e Iᴮ, i
+            (madre). Combinaciones: IᴬIᴮ (AB), Iᴬi (A), Iᴮi (B), ii (O). Los cuatro
+            grupos son igualmente posibles, cada uno con 25% de probabilidad.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-7">
+          <div class="ejercicio-texto">
+            Una población de ratones vive en un campo abierto. Un evento
+            catastrófico (inundación) elimina al 95% de la población, dejando solo
+            10 ratones sobrevivientes con una frecuencia alélica diferente a la
+            población original.
+          </div>
+          <div class="enunciado">
+            8. ¿Qué fenómeno evolutivo describe mejor esta situación?
+          </div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              A) Selección natural, porque sobrevivieron los más aptos.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, true)">
+              B) Efecto cuello de botella, porque la reducción drástica de la
+              población cambia al azar las frecuencias alélicas.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              C) Flujo génico, porque los alelos se movieron de una población a
+              otra.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              D) Especiación simpátrica, porque la nueva población está en el mismo
+              lugar.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-7">
+            ✓ El cuello de botella es una forma de deriva genética: una catástrofe
+            reduce drásticamente el tamaño de la población, y la nueva población
+            refleja las frecuencias alélicas de los pocos sobrevivientes (no de la
+            población original). Esto puede fijar alelos raros o eliminar alelos
+            comunes al azar, sin que sea por selección natural (los sobrevivientes
+            no fueron "más aptos", solo tuvieron suerte).
+          </div>
+        </div>
+
+        <button class="btn-completar-tema" id="btnCompletar-1" onclick="completarTema(1)">
+          ✓ Marcar tema como completado
+        </button>
+
+        <div class="nav-temas-footer">
+          <button onclick="mostrarTema(0)">← Célula y Vida</button>
+          <button onclick="mostrarTema(2)">Siguiente: Química →</button>
+        </div>
+      </section>
+
+      <section class="tema-seccion" id="tema-2">
+        <div class="tema-titulo">
+          <h2>⚗️ Química: Materia, Reacciones y Soluciones</h2>
+          <span class="badge-completado" id="badge-2">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Estructura atómica, tabla periódica, enlace químico, reacciones,
+          soluciones y química orgánica.
+        </p>
+
+        <div class="concepto-card">
+          <h3>3.1 Estructura Atómica</h3>
+          <div class="formula-box">
+            Átomo: núcleo (protones + neutrones) + electrones en orbitales<br />
+            Número atómico (Z): número de protones = identifica el elemento<br />
+            Número másico (A): protones + neutrones<br />
+            Neutrones = A – Z<br /><br />
+            ISÓTOPOS: mismo Z, diferente número de neutrones<br />
+            ¹²C (6p, 6n) y ¹⁴C (6p, 8n) → mismo elemento, masa diferente<br />
+            ¹⁴C es radiactivo → datación de fósiles (vida media = 5 730 años)<br /><br />
+            Iones:<br />
+            Cationes (+): pierden electrones (Na → Na⁺)<br />
+            Aniones (–): ganan electrones (Cl → Cl⁻)<br /><br />
+            Niveles de energía: 1s² 2s² 2p⁶ 3s²... (regla de Aufbau)
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.2 Tabla Periódica y Tendencias</h3>
+          <div class="formula-box">
+            Grupos (columnas): misma configuración de electrones de valencia<br />
+            → Propiedades químicas similares<br />
+            → Grupo 1 (alcalinos): Li, Na, K → muy reactivos, 1 e⁻ de valencia<br />
+            → Grupo 17 (halógenos): F, Cl, Br, I → 7 e⁻ de valencia, muy
+            electronegativos<br />
+            → Grupo 18 (nobles): He, Ne, Ar → inertes, 8 e⁻ de valencia (octeto
+            completo)<br /><br />
+            Periodos (filas): mismo número de niveles de energía<br /><br />
+            TENDENCIAS PERIÓDICAS (izquierda a derecha y abajo a arriba):<br />
+            Electronegatividad: aumenta → (F es la más electronegativa)<br />
+            Radio atómico: disminuye → <br />
+            Energía de ionización: aumenta → <br />
+            Carácter metálico: disminuye →
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.3 Enlace Químico</h3>
+          <div class="formula-box">
+            ENLACE IÓNICO:<br />
+            → Metal + no metal → transferencia de electrones<br />
+            → Forma redes cristalinas sólidas a temperatura ambiente<br />
+            → Alta temperatura de fusión, conducen electricidad disueltos<br />
+            → Ejemplo: NaCl (Na⁺ + Cl⁻)<br /><br />
+            ENLACE COVALENTE:<br />
+            → No metal + no metal → comparten electrones<br />
+            → Simple: 1 par compartido (H–H)<br />
+            → Doble: 2 pares compartidos (O=O)<br />
+            → Triple: 3 pares compartidos (N≡N)<br />
+            → Polar: diferencia de electronegatividad > 0,4 (H₂O, HCl)<br />
+            → Apolar: diferencia de electronegatividad ≤ 0,4 (CH₄, H₂)<br /><br />
+            ENLACE METÁLICO:<br />
+            → Metales → electrones deslocalizados ("mar de electrones")<br />
+            → Explica conductividad eléctrica y maleabilidad
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.4 Reacciones Químicas y Estequiometría</h3>
+          <div class="formula-box">
+            TIPOS DE REACCIONES:<br />
+            Síntesis: A + B → AB (2H₂ + O₂ → 2H₂O)<br />
+            Descomposición: AB → A + B (2H₂O → 2H₂ + O₂)<br />
+            Sustitución simple: A + BC → AC + B (Zn + 2HCl → ZnCl₂ + H₂)<br />
+            Sustitución doble: AB + CD → AD + CB (NaCl + AgNO₃ → AgCl↓ + NaNO₃)<br />
+            Combustión: hidrocarburo + O₂ → CO₂ + H₂O<br /><br />
+            LEY DE CONSERVACIÓN DE LA MASA (Lavoisier):<br />
+            La masa de los reactivos = masa de los productos<br />
+            → Las ecuaciones deben balancearse (mismo número de átomos a cada
+            lado)<br /><br />
+            MOL Y CANTIDAD DE SUSTANCIA:<br />
+            1 mol = 6,022 × 10²³ partículas (número de Avogadro)<br />
+            Masa molar: masa en gramos de 1 mol de sustancia (ej. H₂O = 18 g/mol)
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.5 Ácidos, Bases y pH</h3>
+          <div class="formula-box">
+            Ácido de Brønsted-Lowry: dona protones H⁺<br />
+            Base de Brønsted-Lowry: acepta protones H⁺<br /><br />
+            ESCALA DE pH (0–14):<br />
+            pH < 7: ácido (mayor [H⁺]) → HCl, vinagre, jugo gástrico<br />
+            pH = 7: neutro → agua pura<br />
+            pH > 7: básico/alcalino (menor [H⁺]) → NaOH, jabón, bicarbonato<br />
+            pH = –log[H⁺] → Cada unidad de pH representa una diferencia de ×10 en
+            [H⁺]<br />
+            → pH 3 tiene 10 veces más H⁺ que pH 4<br /><br />
+            Neutralización: ácido + base → sal + agua<br />
+            HCl + NaOH → NaCl + H₂O<br /><br />
+            Indicadores: sustancias que cambian de color según el pH<br />
+            Tornasol: rojo en ácido, azul en base<br />
+            Fenolftaleína: incolora en ácido, rosa en base
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.6 Soluciones y Concentración</h3>
+          <div class="formula-box">
+            Solución = soluto disuelto en solvente<br />
+            Solubilidad: máxima cantidad de soluto que se disuelve a cierta
+            temperatura<br />
+            Concentraciones:<br />
+            % masa/masa = (masa soluto / masa solución) × 100<br />
+            Molaridad (M) = moles de soluto / litros de solución<br />
+            Molalidad (m) = moles de soluto / kg de solvente<br /><br />
+            Propiedades coligativas (dependen del número de partículas):<br />
+            → Descenso del punto de congelación<br />
+            → Elevación del punto de ebullición<br />
+            → Presión osmótica<br />
+            → Descenso de la presión de vapor
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <button class="chat-btn" onclick="abrirChat()">✨</button>
+
+    <script src="js/chat-ia.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById('sidebar-menu');
+        const btn = document.getElementById('btn-menu');
+        menu.classList.toggle('abierto');
+        btn.classList.toggle('active');
+      }
+    </script>
   </body>
 </html>

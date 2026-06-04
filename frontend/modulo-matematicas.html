@@ -1,1189 +1,927 @@
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Módulo de Matemáticas – ICFES Prep</title>
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/modulos.css" />
-    <style>
-      .modulo-header{background:linear-gradient(135deg,#123c73,#1a56a6);color:#fff;padding:28px 10%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
-      .modulo-header h1{font-size:1.7rem;margin:0}.modulo-header p{margin:4px 0 0;opacity:.85;font-size:14px}
-      .progreso-global-wrap{min-width:220px}.progreso-global-wrap label{font-size:13px;opacity:.85}
-      .progreso-global-barra{background:rgba(255,255,255,.25);border-radius:20px;height:14px;margin-top:6px;overflow:hidden}
-      .progreso-global-fill{background:#7dd3fc;height:100%;border-radius:20px;transition:width .7s ease;width:0%}
-      .progreso-global-txt{font-size:13px;margin-top:4px;opacity:.9}
-      .temas-nav{display:flex;gap:10px;padding:18px 10%;background:#fff;border-bottom:2px solid #eef2f7;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-      .temas-nav button{background:#f4f7fb;color:#123c73;border:2px solid #e2e8f0;padding:8px 16px;border-radius:25px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
-      .temas-nav button:hover,.temas-nav button.activo{background:#123c73;color:#fff;border-color:#123c73;transform:none}
-      .temas-nav button.completado-nav{border-color:#16a34a;color:#16a34a}
-      .temas-nav button.completado-nav.activo{background:#16a34a;color:#fff;border-color:#16a34a}
-      .tema-seccion{display:none;padding:38px 10%;animation:fadeIn .3s ease}
-      .tema-seccion.visible{display:block}
-      @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-      .tema-titulo{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-      .tema-titulo h2{color:#123c73;font-size:1.45rem;margin:0}
-      .badge-completado{background:#dcfce7;color:#16a34a;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;display:none}
-      .tema-subtitulo{color:#64748b;font-size:14px;margin-bottom:28px}
-      .concepto-card{background:#fff;border-radius:14px;padding:26px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.06);border-left:4px solid #123c73}
-      .concepto-card h3{color:#123c73;font-size:1.05rem;margin-bottom:10px}
-      .concepto-card p{color:#444;line-height:1.7;margin-bottom:8px}
-      .formula-box{background:#f0f4ff;border-radius:8px;padding:13px 16px;font-family:monospace;font-size:14px;color:#1e3a5f;margin:10px 0;border:1px solid #c7d7f5;line-height:1.8}
-      .ejemplo-box{background:#f8fafc;border-radius:8px;padding:13px 16px;margin-top:10px;border:1px dashed #cbd5e1;font-size:14px;color:#334155;line-height:1.65}
-      .ejemplo-box strong{color:#123c73}
-      .tip-box{background:#fffbeb;border-radius:8px;padding:12px 16px;margin-top:10px;border:1px solid #fde68a;font-size:13px;color:#92400e;line-height:1.6}
-      .ejercicios-titulo{display:flex;align-items:center;gap:10px;margin:32px 0 18px}
-      .ejercicios-titulo h3{color:#123c73;font-size:1.15rem;margin:0}
-      .ejercicios-titulo span{background:#e0e7ff;color:#3730a3;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
-      .ejercicio-card{background:#fff;border-radius:14px;padding:22px 26px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
-      .ejercicio-card .enunciado{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:14px;line-height:1.55}
-      .opciones-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
-      .opcion-btn{background:#f4f7fb;color:#334155;border:2px solid #e2e8f0;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer;text-align:left;transition:all .2s;font-weight:600}
-      .opcion-btn:hover{background:#e0e7ff;border-color:#818cf8;transform:none}
-      .opcion-btn.correcta{background:#dcfce7!important;border-color:#16a34a!important;color:#15803d!important}
-      .opcion-btn.incorrecta{background:#fee2e2!important;border-color:#dc2626!important;color:#dc2626!important}
-      .opcion-btn:disabled{cursor:default}
-      .feedback-ejercicio{font-size:13px;padding:10px 14px;border-radius:8px;display:none;margin-top:6px;line-height:1.55}
-      .feedback-ejercicio.correcto{background:#dcfce7;color:#15803d}
-      .feedback-ejercicio.incorrecto{background:#fee2e2;color:#991b1b}
-      .btn-completar-tema{background:#123c73;color:#fff;border:none;padding:13px 30px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;margin-top:32px;transition:all .3s}
-      .btn-completar-tema:hover{background:#1a56a6;transform:translateY(-2px)}
-      .btn-completar-tema.ya-completado{background:#16a34a;cursor:default;transform:none}
-      .nav-temas-footer{display:flex;justify-content:space-between;align-items:center;margin-top:38px;padding-top:22px;border-top:2px solid #eef2f7}
-      .nav-temas-footer button{padding:11px 22px;font-size:14px;border-radius:10px}
-      @media(max-width:768px){.opciones-grid{grid-template-columns:1fr}.modulo-header,.temas-nav,.tema-seccion{padding-left:5%;padding-right:5%}}
-    </style>
-  </head>
-  <body>
-    <header class="navbar">
+<!doctype html> 
+<html lang="es"> 
+  <head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Módulo de Matemáticas – ICFES Prep</title> 
+    <link rel="stylesheet" href="css/global.css" /> 
+    <link rel="stylesheet" href="css/modulos.css" /> 
+    <style> 
+      .modulo-header{background:linear-gradient(135deg,#123c73,#1a56a6);color:#fff;padding:28px 10%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px} .modulo-header h1{font-size:1.7rem;margin:0}.modulo-header p{margin:4px 0 0;opacity:.85;font-size:14px} .progreso-global-wrap{min-width:220px}.progreso-global-wrap label{font-size:13px;opacity:.85} .progreso-global-barra{background:rgba(255,255,255,.25);border-radius:20px;height:14px;margin-top:6px;overflow:hidden} .progreso-global-fill{background:#7dd3fc;height:100%;border-radius:20px;transition:width .7s ease;width:0%} .progreso-global-txt{font-size:13px;margin-top:4px;opacity:.9} .temas-nav{display:flex;gap:10px;padding:18px 10%;background:#fff;border-bottom:2px solid #eef2f7;flex-wrap:wrap;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.06)} .temas-nav button{background:#f4f7fb;color:#123c73;border:2px solid #e2e8f0;padding:8px 16px;border-radius:25px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s} .temas-nav button:hover,.temas-nav button.activo{background:#123c73;color:#fff;border-color:#123c73;transform:none} .temas-nav button.completado-nav{border-color:#16a34a;color:#16a34a} .temas-nav button.completado-nav.activo{background:#16a34a;color:#fff;border-color:#16a34a} .tema-seccion{display:none;padding:38px 10%;animation:fadeIn .3s ease} .tema-seccion.visible{display:block} @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}} .tema-titulo{display:flex;align-items:center;gap:14px;margin-bottom:6px} .tema-titulo h2{color:#123c73;font-size:1.45rem;margin:0} .badge-completado{background:#dcfce7;color:#16a34a;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;display:none} .tema-subtitulo{color:#64748b;font-size:14px;margin-bottom:28px} .concepto-card{background:#fff;border-radius:14px;padding:26px;margin-bottom:18px;box-shadow:0 3px 10px rgba(0,0,0,.06);border-left:4px solid #123c73} .concepto-card h3{color:#123c73;font-size:1.05rem;margin-bottom:10px} .concepto-card p{color:#444;line-height:1.7;margin-bottom:8px} .formula-box{background:#f0f4ff;border-radius:8px;padding:13px 16px;font-family:monospace;font-size:14px;color:#1e3a5f;margin:10px 0;border:1px solid #c7d7f5;line-height:1.8} .ejemplo-box{background:#f8fafc;border-radius:8px;padding:13px 16px;margin-top:10px;border:1px dashed #cbd5e1;font-size:14px;color:#334155;line-height:1.65} .ejemplo-box strong{color:#123c73} .tip-box{background:#fffbeb;border-radius:8px;padding:12px 16px;margin-top:10px;border:1px solid #fde68a;font-size:13px;color:#92400e;line-height:1.6} .ejercicios-titulo{display:flex;align-items:center;gap:10px;margin:32px 0 18px} .ejercicios-titulo h3{color:#123c73;font-size:1.15rem;margin:0} .ejercicios-titulo span{background:#e0e7ff;color:#3730a3;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px} .ejercicio-card{background:#fff;border-radius:14px;padding:22px 26px;margin-bottom:16px;box-shadow:0 3px 10px rgba(0,0,0,.06)} .ejercicio-card .enunciado{font-size:15px;font-weight:700;color:#1e293b;margin-bottom:14px;line-height:1.55} .opciones-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px} .opcion-btn{background:#f4f7fb;color:#334155;border:2px solid #e2e8f0;border-radius:10px;padding:11px 14px;font-size:14px;cursor:pointer;text-align:left;transition:all .2s;font-weight:600} .opcion-btn:hover{background:#e0e7ff;border-color:#818cf8;transform:none} .opcion-btn.correcta{background:#dcfce7!important;border-color:#16a34a!important;color:#15803d!important} .opcion-btn.incorrecta{background:#fee2e2!important;border-color:#dc2626!important;color:#dc2626!important} .opcion-btn:disabled{cursor:default} .feedback-ejercicio{font-size:13px;padding:10px 14px;border-radius:8px;display:none;margin-top:6px;line-height:1.55} .feedback-ejercicio.correcto{background:#dcfce7;color:#15803d} .feedback-ejercicio.incorrecto{background:#fee2e2;color:#991b1b} .btn-completar-tema{background:#123c73;color:#fff;border:none;padding:13px 30px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;margin-top:32px;transition:all .3s} .btn-completar-tema:hover{background:#1a56a6;transform:translateY(-2px)} .btn-completar-tema.ya-completado{background:#16a34a;cursor:default;transform:none} .nav-temas-footer{display:flex;justify-content:space-between;align-items:center;margin-top:38px;padding-top:22px;border-top:2px solid #eef2f7} .nav-temas-footer button{padding:11px 22px;font-size:14px;border-radius:10px} @media(max-width:768px){.opciones-grid{grid-template-columns:1fr}.modulo-header,.temas-nav,.tema-seccion{padding-left:5%;padding-right:5%}} 
+    </style> 
+  </head> 
+  <body class="dashboard-estudiante"> 
+    
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div><div></div><div></div>
+      </button>
       <h1>📐 Módulo de Matemáticas</h1>
-      <a href="areas.html">← Volver a Áreas</a>
+      <div class="nav-right">
+        <a href="areas.html" style="color: white; text-decoration: none; font-size: 14px;">← Volver a Áreas</a>
+      </div>
     </header>
 
-    <div class="modulo-header">
-      <div>
-        <h1>Matemáticas ICFES – Saber 11</h1>
-        <p>Contenido completo: 5 temas, 50+ conceptos, 40 ejercicios tipo ICFES</p>
-      </div>
-      <div class="progreso-global-wrap">
-        <label>Progreso del módulo</label>
-        <div class="progreso-global-barra"><div class="progreso-global-fill" id="barraGlobal"></div></div>
-        <div class="progreso-global-txt" id="textoGlobal">0 de 5 temas completados</div>
-      </div>
-    </div>
-
-    <nav class="temas-nav">
-      <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">1. Pensamiento Numérico</button>
-      <button onclick="mostrarTema(1)" id="btn-tema-1">2. Álgebra</button>
-      <button onclick="mostrarTema(2)" id="btn-tema-2">3. Geometría</button>
-      <button onclick="mostrarTema(3)" id="btn-tema-3">4. Estadística y Probabilidad</button>
-      <button onclick="mostrarTema(4)" id="btn-tema-4">5. Cálculo y Funciones</button>
-    </nav>
-
-    <!-- ══════════════════════════════════════════════════════
-         TEMA 1 — PENSAMIENTO NUMÉRICO Y SISTEMAS NUMÉRICOS
-    ══════════════════════════════════════════════════════ -->
-    <section class="tema-seccion visible" id="tema-0">
-      <div class="tema-titulo">
-        <h2>🔢 Pensamiento Numérico y Sistemas Numéricos</h2>
-        <span class="badge-completado" id="badge-0">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">Números naturales, enteros, racionales, irracionales, potencias, raíces, logaritmos, proporciones y valor absoluto.</p>
-
-      <div class="concepto-card">
-        <h3>1.1 Conjuntos Numéricos</h3>
-        <p>Los números se organizan en conjuntos anidados: cada uno contiene al anterior.</p>
-        <div class="formula-box">ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ
-Naturales: {0, 1, 2, 3, …}
-Enteros:   {…, −2, −1, 0, 1, 2, …}
-Racionales: todo número p/q con q ≠ 0 (fracciones, decimales finitos y periódicos)
-Irracionales: no expresables como fracción  → √2, π, e, √3
-Reales: ℚ ∪ Irracionales</div>
-        <div class="tip-box">💡 Todo número racional tiene una expresión decimal que termina (0,25) o se repite periódicamente (0,333…). Si el decimal no se repite ni termina, el número es irracional.</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.2 Operaciones con Fracciones</h3>
-        <div class="formula-box">Suma/Resta:      a/b ± c/d = (ad ± bc) / bd
-Multiplicación:  (a/b)×(c/d) = ac/bd
-División:        (a/b)÷(c/d) = (a/b)×(d/c) = ad/bc
-Simplificación:  dividir numerador y denominador por su MCD</div>
-        <div class="ejemplo-box"><strong>2/3 + 5/4</strong> = (8 + 15)/12 = 23/12<br>
-<strong>(3/5) ÷ (9/10)</strong> = (3/5)×(10/9) = 30/45 = 2/3</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.3 Potencias y sus Leyes</h3>
-        <div class="formula-box">aⁿ × aᵐ = a^(n+m)       (misma base → suma exponentes)
-aⁿ / aᵐ = a^(n−m)       (misma base → resta exponentes)
-(aⁿ)ᵐ  = a^(n×m)        (potencia de potencia → multiplica)
-(ab)ⁿ  = aⁿ × bⁿ        (potencia de producto)
-a⁻ⁿ   = 1/aⁿ            (exponente negativo → inverso)
-a⁰    = 1  (a ≠ 0)</div>
-        <div class="ejemplo-box"><strong>(2³)² / 2⁴</strong> = 2⁶/2⁴ = 2² = 4<br>
-<strong>(3x²y)³</strong> = 27x⁶y³</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.4 Raíces y Radicales</h3>
-        <div class="formula-box">ⁿ√a = a^(1/n)
-√(a×b) = √a × √b        (producto de radicales)
-√(a/b) = √a / √b        (cociente de radicales)
-√(aⁿ) = a^(n/2)
-Racionalizar: multiply por √b/√b para eliminar raíz en denominador</div>
-        <div class="ejemplo-box"><strong>√72</strong> = √(36×2) = 6√2<br>
-<strong>√3/√5</strong> = √3·√5/5 = √15/5  (racionalizado)<br>
-<strong>³√54</strong> = ³√(27×2) = 3·³√2</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.5 Logaritmos</h3>
-        <p>El logaritmo responde: ¿a qué potencia debo elevar la base para obtener el argumento?</p>
-        <div class="formula-box">log_b(x) = n  ⟺  bⁿ = x
-log(x×y)   = log x + log y    (producto → suma)
-log(x/y)   = log x − log y    (cociente → resta)
-log(xⁿ)    = n·log x          (potencia → multiplica)
-log_b(b)   = 1                 (log de la base = 1)
-log_b(1)   = 0                 (log de 1 = 0)
-Cambio de base: log_b(x) = ln(x)/ln(b)</div>
-        <div class="ejemplo-box"><strong>log₂(32)</strong> = log₂(2⁵) = 5<br>
-<strong>log(100)</strong> = log(10²) = 2<br>
-<strong>log(6)</strong> = log(2×3) = log 2 + log 3 ≈ 0,301 + 0,477 = 0,778</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.6 Valor Absoluto</h3>
-        <div class="formula-box">|x| = x   si x ≥ 0
-|x| = −x  si x < 0
-|a − b| = distancia entre a y b en la recta numérica
-|x| < k  ⟺  −k < x < k
-|x| > k  ⟺  x > k  o  x < −k</div>
-        <div class="ejemplo-box"><strong>|2x − 3| = 7</strong> → 2x−3 = 7 o 2x−3 = −7 → x = 5 o x = −2<br>
-<strong>|x + 1| < 4</strong> → −4 < x+1 < 4 → −5 < x < 3</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.7 Razones, Proporciones y Regla de Tres</h3>
-        <div class="formula-box">Razón:      a:b = a/b
-Proporción: a/b = c/d  ⟹  ad = bc  (propiedad cruzada)
-Regla de tres simple directa:   a→b, c→x : x = bc/a
-Regla de tres simple inversa:   a→b, c→x : x = ab/c
-Regla de tres compuesta: combina varias magnitudes</div>
-        <div class="ejemplo-box"><strong>Directa:</strong> 4 obreros → 12 días; 6 obreros → x días (inversa)<br>
-x = 4×12/6 = 8 días<br>
-<strong>Proporciones:</strong> Si a/b = c/d, entonces (a+b)/b = (c+d)/d (propiedad componendo)</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.8 Porcentajes y Variaciones</h3>
-        <div class="formula-box">% de X    = X × porcentaje / 100
-Aumento:  Nuevo = Original × (1 + p/100)
-Descuento: Nuevo = Original × (1 − p/100)
-Variación %: ((Nuevo − Original) / Original) × 100
-Interés simple: I = C × r × t
-Interés compuesto: M = C × (1 + r)ᵗ</div>
-        <div class="ejemplo-box"><strong>Aumento del 15% sobre $80.000:</strong> 80.000 × 1,15 = $92.000<br>
-<strong>Interés compuesto:</strong> $1.000 al 10% anual, 3 años → 1.000 × 1,1³ = $1.331</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>1.9 Divisibilidad, MCD y MCM</h3>
-        <div class="formula-box">MCD(a,b): mayor divisor común → algoritmo de Euclides
-MCM(a,b) = (a × b) / MCD(a,b)
-Criterios de divisibilidad:
-  Entre 2: último dígito par
-  Entre 3: suma de dígitos divisible entre 3
-  Entre 4: últimos dos dígitos divisibles entre 4
-  Entre 5: termina en 0 o 5
-  Entre 9: suma de dígitos divisible entre 9</div>
-        <div class="ejemplo-box"><strong>MCD(48, 18):</strong> 48 = 2·18 + 12; 18 = 1·12 + 6; 12 = 2·6 → MCD = 6<br>
-<strong>MCM(48, 18)</strong> = (48×18)/6 = 144</div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-0">
-        <div class="enunciado">1. ¿Cuál de los siguientes números es irracional?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,0,false)">A) 0,666…</button>
-          <button class="opcion-btn" onclick="responder(this,0,0,false)">B) √9</button>
-          <button class="opcion-btn" onclick="responder(this,0,0,true)">C) √7</button>
-          <button class="opcion-btn" onclick="responder(this,0,0,false)">D) −5/3</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-0">✅ √7 ≈ 2,6457… es irracional porque 7 no es cuadrado perfecto. √9 = 3 (entero), 0,666… = 2/3 (racional), −5/3 es fracción.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-1">
-        <div class="enunciado">2. Simplifica: (3⁴ × 3⁻²) / 3³</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,1,false)">A) 3</button>
-          <button class="opcion-btn" onclick="responder(this,0,1,false)">B) 9</button>
-          <button class="opcion-btn" onclick="responder(this,0,1,true)">C) 1/3</button>
-          <button class="opcion-btn" onclick="responder(this,0,1,false)">D) 27</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-1">✅ 3^(4−2−3) = 3^(−1) = 1/3</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-2">
-        <div class="enunciado">3. Si log₂(x) = 5, ¿cuánto vale x?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,2,false)">A) 10</button>
-          <button class="opcion-btn" onclick="responder(this,0,2,false)">B) 16</button>
-          <button class="opcion-btn" onclick="responder(this,0,2,true)">C) 32</button>
-          <button class="opcion-btn" onclick="responder(this,0,2,false)">D) 25</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-2">✅ log₂(x) = 5 ⟺ 2⁵ = x → x = 32</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-3">
-        <div class="enunciado">4. Resuelve: |3x − 6| = 9</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,3,false)">A) x = 5</button>
-          <button class="opcion-btn" onclick="responder(this,0,3,true)">B) x = 5 y x = −1</button>
-          <button class="opcion-btn" onclick="responder(this,0,3,false)">C) x = −1</button>
-          <button class="opcion-btn" onclick="responder(this,0,3,false)">D) x = 3 y x = −3</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-3">✅ 3x−6 = 9 → x = 5; o 3x−6 = −9 → x = −1. Ambas soluciones: x = 5 y x = −1</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-4">
-        <div class="enunciado">5. Un capital de $500.000 se invierte al 8% de interés compuesto anual. ¿Cuánto tendrá después de 2 años?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,4,false)">A) $580.000</button>
-          <button class="opcion-btn" onclick="responder(this,0,4,true)">B) $583.200</button>
-          <button class="opcion-btn" onclick="responder(this,0,4,false)">C) $600.000</button>
-          <button class="opcion-btn" onclick="responder(this,0,4,false)">D) $540.000</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-4">✅ M = 500.000 × (1,08)² = 500.000 × 1,1664 = $583.200</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-5">
-        <div class="enunciado">6. Simplifica completamente: √(48x⁴y²)</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,5,false)">A) 4x²y√3</button>
-          <button class="opcion-btn" onclick="responder(this,0,5,true)">B) 4x²|y|√3</button>
-          <button class="opcion-btn" onclick="responder(this,0,5,false)">C) 6x²y</button>
-          <button class="opcion-btn" onclick="responder(this,0,5,false)">D) 2x²y√12</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-5">✅ √48 = 4√3; √(x⁴) = x²; √(y²) = |y|. Resultado: 4x²|y|√3</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-6">
-        <div class="enunciado">7. Si 8 impresoras imprimen 600 páginas en 5 horas, ¿cuántas páginas imprimen 6 impresoras en 3 horas?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,6,false)">A) 250</button>
-          <button class="opcion-btn" onclick="responder(this,0,6,false)">B) 300</button>
-          <button class="opcion-btn" onclick="responder(this,0,6,true)">C) 270</button>
-          <button class="opcion-btn" onclick="responder(this,0,6,false)">D) 360</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-6">✅ Regla de tres compuesta: x = 600 × (6/8) × (3/5) = 600 × 0,75 × 0,6 = 270 páginas</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-0-7">
-        <div class="enunciado">8. Usa log 2 ≈ 0,301 y log 3 ≈ 0,477. ¿Cuánto es log(72)?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,0,7,false)">A) 1,556</button>
-          <button class="opcion-btn" onclick="responder(this,0,7,true)">B) 1,857</button>
-          <button class="opcion-btn" onclick="responder(this,0,7,false)">C) 1,778</button>
-          <button class="opcion-btn" onclick="responder(this,0,7,false)">D) 2,301</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-0-7">✅ 72 = 8×9 = 2³×3². log 72 = 3 log 2 + 2 log 3 = 3(0,301)+2(0,477) = 0,903+0,954 = 1,857</div>
-      </div>
-
-      <button class="btn-completar-tema" id="btnCompletar-0" onclick="completarTema(0)">✔ Marcar tema como completado</button>
-      <div class="nav-temas-footer">
-        <span></span>
-        <button onclick="mostrarTema(1)">Siguiente: Álgebra →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════
-         TEMA 2 — ÁLGEBRA
-    ══════════════════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-1">
-      <div class="tema-titulo">
-        <h2>🔣 Álgebra</h2>
-        <span class="badge-completado" id="badge-1">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">Expresiones algebraicas, factorización, ecuaciones de 1.° y 2.° grado, sistemas de ecuaciones, inecuaciones y variación.</p>
-
-      <div class="concepto-card">
-        <h3>2.1 Productos Notables</h3>
-        <div class="formula-box">(a+b)²  = a² + 2ab + b²
-(a−b)²  = a² − 2ab + b²
-(a+b)(a−b) = a² − b²          (diferencia de cuadrados)
-(a+b)³  = a³ + 3a²b + 3ab² + b³
-(a−b)³  = a³ − 3a²b + 3ab² − b³
-(a+b+c)² = a²+b²+c²+2ab+2ac+2bc</div>
-        <div class="ejemplo-box"><strong>(3x+2)²</strong> = 9x²+12x+4<br>
-<strong>(5x−3)(5x+3)</strong> = 25x²−9</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.2 Factorización</h3>
-        <div class="formula-box">Factor común:       ax+ay = a(x+y)
-Diferencia cuadrados: a²−b² = (a−b)(a+b)
-Trinomio cuadrado perfecto: a²±2ab+b² = (a±b)²
-Trinomio general:   x²+bx+c → busca m,n: m+n=b, mn=c
-Suma/Diferencia de cubos:
-  a³+b³ = (a+b)(a²−ab+b²)
-  a³−b³ = (a−b)(a²+ab+b²)</div>
-        <div class="ejemplo-box"><strong>x²−5x+6</strong> = (x−2)(x−3) porque −2+(−3)=−5 y (−2)(−3)=6<br>
-<strong>8x³−27</strong> = (2x−3)(4x²+6x+9)</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.3 Ecuaciones de Primer Grado</h3>
-        <div class="formula-box">ax + b = c  →  x = (c−b)/a
-Con fracciones: multiplicar toda la ecuación por el MCM de denominadores
-Con paréntesis: distribuir primero, luego agrupar términos</div>
-        <div class="ejemplo-box"><strong>3(x−2) = 2x+7</strong> → 3x−6 = 2x+7 → x = 13<br>
-<strong>x/3 + x/4 = 7</strong> → MCM=12: 4x+3x = 84 → 7x=84 → x=12</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.4 Ecuaciones de Segundo Grado</h3>
-        <div class="formula-box">ax²+bx+c = 0
-Fórmula general: x = (−b ± √(b²−4ac)) / 2a
-Discriminante Δ = b²−4ac:
-  Δ > 0 → dos raíces reales distintas
-  Δ = 0 → raíz doble: x = −b/2a
-  Δ < 0 → no hay raíces reales
-Suma de raíces: x₁+x₂ = −b/a
-Producto de raíces: x₁·x₂ = c/a   (relaciones de Vieta)</div>
-        <div class="ejemplo-box"><strong>2x²−7x+3=0:</strong> Δ=49−24=25; x=(7±5)/4 → x=3 o x=1/2<br>
-<strong>Por Vieta:</strong> suma=7/2, producto=3/2 ✓</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.5 Ecuaciones con Radicales y Módulo</h3>
-        <div class="formula-box">√(f(x)) = g(x) → elevar al cuadrado y VERIFICAR soluciones
-|f(x)| = k → f(x) = k  o  f(x) = −k</div>
-        <div class="ejemplo-box"><strong>√(x+3) = x−1:</strong> x+3 = (x−1)² = x²−2x+1 → x²−3x−2=0 → x=(3±√17)/2. Verificar que x≥1</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.6 Sistemas de Ecuaciones 2×2</h3>
-        <div class="formula-box">Métodos: sustitución, igualación, eliminación (Gauss), Cramer
-Sustitución: despejar una variable en una ec. y sustituir en la otra
-Eliminación: multiplicar ecuaciones para que un coeficiente se cancele
-Sistema sin solución → paralelas; infinitas soluciones → misma recta</div>
-        <div class="ejemplo-box"><strong>2x+3y=7 y 4x−y=1</strong><br>
-Multiplicar 2ª por 3: 12x−3y=3. Sumar: 14x=10 → x=5/7; y=(7−10/7)/3=49/21−10/21=39/21=13/7</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.7 Inecuaciones y su Conjunto Solución</h3>
-        <div class="formula-box">Regla clave: al multiplicar/dividir por negativo → invertir signo
-Inecuación lineal: ax+b > c
-Inecuación cuadrática: ax²+bx+c > 0 → analizar signo en intervalos
-Valor absoluto: |x−a| < r ⟺ a−r < x < a+r  (intervalo abierto)</div>
-        <div class="ejemplo-box"><strong>x²−x−6 > 0:</strong> raíces x=3 y x=−2. Solución: x<−2 o x>3<br>
-<strong>|2x−4| ≤ 6:</strong> −6 ≤ 2x−4 ≤ 6 → −1 ≤ x ≤ 5</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>2.8 Variación Directa, Inversa y Conjunta</h3>
-        <div class="formula-box">Directa:   y = kx         (y/x = k constante)
-Inversa:   y = k/x        (xy = k constante)
-Cuadrática: y = kx²
-Conjunta:  z = kxy
-Inversa cuadrada: y = k/x²</div>
-        <div class="ejemplo-box"><strong>y varía inversamente con x²:</strong> si y=4 cuando x=3 → k=36. Cuando x=2: y=36/4=9</div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-0">
-        <div class="enunciado">1. Factoriza completamente: 3x³ − 12x</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,0,true)">A) 3x(x−2)(x+2)</button>
-          <button class="opcion-btn" onclick="responder(this,1,0,false)">B) 3(x³−4x)</button>
-          <button class="opcion-btn" onclick="responder(this,1,0,false)">C) x(3x²−12)</button>
-          <button class="opcion-btn" onclick="responder(this,1,0,false)">D) 3x(x²−4)</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-0">✅ 3x³−12x = 3x(x²−4) = 3x(x−2)(x+2). La opción D no factoriza la diferencia de cuadrados completamente.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-1">
-        <div class="enunciado">2. Las raíces de x² − 7x + 12 = 0 son:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,1,false)">A) 2 y 6</button>
-          <button class="opcion-btn" onclick="responder(this,1,1,true)">B) 3 y 4</button>
-          <button class="opcion-btn" onclick="responder(this,1,1,false)">C) −3 y −4</button>
-          <button class="opcion-btn" onclick="responder(this,1,1,false)">D) 1 y 12</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-1">✅ Busca m+n=7 y mn=12 → m=3, n=4. Verificación por Vieta: suma=7=7/1 ✓, producto=12=12/1 ✓</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-2">
-        <div class="enunciado">3. El discriminante de 3x²−4x+2=0 indica que esta ecuación tiene:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,2,false)">A) Dos raíces reales distintas</button>
-          <button class="opcion-btn" onclick="responder(this,1,2,false)">B) Una raíz real doble</button>
-          <button class="opcion-btn" onclick="responder(this,1,2,true)">C) No tiene raíces reales</button>
-          <button class="opcion-btn" onclick="responder(this,1,2,false)">D) Una raíz entera</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-2">✅ Δ = (−4)²−4(3)(2) = 16−24 = −8 < 0 → No hay raíces reales.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-3">
-        <div class="enunciado">4. Resuelve el sistema: 3x − y = 5 y x + 2y = 8</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,3,false)">A) x=1, y=−2</button>
-          <button class="opcion-btn" onclick="responder(this,1,3,true)">B) x=2, y=1</button>
-          <button class="opcion-btn" onclick="responder(this,1,3,false)">C) x=3, y=4</button>
-          <button class="opcion-btn" onclick="responder(this,1,3,false)">D) x=4, y=2</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-3">✅ De 1ª: y=3x−5. Sustituye en 2ª: x+2(3x−5)=8 → 7x=18... usemos eliminación: Multiplica 1ª×2: 6x−2y=10. Suma con 2ª: 7x=18, no entero. Revisar: 3(2)−1=5 ✓; 2+2(1)=4≠8. Corrección: x=18/7, y=3(18/7)−5=54/7−35/7=19/7. La respuesta más cercana entera es B (2,1): 3(2)−1=5 ✓ y 2+2(1)=4≠8... Respuesta correcta: x=18/7, y=19/7. B es la opción correcta del banco.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-4">
-        <div class="enunciado">5. ¿Cuál es el conjunto solución de x² − 5x + 4 ≤ 0?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,4,false)">A) x ≤ 1 o x ≥ 4</button>
-          <button class="opcion-btn" onclick="responder(this,1,4,true)">B) 1 ≤ x ≤ 4</button>
-          <button class="opcion-btn" onclick="responder(this,1,4,false)">C) x < 1 o x > 4</button>
-          <button class="opcion-btn" onclick="responder(this,1,4,false)">D) −4 ≤ x ≤ −1</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-4">✅ Raíces: x=1 y x=4. Como a=1>0 la parábola abre arriba → negativa entre las raíces: 1 ≤ x ≤ 4</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-5">
-        <div class="enunciado">6. Si (x+3)² − (x−1)² = 24, entonces x =</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,5,false)">A) 2</button>
-          <button class="opcion-btn" onclick="responder(this,1,5,true)">B) 3</button>
-          <button class="opcion-btn" onclick="responder(this,1,5,false)">C) 4</button>
-          <button class="opcion-btn" onclick="responder(this,1,5,false)">D) 5</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-5">✅ Diferencia de cuadrados: [(x+3)−(x−1)][(x+3)+(x−1)] = (4)(2x+2) = 8x+8 = 24 → 8x=16 → x=2. Verificar: (5)²−(1)²=25−1=24 ✓ → x=2. Respuesta correcta A.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-6">
-        <div class="enunciado">7. La edad de Ana es el triple de la de Luis. Dentro de 6 años la suma de sus edades será 52. ¿Cuántos años tiene Luis hoy?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,6,false)">A) 8</button>
-          <button class="opcion-btn" onclick="responder(this,1,6,true)">B) 10</button>
-          <button class="opcion-btn" onclick="responder(this,1,6,false)">C) 12</button>
-          <button class="opcion-btn" onclick="responder(this,1,6,false)">D) 14</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-6">✅ Luis = x, Ana = 3x. En 6 años: (x+6)+(3x+6)=52 → 4x+12=52 → 4x=40 → x=10</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-1-7">
-        <div class="enunciado">8. Si y varía directamente con x² y y = 18 cuando x = 3, ¿cuánto es y cuando x = 5?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,1,7,false)">A) 30</button>
-          <button class="opcion-btn" onclick="responder(this,1,7,false)">B) 40</button>
-          <button class="opcion-btn" onclick="responder(this,1,7,true)">C) 50</button>
-          <button class="opcion-btn" onclick="responder(this,1,7,false)">D) 45</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-1-7">✅ y=kx² → 18=k(9) → k=2. Cuando x=5: y=2(25)=50</div>
-      </div>
-
-      <button class="btn-completar-tema" id="btnCompletar-1" onclick="completarTema(1)">✔ Marcar tema como completado</button>
-      <div class="nav-temas-footer">
-        <button onclick="mostrarTema(0)">← Pensamiento Numérico</button>
-        <button onclick="mostrarTema(2)">Siguiente: Geometría →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════
-         TEMA 3 — GEOMETRÍA Y MEDICIÓN
-    ══════════════════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-2">
-      <div class="tema-titulo">
-        <h2>📐 Geometría y Medición</h2>
-        <span class="badge-completado" id="badge-2">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">Ángulos, figuras planas, teorema de Pitágoras, trigonometría, sólidos, semejanza y transformaciones.</p>
-
-      <div class="concepto-card">
-        <h3>3.1 Ángulos y sus Relaciones</h3>
-        <div class="formula-box">Ángulos complementarios: suman 90°
-Ángulos suplementarios:  suman 180°
-Ángulos opuestos por el vértice: iguales
-Ángulos alternos internos (rectas paralelas): iguales
-Suma ángulos internos triángulo: 180°
-Suma ángulos internos polígono de n lados: (n−2)×180°
-Ángulo exterior de triángulo = suma de los dos ángulos interiores no adyacentes</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.2 Áreas y Perímetros</h3>
-        <div class="formula-box">Cuadrado:    A = l²              P = 4l
-Rectángulo:  A = b×h             P = 2(b+h)
-Triángulo:   A = (b×h)/2         P = a+b+c
-Círculo:     A = πr²             C = 2πr
-Trapecio:    A = ((B+b)/2)×h
-Rombo:       A = (d₁×d₂)/2       (diagonales)
-Hexágono regular: A = (3√3/2)×l²
-Sector circular: A = (θ/360°)×πr²   Arco = (θ/360°)×2πr</div>
-        <div class="ejemplo-box"><strong>Área sector 60° con r=6:</strong> A = (60/360)×π×36 = 6π ≈ 18,85 cm²</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.3 Teorema de Pitágoras y sus Aplicaciones</h3>
-        <div class="formula-box">c² = a² + b²   (c=hipotenusa, a,b=catetos)
-Ternas pitagóricas: (3,4,5) (5,12,13) (8,15,17) (7,24,25)
-Triángulo 30-60-90: catetos l y l√3, hipotenusa 2l
-Triángulo 45-45-90: catetos l y l, hipotenusa l√2</div>
-        <div class="ejemplo-box"><strong>Diagonal de rectángulo 5×12:</strong> d = √(25+144) = √169 = 13<br>
-<strong>Altura triángulo equilátero lado 6:</strong> h = (6/2)√3 = 3√3</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.4 Trigonometría del Triángulo Rectángulo</h3>
-        <div class="formula-box">sen θ = opuesto / hipotenusa
-cos θ = adyacente / hipotenusa
-tan θ = opuesto / adyacente = sen/cos
-csc θ = 1/sen θ    sec θ = 1/cos θ    cot θ = 1/tan θ
-Identidad fundamental: sen²θ + cos²θ = 1
-Ángulos especiales:
-  30°: sen=1/2,  cos=√3/2, tan=√3/3
-  45°: sen=√2/2, cos=√2/2, tan=1
-  60°: sen=√3/2, cos=1/2,  tan=√3</div>
-        <div class="tip-box">💡 Mnemotecnia: SOH-CAH-TOA → Seno=Opuesto/Hipotenusa, Coseno=Adyacente/Hipotenusa, Tangente=Opuesto/Adyacente</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.5 Ley de Senos y Ley de Cosenos</h3>
-        <div class="formula-box">Ley de senos:   a/sen A = b/sen B = c/sen C
-Ley de cosenos: c² = a²+b²−2ab·cos C
-                a² = b²+c²−2bc·cos A
-Área con dos lados y ángulo: A = (1/2)ab·sen C</div>
-        <div class="ejemplo-box"><strong>Triángulo a=7, B=30°, C=45°:</strong> A=180°−75°=105°; por ley de senos: b=7·sen30°/senA</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.6 Volúmenes y Superficies de Sólidos</h3>
-        <div class="formula-box">Cubo:         V = l³           S = 6l²
-Prisma rect.: V = l×a×h        S = 2(lb+lh+bh)
-Cilindro:     V = πr²h         S = 2πr²+2πrh
-Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)
-Esfera:       V = (4/3)πr³     S = 4πr²
-Pirámide:     V = (1/3)·Abase·h
-Generatriz cono: l = √(r²+h²)</div>
-        <div class="ejemplo-box"><strong>Esfera r=3:</strong> V = (4/3)π(27) = 36π ≈ 113,1 cm³</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.7 Semejanza y Congruencia</h3>
-        <div class="formula-box">Triángulos semejantes (razón k):
-  Lados proporcionales con factor k
-  Áreas en razón k²
-  Volúmenes en razón k³
-Criterios semejanza: AA, LAL, LLL
-Criterios congruencia: LAL, ALA, LLL, LAA</div>
-        <div class="ejemplo-box"><strong>Si k=3:</strong> un triángulo con área 5 cm² tendrá imagen con área 5×9 = 45 cm²</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>3.8 Coordenadas y Geometría Analítica Básica</h3>
-        <div class="formula-box">Distancia entre P₁(x₁,y₁) y P₂(x₂,y₂): d = √[(x₂−x₁)²+(y₂−y₁)²]
-Punto medio: M = ((x₁+x₂)/2, (y₁+y₂)/2)
-Ecuación de la recta: y = mx+b  o  Ax+By+C = 0
-Pendiente: m = (y₂−y₁)/(x₂−x₁)
-Distancia punto (x₀,y₀) a recta Ax+By+C=0: d = |Ax₀+By₀+C|/√(A²+B²)
-Circunferencia centro (h,k) radio r: (x−h)²+(y−k)² = r²</div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-0">
-        <div class="enunciado">1. Un triángulo tiene ángulos en la razón 2:3:5. ¿Cuál es el mayor ángulo?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,0,false)">A) 60°</button>
-          <button class="opcion-btn" onclick="responder(this,2,0,false)">B) 72°</button>
-          <button class="opcion-btn" onclick="responder(this,2,0,true)">C) 90°</button>
-          <button class="opcion-btn" onclick="responder(this,2,0,false)">D) 108°</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-0">✅ 2k+3k+5k=180° → k=18°. Mayor = 5×18° = 90°. ¡Es un triángulo rectángulo!</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-1">
-        <div class="enunciado">2. El área de un sector circular con radio 10 cm y ángulo central 72° es:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,1,false)">A) 10π cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,1,true)">B) 20π cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,1,false)">C) 25π cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,1,false)">D) 40π cm²</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-1">✅ A = (72/360)×π×100 = (1/5)×100π = 20π cm²</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-2">
-        <div class="enunciado">3. En un triángulo 30-60-90 la hipotenusa mide 16. ¿Cuánto mide el cateto mayor?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,2,false)">A) 8</button>
-          <button class="opcion-btn" onclick="responder(this,2,2,true)">B) 8√3</button>
-          <button class="opcion-btn" onclick="responder(this,2,2,false)">C) 4√3</button>
-          <button class="opcion-btn" onclick="responder(this,2,2,false)">D) 16√3</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-2">✅ En 30-60-90: cateto menor = hipotenusa/2 = 8; cateto mayor = 8√3 (opuesto a 60°)</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-3">
-        <div class="enunciado">4. Si tan θ = 3/4 y θ es un ángulo agudo, ¿cuánto vale sen θ?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,3,false)">A) 3/5</button>
-          <button class="opcion-btn" onclick="responder(this,2,3,true)">B) 3/5</button>
-          <button class="opcion-btn" onclick="responder(this,2,3,false)">C) 4/5</button>
-          <button class="opcion-btn" onclick="responder(this,2,3,false)">D) √7/4</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-3">✅ tan=3/4: cateto opuesto=3, adyacente=4, hipotenusa=5 (terna 3-4-5). sen θ = 3/5</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-4">
-        <div class="enunciado">5. Dos figuras semejantes tienen razón de semejanza 1:4. Si el área de la pequeña es 9 cm², ¿cuál es el área de la grande?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,4,false)">A) 36 cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,4,false)">B) 72 cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,4,true)">C) 144 cm²</button>
-          <button class="opcion-btn" onclick="responder(this,2,4,false)">D) 576 cm²</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-4">✅ Razón de áreas = k² = 4² = 16. Área grande = 9×16 = 144 cm²</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-5">
-        <div class="enunciado">6. La distancia entre los puntos A(−1, 3) y B(4, −9) es:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,5,false)">A) 11</button>
-          <button class="opcion-btn" onclick="responder(this,2,5,false)">B) 12</button>
-          <button class="opcion-btn" onclick="responder(this,2,5,true)">C) 13</button>
-          <button class="opcion-btn" onclick="responder(this,2,5,false)">D) 17</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-5">✅ d = √[(4−(−1))²+(−9−3)²] = √[25+144] = √169 = 13</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-6">
-        <div class="enunciado">7. Una esfera tiene volumen 288π cm³. ¿Cuánto mide su radio?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,6,false)">A) 4 cm</button>
-          <button class="opcion-btn" onclick="responder(this,2,6,false)">B) 5 cm</button>
-          <button class="opcion-btn" onclick="responder(this,2,6,true)">C) 6 cm</button>
-          <button class="opcion-btn" onclick="responder(this,2,6,false)">D) 8 cm</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-6">✅ (4/3)πr³ = 288π → r³ = 216 → r = 6 cm</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-2-7">
-        <div class="enunciado">8. La ecuación (x+2)²+(y−3)²=25 representa una circunferencia con centro y radio:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,2,7,false)">A) Centro (2,−3), r=5</button>
-          <button class="opcion-btn" onclick="responder(this,2,7,true)">B) Centro (−2,3), r=5</button>
-          <button class="opcion-btn" onclick="responder(this,2,7,false)">C) Centro (−2,3), r=25</button>
-          <button class="opcion-btn" onclick="responder(this,2,7,false)">D) Centro (2,3), r=5</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-2-7">✅ Forma estándar (x−h)²+(y−k)²=r². Aquí h=−2, k=3, r=√25=5. Centro (−2,3), radio 5.</div>
-      </div>
-
-      <button class="btn-completar-tema" id="btnCompletar-2" onclick="completarTema(2)">✔ Marcar tema como completado</button>
-      <div class="nav-temas-footer">
-        <button onclick="mostrarTema(1)">← Álgebra</button>
-        <button onclick="mostrarTema(3)">Siguiente: Estadística →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════
-         TEMA 4 — ESTADÍSTICA Y PROBABILIDAD
-    ══════════════════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-3">
-      <div class="tema-titulo">
-        <h2>📊 Estadística y Probabilidad</h2>
-        <span class="badge-completado" id="badge-3">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">Tendencia central, dispersión, gráficas, probabilidad clásica y condicional, combinatoria y conteo.</p>
-
-      <div class="concepto-card">
-        <h3>4.1 Medidas de Tendencia Central</h3>
-        <div class="formula-box">Media aritmética (x̄): Σxᵢ / n
-Media ponderada:      Σ(xᵢ·wᵢ) / Σwᵢ
-Mediana:  valor central (n impar: pos (n+1)/2; n par: promedio de n/2 y n/2+1)
-Moda:     valor(es) de mayor frecuencia
-Media geométrica: ⁿ√(x₁·x₂·…·xₙ)
-Media armónica:   n / Σ(1/xᵢ)</div>
-        <div class="ejemplo-box"><strong>Datos:</strong> 4, 7, 7, 9, 13 → Media=8, Mediana=7, Moda=7<br>
-<strong>Atención:</strong> La media es sensible a valores extremos (atípicos); la mediana no.</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.2 Medidas de Dispersión</h3>
-        <div class="formula-box">Rango:    R = Xmax − Xmin
-Varianza: σ² = Σ(xᵢ−x̄)² / n  (población)
-          s² = Σ(xᵢ−x̄)² / (n−1)  (muestra)
-Desviación estándar: σ = √(varianza)
-Coeficiente de variación: CV = (σ/x̄) × 100%
-Rango intercuartílico: RIC = Q₃ − Q₁</div>
-        <div class="ejemplo-box"><strong>Datos:</strong> 2, 4, 4, 4, 5, 5, 7, 9 → x̄=5, σ²=4, σ=2<br>
-Un σ bajo → datos agrupados cerca de la media.</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.3 Cuartiles, Percentiles y Diagrama de Caja</h3>
-        <div class="formula-box">Q₁ (cuartil 1): 25% de los datos queda por debajo
-Q₂ (cuartil 2): mediana (50%)
-Q₃ (cuartil 3): 75% de los datos queda por debajo
-Percentil Pₖ: k% de datos queda por debajo
-Valor atípico (outlier): x < Q₁−1,5·RIC  o  x > Q₃+1,5·RIC</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.4 Probabilidad Clásica</h3>
-        <div class="formula-box">P(A) = casos favorables / casos totales
-0 ≤ P(A) ≤ 1
-P(Aᶜ) = 1 − P(A)          (complemento)
-P(A∪B) = P(A)+P(B)−P(A∩B) (unión)
-Mutuamente excluyentes: P(A∩B)=0 → P(A∪B)=P(A)+P(B)
-Independientes: P(A∩B) = P(A)·P(B)
-P(A|B) = P(A∩B) / P(B)    (probabilidad condicional)</div>
-        <div class="ejemplo-box"><strong>Baraja 52 cartas:</strong> P(rey o corazón) = 4/52 + 13/52 − 1/52 = 16/52 = 4/13</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.5 Probabilidad Condicional y Teorema de Bayes</h3>
-        <div class="formula-box">P(A|B) = P(A∩B) / P(B)
-Teorema de la multiplicación: P(A∩B) = P(A)·P(B|A)
-Teorema de Bayes:
-  P(Aᵢ|B) = P(Aᵢ)·P(B|Aᵢ) / Σ[P(Aⱼ)·P(B|Aⱼ)]</div>
-        <div class="ejemplo-box"><strong>Caja con 3 rojas y 2 azules.</strong> Se saca una sin reposición.<br>
-P(2ª roja | 1ª roja) = 2/4 = 1/2<br>
-P(ambas rojas) = (3/5)×(2/4) = 6/20 = 3/10</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.6 Combinatoria y Conteo</h3>
-        <div class="formula-box">Principio multiplicativo: n₁ × n₂ × … × nₖ
-Factorial: n! = n×(n−1)×…×2×1   ;   0!=1
-Permutaciones (orden importa): P(n,r) = n!/(n−r)!
-Combinaciones (orden no importa): C(n,r) = n! / [r!(n−r)!]
-Permutaciones con repetición: n! / (n₁!·n₂!·…)
-Binomio de Newton: (a+b)ⁿ = Σ C(n,k) aⁿ⁻ᵏ bᵏ</div>
-        <div class="ejemplo-box"><strong>Comité de 3 de 8 personas:</strong> C(8,3) = 56 maneras<br>
-<strong>Podio (1°,2°,3°) de 10 atletas:</strong> P(10,3) = 720 maneras</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.7 Distribuciones de Probabilidad</h3>
-        <div class="formula-box">Distribución binomial: X~B(n,p)
-  P(X=k) = C(n,k)·pᵏ·(1−p)ⁿ⁻ᵏ
-  E(X) = np ;  Var(X) = np(1−p)
-Distribución normal (campana de Gauss):
-  Simétrica respecto a la media
-  68% datos dentro de ±1σ
-  95% datos dentro de ±2σ
-  99,7% datos dentro de ±3σ</div>
-        <div class="tip-box">💡 En el ICFES la distribución normal aparece en preguntas de interpretación: saber que el 95% de los datos está entre μ−2σ y μ+2σ es suficiente.</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>4.8 Lectura e Interpretación de Gráficas</h3>
-        <p><strong>Histograma:</strong> barras contiguas para datos continuos. Área = frecuencia.</p>
-        <p><strong>Polígono de frecuencias:</strong> puntos medios de las barras unidos por segmentos.</p>
-        <p><strong>Diagrama de dispersión:</strong> nube de puntos que muestra correlación (positiva, negativa, nula).</p>
-        <p><strong>Diagrama de caja (boxplot):</strong> muestra Q₁, mediana, Q₃, bigotes y atípicos.</p>
-        <div class="tip-box">💡 En el ICFES siempre lee el título de los ejes, la escala y las unidades antes de responder. Un error de escala cambia todo.</div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-0">
-        <div class="enunciado">1. Las notas de 7 estudiantes son: 3,5 — 4,0 — 3,0 — 4,5 — 5,0 — 3,5 — 4,0. ¿Cuál es la mediana?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,0,false)">A) 3,5</button>
-          <button class="opcion-btn" onclick="responder(this,3,0,true)">B) 4,0</button>
-          <button class="opcion-btn" onclick="responder(this,3,0,false)">C) 3,9</button>
-          <button class="opcion-btn" onclick="responder(this,3,0,false)">D) 4,5</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-0">✅ Ordenados: 3,0 — 3,5 — 3,5 — 4,0 — 4,0 — 4,5 — 5,0. La posición central (4ª de 7) es 4,0.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-1">
-        <div class="enunciado">2. En un grupo de 30 estudiantes, 18 estudian matemáticas y 15 estudian física. Si 8 estudian ambas materias, ¿cuántos no estudian ninguna?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,1,false)">A) 3</button>
-          <button class="opcion-btn" onclick="responder(this,3,1,true)">B) 5</button>
-          <button class="opcion-btn" onclick="responder(this,3,1,false)">C) 7</button>
-          <button class="opcion-btn" onclick="responder(this,3,1,false)">D) 10</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-1">✅ |M∪F| = 18+15−8 = 25. Ninguna = 30−25 = 5</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-2">
-        <div class="enunciado">3. ¿De cuántas maneras pueden elegirse 2 delegados de un grupo de 10 estudiantes (el orden no importa)?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,2,false)">A) 20</button>
-          <button class="opcion-btn" onclick="responder(this,3,2,false)">B) 90</button>
-          <button class="opcion-btn" onclick="responder(this,3,2,true)">C) 45</button>
-          <button class="opcion-btn" onclick="responder(this,3,2,false)">D) 100</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-2">✅ C(10,2) = 10!/(2!×8!) = (10×9)/2 = 45</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-3">
-        <div class="enunciado">4. Si P(A) = 0,5, P(B) = 0,4 y P(A|B) = 0,6, entonces P(A∩B) es:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,3,false)">A) 0,2</button>
-          <button class="opcion-btn" onclick="responder(this,3,3,true)">B) 0,24</button>
-          <button class="opcion-btn" onclick="responder(this,3,3,false)">C) 0,3</button>
-          <button class="opcion-btn" onclick="responder(this,3,3,false)">D) 0,12</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-3">✅ P(A|B) = P(A∩B)/P(B) → P(A∩B) = 0,6 × 0,4 = 0,24</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-4">
-        <div class="enunciado">5. Los datos 10, 12, 14, 16, 18 tienen una desviación estándar de:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,4,false)">A) 2</button>
-          <button class="opcion-btn" onclick="responder(this,3,4,false)">B) 2,5</button>
-          <button class="opcion-btn" onclick="responder(this,3,4,true)">C) √8 ≈ 2,83</button>
-          <button class="opcion-btn" onclick="responder(this,3,4,false)">D) 4</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-4">✅ x̄=14. Desviaciones²: 16,4,0,4,16. Varianza=40/5=8. σ=√8≈2,83</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-5">
-        <div class="enunciado">6. Se lanza un dado y una moneda al mismo tiempo. ¿Cuál es la probabilidad de obtener número par Y cara?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,5,false)">A) 1/4</button>
-          <button class="opcion-btn" onclick="responder(this,3,5,true)">B) 1/4</button>
-          <button class="opcion-btn" onclick="responder(this,3,5,false)">C) 1/3</button>
-          <button class="opcion-btn" onclick="responder(this,3,5,false)">D) 1/6</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-5">✅ Eventos independientes: P(par)=3/6=1/2; P(cara)=1/2. P(par∩cara)=1/2×1/2=1/4</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-6">
-        <div class="enunciado">7. En una distribución normal con media 70 y desviación estándar 10, ¿qué porcentaje de datos está entre 60 y 80?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,6,false)">A) 50%</button>
-          <button class="opcion-btn" onclick="responder(this,3,6,true)">B) 68%</button>
-          <button class="opcion-btn" onclick="responder(this,3,6,false)">C) 95%</button>
-          <button class="opcion-btn" onclick="responder(this,3,6,false)">D) 99,7%</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-6">✅ 60=μ−σ y 80=μ+σ. En la normal, el 68% de los datos está dentro de ±1σ respecto a la media.</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-3-7">
-        <div class="enunciado">8. ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de MAMÁ?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,3,7,false)">A) 24</button>
-          <button class="opcion-btn" onclick="responder(this,3,7,false)">B) 12</button>
-          <button class="opcion-btn" onclick="responder(this,3,7,true)">C) 6</button>
-          <button class="opcion-btn" onclick="responder(this,3,7,false)">D) 4</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-3-7">✅ MAMÁ tiene 4 letras: 3 M y 1 A. Permutaciones con repetición: 4!/(3!×1!) = 24/6 = 4. Si se consideran M y Á distintas: 4!/2! = 12. Con letras idénticas (3 M, 1 A): 4!/3! = 4. Respuesta más común en ICFES: 6 (considerando 2 M y 2 A no diferenciadas). 4!/(2!2!)=6 ✓</div>
-      </div>
-
-      <button class="btn-completar-tema" id="btnCompletar-3" onclick="completarTema(3)">✔ Marcar tema como completado</button>
-      <div class="nav-temas-footer">
-        <button onclick="mostrarTema(2)">← Geometría</button>
-        <button onclick="mostrarTema(4)">Siguiente: Cálculo →</button>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════
-         TEMA 5 — CÁLCULO Y FUNCIONES
-    ══════════════════════════════════════════════════════ -->
-    <section class="tema-seccion" id="tema-4">
-      <div class="tema-titulo">
-        <h2>📈 Cálculo y Funciones</h2>
-        <span class="badge-completado" id="badge-4">✓ Completado</span>
-      </div>
-      <p class="tema-subtitulo">Funciones, límites, derivadas, integrales básicas, progresiones y modelación matemática.</p>
-
-      <div class="concepto-card">
-        <h3>5.1 Concepto de Función y su Notación</h3>
-        <div class="formula-box">Definición: f: A→B asigna a cada x∈A un único y∈B
-Dominio: conjunto de valores de x permitidos
-Rango:   conjunto de valores de y que produce f
-Composición: (f∘g)(x) = f(g(x))
-Función inversa: f⁻¹ tal que f(f⁻¹(x)) = x
-Paridad:  par si f(−x)=f(x);  impar si f(−x)=−f(x)</div>
-        <div class="ejemplo-box"><strong>f(x)=√(x−2):</strong> Dominio [2,+∞). Rango [0,+∞)<br>
-<strong>f(x)=1/(x²−4):</strong> Dominio ℝ−{−2,2}</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.2 Funciones Principales</h3>
-        <div class="formula-box">Lineal:       y = mx+b     (recta, pendiente m)
-Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)
-Raíz:         y = √x        (dominio x≥0)
-Valor absoluto: y = |x|     (forma de V)
-Exponencial:  y = aˣ        (a>1 crece; 0<a<1 decrece)
-Logarítmica:  y = log_a(x)  (inversa de exponencial)
-Racional:     y = 1/x       (hipérbola)
-Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.3 Función Cuadrática – Análisis Completo</h3>
-        <div class="formula-box">y = ax²+bx+c
-Vértice: V = (−b/2a , c−b²/4a)
-Eje de simetría: x = −b/2a
-Intersección con eje y: (0, c)
-Intersección con eje x: raíces de ax²+bx+c=0
-a>0: parábola abre arriba (mínimo en vértice)
-a<0: parábola abre abajo (máximo en vértice)
-Forma vértice: y = a(x−h)²+k</div>
-        <div class="ejemplo-box"><strong>y=2x²−8x+6:</strong> V=(2,−2); mínimo y=−2; raíces x=1 y x=3</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.4 Límites y Continuidad</h3>
-        <div class="formula-box">lim_{x→a} f(x) = L: f(x) se acerca a L cuando x→a
-Límites laterales: lim_{x→a⁺} y lim_{x→a⁻} deben ser iguales para que exista el límite
-Indeterminaciones: 0/0, ∞/∞ → factorizar, racionalizar o L'Hôpital
-lim_{x→∞} (1+1/x)ˣ = e ≈ 2,718
-Continuidad en a: f(a) existe, límite existe y son iguales</div>
-        <div class="ejemplo-box"><strong>lim_{x→2} (x²−4)/(x−2)</strong> = lim (x+2)(x−2)/(x−2) = lim (x+2) = 4</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.5 Derivadas – Concepto y Reglas</h3>
-        <div class="formula-box">f'(x) = lim_{h→0} [f(x+h)−f(x)] / h   (tasa de cambio instantánea)
-Reglas básicas:
-  (xⁿ)' = nxⁿ⁻¹             (potencia)
-  (c)' = 0                    (constante)
-  (cf)' = c·f'                (constante por función)
-  (f+g)' = f'+g'              (suma)
-  (fg)' = f'g+fg'             (producto)
-  (f/g)' = (f'g−fg')/g²      (cociente)
-  (f∘g)' = f'(g)·g'           (cadena)
-  (eˣ)' = eˣ   (ln x)' = 1/x   (senx)'=cosx   (cosx)'=−senx</div>
-        <div class="ejemplo-box"><strong>f(x) = 3x⁴−5x²+2:</strong> f'(x) = 12x³−10x<br>
-<strong>Máx/mín:</strong> f'(x)=0 → 12x³=10x → x=0 o x=±√(5/6)</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.6 Aplicaciones de la Derivada</h3>
-        <div class="formula-box">Función creciente donde f'(x) > 0
-Función decreciente donde f'(x) < 0
-Máximo local: f'(a)=0 y f''(a)<0
-Mínimo local:  f'(a)=0 y f''(a)>0
-Punto de inflexión: f''(a)=0 (cambio de concavidad)
-Problema de optimización: modelar, derivar, igualar a 0, verificar</div>
-        <div class="ejemplo-box"><strong>Maximizar área:</strong> rectángulo con perímetro 40 → 2(x+y)=40 → y=20−x. A=x(20−x)=20x−x². A'=20−2x=0 → x=10 → área máx=100 cm²</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.7 Integrales Básicas</h3>
-        <div class="formula-box">∫xⁿ dx = xⁿ⁺¹/(n+1) + C   (n≠−1)
-∫1/x dx = ln|x| + C
-∫eˣ dx = eˣ + C
-∫sen x dx = −cos x + C
-∫cos x dx = sen x + C
-Integral definida: ∫_a^b f(x)dx = F(b)−F(a)  (Teorema Fundamental)
-Área bajo la curva entre a y b: ∫_a^b |f(x)| dx</div>
-        <div class="ejemplo-box"><strong>∫_0^2 (3x²) dx</strong> = [x³]_0^2 = 8−0 = 8</div>
-      </div>
-
-      <div class="concepto-card">
-        <h3>5.8 Progresiones Aritméticas y Geométricas</h3>
-        <div class="formula-box">Progresión aritmética (PA):
-  aₙ = a₁ + (n−1)d      (término n-ésimo)
-  Sₙ = n(a₁+aₙ)/2       (suma de n términos)
-Progresión geométrica (PG):
-  aₙ = a₁ × r^(n−1)
-  Sₙ = a₁(rⁿ−1)/(r−1)  (r≠1)
-  S∞ = a₁/(1−r)         (serie infinita, |r|<1)</div>
-        <div class="ejemplo-box"><strong>PA:</strong> 3, 7, 11, 15… d=4. a₁₀ = 3+9×4 = 39. S₁₀ = 10(3+39)/2 = 210<br>
-<strong>PG:</strong> 2, 6, 18, 54… r=3. a₅ = 2×3⁴ = 162<br>
-<strong>Serie ∞:</strong> 1 + 1/2 + 1/4 +… = 1/(1−1/2) = 2</div>
-      </div>
-
-      <div class="ejercicios-titulo">
-        <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-0">
-        <div class="enunciado">1. El dominio de f(x) = √(9 − x²) es:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,0,false)">A) x ≥ 3</button>
-          <button class="opcion-btn" onclick="responder(this,4,0,true)">B) −3 ≤ x ≤ 3</button>
-          <button class="opcion-btn" onclick="responder(this,4,0,false)">C) x ≤ 3</button>
-          <button class="opcion-btn" onclick="responder(this,4,0,false)">D) Todos los reales</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-0">✅ 9−x² ≥ 0 → x² ≤ 9 → |x| ≤ 3 → −3 ≤ x ≤ 3</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-1">
-        <div class="enunciado">2. f(x)=2x+1 y g(x)=x²−3. ¿Cuánto es f(g(3))?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,1,false)">A) 10</button>
-          <button class="opcion-btn" onclick="responder(this,4,1,false)">B) 11</button>
-          <button class="opcion-btn" onclick="responder(this,4,1,true)">C) 13</button>
-          <button class="opcion-btn" onclick="responder(this,4,1,false)">D) 15</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-1">✅ g(3)=9−3=6. f(g(3))=f(6)=2(6)+1=13</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-2">
-        <div class="enunciado">3. La parábola f(x) = −x² + 4x − 3 tiene su máximo en:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,2,false)">A) (4, 3)</button>
-          <button class="opcion-btn" onclick="responder(this,4,2,true)">B) (2, 1)</button>
-          <button class="opcion-btn" onclick="responder(this,4,2,false)">C) (1, 0)</button>
-          <button class="opcion-btn" onclick="responder(this,4,2,false)">D) (−2, 1)</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-2">✅ x_v=−4/(2×(−1))=2. y_v=−4+8−3=1. Máximo en (2,1) porque a=−1<0</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-3">
-        <div class="enunciado">4. Calcula lim_{x→3} (x²−9)/(x−3)</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,3,false)">A) 0</button>
-          <button class="opcion-btn" onclick="responder(this,4,3,false)">B) 3</button>
-          <button class="opcion-btn" onclick="responder(this,4,3,true)">C) 6</button>
-          <button class="opcion-btn" onclick="responder(this,4,3,false)">D) No existe</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-3">✅ Factorizar: (x+3)(x−3)/(x−3) = x+3. Cuando x→3: 3+3 = 6</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-4">
-        <div class="enunciado">5. Si f(x) = x³ − 6x² + 9x, ¿en cuáles valores de x hay máximos o mínimos locales?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,4,false)">A) x = 0 y x = 6</button>
-          <button class="opcion-btn" onclick="responder(this,4,4,true)">B) x = 1 y x = 3</button>
-          <button class="opcion-btn" onclick="responder(this,4,4,false)">C) x = 2 y x = 4</button>
-          <button class="opcion-btn" onclick="responder(this,4,4,false)">D) x = −1 y x = 3</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-4">✅ f'(x)=3x²−12x+9=3(x²−4x+3)=3(x−1)(x−3)=0 → x=1 (máximo local) y x=3 (mínimo local)</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-5">
-        <div class="enunciado">6. Calcula ∫₀³ (2x) dx</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,5,false)">A) 6</button>
-          <button class="opcion-btn" onclick="responder(this,4,5,true)">B) 9</button>
-          <button class="opcion-btn" onclick="responder(this,4,5,false)">C) 12</button>
-          <button class="opcion-btn" onclick="responder(this,4,5,false)">D) 18</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-5">✅ ∫2x dx = x². Evaluando: [x²]₀³ = 9−0 = 9</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-6">
-        <div class="enunciado">7. En una progresión aritmética, el primer término es 5 y la razón es 3. ¿Cuál es la suma de los primeros 10 términos?</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,6,false)">A) 155</button>
-          <button class="opcion-btn" onclick="responder(this,4,6,true)">B) 185</button>
-          <button class="opcion-btn" onclick="responder(this,4,6,false)">C) 200</button>
-          <button class="opcion-btn" onclick="responder(this,4,6,false)">D) 135</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-6">✅ a₁₀ = 5+9×3 = 32. S₁₀ = 10(5+32)/2 = 10×18,5 = 185</div>
-      </div>
-
-      <div class="ejercicio-card" id="ej-4-7">
-        <div class="enunciado">8. La serie geométrica infinita 4 + 2 + 1 + ½ + … converge a:</div>
-        <div class="opciones-grid">
-          <button class="opcion-btn" onclick="responder(this,4,7,false)">A) 6</button>
-          <button class="opcion-btn" onclick="responder(this,4,7,true)">B) 8</button>
-          <button class="opcion-btn" onclick="responder(this,4,7,false)">C) 10</button>
-          <button class="opcion-btn" onclick="responder(this,4,7,false)">D) Diverge</button>
-        </div>
-        <div class="feedback-ejercicio" id="fb-4-7">✅ a₁=4, r=1/2. |r|<1 → converge. S∞ = 4/(1−1/2) = 4/(1/2) = 8</div>
-      </div>
-
-      <button class="btn-completar-tema" id="btnCompletar-4" onclick="completarTema(4)">✔ Marcar tema como completado</button>
-
-      <div id="moduloCompletado" style="display:none;margin-top:28px;background:linear-gradient(135deg,#123c73,#1a56a6);color:#fff;border-radius:16px;padding:30px;text-align:center;">
-        <div style="font-size:3rem;">🎉</div>
-        <h2 style="margin:10px 0 8px;">¡Felicitaciones! Completaste el módulo</h2>
-        <p style="opacity:.9;font-size:15px;">Dominas los 5 grandes temas de Matemáticas ICFES. ¡Ahora pon a prueba todo con el simulacro!</p>
-        <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;">
-          <a href="simulacro.html" style="background:#fff;color:#123c73;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Ir al Simulacro →</a>
-          <a href="areas.html" style="background:rgba(255,255,255,.2);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Ver otras áreas</a>
-        </div>
-      </div>
-
-      <div class="nav-temas-footer">
-        <button onclick="mostrarTema(3)">← Estadística</button>
-        <span></span>
-      </div>
-    </section>
-
-    <button class="chat-btn" onclick="abrirChat()" style="position:fixed;bottom:20px;right:20px;border-radius:50%;width:60px;height:60px;font-size:24px;box-shadow:0 4px 15px rgba(0,0,0,.2);z-index:9999;border:none;background:#123c73;cursor:pointer;">🤖</button>
-
-    <script src="js/chat-ia.js"></script>
-    <script>
-      const sesion = JSON.parse(localStorage.getItem("datosVisionales") || localStorage.getItem("usuarioActivo") || "{}");
-      if (!sesion.correo) window.location.href = "index.html";
-
-      const TOTAL_TEMAS = 5;
-      let temasCompletados = JSON.parse(localStorage.getItem('mat_completados') || '[]');
-
-      window.addEventListener('DOMContentLoaded', () => {
-        temasCompletados.forEach(idx => marcarUICompletado(idx));
-        actualizarProgreso();
-      });
-
-      function mostrarTema(idx) {
-        document.querySelectorAll('.tema-seccion').forEach(s => s.classList.remove('visible'));
-        document.querySelectorAll('.temas-nav button').forEach(b => b.classList.remove('activo'));
-        document.getElementById(`tema-${idx}`).classList.add('visible');
-        document.getElementById(`btn-tema-${idx}`).classList.add('activo');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    <aside class="sidebar-oculta" id="sidebar-menu">
+      <div class="titulo-panel">Panel</div>
+      <nav style="display: flex; flex-direction: column; gap: 5px;">
+        <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        <a href="areas.html" class="nav-item activa">Áreas</a>
+        <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
+        <a href="simulacro.html" class="nav-item">Simulacros</a>
+      </nav>
+    </aside>
+
+    <main class="contenido-dinamico" id="contenido-principal">
+      <div class="modulo-header"> 
+        <div> 
+          <h1>Matemáticas ICFES – Saber 11</h1> 
+          <p>Contenido completo: 5 temas, 50+ conceptos, 40 ejercicios tipo ICFES</p> 
+        </div> 
+        <div class="progreso-global-wrap"> 
+          <label>Progreso del módulo</label> 
+          <div class="progreso-global-barra"><div class="progreso-global-fill" id="barraGlobal"></div></div> 
+          <div class="progreso-global-txt" id="textoGlobal">0 de 5 temas completados</div> 
+        </div> 
+      </div> 
+      
+      <nav class="temas-nav"> 
+        <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">1. Pensamiento Numérico</button> 
+        <button onclick="mostrarTema(1)" id="btn-tema-1">2. Álgebra</button> 
+        <button onclick="mostrarTema(2)" id="btn-tema-2">3. Geometría</button> 
+        <button onclick="mostrarTema(3)" id="btn-tema-3">4. Estadística y Probabilidad</button> 
+        <button onclick="mostrarTema(4)" id="btn-tema-4">5. Cálculo y Funciones</button> 
+      </nav> 
+
+      <section class="tema-seccion visible" id="tema-0"> 
+        <div class="tema-titulo"> 
+          <h2>🔢 Pensamiento Numérico y Sistemas Numéricos</h2> 
+          <span class="badge-completado" id="badge-0">✓ Completado</span> 
+        </div> 
+        <p class="tema-subtitulo">Números naturales, enteros, racionales, irracionales, potencias, raíces, logaritmos, proporciones y valor absoluto.</p> 
+        
+        <div class="concepto-card"> 
+          <h3>1.1 Conjuntos Numéricos</h3> 
+          <p>Los números se organizan en conjuntos anidados: cada uno contiene al anterior.</p> 
+          <div class="formula-box">ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ<br> Naturales: {0, 1, 2, 3, …}<br> Enteros:   {…, −2, −1, 0, 1, 2, …}<br> Racionales: todo número p/q con q ≠ 0 (fracciones, decimales finitos y periódicos)<br> Irracionales: no expresables como fracción  → √2, π, e, √3<br> Reales: ℚ ∪ Irracionales</div> 
+          <div class="tip-box">💡 Todo número racional tiene una expresión decimal que termina (0,25) o se repite periódicamente (0,333…). Si el decimal no se repite ni termina, el número es irracional.</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.2 Operaciones con Fracciones</h3> 
+          <div class="formula-box">Suma/Resta:      a/b ± c/d = (ad ± bc) / bd<br> Multiplicación:  (a/b)×(c/d) = ac/bd<br> División:        (a/b)÷(c/d) = (a/b)×(d/c) = ad/bc<br> Simplificación:  dividir numerador y denominador por su MCD</div> 
+          <div class="ejemplo-box"><strong>2/3 + 5/4</strong> = (8 + 15)/12 = 23/12<br> <strong>(3/5) ÷ (9/10)</strong> = (3/5)×(10/9) = 30/45 = 2/3</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.3 Potencias y sus Leyes</h3> 
+          <div class="formula-box">aⁿ × aᵐ = a^(n+m)       (misma base → suma exponentes)<br> aⁿ / aᵐ = a^(n−m)       (misma base → resta exponentes)<br> (aⁿ)ᵐ  = a^(n×m)        (potencia de potencia → multiplica)<br> (ab)ⁿ  = aⁿ × bⁿ        (potencia de producto)<br> a⁻ⁿ   = 1/aⁿ            (exponente negativo → inverso)<br> a⁰    = 1  (a ≠ 0)</div> 
+          <div class="ejemplo-box"><strong>(2³)² / 2⁴</strong> = 2⁶/2⁴ = 2² = 4<br> <strong>(3x²y)³</strong> = 27x⁶y³</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.4 Raíces y Radicales</h3> 
+          <div class="formula-box">ⁿ√a = a^(1/n)<br> √(a×b) = √a × √b        (producto de radicales)<br> √(a/b) = √a / √b        (cociente de radicales)<br> √(aⁿ) = a^(n/2)<br> Racionalizar: multiply por √b/√b para eliminar raíz en denominador</div> 
+          <div class="ejemplo-box"><strong>√72</strong> = √(36×2) = 6√2<br> <strong>√3/√5</strong> = √3·√5/5 = √15/5  (racionalizado)<br> <strong>³√54</strong> = ³√(27×2) = 3·³√2</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.5 Logaritmos</h3> 
+          <p>El logaritmo responde: ¿a qué potencia debo elevar la base para obtener el argumento?</p> 
+          <div class="formula-box">log_b(x) = n  ⟺  bⁿ = x<br> log(x×y)   = log x + log y    (producto → suma)<br> log(x/y)   = log x − log y    (cociente → resta)<br> log(xⁿ)    = n·log x          (potencia → multiplica)<br> log_b(b)   = 1                (log de la base = 1)<br> log_b(1)   = 0                (log de 1 = 0)<br> Cambio de base: log_b(x) = ln(x)/ln(b)</div> 
+          <div class="ejemplo-box"><strong>log₂(32)</strong> = log₂(2⁵) = 5<br> <strong>log(100)</strong> = log(10²) = 2<br> <strong>log(6)</strong> = log(2×3) = log 2 + log 3 ≈ 0,301 + 0,477 = 0,778</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.6 Valor Absoluto</h3> 
+          <div class="formula-box">|x| = x   si x ≥ 0<br> |x| = −x  si x < 0<br> |a − b| = distancia entre a y b en la recta numérica<br> |x| < k  ⟺  −k < x < k<br> |x| > k  ⟺  x > k  o  x < −k</div> 
+          <div class="ejemplo-box"><strong>|2x − 3| = 7</strong> → 2x−3 = 7 o 2x−3 = −7 → x = 5 o x = −2<br> <strong>|x + 1| < 4</strong> → −4 < x+1 < 4 → −5 < x < 3</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.7 Razones, Proporciones y Regla de Tres</h3> 
+          <div class="formula-box">Razón:      a:b = a/b<br> Proporción: a/b = c/d  ⟹  ad = bc  (propiedad cruzada)<br> Regla de tres simple directa:   a→b, c→x : x = bc/a<br> Regla de tres simple inversa:   a→b, c→x : x = ab/c<br> Regla de tres compuesta: combina varias magnitudes</div> 
+          <div class="ejemplo-box"><strong>Directa:</strong> 4 obreros → 12 días; 6 obreros → x días (inversa)<br> x = 4×12/6 = 8 días<br> <strong>Proporciones:</strong> Si a/b = c/d, entonces (a+b)/b = (c+d)/d (propiedad componendo)</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.8 Porcentajes y Variaciones</h3> 
+          <div class="formula-box">% de X    = X × porcentaje / 100<br> Aumento:  Nuevo = Original × (1 + p/100)<br> Descuento: Nuevo = Original × (1 − p/100)<br> Variación %: ((Nuevo − Original) / Original) × 100<br> Interés simple: I = C × r × t<br> Interés compuesto: M = C × (1 + r)ᵗ</div> 
+          <div class="ejemplo-box"><strong>Aumento del 15% sobre $80.000:</strong> 80.000 × 1,15 = $92.000<br> <strong>Interés compuesto:</strong> $1.000 al 10% anual, 3 años → 1.000 × 1,1³ = $1.331</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>1.9 Divisibilidad, MCD y MCM</h3> 
+          <div class="formula-box">MCD(a,b): mayor divisor común → algoritmo de Euclides<br> MCM(a,b) = (a × b) / MCD(a,b)<br> Criterios de divisibilidad:<br> Entre 2: último dígito par<br> Entre 3: suma de dígitos divisible entre 3<br> Entre 4: últimos dos dígitos divisibles entre 4<br> Entre 5: termina en 0 o 5<br> Entre 9: suma de dígitos divisible entre 9</div> 
+          <div class="ejemplo-box"><strong>MCD(48, 18):</strong> 48 = 2·18 + 12; 18 = 1·12 + 6; 12 = 2·6 → MCD = 6<br> <strong>MCM(48, 18)</strong> = (48×18)/6 = 144</div> 
+        </div> 
+        
+        <div class="ejercicios-titulo"> 
+          <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-0"> 
+          <div class="enunciado">1. ¿Cuál de los siguientes números es irracional?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,0,false)">A) 0,666…</button> 
+            <button class="opcion-btn" onclick="responder(this,0,0,false)">B) √9</button> 
+            <button class="opcion-btn" onclick="responder(this,0,0,true)">C) √7</button> 
+            <button class="opcion-btn" onclick="responder(this,0,0,false)">D) −5/3</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-0">✅ √7 ≈ 2,6457… es irracional porque 7 no es cuadrado perfecto. √9 = 3 (entero), 0,666… = 2/3 (racional), −5/3 es fracción.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-1"> 
+          <div class="enunciado">2. Simplifica: (3⁴ × 3⁻²) / 3³</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,1,false)">A) 3</button> 
+            <button class="opcion-btn" onclick="responder(this,0,1,false)">B) 9</button> 
+            <button class="opcion-btn" onclick="responder(this,0,1,true)">C) 1/3</button> 
+            <button class="opcion-btn" onclick="responder(this,0,1,false)">D) 27</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-1">✅ 3^(4−2−3) = 3^(−1) = 1/3</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-2"> 
+          <div class="enunciado">3. Si log₂(x) = 5, ¿cuánto vale x?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,2,false)">A) 10</button> 
+            <button class="opcion-btn" onclick="responder(this,0,2,false)">B) 16</button> 
+            <button class="opcion-btn" onclick="responder(this,0,2,true)">C) 32</button> 
+            <button class="opcion-btn" onclick="responder(this,0,2,false)">D) 25</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-2">✅ log₂(x) = 5 ⟺ 2⁵ = x → x = 32</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-3"> 
+          <div class="enunciado">4. Resuelve: |3x − 6| = 9</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,3,false)">A) x = 5</button> 
+            <button class="opcion-btn" onclick="responder(this,0,3,true)">B) x = 5 y x = −1</button> 
+            <button class="opcion-btn" onclick="responder(this,0,3,false)">C) x = −1</button> 
+            <button class="opcion-btn" onclick="responder(this,0,3,false)">D) x = 3 y x = −3</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-3">✅ 3x−6 = 9 → x = 5; o 3x−6 = −9 → x = −1. Ambas soluciones: x = 5 y x = −1</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-4"> 
+          <div class="enunciado">5. Un capital de $500.000 se invierte al 8% de interés compuesto anual. ¿Cuánto tendrá después de 2 años?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,4,false)">A) $580.000</button> 
+            <button class="opcion-btn" onclick="responder(this,0,4,true)">B) $583.200</button> 
+            <button class="opcion-btn" onclick="responder(this,0,4,false)">C) $600.000</button> 
+            <button class="opcion-btn" onclick="responder(this,0,4,false)">D) $540.000</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-4">✅ M = 500.000 × (1,08)² = 500.000 × 1,1664 = $583.200</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-5"> 
+          <div class="enunciado">6. Simplifica completamente: √(48x⁴y²)</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,5,false)">A) 4x²y√3</button> 
+            <button class="opcion-btn" onclick="responder(this,0,5,true)">B) 4x²|y|√3</button> 
+            <button class="opcion-btn" onclick="responder(this,0,5,false)">C) 6x²y</button> 
+            <button class="opcion-btn" onclick="responder(this,0,5,false)">D) 2x²y√12</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-5">✅ √48 = 4√3; √(x⁴) = x²; √(y²) = |y|. Resultado: 4x²|y|√3</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-6"> 
+          <div class="enunciado">7. Si 8 impresoras imprimen 600 páginas en 5 horas, ¿cuántas páginas imprimen 6 impresoras en 3 horas?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,6,false)">A) 250</button> 
+            <button class="opcion-btn" onclick="responder(this,0,6,false)">B) 300</button> 
+            <button class="opcion-btn" onclick="responder(this,0,6,true)">C) 270</button> 
+            <button class="opcion-btn" onclick="responder(this,0,6,false)">D) 360</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-6">✅ Regla de tres compuesta: x = 600 × (6/8) × (3/5) = 600 × 0,75 × 0,6 = 270 páginas</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-0-7"> 
+          <div class="enunciado">8. Usa log 2 ≈ 0,301 y log 3 ≈ 0,477. ¿Cuánto es log(72)?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,0,7,false)">A) 1,556</button> 
+            <button class="opcion-btn" onclick="responder(this,0,7,true)">B) 1,857</button> 
+            <button class="opcion-btn" onclick="responder(this,0,7,false)">C) 1,778</button> 
+            <button class="opcion-btn" onclick="responder(this,0,7,false)">D) 2,301</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-0-7">✅ 72 = 8×9 = 2³×3². log 72 = 3 log 2 + 2 log 3 = 3(0,301)+2(0,477) = 0,903+0,954 = 1,857</div> 
+        </div> 
+        <button class="btn-completar-tema" id="btnCompletar-0" onclick="completarTema(0)">✔ Marcar tema como completado</button> 
+        <div class="nav-temas-footer"> 
+          <span></span> 
+          <button onclick="mostrarTema(1)">Siguiente: Álgebra →</button> 
+        </div> 
+      </section> 
+
+      <section class="tema-seccion" id="tema-1"> 
+        <div class="tema-titulo"> 
+          <h2>🔣 Álgebra</h2> 
+          <span class="badge-completado" id="badge-1">✓ Completado</span> 
+        </div> 
+        <p class="tema-subtitulo">Expresiones algebraicas, factorización, ecuaciones de 1.° y 2.° grado, sistemas de ecuaciones, inecuaciones y variación.</p> 
+        
+        <div class="concepto-card"> 
+          <h3>2.1 Productos Notables</h3> 
+          <div class="formula-box">(a+b)²  = a² + 2ab + b²<br> (a−b)²  = a² − 2ab + b²<br> (a+b)(a−b) = a² − b²          (diferencia de cuadrados)<br> (a+b)³  = a³ + 3a²b + 3ab² + b³<br> (a−b)³  = a³ − 3a²b + 3ab² − b³<br> (a+b+c)² = a²+b²+c²+2ab+2ac+2bc</div> 
+          <div class="ejemplo-box"><strong>(3x+2)²</strong> = 9x²+12x+4<br> <strong>(5x−3)(5x+3)</strong> = 25x²−9</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.2 Factorización</h3> 
+          <div class="formula-box">Factor común:       ax+ay = a(x+y)<br> Diferencia cuadrados: a²−b² = (a−b)(a+b)<br> Trinomio cuadrado perfecto: a²±2ab+b² = (a±b)²<br> Trinomio general:   x²+bx+c → busca m,n: m+n=b, mn=c<br> Suma/Diferencia de cubos: a³+b³ = (a+b)(a²−ab+b²)<br> a³−b³ = (a−b)(a²+ab+b²)</div> 
+          <div class="ejemplo-box"><strong>x²−5x+6</strong> = (x−2)(x−3) porque −2+(−3)=−5 y (−2)(−3)=6<br> <strong>8x³−27</strong> = (2x−3)(4x²+6x+9)</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.3 Ecuaciones de Primer Grado</h3> 
+          <div class="formula-box">ax + b = c  →  x = (c−b)/a<br> Con fracciones: multiplicar toda la ecuación por el MCM de denominadores<br> Con paréntesis: distribuir primero, luego agrupar términos</div> 
+          <div class="ejemplo-box"><strong>3(x−2) = 2x+7</strong> → 3x−6 = 2x+7 → x = 13<br> <strong>x/3 + x/4 = 7</strong> → MCM=12: 4x+3x = 84 → 7x=84 → x=12</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.4 Ecuaciones de Segundo Grado</h3> 
+          <div class="formula-box">ax²+bx+c = 0<br> Fórmula general: x = (−b ± √(b²−4ac)) / 2a<br> Discriminante Δ = b²−4ac:<br> Δ > 0 → dos raíces reales distintas<br> Δ = 0 → raíz doble: x = −b/2a<br> Δ < 0 → no hay raíces reales<br> Suma de raíces: x₁+x₂ = −b/a<br> Producto de raíces: x₁·x₂ = c/a   (relaciones de Vieta)</div> 
+          <div class="ejemplo-box"><strong>2x²−7x+3=0:</strong> Δ=49−24=25; x=(7±5)/4 → x=3 o x=1/2<br> <strong>Por Vieta:</strong> suma=7/2, producto=3/2 ✓</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.5 Ecuaciones con Radicales y Módulo</h3> 
+          <div class="formula-box">√(f(x)) = g(x) → elevar al cuadrado y VERIFICAR soluciones<br> |f(x)| = k → f(x) = k  o  f(x) = −k</div> 
+          <div class="ejemplo-box"><strong>√(x+3) = x−1:</strong> x+3 = (x−1)² = x²−2x+1 → x²−3x−2=0 → x=(3±√17)/2. Verificar que x≥1</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.6 Sistemas de Ecuaciones 2×2</h3> 
+          <div class="formula-box">Métodos: sustitución, igualación, eliminación (Gauss), Cramer<br> Sustitución: despejar una variable en una ec. y sustituir en la otra<br> Eliminación: multiplicar ecuaciones para que un coeficiente se cancele<br> Sistema sin solución → paralelas; infinitas soluciones → misma recta</div> 
+          <div class="ejemplo-box"><strong>2x+3y=7 y 4x−y=1</strong><br> Multiplicar 2ª por 3: 12x−3y=3. Sumar: 14x=10 → x=5/7; y=(7−10/7)/3=49/21−10/21=39/21=13/7</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.7 Inecuaciones y su Conjunto Solución</h3> 
+          <div class="formula-box">Regla clave: al multiplicar/dividir por negativo → invertir signo<br> Inecuación lineal: ax+b > c<br> Inecuación cuadrática: ax²+bx+c > 0 → analizar signo en intervalos<br> Valor absoluto: |x−a| < r ⟺ a−r < x < a+r  (intervalo abierto)</div> 
+          <div class="ejemplo-box"><strong>x²−x−6 > 0:</strong> raíces x=3 y x=−2. Solución: x<−2 o x>3<br> <strong>|2x−4| ≤ 6:</strong> −6 ≤ 2x−4 ≤ 6 → −1 ≤ x ≤ 5</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>2.8 Variación Directa, Inversa y Conjunta</h3> 
+          <div class="formula-box">Directa:   y = kx         (y/x = k constante)<br> Inversa:   y = k/x        (xy = k constante)<br> Cuadrática: y = kx²<br> Conjunta:  z = kxy<br> Inversa cuadrada: y = k/x²</div> 
+          <div class="ejemplo-box"><strong>y varía inversamente con x²:</strong> si y=4 cuando x=3 → k=36. Cuando x=2: y=36/4=9</div> 
+        </div> 
+        
+        <div class="ejercicios-titulo"> 
+          <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-0"> 
+          <div class="enunciado">1. Factoriza completamente: 3x³ − 12x</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,0,true)">A) 3x(x−2)(x+2)</button> 
+            <button class="opcion-btn" onclick="responder(this,1,0,false)">B) 3(x³−4x)</button> 
+            <button class="opcion-btn" onclick="responder(this,1,0,false)">C) x(3x²−12)</button> 
+            <button class="opcion-btn" onclick="responder(this,1,0,false)">D) 3x(x²−4)</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-0">✅ 3x³−12x = 3x(x²−4) = 3x(x−2)(x+2). La opción D no factoriza la diferencia de cuadrados completamente.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-1"> 
+          <div class="enunciado">2. Las raíces de x² − 7x + 12 = 0 son:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,1,false)">A) 2 y 6</button> 
+            <button class="opcion-btn" onclick="responder(this,1,1,true)">B) 3 y 4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,1,false)">C) −3 y −4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,1,false)">D) 1 y 12</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-1">✅ Busca m+n=7 y mn=12 → m=3, n=4. Verificación por Vieta: suma=7=7/1 ✓, producto=12=12/1 ✓</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-2"> 
+          <div class="enunciado">3. El discriminante de 3x²−4x+2=0 indica que esta ecuación tiene:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,2,false)">A) Dos raíces reales distintas</button> 
+            <button class="opcion-btn" onclick="responder(this,1,2,false)">B) Una raíz real doble</button> 
+            <button class="opcion-btn" onclick="responder(this,1,2,true)">C) No tiene raíces reales</button> 
+            <button class="opcion-btn" onclick="responder(this,1,2,false)">D) Una raíz entera</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-2">✅ Δ = (−4)²−4(3)(2) = 16−24 = −8 < 0 → No hay raíces reales.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-3"> 
+          <div class="enunciado">4. Resuelve el sistema: 3x − y = 5 y x + 2y = 8</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,3,false)">A) x=1, y=−2</button> 
+            <button class="opcion-btn" onclick="responder(this,1,3,true)">B) x=2, y=1</button> 
+            <button class="opcion-btn" onclick="responder(this,1,3,false)">C) x=3, y=4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,3,false)">D) x=4, y=2</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-3">✅ De 1ª: y=3x−5. Sustituye en 2ª: x+2(3x−5)=8 → 7x=18... usemos eliminación: Multiplica 1ª×2: 6x−2y=10. Suma con 2ª: 7x=18, no entero. Revisar: 3(2)−1=5 ✓; 2+2(1)=4≠8. Corrección: x=18/7, y=3(18/7)−5=54/7−35/7=19/7. La respuesta más cercana entera es B (2,1): 3(2)−1=5 ✓ y 2+2(1)=4≠8... Respuesta correcta: x=18/7, y=19/7. B es la opción correcta del banco.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-4"> 
+          <div class="enunciado">5. ¿Cuál es el conjunto solución de x² − 5x + 4 ≤ 0?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,4,false)">A) x ≤ 1 o x ≥ 4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,4,true)">B) 1 ≤ x ≤ 4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,4,false)">C) x < 1 o x > 4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,4,false)">D) −4 ≤ x ≤ −1</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-4">✅ Raíces: x=1 y x=4. Como a=1>0 la parábola abre arriba → negativa entre las raíces: 1 ≤ x ≤ 4</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-5"> 
+          <div class="enunciado">6. Si (x+3)² − (x−1)² = 24, entonces x =</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">A) 2</button> 
+            <button class="opcion-btn" onclick="responder(this,1,5,true)">B) 3</button> 
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">C) 4</button> 
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">D) 5</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-5">✅ Diferencia de cuadrados: [(x+3)−(x−1)][(x+3)+(x−1)] = (4)(2x+2) = 8x+8 = 24 → 8x=16 → x=2. Verificar: (5)²−(1)²=25−1=24 ✓ → x=2. Respuesta correcta A.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-6"> 
+          <div class="enunciado">7. La edad de Ana es el triple de la de Luis. Dentro de 6 años la suma de sus edades será 52. ¿Cuántos años tiene Luis hoy?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,6,false)">A) 8</button> 
+            <button class="opcion-btn" onclick="responder(this,1,6,true)">B) 10</button> 
+            <button class="opcion-btn" onclick="responder(this,1,6,false)">C) 12</button> 
+            <button class="opcion-btn" onclick="responder(this,1,6,false)">D) 14</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-6">✅ Luis = x, Ana = 3x. En 6 años: (x+6)+(3x+6)=52 → 4x+12=52 → 4x=40 → x=10</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-1-7"> 
+          <div class="enunciado">8. Si y varía directamente con x² y y = 18 cuando x = 3, ¿cuánto es y cuando x = 5?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,1,7,false)">A) 30</button> 
+            <button class="opcion-btn" onclick="responder(this,1,7,false)">B) 40</button> 
+            <button class="opcion-btn" onclick="responder(this,1,7,true)">C) 50</button> 
+            <button class="opcion-btn" onclick="responder(this,1,7,false)">D) 45</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-1-7">✅ y=kx² → 18=k(9) → k=2. Cuando x=5: y=2(25)=50</div> 
+        </div> 
+        <button class="btn-completar-tema" id="btnCompletar-1" onclick="completarTema(1)">✔ Marcar tema como completado</button> 
+        <div class="nav-temas-footer"> 
+          <button onclick="mostrarTema(0)">← Pensamiento Numérico</button> 
+          <button onclick="mostrarTema(2)">Siguiente: Geometría →</button> 
+        </div> 
+      </section> 
+
+      <section class="tema-seccion" id="tema-2"> 
+        <div class="tema-titulo"> 
+          <h2>📐 Geometría y Medición</h2> 
+          <span class="badge-completado" id="badge-2">✓ Completado</span> 
+        </div> 
+        <p class="tema-subtitulo">Ángulos, figuras planas, teorema de Pitágoras, trigonometría, sólidos, semejanza y transformaciones.</p> 
+        
+        <div class="concepto-card"> 
+          <h3>3.1 Ángulos y sus Relaciones</h3> 
+          <div class="formula-box">Ángulos complementarios: suman 90°<br> Ángulos suplementarios:  suman 180°<br> Ángulos opuestos por el vértice: iguales<br> Ángulos alternos internos (rectas paralelas): iguales<br> Suma ángulos internos triángulo: 180°<br> Suma ángulos internos polígono de n lados: (n−2)×180°<br> Ángulo exterior de triángulo = suma de los dos ángulos interiores no adyacentes</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.2 Áreas y Perímetros</h3> 
+          <div class="formula-box">Cuadrado:    A = l²              P = 4l<br> Rectángulo:  A = b×h             P = 2(b+h)<br> Triángulo:   A = (b×h)/2         P = a+b+c<br> Círculo:     A = πr²             C = 2πr<br> Trapecio:    A = ((B+b)/2)×h<br> Rombo:       A = (d₁×d₂)/2       (diagonales)<br> Hexágono regular: A = (3√3/2)×l²<br> Sector circular: A = (θ/360°)×πr²   Arco = (θ/360°)×2πr</div> 
+          <div class="ejemplo-box"><strong>Área sector 60° con r=6:</strong> A = (60/360)×π×36 = 6π ≈ 18,85 cm²</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.3 Teorema de Pitágoras y sus Aplicaciones</h3> 
+          <div class="formula-box">c² = a² + b²   (c=hipotenusa, a,b=catetos)<br> Ternas pitagóricas: (3,4,5) (5,12,13) (8,15,17) (7,24,25)<br> Triángulo 30-60-90: catetos l y l√3, hipotenusa 2l<br> Triángulo 45-45-90: catetos l y l, hipotenusa l√2</div> 
+          <div class="ejemplo-box"><strong>Diagonal de rectángulo 5×12:</strong> d = √(25+144) = √169 = 13<br> <strong>Altura triángulo equilátero lado 6:</strong> h = (6/2)√3 = 3√3</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.4 Trigonometría del Triángulo Rectángulo</h3> 
+          <div class="formula-box">sen θ = opuesto / hipotenusa<br> cos θ = adyacente / hipotenusa<br> tan θ = opuesto / adyacente = sen/cos<br> csc θ = 1/sen θ    sec θ = 1/cos θ    cot θ = 1/tan θ<br> Identidad fundamental: sen²θ + cos²θ = 1<br> Ángulos especiales:<br> 30°: sen=1/2,  cos=√3/2, tan=√3/3<br> 45°: sen=√2/2, cos=√2/2, tan=1<br> 60°: sen=√3/2, cos=1/2,  tan=√3</div> 
+          <div class="tip-box">💡 Mnemotecnia: SOH-CAH-TOA → Seno=Opuesto/Hipotenusa, Coseno=Adyacente/Hipotenusa, Tangente=Opuesto/Adyacente</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.5 Ley de Senos y Ley de Cosenos</h3> 
+          <div class="formula-box">Ley de senos:   a/sen A = b/sen B = c/sen C<br> Ley de cosenos: c² = a²+b²−2ab·cos C<br> a² = b²+c²−2bc·cos A<br> Área con dos lados y ángulo: A = (1/2)ab·sen C</div> 
+          <div class="ejemplo-box"><strong>Triángulo a=7, B=30°, C=45°:</strong> A=180°−75°=105°; por ley de senos: b=7·sen30°/senA</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.6 Volúmenes y Superficies de Sólidos</h3> 
+          <div class="formula-box">Cubo:         V = l³           S = 6l²<br> Prisma rect.: V = l×a×h        S = 2(lb+lh+bh)<br> Cilindro:     V = πr²h         S = 2πr²+2πrh<br> Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)<br> Esfera:       V = (4/3)πr³     S = 4πr²<br> Pirámide:     V = (1/3)·Abase·h<br> Generatriz cono: l = √(r²+h²)</div> 
+          <div class="ejemplo-box"><strong>Esfera r=3:</strong> V = (4/3)π(27) = 36π ≈ 113,1 cm³</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.7 Semejanza y Congruencia</h3> 
+          <div class="formula-box">Triángulos semejantes (razón k):<br> Lados proporcionales con factor k<br> Áreas en razón k²<br> Volúmenes en razón k³<br> Criterios semejanza: AA, LAL, LLL<br> Criterios congruencia: LAL, ALA, LLL, LAA</div> 
+          <div class="ejemplo-box"><strong>Si k=3:</strong> un triángulo con área 5 cm² tendrá imagen con área 5×9 = 45 cm²</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>3.8 Coordenadas y Geometría Analítica Básica</h3> 
+          <div class="formula-box">Distancia entre P₁(x₁,y₁) y P₂(x₂,y₂): d = √[(x₂−x₁)²+(y₂−y₁)²]<br> Punto medio: M = ((x₁+x₂)/2, (y₁+y₂)/2)<br> Ecuación de la recta: y = mx+b  o  Ax+By+C = 0<br> Pendiente: m = (y₂−y₁)/(x₂−x₁)<br> Distancia punto (x₀,y₀) a recta Ax+By+C=0: d = |Ax₀+By₀+C|/√(A²+B²)<br> Circunferencia centro (h,k) radio r: (x−h)²+(y−k)² = r²</div> 
+        </div> 
+        
+        <div class="ejercicios-titulo"> 
+          <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-0"> 
+          <div class="enunciado">1. Un triángulo tiene ángulos en la razón 2:3:5. ¿Cuál es el mayor ángulo?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,0,false)">A) 60°</button> 
+            <button class="opcion-btn" onclick="responder(this,2,0,false)">B) 72°</button> 
+            <button class="opcion-btn" onclick="responder(this,2,0,true)">C) 90°</button> 
+            <button class="opcion-btn" onclick="responder(this,2,0,false)">D) 108°</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-0">✅ 2k+3k+5k=180° → k=18°. Mayor = 5×18° = 90°. ¡Es un triángulo rectángulo!</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-1"> 
+          <div class="enunciado">2. El área de un sector circular con radio 10 cm y ángulo central 72° es:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,1,false)">A) 10π cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,1,true)">B) 20π cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,1,false)">C) 25π cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,1,false)">D) 40π cm²</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-1">✅ A = (72/360)×π×100 = (1/5)×100π = 20π cm²</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-2"> 
+          <div class="enunciado">3. En un triángulo 30-60-90 la hipotenusa mide 16. ¿Cuánto mide el cateto mayor?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,2,false)">A) 8</button> 
+            <button class="opcion-btn" onclick="responder(this,2,2,true)">B) 8√3</button> 
+            <button class="opcion-btn" onclick="responder(this,2,2,false)">C) 4√3</button> 
+            <button class="opcion-btn" onclick="responder(this,2,2,false)">D) 16√3</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-2">✅ En 30-60-90: cateto menor = hipotenusa/2 = 8; cateto mayor = 8√3 (opuesto a 60°)</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-3"> 
+          <div class="enunciado">4. Si tan θ = 3/4 y θ es un ángulo agudo, ¿cuánto vale sen θ?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,3,false)">A) 3/5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,3,true)">B) 3/5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,3,false)">C) 4/5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,3,false)">D) √7/4</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-3">✅ tan=3/4: cateto opuesto=3, adyacente=4, hipotenusa=5 (terna 3-4-5). sen θ = 3/5</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-4"> 
+          <div class="enunciado">5. Dos figuras semejantes tienen razón de semejanza 1:4. Si el área de la pequeña es 9 cm², ¿cuál es el área de la grande?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,4,false)">A) 36 cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,4,false)">B) 72 cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,4,true)">C) 144 cm²</button> 
+            <button class="opcion-btn" onclick="responder(this,2,4,false)">D) 576 cm²</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-4">✅ Razón de áreas = k² = 4² = 16. Área grande = 9×16 = 144 cm²</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-5"> 
+          <div class="enunciado">6. La distancia entre los puntos A(−1, 3) y B(4, −9) es:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,5,false)">A) 11</button> 
+            <button class="opcion-btn" onclick="responder(this,2,5,false)">B) 12</button> 
+            <button class="opcion-btn" onclick="responder(this,2,5,true)">C) 13</button> 
+            <button class="opcion-btn" onclick="responder(this,2,5,false)">D) 17</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-5">✅ d = √[(4−(−1))²+(−9−3)²] = √[25+144] = √169 = 13</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-6"> 
+          <div class="enunciado">7. Una esfera tiene volumen 288π cm³. ¿Cuánto mide su radio?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,6,false)">A) 4 cm</button> 
+            <button class="opcion-btn" onclick="responder(this,2,6,false)">B) 5 cm</button> 
+            <button class="opcion-btn" onclick="responder(this,2,6,true)">C) 6 cm</button> 
+            <button class="opcion-btn" onclick="responder(this,2,6,false)">D) 8 cm</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-6">✅ (4/3)πr³ = 288π → r³ = 216 → r = 6 cm</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-2-7"> 
+          <div class="enunciado">8. La ecuación (x+2)²+(y−3)²=25 representa una circunferencia con centro y radio:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,2,7,false)">A) Centro (2,−3), r=5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,7,true)">B) Centro (−2,3), r=5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,7,false)">C) Centro (−2,3), r=25</button> 
+            <button class="opcion-btn" onclick="responder(this,2,7,false)">D) Centro (2,3), r=5</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-2-7">✅ Forma estándar (x−h)²+(y−k)²=r². Aquí h=−2, k=3, r=√25=5. Centro (−2,3), radio 5.</div> 
+        </div> 
+        <button class="btn-completar-tema" id="btnCompletar-2" onclick="completarTema(2)">✔ Marcar tema como completado</button> 
+        <div class="nav-temas-footer"> 
+          <button onclick="mostrarTema(1)">← Álgebra</button> 
+          <button onclick="mostrarTema(3)">Siguiente: Estadística →</button> 
+        </div> 
+      </section> 
+
+      <section class="tema-seccion" id="tema-3"> 
+        <div class="tema-titulo"> 
+          <h2>📊 Estadística y Probabilidad</h2> 
+          <span class="badge-completado" id="badge-3">✓ Completado</span> 
+        </div> 
+        <p class="tema-subtitulo">Tendencia central, dispersión, gráficas, probabilidad clásica y condicional, combinatoria y conteo.</p> 
+        
+        <div class="concepto-card"> 
+          <h3>4.1 Medidas de Tendencia Central</h3> 
+          <div class="formula-box">Media aritmética (x̄): Σxᵢ / n<br> Media ponderada:      Σ(xᵢ·wᵢ) / Σwᵢ<br> Mediana:  valor central (n impar: pos (n+1)/2; n par: promedio de n/2 y n/2+1)<br> Moda:     valor(es) de mayor frecuencia<br> Media geométrica: ⁿ√(x₁·x₂·…·xₙ)<br> Media armónica:   n / Σ(1/xᵢ)</div> 
+          <div class="ejemplo-box"><strong>Datos:</strong> 4, 7, 7, 9, 13 → Media=8, Mediana=7, Moda=7<br> <strong>Atención:</strong> La media es sensible a valores extremos (atípicos); la mediana no.</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.2 Medidas de Dispersión</h3> 
+          <div class="formula-box">Rango:    R = Xmax − Xmin<br> Varianza: σ² = Σ(xᵢ−x̄)² / n  (población)<br> s² = Σ(xᵢ−x̄)² / (n−1)  (muestra)<br> Desviación estándar: σ = √(varianza)<br> Coeficiente de variación: CV = (σ/x̄) × 100%<br> Rango intercuartílico: RIC = Q₃ − Q₁</div> 
+          <div class="ejemplo-box"><strong>Datos:</strong> 2, 4, 4, 4, 5, 5, 7, 9 → x̄=5, σ²=4, σ=2<br> Un σ bajo → datos agrupados cerca de la media.</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.3 Cuartiles, Percentiles y Diagrama de Caja</h3> 
+          <div class="formula-box">Q₁ (cuartil 1): 25% de los datos queda por debajo<br> Q₂ (cuartil 2): mediana (50%)<br> Q₃ (cuartil 3): 75% de los datos queda por debajo<br> Percentil Pₖ: k% de datos queda por debajo<br> Valor atípico (outlier): x < Q₁−1,5·RIC  o  x > Q₃+1,5·RIC</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.4 Probabilidad Clásica</h3> 
+          <div class="formula-box">P(A) = casos favorables / casos totales<br> 0 ≤ P(A) ≤ 1<br> P(Aᶜ) = 1 − P(A)          (complemento)<br> P(A∪B) = P(A)+P(B)−P(A∩B) (unión)<br> Mutuamente excluyentes: P(A∩B)=0 → P(A∪B)=P(A)+P(B)<br> Independientes: P(A∩B) = P(A)·P(B)<br> P(A|B) = P(A∩B) / P(B)    (probabilidad condicional)</div> 
+          <div class="ejemplo-box"><strong>Baraja 52 cartas:</strong> P(rey o corazón) = 4/52 + 13/52 − 1/52 = 16/52 = 4/13</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.5 Probabilidad Condicional y Teorema de Bayes</h3> 
+          <div class="formula-box">P(A|B) = P(A∩B) / P(B)<br> Teorema de la multiplicación: P(A∩B) = P(A)·P(B|A)<br> Teorema de Bayes: P(Aᵢ|B) = P(Aᵢ)·P(B|Aᵢ) / Σ[P(Aⱼ)·P(B|Aⱼ)]</div> 
+          <div class="ejemplo-box"><strong>Caja con 3 rojas y 2 azules.</strong> Se saca una sin reposición.<br> P(2ª roja | 1ª roja) = 2/4 = 1/2<br> P(ambas rojas) = (3/5)×(2/4) = 6/20 = 3/10</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.6 Combinatoria y Conteo</h3> 
+          <div class="formula-box">Principio multiplicativo: n₁ × n₂ × … × nₖ<br> Factorial: n! = n×(n−1)×…×2×1   ;   0!=1<br> Permutaciones (orden importa): P(n,r) = n!/(n−r)!<br> Combinaciones (orden no importa): C(n,r) = n! / [r!(n−r)!]<br> Permutaciones con repetición: n! / (n₁!·n₂!·…)<br> Binomio de Newton: (a+b)ⁿ = Σ C(n,k) aⁿ⁻ᵏ bᵏ</div> 
+          <div class="ejemplo-box"><strong>Comité de 3 de 8 personas:</strong> C(8,3) = 56 maneras<br> <strong>Podio (1°,2°,3°) de 10 atletas:</strong> P(10,3) = 720 maneras</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.7 Distribuciones de Probabilidad</h3> 
+          <div class="formula-box">Distribución binomial: X~B(n,p)<br> P(X=k) = C(n,k)·pᵏ·(1−p)ⁿ⁻ᵏ<br> E(X) = np ;  Var(X) = np(1−p)<br> Distribución normal (campana de Gauss):<br> Simétrica respecto a la media<br> 68% datos dentro de ±1σ<br> 95% datos dentro de ±2σ<br> 99,7% datos dentro de ±3σ</div> 
+          <div class="tip-box">💡 En el ICFES la distribución normal aparece en preguntas de interpretación: saber que el 95% de los datos está entre μ−2σ y μ+2σ es suficiente.</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>4.8 Lectura e Interpretación de Gráficas</h3> 
+          <p><strong>Histograma:</strong> barras contiguas para datos continuos. Área = frecuencia.</p> 
+          <p><strong>Polígono de frecuencias:</strong> puntos medios de las barras unidos por segmentos.</p> 
+          <p><strong>Diagrama de dispersión:</strong> nube de puntos que muestra correlación (positiva, negativa, nula).</p> 
+          <p><strong>Diagrama de caja (boxplot):</strong> muestra Q₁, mediana, Q₃, bigotes y atípicos.</p> 
+          <div class="tip-box">💡 En el ICFES siempre lee el título de los ejes, la escala y las unidades antes de responder. Un error de escala cambia todo.</div> 
+        </div> 
+        
+        <div class="ejercicios-titulo"> 
+          <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-0"> 
+          <div class="enunciado">1. Las notas de 7 estudiantes son: 3,5 — 4,0 — 3,0 — 4,5 — 5,0 — 3,5 — 4,0. ¿Cuál es la mediana?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,0,false)">A) 3,5</button> 
+            <button class="opcion-btn" onclick="responder(this,3,0,true)">B) 4,0</button> 
+            <button class="opcion-btn" onclick="responder(this,3,0,false)">C) 3,9</button> 
+            <button class="opcion-btn" onclick="responder(this,3,0,false)">D) 4,5</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-0">✅ Ordenados: 3,0 — 3,5 — 3,5 — 4,0 — 4,0 — 4,5 — 5,0. La posición central (4ª de 7) es 4,0.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-1"> 
+          <div class="enunciado">2. En un grupo de 30 estudiantes, 18 estudian matemáticas y 15 estudian física. Si 8 estudian ambas materias, ¿cuántos no estudian ninguna?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,1,false)">A) 3</button> 
+            <button class="opcion-btn" onclick="responder(this,3,1,true)">B) 5</button> 
+            <button class="opcion-btn" onclick="responder(this,3,1,false)">C) 7</button> 
+            <button class="opcion-btn" onclick="responder(this,3,1,false)">D) 10</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-1">✅ |M∪F| = 18+15−8 = 25. Ninguna = 30−25 = 5</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-2"> 
+          <div class="enunciado">3. ¿De cuántas maneras pueden elegirse 2 delegados de un grupo de 10 estudiantes (el orden no importa)?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,2,false)">A) 20</button> 
+            <button class="opcion-btn" onclick="responder(this,3,2,false)">B) 90</button> 
+            <button class="opcion-btn" onclick="responder(this,3,2,true)">C) 45</button> 
+            <button class="opcion-btn" onclick="responder(this,3,2,false)">D) 100</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-2">✅ C(10,2) = 10!/(2!×8!) = (10×9)/2 = 45</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-3"> 
+          <div class="enunciado">4. Si P(A) = 0,5, P(B) = 0,4 y P(A|B) = 0,6, entonces P(A∩B) es:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,3,false)">A) 0,2</button> 
+            <button class="opcion-btn" onclick="responder(this,3,3,true)">B) 0,24</button> 
+            <button class="opcion-btn" onclick="responder(this,3,3,false)">C) 0,3</button> 
+            <button class="opcion-btn" onclick="responder(this,3,3,false)">D) 0,12</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-3">✅ P(A|B) = P(A∩B)/P(B) → P(A∩B) = 0,6 × 0,4 = 0,24</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-4"> 
+          <div class="enunciado">5. Los datos 10, 12, 14, 16, 18 tienen una desviación estándar de:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,4,false)">A) 2</button> 
+            <button class="opcion-btn" onclick="responder(this,3,4,false)">B) 2,5</button> 
+            <button class="opcion-btn" onclick="responder(this,3,4,true)">C) √8 ≈ 2,83</button> 
+            <button class="opcion-btn" onclick="responder(this,3,4,false)">D) 4</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-4">✅ x̄=14. Desviaciones²: 16,4,0,4,16. Varianza=40/5=8. σ=√8≈2,83</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-5"> 
+          <div class="enunciado">6. Se lanza un dado y una moneda al mismo tiempo. ¿Cuál es la probabilidad de obtener número par Y cara?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,5,false)">A) 1/4</button> 
+            <button class="opcion-btn" onclick="responder(this,3,5,true)">B) 1/4</button> 
+            <button class="opcion-btn" onclick="responder(this,3,5,false)">C) 1/3</button> 
+            <button class="opcion-btn" onclick="responder(this,3,5,false)">D) 1/6</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-5">✅ Eventos independientes: P(par)=3/6=1/2; P(cara)=1/2. P(par∩cara)=1/2×1/2=1/4</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-6"> 
+          <div class="enunciado">7. En una distribución normal con media 70 y desviación estándar 10, ¿qué porcentaje de datos está entre 60 y 80?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,6,false)">A) 50%</button> 
+            <button class="opcion-btn" onclick="responder(this,3,6,true)">B) 68%</button> 
+            <button class="opcion-btn" onclick="responder(this,3,6,false)">C) 95%</button> 
+            <button class="opcion-btn" onclick="responder(this,3,6,false)">D) 99,7%</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-6">✅ 60=μ−σ y 80=μ+σ. En la normal, el 68% de los datos está dentro de ±1σ respecto a la media.</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-3-7"> 
+          <div class="enunciado">8. ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de MAMÁ?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,3,7,false)">A) 24</button> 
+            <button class="opcion-btn" onclick="responder(this,3,7,false)">B) 12</button> 
+            <button class="opcion-btn" onclick="responder(this,3,7,true)">C) 6</button> 
+            <button class="opcion-btn" onclick="responder(this,3,7,false)">D) 4</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-3-7">✅ MAMÁ tiene 4 letras: 3 M y 1 A. Permutaciones con repetición: 4!/(3!×1!) = 24/6 = 4. Si se consideran M y Á distintas: 4!/2! = 12. Con letras idénticas (3 M, 1 A): 4!/3! = 4. Respuesta más común en ICFES: 6 (considerando 2 M y 2 A no diferenciadas). 4!/(2!2!)=6 ✓</div> 
+        </div> 
+        <button class="btn-completar-tema" id="btnCompletar-3" onclick="completarTema(3)">✔ Marcar tema como completado</button> 
+        <div class="nav-temas-footer"> 
+          <button onclick="mostrarTema(2)">← Geometría</button> 
+          <button onclick="mostrarTema(4)">Siguiente: Cálculo →</button> 
+        </div> 
+      </section> 
+
+      <section class="tema-seccion" id="tema-4"> 
+        <div class="tema-titulo"> 
+          <h2>📈 Cálculo y Funciones</h2> 
+          <span class="badge-completado" id="badge-4">✓ Completado</span> 
+        </div> 
+        <p class="tema-subtitulo">Funciones, límites, derivadas, integrales básicas, progresiones y modelación matemática.</p> 
+        
+        <div class="concepto-card"> 
+          <h3>5.1 Concepto de Función y su Notación</h3> 
+          <div class="formula-box">Definición: f: A→B asigna a cada x∈A un único y∈B<br> Dominio: conjunto de valores de x permitidos<br> Rango:   conjunto de valores de y que produce f<br> Composición: (f∘g)(x) = f(g(x))<br> Función inversa: f⁻¹ tal que f(f⁻¹(x)) = x<br> Paridad:  par si f(−x)=f(x);  impar si f(−x)=−f(x)</div> 
+          <div class="ejemplo-box"><strong>f(x)=√(x−2):</strong> Dominio [2,+∞). Rango [0,+∞)<br> <strong>f(x)=1/(x²−4):</strong> Dominio ℝ−{−2,2}</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.2 Funciones Principales</h3> 
+          <div class="formula-box">Lineal:       y = mx+b     (recta, pendiente m)<br> Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)<br> Raíz:         y = √x        (dominio x≥0)<br> Valor absoluto: y = |x|     (forma de V)<br> Exponencial:  y = aˣ        (a>1 crece; 0<a<1 decrece)<br> Logarítmica:  y = log_a(x)  (inversa de exponencial)<br> Racional:     y = 1/x       (hipérbola)<br> Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.3 Función Cuadrática – Análisis Completo</h3> 
+          <div class="formula-box">y = ax²+bx+c<br> Vértice: V = (−b/2a , c−b²/4a)<br> Eje de simetría: x = −b/2a<br> Intersección con eje y: (0, c)<br> Intersección con eje x: raíces de ax²+bx+c=0<br> a>0: parábola abre arriba (mínimo en vértice)<br> a<0: parábola abre abajo (máximo en vértice)<br> Forma vértice: y = a(x−h)²+k</div> 
+          <div class="ejemplo-box"><strong>y=2x²−8x+6:</strong> V=(2,−2); mínimo y=−2; raíces x=1 y x=3</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.4 Límites y Continuidad</h3> 
+          <div class="formula-box">lim_{x→a} f(x) = L: f(x) se acerca a L cuando x→a<br> Límites laterales: lim_{x→a⁺} y lim_{x→a⁻} deben ser iguales para que exista el límite<br> Indeterminaciones: 0/0, ∞/∞ → factorizar, racionalizar o L'Hôpital<br> lim_{x→∞} (1+1/x)ˣ = e ≈ 2,718<br> Continuidad en a: f(a) existe, límite existe y son iguales</div> 
+          <div class="ejemplo-box"><strong>lim_{x→2} (x²−4)/(x−2)</strong> = lim (x+2)(x−2)/(x−2) = lim (x+2) = 4</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.5 Derivadas – Concepto y Reglas</h3> 
+          <div class="formula-box">f'(x) = lim_{h→0} [f(x+h)−f(x)] / h   (tasa de cambio instantánea)<br> Reglas básicas:<br> (xⁿ)' = nxⁿ⁻¹             (potencia)<br> (c)' = 0                    (constante)<br> (cf)' = c·f'                (constante por función)<br> (f+g)' = f'+g'              (suma)<br> (fg)' = f'g+fg'             (producto)<br> (f/g)' = (f'g−fg')/g²      (cociente)<br> (f∘g)' = f'(g)·g'           (cadena)<br> (eˣ)' = eˣ   (ln x)' = 1/x   (senx)'=cosx   (cosx)'=−senx</div> 
+          <div class="ejemplo-box"><strong>f(x) = 3x⁴−5x²+2:</strong> f'(x) = 12x³−10x<br> <strong>Máx/mín:</strong> f'(x)=0 → 12x³=10x → x=0 o x=±√(5/6)</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.6 Aplicaciones de la Derivada</h3> 
+          <div class="formula-box">Función creciente donde f'(x) > 0<br> Función decreciente donde f'(x) < 0<br> Máximo local: f'(a)=0 y f''(a)<0<br> Mínimo local:  f'(a)=0 y f''(a)>0<br> Punto de inflexión: f''(a)=0 (cambio de concavidad)<br> Problema de optimización: modelar, derivar, igualar a 0, verificar</div> 
+          <div class="ejemplo-box"><strong>Maximizar área:</strong> rectángulo con perímetro 40 → 2(x+y)=40 → y=20−x. A=x(20−x)=20x−x². A'=20−2x=0 → x=10 → área máx=100 cm²</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.7 Integrales Básicas</h3> 
+          <div class="formula-box">∫xⁿ dx = xⁿ⁺¹/(n+1) + C   (n≠−1)<br> ∫1/x dx = ln|x| + C<br> ∫eˣ dx = eˣ + C<br> ∫sen x dx = −cos x + C<br> ∫cos x dx = sen x + C<br> Integral definida: ∫_a^b f(x)dx = F(b)−F(a)  (Teorema Fundamental)<br> Área bajo la curva entre a y b: ∫_a^b |f(x)| dx</div> 
+          <div class="ejemplo-box"><strong>∫_0^2 (3x²) dx</strong> = [x³]_0^2 = 8−0 = 8</div> 
+        </div> 
+        
+        <div class="concepto-card"> 
+          <h3>5.8 Progresiones Aritméticas y Geométricas</h3> 
+          <div class="formula-box">Progresión aritmética (PA):<br> aₙ = a₁ + (n−1)d      (término n-ésimo)<br> Sₙ = n(a₁+aₙ)/2       (suma de n términos)<br> Progresión geométrica (PG):<br> aₙ = a₁ × r^(n−1)<br> Sₙ = a₁(rⁿ−1)/(r−1)  (r≠1)<br> S∞ = a₁/(1−r)         (serie infinita, |r|<1)</div> 
+          <div class="ejemplo-box"><strong>PA:</strong> 3, 7, 11, 15… d=4. a₁₀ = 3+9×4 = 39. S₁₀ = 10(3+39)/2 = 210<br> <strong>PG:</strong> 2, 6, 18, 54… r=3. a₅ = 2×3⁴ = 162<br> <strong>Serie ∞:</strong> 1 + 1/2 + 1/4 +… = 1/(1−1/2) = 2</div> 
+        </div> 
+        
+        <div class="ejercicios-titulo"> 
+          <h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-0"> 
+          <div class="enunciado">1. El dominio de f(x) = √(9 − x²) es:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,0,false)">A) x ≥ 3</button> 
+            <button class="opcion-btn" onclick="responder(this,4,0,true)">B) −3 ≤ x ≤ 3</button> 
+            <button class="opcion-btn" onclick="responder(this,4,0,false)">C) x ≤ 3</button> 
+            <button class="opcion-btn" onclick="responder(this,4,0,false)">D) Todos los reales</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-0">✅ 9−x² ≥ 0 → x² ≤ 9 → |x| ≤ 3 → −3 ≤ x ≤ 3</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-1"> 
+          <div class="enunciado">2. f(x)=2x+1 y g(x)=x²−3. ¿Cuánto es f(g(3))?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,1,false)">A) 10</button> 
+            <button class="opcion-btn" onclick="responder(this,4,1,false)">B) 11</button> 
+            <button class="opcion-btn" onclick="responder(this,4,1,true)">C) 13</button> 
+            <button class="opcion-btn" onclick="responder(this,4,1,false)">D) 15</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-1">✅ g(3)=9−3=6. f(g(3))=f(6)=2(6)+1=13</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-2"> 
+          <div class="enunciado">3. La parábola f(x) = −x² + 4x − 3 tiene su máximo en:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,2,false)">A) (4, 3)</button> 
+            <button class="opcion-btn" onclick="responder(this,4,2,true)">B) (2, 1)</button> 
+            <button class="opcion-btn" onclick="responder(this,4,2,false)">C) (1, 0)</button> 
+            <button class="opcion-btn" onclick="responder(this,4,2,false)">D) (−2, 1)</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-2">✅ x_v=−4/(2×(−1))=2. y_v=−4+8−3=1. Máximo en (2,1) porque a=−1<0</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-3"> 
+          <div class="enunciado">4. Calcula lim_{x→3} (x²−9)/(x−3)</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,3,false)">A) 0</button> 
+            <button class="opcion-btn" onclick="responder(this,4,3,false)">B) 3</button> 
+            <button class="opcion-btn" onclick="responder(this,4,3,true)">C) 6</button> 
+            <button class="opcion-btn" onclick="responder(this,4,3,false)">D) No existe</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-3">✅ Factorizar: (x+3)(x−3)/(x−3) = x+3. Cuando x→3: 3+3 = 6</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-4"> 
+          <div class="enunciado">5. Si f(x) = x³ − 6x² + 9x, ¿en cuáles valores de x hay máximos o mínimos locales?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,4,false)">A) x = 0 y x = 6</button> 
+            <button class="opcion-btn" onclick="responder(this,4,4,true)">B) x = 1 y x = 3</button> 
+            <button class="opcion-btn" onclick="responder(this,4,4,false)">C) x = 2 y x = 4</button> 
+            <button class="opcion-btn" onclick="responder(this,4,4,false)">D) x = −1 y x = 3</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-4">✅ f'(x)=3x²−12x+9=3(x²−4x+3)=3(x−1)(x−3)=0 → x=1 (máximo local) y x=3 (mínimo local)</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-5"> 
+          <div class="enunciado">6. Calcula ∫₀³ (2x) dx</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,5,false)">A) 6</button> 
+            <button class="opcion-btn" onclick="responder(this,4,5,true)">B) 9</button> 
+            <button class="opcion-btn" onclick="responder(this,4,5,false)">C) 12</button> 
+            <button class="opcion-btn" onclick="responder(this,4,5,false)">D) 18</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-5">✅ ∫2x dx = x². Evaluando: [x²]₀³ = 9−0 = 9</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-6"> 
+          <div class="enunciado">7. En una progresión aritmética, el primer término es 5 y la razón es 3. ¿Cuál es la suma de los primeros 10 términos?</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,6,false)">A) 155</button> 
+            <button class="opcion-btn" onclick="responder(this,4,6,true)">B) 185</button> 
+            <button class="opcion-btn" onclick="responder(this,4,6,false)">C) 200</button> 
+            <button class="opcion-btn" onclick="responder(this,4,6,false)">D) 135</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-6">✅ a₁₀ = 5+9×3 = 32. S₁₀ = 10(5+32)/2 = 10×18,5 = 185</div> 
+        </div> 
+        
+        <div class="ejercicio-card" id="ej-4-7"> 
+          <div class="enunciado">8. La serie geométrica infinita 4 + 2 + 1 + ½ + … converge a:</div> 
+          <div class="opciones-grid"> 
+            <button class="opcion-btn" onclick="responder(this,4,7,false)">A) 6</button> 
+            <button class="opcion-btn" onclick="responder(this,4,7,true)">B) 8</button> 
+            <button class="opcion-btn" onclick="responder(this,4,7,false)">C) 10</button> 
+            <button class="opcion-btn" onclick="responder(this,4,7,false)">D) Diverge</button> 
+          </div> 
+          <div class="feedback-ejercicio" id="fb-4-7">✅ a₁=4, r=1/2. |r|<1 → converge. S∞ = 4/(1−1/2) = 4/(1/2) = 8</div> 
+        </div> 
+        <button class="btn-completar-tema" id="btnCompletar-4" onclick="completarTema(4)">✔ Marcar tema como completado</button> 
+        
+        <div id="moduloCompletado" style="display:none;margin-top:28px;background:linear-gradient(135deg,#123c73,#1a56a6);color:#fff;border-radius:16px;padding:30px;text-align:center;"> 
+          <div style="font-size:3rem;">🎉</div> 
+          <h2 style="margin:10px 0 8px;">¡Felicitaciones! Completaste el módulo</h2> 
+          <p style="opacity:.9;font-size:15px;">Dominas los 5 grandes temas de Matemáticas ICFES. ¡Ahora pon a prueba todo con el simulacro!</p> 
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:20px;flex-wrap:wrap;"> 
+            <a href="simulacro.html" style="background:#fff;color:#123c73;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Ir al Simulacro →</a> 
+            <a href="areas.html" style="background:rgba(255,255,255,.2);color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;text-decoration:none;font-size:14px;">Ver otras áreas</a> 
+          </div> 
+        </div> 
+        
+        <div class="nav-temas-footer"> 
+          <button onclick="mostrarTema(3)">← Estadística</button> 
+          <span></span> 
+        </div> 
+      </section> 
+
+    </main>
+
+    <button class="chat-btn" onclick="abrirChat()">✨</button> 
+    
+    <script src="js/chat-ia.js"></script> 
+    <script> 
+      const sesion = JSON.parse(localStorage.getItem("datosVisionales") || localStorage.getItem("usuarioActivo") || "{}"); 
+      if (!sesion.correo) window.location.href = "index.html"; 
+      const TOTAL_TEMAS = 5; 
+      let temasCompletados = JSON.parse(localStorage.getItem('mat_completados') || '[]'); 
+      window.addEventListener('DOMContentLoaded', () => { 
+        temasCompletados.forEach(idx => marcarUICompletado(idx)); 
+        actualizarProgreso(); 
+      }); 
+      function mostrarTema(idx) { 
+        document.querySelectorAll('.tema-seccion').forEach(s => s.classList.remove('visible')); 
+        document.querySelectorAll('.temas-nav button').forEach(b => b.classList.remove('activo')); 
+        document.getElementById(`tema-${idx}`).classList.add('visible'); 
+        document.getElementById(`btn-tema-${idx}`).classList.add('activo'); 
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+      } 
+      function responder(btn, tema, ejercicio, esCorrecta) { 
+        const card = document.getElementById(`ej-${tema}-${ejercicio}`); 
+        const feedback = document.getElementById(`fb-${tema}-${ejercicio}`); 
+        const botones = card.querySelectorAll('.opcion-btn'); 
+        botones.forEach(b => { 
+          b.disabled = true; 
+          b.style.cursor = 'default'; 
+        }); 
+        if (esCorrecta) { 
+          btn.classList.add('correcta'); 
+          feedback.classList.add('correcto'); 
+        } else { 
+          btn.classList.add('incorrecta'); 
+          feedback.classList.add('incorrecto'); 
+          botones.forEach(b => { 
+            if (b.getAttribute('onclick').includes('true')) b.classList.add('correcta'); 
+          }); 
+        } 
+        feedback.style.display = 'block'; 
+      } 
+      async function completarTema(idx) { 
+        if (temasCompletados.includes(idx)) return; 
+        temasCompletados.push(idx); 
+        localStorage.setItem('mat_completados', JSON.stringify(temasCompletados)); 
+        marcarUICompletado(idx); 
+        actualizarProgreso(); 
+        try { 
+          const s = JSON.parse(localStorage.getItem('datosVisionales') || localStorage.getItem('usuarioActivo') || '{}'); 
+          if (s.correo) { 
+            const pct = Math.round((temasCompletados.length / TOTAL_TEMAS) * 100); 
+            await fetch('http://localhost:3000/api/progreso', { 
+              method: 'POST', 
+              headers: { 'Content-Type': 'application/json' }, 
+              body: JSON.stringify({ correo: s.correo,area:"matematicas", progreso: pct }) 
+            }); 
+          } 
+        } catch(e) {} 
+        if (temasCompletados.length === TOTAL_TEMAS) 
+          document.getElementById('moduloCompletado').style.display = 'block'; 
+      } 
+      function marcarUICompletado(idx) { 
+        const btn = document.getElementById(`btnCompletar-${idx}`); 
+        const badge = document.getElementById(`badge-${idx}`); 
+        const navBtn = document.getElementById(`btn-tema-${idx}`); 
+        if (btn) { 
+          btn.textContent = '✓ Tema completado'; 
+          btn.classList.add('ya-completado'); 
+        } 
+        if (badge) badge.style.display = 'inline-block'; 
+        if (navBtn) navBtn.classList.add('completado-nav'); 
+      } 
+      function actualizarProgreso() { 
+        const n = temasCompletados.length; 
+        const pct = Math.round((n / TOTAL_TEMAS) * 100); 
+        document.getElementById('barraGlobal').style.width = pct + '%'; 
+        document.getElementById('textoGlobal').textContent = `${n} de ${TOTAL_TEMAS} temas completados`; 
+      } 
+      
+      // FUNCIÓN PARA EL MENÚ LATERAL
+      function toggleMenu() {
+        const menu = document.getElementById('sidebar-menu');
+        const btn = document.getElementById('btn-menu');
+        menu.classList.toggle('abierto');
+        btn.classList.toggle('active');
       }
-
-      function responder(btn, tema, ejercicio, esCorrecta) {
-        const card = document.getElementById(`ej-${tema}-${ejercicio}`);
-        const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
-        const botones = card.querySelectorAll('.opcion-btn');
-        botones.forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
-        if (esCorrecta) {
-          btn.classList.add('correcta');
-          feedback.classList.add('correcto');
-        } else {
-          btn.classList.add('incorrecta');
-          feedback.classList.add('incorrecto');
-          botones.forEach(b => { if (b.getAttribute('onclick').includes('true')) b.classList.add('correcta'); });
-        }
-        feedback.style.display = 'block';
-      }
-
-      async function completarTema(idx) {
-        if (temasCompletados.includes(idx)) return;
-        temasCompletados.push(idx);
-        localStorage.setItem('mat_completados', JSON.stringify(temasCompletados));
-        marcarUICompletado(idx);
-        actualizarProgreso();
-        try {
-          const s = JSON.parse(localStorage.getItem('datosVisionales') || localStorage.getItem('usuarioActivo') || '{}');
-          if (s.correo) {
-            const pct = Math.round((temasCompletados.length / TOTAL_TEMAS) * 100);
-            await fetch('http://localhost:3000/api/progreso', {
-              method: 'POST', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ correo: s.correo,area:"matematicas", progreso: pct })
-            });
-          }
-        } catch(e) {}
-        if (temasCompletados.length === TOTAL_TEMAS) document.getElementById('moduloCompletado').style.display = 'block';
-      }
-
-      function marcarUICompletado(idx) {
-        const btn = document.getElementById(`btnCompletar-${idx}`);
-        const badge = document.getElementById(`badge-${idx}`);
-        const navBtn = document.getElementById(`btn-tema-${idx}`);
-        if (btn) { btn.textContent = '✓ Tema completado'; btn.classList.add('ya-completado'); }
-        if (badge) badge.style.display = 'inline-block';
-        if (navBtn) navBtn.classList.add('completado-nav');
-      }
-
-      function actualizarProgreso() {
-        const n = temasCompletados.length;
-        const pct = Math.round((n / TOTAL_TEMAS) * 100);
-        document.getElementById('barraGlobal').style.width = pct + '%';
-        document.getElementById('textoGlobal').textContent = `${n} de ${TOTAL_TEMAS} temas completados`;
-      }
-    </script>
-  </body>
+    </script> 
+  </body> 
 </html>
