@@ -1,75 +1,165 @@
 <!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel del Estudiante - ICFES Prep</title>
-  <link rel="stylesheet" href="css/global.css" />
-</head>
-<body class="dashboard-estudiante">
-  
-  <header class="navbar navbar-estudiante">
-    <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </button>
-    
-   <h1>Panel del Estudiante</h1>
-    
-    <div class="nav-right">
-      <div style="display: flex; align-items: center; gap: 10px; color: white;">
-        <span id="nav-nombre-estudiante" style="font-size:14px; opacity:0.85;"></span>
-        <a href="perfil-estudiante.html" id="nav-avatar" class="profile-nav-icon" style="background:#3d8bfd; margin: 0; cursor: pointer; text-decoration: none;">E</a>
-      </div>
-      <a href="#" onclick="cerrarSesion()" style="font-size:13px; opacity:0.85; margin-left: 20px;">Cerrar sesión</a>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel del Estudiante - ICFES Prep</title>
+    <link rel="stylesheet" href="css/global.css" />
+  </head>
+  <body class="dashboard-estudiante">
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
 
-  <aside class="sidebar-oculta" id="sidebar-menu">
+      <h1>Panel del Estudiante</h1>
+
+      <div class="nav-right">
+        <div
+          style="display: flex; align-items: center; gap: 10px; color: white"
+        >
+          <span
+            id="nav-nombre-estudiante"
+            style="font-size: 14px; opacity: 0.85"
+          ></span>
+          <!-- Avatar con soporte para foto e inicial -->
+          <a
+            href="perfil-estudiante.html"
+            id="nav-avatar"
+            class="profile-nav-icon"
+            style="
+              background: #3d8bfd;
+              margin: 0;
+              cursor: pointer;
+              text-decoration: none;
+              width: 38px;
+              height: 38px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              color: white;
+              font-weight: bold;
+            "
+          >
+            E
+          </a>
+        </div>
+        <a
+          href="#"
+          onclick="cerrarSesion()"
+          style="font-size: 13px; opacity: 0.85; margin-left: 20px"
+          >Cerrar sesión</a
+        >
+      </div>
+    </header>
+
+    <aside class="sidebar-oculta" id="sidebar-menu">
       <div class="titulo-panel">Panel</div>
-      <nav style="display: flex; flex-direction: column; gap: 5px;">
+      <nav style="display: flex; flex-direction: column; gap: 5px">
         <a href="panel-estudiante.html" class="nav-item activa">Inicio</a>
         <a href="areas.html" class="nav-item">Áreas</a>
-        
         <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
         <a href="simulacro.html" class="nav-item">Simulacros</a>
-        
-        </nav>
+      </nav>
     </aside>
 
-  <main class="contenido-dinamico" id="contenido-principal">
-    
-    <section style="background: white; border-radius: 20px; padding: 60px 40px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 40px; border-top: 8px solid #123c73;">
-      <h2 id="saludo-estudiante" style="color: #123c73; font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; letter-spacing: -1px;">¡Hola!</h2>
-      <p style="color: #555; font-size: 1.5rem; margin-bottom: 40px;">¿Estás preparado para asegurar ese puntaje en el ICFES?</p>
-      
-      <div style="max-width: 700px; margin: 0 auto; background: #f8fafc; padding: 30px; border-radius: 15px; border: 1px solid #eef2f7;">
-        <p style="font-weight: bold; color: #333; margin-bottom: 15px; text-align: left; font-size: 1.1rem;">Tu progreso hasta el momento:</p>
-        <div style="display: flex; align-items: center; gap: 20px;">
-          <div class="barra-fondo" style="height: 28px; border-radius: 20px; background: #e4e7ed; flex-grow: 1; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);">
-            <div id="barra-progreso-general" class="barra-llena" style="width: 0%; height: 100%; background: linear-gradient(90deg, #123c73, #3d8bfd); border-radius: 20px; transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);"></div>
-          </div>
-          <span id="texto-progreso-general" style="font-size: 28px; font-weight: 900; color: #123c73; min-width: 80px; text-align: right;">0%</span>
-        </div>
-      </div>
-    </section>
+    <main class="contenido-dinamico" id="contenido-principal">
+      <section
+        style="
+          background: white;
+          border-radius: 20px;
+          padding: 60px 40px;
+          text-align: center;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          margin-bottom: 40px;
+          border-top: 8px solid #123c73;
+        "
+      >
+        <h2
+          id="saludo-estudiante"
+          style="
+            color: #123c73;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+          "
+        >
+          ¡Hola!
+        </h2>
+        <p style="color: #555; font-size: 1.5rem; margin-bottom: 40px">
+          ¿Estás preparado para asegurar ese puntaje en el ICFES?
+        </p>
 
-    <div id="contenedor-anuncios" style="display: none;"></div>
-    
-  </main>
+        <div
+          style="
+            max-width: 700px;
+            margin: 0 auto;
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #eef2f7;
+          "
+        >
+          <p
+            style="
+              font-weight: bold;
+              color: #333;
+              margin-bottom: 15px;
+              text-align: left;
+              font-size: 1.1rem;
+            "
+          >
+            Tu progreso hasta el momento:
+          </p>
+          <div style="display: flex; align-items: center; gap: 20px">
+            <div
+              class="barra-fondo"
+              style="
+                height: 28px;
+                border-radius: 20px;
+                background: #e4e7ed;
+                flex-grow: 1;
+                overflow: hidden;
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+              "
+            >
+              <div
+                id="barra-progreso-general"
+                class="barra-llena"
+                style="
+                  width: 0%;
+                  height: 100%;
+                  background: linear-gradient(90deg, #123c73, #3d8bfd);
+                  border-radius: 20px;
+                  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+                "
+              ></div>
+            </div>
+            <span
+              id="texto-progreso-general"
+              style="
+                font-size: 28px;
+                font-weight: 900;
+                color: #123c73;
+                min-width: 80px;
+                text-align: right;
+              "
+              >0%</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <div id="contenedor-anuncios" style="display: none"></div>
+    </main>
 
     <button class="chat-btn" onclick="abrirChat()">✨</button>
-  <script src="js/chat-ia.js"></script>
-  <script src="js/panel-estudiante.js"></script>
-  <script>
-    // Función para abrir/cerrar el menú
-    function toggleMenu() {
-      const menu = document.getElementById('sidebar-menu');
-      const btn = document.getElementById('btn-menu');
-      menu.classList.toggle('abierto');
-      btn.classList.toggle('active');
-    }
-  </script>
-</body>
+    <script src="js/chat-ia.js"></script>
+    <script src="js/panel-estudiante.js"></script>
+  </body>
 </html>

@@ -1,0 +1,2035 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Módulo de Inglés – ICFES Prep</title>
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/modulos.css" />
+    <style>
+      .modulo-header {
+        background: linear-gradient(135deg, #065f46, #059669);
+        color: #fff;
+        padding: 28px 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+      .modulo-header h1 {
+        font-size: 1.7rem;
+        margin: 0;
+      }
+      .modulo-header p {
+        margin: 4px 0 0;
+        opacity: 0.85;
+        font-size: 14px;
+      }
+      .progreso-global-wrap {
+        min-width: 220px;
+      }
+      .progreso-global-wrap label {
+        font-size: 13px;
+        opacity: 0.85;
+      }
+      .progreso-global-barra {
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 20px;
+        height: 14px;
+        margin-top: 6px;
+        overflow: hidden;
+      }
+      .progreso-global-fill {
+        background: #6ee7b7;
+        height: 100%;
+        border-radius: 20px;
+        transition: width 0.7s ease;
+        width: 0%;
+      }
+      .progreso-global-txt {
+        font-size: 13px;
+        margin-top: 4px;
+        opacity: 0.9;
+      }
+      .temas-nav {
+        display: flex;
+        gap: 10px;
+        padding: 18px 10%;
+        background: #fff;
+        border-bottom: 2px solid #eef2f7;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .temas-nav button {
+        background: #f4f7fb;
+        color: #065f46;
+        border: 2px solid #e2e8f0;
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .temas-nav button:hover,
+      .temas-nav button.activo {
+        background: #065f46;
+        color: #fff;
+        border-color: #065f46;
+        transform: none;
+      }
+      .temas-nav button.completado-nav {
+        border-color: #16a34a;
+        color: #16a34a;
+      }
+      .temas-nav button.completado-nav.activo {
+        background: #16a34a;
+        color: #fff;
+        border-color: #16a34a;
+      }
+      .tema-seccion {
+        display: none;
+        padding: 38px 10%;
+        animation: fadeIn 0.3s ease;
+      }
+      .tema-seccion.visible {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .tema-titulo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 6px;
+      }
+      .tema-titulo h2 {
+        color: #065f46;
+        font-size: 1.45rem;
+        margin: 0;
+      }
+      .badge-completado {
+        background: #dcfce7;
+        color: #16a34a;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        display: none;
+      }
+      .tema-subtitulo {
+        color: #64748b;
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+      .concepto-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 26px;
+        margin-bottom: 18px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        border-left: 4px solid #059669;
+      }
+      .concepto-card h3 {
+        color: #065f46;
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+      }
+      .concepto-card p {
+        color: #444;
+        line-height: 1.7;
+        margin-bottom: 8px;
+      }
+      .formula-box {
+        background: #ecfdf5;
+        border-radius: 8px;
+        padding: 13px 16px;
+        font-family: monospace;
+        font-size: 14px;
+        color: #064e3b;
+        margin: 10px 0;
+        border: 1px solid #a7f3d0;
+        line-height: 1.8;
+      }
+      .ejemplo-box {
+        background: #f8fafc;
+        border-radius: 8px;
+        padding: 13px 16px;
+        margin-top: 10px;
+        border: 1px dashed #cbd5e1;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.65;
+      }
+      .ejemplo-box strong {
+        color: #065f46;
+      }
+      .tip-box {
+        background: #fffbeb;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-top: 10px;
+        border: 1px solid #fde68a;
+        font-size: 13px;
+        color: #92400e;
+        line-height: 1.6;
+      }
+      .ejercicios-titulo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 32px 0 18px;
+      }
+      .ejercicios-titulo h3 {
+        color: #065f46;
+        font-size: 1.15rem;
+        margin: 0;
+      }
+      .ejercicios-titulo span {
+        background: #d1fae5;
+        color: #065f46;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+      }
+      .ejercicio-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 22px 26px;
+        margin-bottom: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+      }
+      .ejercicio-card .enunciado {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 14px;
+        line-height: 1.55;
+      }
+      .opciones-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9px;
+        margin-bottom: 10px;
+      }
+      .opcion-btn {
+        background: #f4f7fb;
+        color: #334155;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 11px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        font-weight: 600;
+      }
+      .opcion-btn:hover {
+        background: #d1fae5;
+        border-color: #6ee7b7;
+        transform: none;
+      }
+      .opcion-btn.correcta {
+        background: #dcfce7 !important;
+        border-color: #16a34a !important;
+        color: #15803d !important;
+      }
+      .opcion-btn.incorrecta {
+        background: #fee2e2 !important;
+        border-color: #dc2626 !important;
+        color: #dc2626 !important;
+      }
+      .opcion-btn:disabled {
+        cursor: default;
+      }
+      .feedback-ejercicio {
+        font-size: 13px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        display: none;
+        margin-top: 6px;
+        line-height: 1.55;
+      }
+      .feedback-ejercicio.correcto {
+        background: #dcfce7;
+        color: #15803d;
+      }
+      .feedback-ejercicio.incorrecto {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+      .btn-completar-tema {
+        background: #065f46;
+        color: #fff;
+        border: none;
+        padding: 13px 30px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 32px;
+        transition: all 0.3s;
+      }
+      .btn-completar-tema:hover {
+        background: #059669;
+        transform: translateY(-2px);
+      }
+      .btn-completar-tema.ya-completado {
+        background: #16a34a;
+        cursor: default;
+        transform: none;
+      }
+      .nav-temas-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 38px;
+        padding-top: 22px;
+        border-top: 2px solid #eef2f7;
+      }
+      .nav-temas-footer button {
+        padding: 11px 22px;
+        font-size: 14px;
+        border-radius: 10px;
+      }
+      @media (max-width: 768px) {
+        .opciones-grid {
+          grid-template-columns: 1fr;
+        }
+        .modulo-header,
+        .temas-nav,
+        .tema-seccion {
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+      }
+    </style>
+  </head>
+  <body class="dashboard-estudiante">
+    <header class="navbar navbar-estudiante">
+      <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
+      <h1>Módulo de Inglés</h1>
+      <div class="nav-right">
+        <a
+          href="areas.html"
+          style="color: white; text-decoration: none; font-size: 14px"
+          >← Volver a Áreas</a
+        >
+      </div>
+    </header>
+
+    <aside class="sidebar-oculta" id="sidebar-menu">
+      <div class="titulo-panel">Panel</div>
+      <nav style="display: flex; flex-direction: column; gap: 5px">
+        <a href="panel-estudiante.html" class="nav-item">Inicio</a>
+        <a href="areas.html" class="nav-item activa">Áreas</a>
+        <a href="cuadernillos.html" class="nav-item">Cuadernillos</a>
+        <a href="simulacro.html" class="nav-item">Simulacros</a>
+      </nav>
+    </aside>
+
+    <main class="contenido-dinamico" id="contenido-principal">
+      <div class="modulo-header">
+        <div>
+          <h1>Inglés ICFES – Saber 11</h1>
+          <p>
+            Contenido completo: 5 temas, 40+ conceptos, 40 ejercicios tipo ICFES
+          </p>
+        </div>
+        <div class="progreso-global-wrap">
+          <label>Progreso del módulo</label>
+          <div class="progreso-global-barra">
+            <div class="progreso-global-fill" id="barraGlobal"></div>
+          </div>
+          <div class="progreso-global-txt" id="textoGlobal">
+            0 de 5 temas completados
+          </div>
+        </div>
+      </div>
+
+      <nav class="temas-nav">
+        <button onclick="mostrarTema(0)" class="activo" id="btn-tema-0">
+          1. Vocabulario y Contexto
+        </button>
+        <button onclick="mostrarTema(1)" id="btn-tema-1">
+          2. Gramática Esencial
+        </button>
+        <button onclick="mostrarTema(2)" id="btn-tema-2">
+          3. Comprensión de Lectura
+        </button>
+        <button onclick="mostrarTema(3)" id="btn-tema-3">
+          4. Tiempos Verbales
+        </button>
+        <button onclick="mostrarTema(4)" id="btn-tema-4">
+          5. Conectores y Coherencia
+        </button>
+      </nav>
+
+      <!-- TEMA 0: VOCABULARIO -->
+      <section class="tema-seccion visible" id="tema-0">
+        <div class="tema-titulo">
+          <h2>📖 Vocabulario y Contexto</h2>
+          <span class="badge-completado" id="badge-0">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Estrategias para deducir el significado de palabras por contexto,
+          familias de palabras y prefijos/sufijos frecuentes en el ICFES.
+        </p>
+
+        <div class="concepto-card">
+          <h3>1.1 Deducción por Contexto</h3>
+          <p>
+            En el ICFES Inglés, muchas preguntas piden el significado de una
+            palabra subrayada. La estrategia es leer las oraciones antes y
+            después para deducirlo.
+          </p>
+          <div class="formula-box">
+            Pasos: 1. Lee la oración completa donde aparece la palabra. 2.
+            Identifica pistas: sinónimos cercanos, ejemplos, contraste (but,
+            however, although). 3. Sustituye la palabra por cada opción y elige
+            la que mantiene el sentido.
+          </div>
+          <div class="ejemplo-box">
+            <strong
+              >The scientist was meticulous in her work, checking every detail
+              twice.</strong
+            ><br />→ "meticulous" significa: <em>cuidadosa / detallista</em> (la
+            pista es "checking every detail twice")
+          </div>
+          <div class="tip-box">
+            💡 Palabras como <em>however, but, although</em> indican contraste:
+            la palabra tiene significado opuesto a lo que ya se dijo.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.2 Prefijos Frecuentes</h3>
+          <div class="formula-box">
+            un- → negación: unhappy, unclear, unknown re- → repetición: redo,
+            rewrite, return pre- → antes: preview, prehistoric, premature mis- →
+            error: misunderstand, mistake, misuse over- → exceso: overwork,
+            overestimate, overcome sub- → debajo: subway, submarine, subtitle
+            inter-→ entre: international, interact, interview dis- → opuesto:
+            disagree, disappear, disconnect
+          </div>
+          <div class="ejemplo-box">
+            <strong>The instructions were unclear.</strong> → un + clear = no
+            estaba claro
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.3 Sufijos Frecuentes</h3>
+          <div class="formula-box">
+            -tion / -sion → sustantivo: education, permission, decision -ness →
+            sustantivo: happiness, darkness, kindness -ful → adjetivo:
+            beautiful, careful, powerful -less → adjetivo (sin): careless,
+            hopeless, useless -ly → adverbio: quickly, carefully, recently -er /
+            -or → agente: teacher, actor, writer -able / -ible → posibilidad:
+            comfortable, flexible, possible -ment → sustantivo: government,
+            improvement, movement
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.4 Vocabulario Académico Frecuente</h3>
+          <div class="formula-box">
+            argue (v) → sostener / argumentar indicate (v) → indicar / señalar
+            suggest (v) → sugerir / implicar therefore (adv) → por lo tanto
+            however (adv) → sin embargo despite (prep) → a pesar de although
+            (conj) → aunque significant (adj)→ significativo previous (adj) →
+            previo / anterior according to → según
+          </div>
+          <div class="tip-box">
+            💡 Estas palabras aparecen en textos académicos del ICFES.
+            Reconocerlas ayuda a entender la idea principal del párrafo.
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-0">
+          <p class="enunciado">
+            1. Read:
+            <em
+              >"The expedition was <u>arduous</u>, requiring months of
+              preparation and extreme physical endurance."</em
+            ><br />The word <strong>arduous</strong> most likely means:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              A) Easy and enjoyable
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, true)">
+              B) Very difficult and demanding
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              C) Short and simple
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 0, false)">
+              D) Cheap and affordable
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-0">
+            ✅ Correcto. "Arduous" significa muy difícil. La pista está en
+            "months of preparation and extreme physical endurance".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-1">
+          <p class="enunciado">
+            2. What does the prefix <strong>"mis-"</strong> mean in the word
+            <em>misunderstand</em>?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              A) Again
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              B) Before
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, true)">
+              C) Wrongly / incorrectly
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 1, false)">
+              D) After
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-1">
+            ✅ Correcto. "Mis-" indica que algo se hace de forma incorrecta o
+            equivocada.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-2">
+          <p class="enunciado">
+            3.
+            <em
+              >"The scientist's findings were <u>significant</u>, changing the
+              way we understand the human brain."</em
+            ><br />The word <strong>significant</strong> means:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              A) Unimportant
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, true)">
+              B) Important and meaningful
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              C) Confusing
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 2, false)">
+              D) Temporary
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-2">
+            ✅ Correcto. "Significant" = significativo / importante. La pista es
+            "changing the way we understand".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-3">
+          <p class="enunciado">
+            4. The suffix <strong>"-less"</strong> in the word
+            <em>careless</em> indicates:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              A) Full of care
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              B) Able to care
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, true)">
+              C) Without care
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 3, false)">
+              D) Too much care
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-3">
+            ✅ Correcto. El sufijo "-less" significa "sin" o "sin la cualidad
+            de".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-4">
+          <p class="enunciado">
+            5.
+            <em
+              >"<u>Despite</u> the heavy rain, the match continued without
+              interruption."</em
+            ><br />The word <strong>despite</strong> is used to express:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              A) Cause and effect
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, true)">
+              B) Contrast / concession
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              C) Time sequence
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 4, false)">
+              D) Addition
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-4">
+            ✅ Correcto. "Despite" = a pesar de. Expresa contraste o concesión
+            entre dos ideas.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-5">
+          <p class="enunciado">
+            6. What does the word <strong>"previous"</strong> mean?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              A) Next / following
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, true)">
+              B) Before / prior
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              C) Important
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
+              D) Similar
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-5">
+            ✅ Correcto. "Previous" significa anterior o previo.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-6">
+          <p class="enunciado">
+            7.
+            <em
+              >"The professor <u>indicated</u> that the exam would cover
+              chapters 3 through 7."</em
+            ><br />The word <strong>indicated</strong> means:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              A) Forgot
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              B) Denied
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, true)">
+              C) Pointed out / stated
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 6, false)">
+              D) Wondered
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-6">
+            ✅ Correcto. "Indicated" = señaló / indicó.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-0-7">
+          <p class="enunciado">
+            8. The suffix <strong>"-tion"</strong> in
+            <em>education</em> transforms the verb into a:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              A) Adjective
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              B) Adverb
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, true)">
+              C) Noun
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 7, false)">
+              D) Verb in past tense
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-0-7">
+            ✅ Correcto. El sufijo "-tion" convierte verbos en sustantivos:
+            educate → education.
+          </div>
+        </div>
+
+        <button
+          class="btn-completar-tema"
+          id="btnCompletar-0"
+          onclick="completarTema(0)"
+        >
+          ✓ Marcar tema como completado
+        </button>
+        <div class="nav-temas-footer">
+          <span></span>
+          <button onclick="mostrarTema(1)">Gramática Esencial →</button>
+        </div>
+      </section>
+
+      <!-- TEMA 1: GRAMÁTICA -->
+      <section class="tema-seccion" id="tema-1">
+        <div class="tema-titulo">
+          <h2>📝 Gramática Esencial</h2>
+          <span class="badge-completado" id="badge-1">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Estructuras gramaticales fundamentales evaluadas en el ICFES:
+          artículos, preposiciones, voz pasiva y oraciones condicionales.
+        </p>
+
+        <div class="concepto-card">
+          <h3>1.1 Artículos: a / an / the</h3>
+          <div class="formula-box">
+            a → antes de consonante (sonido): a book, a university an → antes de
+            vocal (sonido): an apple, an hour the → artículo definido (ya
+            conocido o único): the sun, the president Ø → sin artículo: con
+            plurales generales, sustantivos incontables generales I like music.
+            / Dogs are friendly.
+          </div>
+          <div class="ejemplo-box">
+            <strong>She bought <u>a</u> new car. The car is red.</strong><br />→
+            Primera mención: "a". Segunda mención (ya conocido): "the".
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.2 Preposiciones de Tiempo y Lugar</h3>
+          <div class="formula-box">
+            AT → hora exacta, lugar puntual: at 3 pm, at school, at home ON →
+            días, fechas, superficies: on Monday, on the table, on July 4th IN →
+            meses, años, períodos, in 2023, in the morning, lugares cerrados: in
+            Colombia, in the box FOR → duración: I've studied for 3 hours. SINCE
+            → punto de inicio: I've been here since Monday.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.3 Voz Pasiva</h3>
+          <p>
+            Se usa cuando el agente (quien hace la acción) es desconocido,
+            irrelevante o se quiere enfatizar el objeto.
+          </p>
+          <div class="formula-box">
+            Estructura: Subject + TO BE (conjugado) + Past Participle + (by +
+            agent) Presente: The book is written by García Márquez. Pasado: The
+            window was broken (by someone). Futuro: The report will be sent
+            tomorrow. Presente perf.: The problem has been solved.
+          </div>
+          <div class="ejemplo-box">
+            <strong>Activa:</strong> Scientists discovered a new species.<br /><strong
+              >Pasiva:</strong
+            >
+            A new species <u>was discovered</u> by scientists.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>1.4 Oraciones Condicionales</h3>
+          <div class="formula-box">
+            Tipo 0 (verdad general): If + present simple, present simple → If
+            you heat water to 100°C, it boils. Tipo 1 (posible / real): If +
+            present simple, will + infinitive → If it rains, I will stay home.
+            Tipo 2 (hipotético / irreal presente): If + past simple, would +
+            infinitive → If I had more time, I would travel more. Tipo 3 (irreal
+            pasado): If + past perfect, would have + past participle → If she
+            had studied, she would have passed.
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-0">
+          <p class="enunciado">
+            1. Choose the correct article:
+            <em
+              >"I saw ___ elephant at the zoo. ___ elephant was very large."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              A) the / a
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, true)">
+              B) an / The
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              C) a / The
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 0, false)">
+              D) an / an
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-0">
+            ✅ Correcto. "an" porque "elephant" empieza con vocal. La segunda
+            vez "The" porque ya se mencionó (conocido).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-1">
+          <p class="enunciado">
+            2. Select the correct preposition:
+            <em>"The meeting is ___ Monday ___ 9 am."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 1, true)">
+              A) on / at
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              B) in / on
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              C) at / in
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 1, false)">
+              D) on / in
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-1">
+            ✅ Correcto. ON para días de la semana. AT para horas exactas.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-2">
+          <p class="enunciado">
+            3. Transform to passive voice:
+            <em>"The company produces 500 cars per day."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              A) 500 cars produces the company per day.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, true)">
+              B) 500 cars are produced by the company per day.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              C) 500 cars were produced by the company per day.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 2, false)">
+              D) 500 cars have produced per day.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-2">
+            ✅ Correcto. Presente simple pasiva: are + past participle
+            (produced).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-3">
+          <p class="enunciado">
+            4. Choose the correct conditional:
+            <em>"___ you work hard, you ___ succeed."</em> (Type 1)
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 3, true)">
+              A) If / will
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              B) If / would
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              C) When / would
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 3, false)">
+              D) Unless / will not
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-3">
+            ✅ Correcto. Condicional Tipo 1: If + present simple + will +
+            infinitive.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-4">
+          <p class="enunciado">
+            5.
+            <em
+              >"If she <u>had known</u> about the problem, she
+              <u>would have called</u> the doctor."</em
+            ><br />This sentence is:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              A) Type 0 conditional
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              B) Type 1 conditional
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, false)">
+              C) Type 2 conditional
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 4, true)">
+              D) Type 3 conditional
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-4">
+            ✅ Correcto. Tipo 3: had + past participle / would have + past
+            participle. Situación irreal en el pasado.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-5">
+          <p class="enunciado">
+            6. Complete: <em>"She has lived in Bogotá ___ 2015."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              A) for
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, true)">
+              B) since
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              C) during
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 5, false)">
+              D) by
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-5">
+            ✅ Correcto. SINCE se usa con un punto específico en el tiempo
+            (2015). FOR se usa con duración (for 9 years).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-6">
+          <p class="enunciado">7. Identify the passive voice sentence:</p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              A) She wrote the report yesterday.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, true)">
+              B) The report was written by her.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              C) She will write the report tomorrow.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 6, false)">
+              D) She has written the report.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-6">
+            ✅ Correcto. La voz pasiva usa: to be + past participle. "was
+            written" es la estructura pasiva.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-1-7">
+          <p class="enunciado">
+            8. <em>"___ I were rich, I would travel the world."</em> This
+            conditional type is:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              A) Type 0 – general truth
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              B) Type 1 – real possibility
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, true)">
+              C) Type 2 – hypothetical present
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 1, 7, false)">
+              D) Type 3 – unreal past
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-1-7">
+            ✅ Correcto. "If I were rich" usa pasado hipotético (were) + would.
+            Es Tipo 2 (situación irreal en el presente).
+          </div>
+        </div>
+
+        <button
+          class="btn-completar-tema"
+          id="btnCompletar-1"
+          onclick="completarTema(1)"
+        >
+          ✓ Marcar tema como completado
+        </button>
+        <div class="nav-temas-footer">
+          <button onclick="mostrarTema(0)">← Vocabulario</button>
+          <button onclick="mostrarTema(2)">Comprensión Lectora →</button>
+        </div>
+      </section>
+
+      <!-- TEMA 2: COMPRENSIÓN LECTORA -->
+      <section class="tema-seccion" id="tema-2">
+        <div class="tema-titulo">
+          <h2>📰 Comprensión de Lectura</h2>
+          <span class="badge-completado" id="badge-2">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Estrategias para responder preguntas sobre textos en inglés: idea
+          principal, detalles específicos, inferencia y propósito del autor.
+        </p>
+
+        <div class="concepto-card">
+          <h3>2.1 Tipos de Preguntas en el ICFES</h3>
+          <div class="formula-box">
+            1. Main idea / Topic → ¿De qué trata principalmente el texto? 2.
+            Specific detail → ¿Qué dice el texto sobre X? 3. Inference → ¿Qué se
+            puede concluir / inferir? 4. Vocabulary in context → ¿Qué significa
+            la palabra subrayada? 5. Author's purpose → ¿Para qué escribe el
+            autor? 6. Text organization → ¿Cómo está organizado el texto?
+          </div>
+          <div class="tip-box">
+            💡 Para la idea principal: lee el primer y último párrafo. El tema
+            se repite en ambos. Las opciones incorrectas suelen ser demasiado
+            específicas o demasiado generales.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>2.2 Estrategia Skimming y Scanning</h3>
+          <div class="formula-box">
+            SKIMMING (lectura rápida para idea general): → Lee el título,
+            subtítulos, primera oración de cada párrafo. → Úsalo para preguntas
+            de "main idea" o "purpose". SCANNING (buscar información
+            específica): → Busca palabras clave del enunciado dentro del texto.
+            → Úsalo para preguntas de detalle o datos concretos (fechas,
+            nombres, cifras).
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>2.3 Cómo Identificar la Idea Principal</h3>
+          <div class="formula-box">
+            ✔ Aparece en el primer párrafo (o primera oración de cada párrafo =
+            topic sentence). ✔ Es el tema más amplio del texto; todos los
+            detalles la apoyan. ✔ Descarta opciones que: - Solo hablan de un
+            párrafo específico (demasiado específicas) - Son tan generales que
+            podrían aplicar a cualquier texto - Contradicen lo que dice el texto
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>2.4 Inferencia y Conclusión</h3>
+          <p>
+            Inferir = sacar una conclusión que NO está escrita directamente,
+            pero que se puede deducir lógicamente de la información del texto.
+          </p>
+          <div class="formula-box">
+            Palabras clave en preguntas de inferencia: "It can be inferred
+            that..." "The passage suggests that..." "What can be concluded
+            from..." "The author implies that..." Regla: La respuesta correcta
+            debe ser 100% apoyada por el texto. No uses conocimiento externo ni
+            suposiciones.
+          </div>
+          <div class="tip-box">
+            💡 Si una opción dice algo que el texto no menciona ni sugiere en
+            ninguna parte, está incorrecta aunque "suene lógica".
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-0">
+          <p class="enunciado">
+            Read the passage and answer questions 1–4:<br /><br /><em
+              >"Climate change is one of the most pressing challenges of our
+              time. Rising temperatures are causing glaciers to melt, sea levels
+              to rise, and extreme weather events to become more frequent.
+              Scientists agree that human activities, particularly the burning
+              of fossil fuels, are the primary cause. Governments around the
+              world are now developing policies to reduce carbon emissions and
+              transition to renewable energy sources."</em
+            >
+          </p>
+          <p class="enunciado">
+            1. What is the <strong>main idea</strong> of this passage?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+              A) Glaciers are melting because of warm weather.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, true)">
+              B) Climate change is a serious global problem caused by humans,
+              and governments are responding.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+              C) Renewable energy is cheaper than fossil fuels.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">
+              D) Sea levels have always changed throughout history.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-0">
+            ✅ Correcto. La idea principal abarca todo el texto: causas, efectos
+            y respuesta global al cambio climático.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-1">
+          <p class="enunciado">
+            2. According to the passage, what is the
+            <strong>primary cause</strong> of climate change?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+              A) Natural cycles of the Earth
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, true)">
+              B) Human activities, especially burning fossil fuels
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+              C) Government policies
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">
+              D) Melting glaciers
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-1">
+            ✅ Correcto. El texto dice explícitamente: "human activities,
+            particularly the burning of fossil fuels, are the primary cause."
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-2">
+          <p class="enunciado">
+            3. What can be <strong>inferred</strong> from the passage?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+              A) All governments have already stopped using fossil fuels.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, true)">
+              B) If carbon emissions are not reduced, climate problems may
+              worsen.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+              C) Scientists disagree about the causes of climate change.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">
+              D) Renewable energy cannot replace fossil fuels.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-2">
+            ✅ Correcto. Se infiere que las políticas buscan evitar mayores
+            consecuencias, lo que implica que sin acción el problema empeoraría.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-3">
+          <p class="enunciado">
+            4. The word <strong>"pressing"</strong> in the first sentence most
+            likely means:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+              A) Relaxing and easy
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+              B) Related to the press / media
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, true)">
+              C) Urgent and important
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">
+              D) Old and historical
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-3">
+            ✅ Correcto. "Pressing" en este contexto significa urgente. El texto
+            habla de consecuencias graves, lo que confirma la urgencia.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-4">
+          <p class="enunciado">
+            Read:
+            <em
+              >"The library closes at 8 pm on weekdays and at 5 pm on weekends.
+              Members can borrow up to 5 books at a time for a period of two
+              weeks."</em
+            ><br /><br />5. What is the <strong>purpose</strong> of this text?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+              A) To argue that libraries should stay open longer
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, true)">
+              B) To inform readers about library rules and hours
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+              C) To persuade people to read more books
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">
+              D) To describe the history of libraries
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-4">
+            ✅ Correcto. El texto da información práctica (horarios y reglas) →
+            propósito informativo.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-5">
+          <p class="enunciado">
+            6. According to the library text above, a member who wants to borrow
+            books on a Saturday must return them by:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 5, true)">
+              A) The following Saturday (2 weeks later)
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+              B) Before 5 pm the same day
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+              C) Within one week
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">
+              D) The following Monday
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-5">
+            ✅ Correcto. El texto dice "for a period of two weeks", así que los
+            libros prestados el sábado se devuelven dos semanas después.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-6">
+          <p class="enunciado">
+            7. Which reading strategy is most useful for finding a specific date
+            mentioned in a long article?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+              A) Skimming
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, true)">
+              B) Scanning
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+              C) Reading word by word
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">
+              D) Summarizing
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-6">
+            ✅ Correcto. Scanning = buscar información específica rápidamente
+            (fechas, nombres, cifras).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-7">
+          <p class="enunciado">
+            8. In the climate change text, the word
+            <strong>"transition"</strong> most likely means:
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+              A) Block or prevent
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, true)">
+              B) Move or change from one state to another
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+              C) Destroy completely
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">
+              D) Stay the same
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-7">
+            ✅ Correcto. "Transition to renewable energy" = cambiar hacia
+            energías renovables.
+          </div>
+        </div>
+
+        <button
+          class="btn-completar-tema"
+          id="btnCompletar-2"
+          onclick="completarTema(2)"
+        >
+          ✓ Marcar tema como completado
+        </button>
+        <div class="nav-temas-footer">
+          <button onclick="mostrarTema(1)">← Gramática</button>
+          <button onclick="mostrarTema(3)">Tiempos Verbales →</button>
+        </div>
+      </section>
+
+      <!-- TEMA 3: TIEMPOS VERBALES -->
+      <section class="tema-seccion" id="tema-3">
+        <div class="tema-titulo">
+          <h2>⏱️ Tiempos Verbales</h2>
+          <span class="badge-completado" id="badge-3">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Los tiempos verbales más evaluados en el ICFES: simple, continuo,
+          perfecto y sus usos en contexto.
+        </p>
+
+        <div class="concepto-card">
+          <h3>3.1 Presente Simple vs. Presente Continuo</h3>
+          <div class="formula-box">
+            PRESENT SIMPLE (hábitos, verdades generales, rutinas): (+) She works
+            every day. (-) She doesn't work on Sundays. (?) Does she work here?
+            Marcadores: always, usually, often, sometimes, never, every day
+            PRESENT CONTINUOUS (acciones en progreso AHORA): (+) She is working
+            right now. (-) She isn't working at the moment. (?) Is she working
+            today? Marcadores: now, right now, at the moment, currently, today
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.2 Pasado Simple vs. Presente Perfecto</h3>
+          <div class="formula-box">
+            PAST SIMPLE (acción terminada en tiempo específico pasado): (+) I
+            visited Paris in 2019. Marcadores: yesterday, last year, in 2010,
+            ago, when PRESENT PERFECT (experiencia de vida / acción con efecto
+            presente): (+) I have visited Paris. (alguna vez en mi vida) (+) She
+            has just finished. (acción muy reciente) Marcadores: ever, never,
+            already, yet, just, recently, for (duración), since (punto de
+            inicio)
+          </div>
+          <div class="ejemplo-box">
+            <strong>I saw that movie last week.</strong> (tiempo específico →
+            pasado simple)<br /><strong>I have seen that movie.</strong>
+            (experiencia, sin tiempo específico → presente perfecto)
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.3 Futuro: will vs. going to</h3>
+          <div class="formula-box">
+            WILL (decisión espontánea / predicción sin evidencia): I'll help you
+            with that. (decisión en el momento) I think it will rain.
+            (predicción) GOING TO (plan previo / evidencia visible): I'm going
+            to study medicine. (plan ya decidido) Look at those clouds – it's
+            going to rain! (evidencia visible)
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>3.4 Pasado Continuo y Pasado Perfecto</h3>
+          <div class="formula-box">
+            PAST CONTINUOUS (acción en progreso en un momento del pasado):
+            was/were + verb-ing I was sleeping when the phone rang. PAST PERFECT
+            (acción completada ANTES de otra en el pasado): had + past
+            participle When I arrived, she had already left. (primero se fue
+            ella, luego llegué yo)
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-0">
+          <p class="enunciado">
+            1. <em>"She ___ to the gym every morning before work."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 0, true)">
+              A) goes
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+              B) is going
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+              C) went
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">
+              D) has gone
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-0">
+            ✅ Correcto. "Every morning" indica rutina → Presente Simple:
+            "goes".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-1">
+          <p class="enunciado">
+            2. <em>"I can't talk right now. I ___ dinner."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+              A) make
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, true)">
+              B) am making
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+              C) made
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">
+              D) will make
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-1">
+            ✅ Correcto. "Right now" indica que la acción ocurre en este momento
+            → Presente Continuo: "am making".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-2">
+          <p class="enunciado">3. <em>"Have you ___ been to Cartagena?"</em></p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 2, true)">
+              A) ever
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+              B) yesterday
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+              C) last year
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">
+              D) in 2020
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-2">
+            ✅ Correcto. "Ever" es el marcador del Presente Perfecto para
+            preguntar sobre experiencias de vida.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-3">
+          <p class="enunciado">
+            4.
+            <em
+              >"By the time the firefighters arrived, the building ___
+              completely."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+              A) burned
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+              B) was burning
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, true)">
+              C) had burned
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">
+              D) has burned
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-3">
+            ✅ Correcto. "By the time... arrived" indica que la acción ocurrió
+            ANTES → Pasado Perfecto: "had burned".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-4">
+          <p class="enunciado">
+            5. <em>"I ___ for this company since 2018."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+              A) work
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+              B) worked
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, true)">
+              C) have worked
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">
+              D) was working
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-4">
+            ✅ Correcto. "Since 2018" con acción que continúa hasta el presente
+            → Presente Perfecto: "have worked".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-5">
+          <p class="enunciado">
+            6. <em>"While I ___ the dishes, my roommate was watching TV."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+              A) washed
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, true)">
+              B) was washing
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+              C) have washed
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">
+              D) wash
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-5">
+            ✅ Correcto. "While" indica dos acciones simultáneas en el pasado →
+            Pasado Continuo: "was washing".
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-6">
+          <p class="enunciado">
+            7. <em>"Look at those dark clouds! It ___ rain."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+              A) will
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, true)">
+              B) is going to
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+              C) rains
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">
+              D) rained
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-6">
+            ✅ Correcto. "Look at those dark clouds" = evidencia visible → Going
+            to (predicción basada en evidencia).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-7">
+          <p class="enunciado">
+            8.
+            <em>"She ___ in London for two years before moving to Paris."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+              A) lives
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+              B) has lived
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, true)">
+              C) had lived
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">
+              D) was living
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-7">
+            ✅ Correcto. Acción que ocurrió antes de otra acción pasada → Pasado
+            Perfecto: "had lived".
+          </div>
+        </div>
+
+        <button
+          class="btn-completar-tema"
+          id="btnCompletar-3"
+          onclick="completarTema(3)"
+        >
+          ✓ Marcar tema como completado
+        </button>
+        <div class="nav-temas-footer">
+          <button onclick="mostrarTema(2)">← Comprensión Lectora</button>
+          <button onclick="mostrarTema(4)">Conectores y Coherencia →</button>
+        </div>
+      </section>
+
+      <!-- TEMA 4: CONECTORES -->
+      <section class="tema-seccion" id="tema-4">
+        <div class="tema-titulo">
+          <h2>🔗 Conectores y Coherencia Textual</h2>
+          <span class="badge-completado" id="badge-4">✓ Completado</span>
+        </div>
+        <p class="tema-subtitulo">
+          Conectores discursivos y su función para dar coherencia y cohesión a
+          los textos en inglés.
+        </p>
+
+        <div class="concepto-card">
+          <h3>4.1 Conectores de Contraste</h3>
+          <div class="formula-box">
+            however → sin embargo (inicio de oración) but → pero (une dos
+            cláusulas) although/though → aunque (aunque + sujeto + verbo)
+            despite/in spite of → a pesar de (despite + noun/gerund) on the
+            other hand → por otro lado nevertheless → no obstante whereas/while
+            → mientras que (contraste)
+          </div>
+          <div class="ejemplo-box">
+            <strong>Although</strong> it was raining, they went out.<br /><strong
+              >Despite</strong
+            >
+            the rain, they went out.<br /><strong>However,</strong> they decided
+            to go out.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>4.2 Conectores de Causa y Efecto</h3>
+          <div class="formula-box">
+            because / since / as → porque (causa) therefore / thus / so → por lo
+            tanto (efecto/consecuencia) as a result → como resultado
+            consequently → en consecuencia due to / owing to → debido a (+
+            sustantivo) because of → a causa de (+ sustantivo)
+          </div>
+          <div class="ejemplo-box">
+            <strong>Because</strong> she studied hard, she passed the exam.<br />She
+            studied hard; <strong>therefore,</strong> she passed.<br />She
+            passed <strong>due to</strong> her hard work.
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>4.3 Conectores de Adición y Secuencia</h3>
+          <div class="formula-box">
+            ADICIÓN: furthermore / moreover / in addition → además also / too /
+            as well → también not only... but also → no solo... sino también
+            SECUENCIA: first / firstly → primero then / next → luego / después
+            after that → después de eso finally / lastly → finalmente in
+            conclusion → en conclusión
+          </div>
+        </div>
+
+        <div class="concepto-card">
+          <h3>4.4 Coherencia y Cohesión Textual</h3>
+          <p>
+            Una pregunta frecuente del ICFES pide identificar qué oración o
+            conector encaja mejor en un espacio en blanco del texto.
+          </p>
+          <div class="formula-box">
+            Pasos para elegir el conector correcto: 1. Lee la oración ANTERIOR
+            al espacio: ¿qué idea expresa? 2. Lee la oración POSTERIOR: ¿qué
+            relación tiene con la anterior? → ¿Contraste? → however, but,
+            although → ¿Consecuencia? → therefore, as a result → ¿Adición? →
+            furthermore, in addition → ¿Secuencia? → then, finally 3. Elige el
+            conector que expresa esa relación.
+          </div>
+          <div class="tip-box">
+            💡 Un error común es confundir "although" (conjunción, seguida de
+            sujeto+verbo) con "despite" (preposición, seguida de sustantivo o
+            gerundio).
+          </div>
+        </div>
+
+        <div class="ejercicios-titulo">
+          <h3>Ejercicios tipo ICFES</h3>
+          <span>8 preguntas</span>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-0">
+          <p class="enunciado">
+            1.
+            <em
+              >"The new policy was expensive; ___, it proved very
+              effective."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+              A) therefore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, true)">
+              B) however
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+              C) furthermore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">
+              D) because
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-0">
+            ✅ Correcto. Hay contraste: costosa PERO efectiva → "however" (sin
+            embargo).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-1">
+          <p class="enunciado">
+            2. <em>"The roads were closed ___ the heavy snowfall."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+              A) although
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+              B) therefore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, true)">
+              C) due to
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">
+              D) moreover
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-1">
+            ✅ Correcto. "Due to" + sustantivo expresa causa. Las carreteras se
+            cerraron A CAUSA DE la nieve.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-2">
+          <p class="enunciado">
+            3.
+            <em
+              >"The product is affordable. ___, it is available in stores
+              nationwide."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+              A) However
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+              B) Therefore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, true)">
+              C) Furthermore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">
+              D) Although
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-2">
+            ✅ Correcto. Se añade otra ventaja (adición) → "Furthermore"
+            (además).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-3">
+          <p class="enunciado">
+            4. <em>"___ she had no previous experience, she got the job."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 3, true)">
+              A) Although
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+              B) Because
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+              C) Therefore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">
+              D) Due to
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-3">
+            ✅ Correcto. "Although" introduce una oración concesiva (sujeto +
+            verbo). Contraste: sin experiencia PERO consiguió el trabajo.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-4">
+          <p class="enunciado">
+            5.
+            <em
+              >"First, mix the dry ingredients. ___, add the eggs and butter.
+              ___, bake for 30 minutes."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+              A) However / Because
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, true)">
+              B) Then / Finally
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+              C) Therefore / Although
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">
+              D) Moreover / Due to
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-4">
+            ✅ Correcto. Son instrucciones en secuencia → Then (luego) / Finally
+            (finalmente).
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-5">
+          <p class="enunciado">
+            6. What is the difference between <strong>"although"</strong> and
+            <strong>"despite"</strong>?
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+              A) They are identical and interchangeable.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, true)">
+              B) "Although" is followed by subject + verb; "despite" by a noun
+              or gerund.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+              C) "Despite" expresses cause; "although" expresses result.
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">
+              D) "Although" comes at the end; "despite" at the beginning.
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-5">
+            ✅ Correcto. Although + clause (sujeto+verbo). Despite +
+            noun/gerund. Ej: Although it rained / Despite the rain.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-6">
+          <p class="enunciado">
+            7. <em>"She trained for months. ___, she won the championship."</em>
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+              A) However
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, true)">
+              B) As a result
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+              C) Despite
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">
+              D) Although
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-6">
+            ✅ Correcto. Entrenó mucho → CONSECUENCIA: ganó. "As a result"
+            expresa resultado/efecto.
+          </div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-4-7">
+          <p class="enunciado">
+            8.
+            <em
+              >"Not only is the course free, ___ it offers a certificate upon
+              completion."</em
+            >
+          </p>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+              A) however
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+              B) therefore
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, true)">
+              C) but also
+            </button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">
+              D) although
+            </button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-7">
+            ✅ Correcto. "Not only... but also" es una estructura de adición que
+            enfatiza dos ventajas.
+          </div>
+        </div>
+
+        <button
+          class="btn-completar-tema"
+          id="btnCompletar-4"
+          onclick="completarTema(4)"
+        >
+          ✓ Marcar tema como completado
+        </button>
+
+        <!-- Banner de módulo completado -->
+        <div
+          id="moduloCompletado"
+          style="
+            display: none;
+            background: linear-gradient(135deg, #065f46, #059669);
+            color: #fff;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 32px;
+          "
+        >
+          <div style="font-size: 3rem; margin-bottom: 12px">🎉</div>
+          <h2 style="margin: 0 0 8px; font-size: 1.6rem">
+            ¡Módulo de Inglés Completado!
+          </h2>
+          <p style="opacity: 0.9; margin-bottom: 24px">
+            Has dominado vocabulario, gramática, comprensión lectora, tiempos
+            verbales y conectores. ¡Excelente trabajo!
+          </p>
+          <div
+            style="
+              display: flex;
+              gap: 14px;
+              justify-content: center;
+              flex-wrap: wrap;
+            "
+          >
+            <a
+              href="simulacro.html"
+              style="
+                background: #fff;
+                color: #065f46;
+                padding: 12px 28px;
+                border-radius: 10px;
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 14px;
+              "
+              >Ir al Simulacro →</a
+            >
+            <a
+              href="areas.html"
+              style="
+                background: rgba(255, 255, 255, 0.2);
+                color: #fff;
+                padding: 12px 28px;
+                border-radius: 10px;
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 14px;
+              "
+              >Ver otras áreas</a
+            >
+          </div>
+        </div>
+
+        <div class="nav-temas-footer">
+          <button onclick="mostrarTema(3)">← Tiempos Verbales</button>
+          <span></span>
+        </div>
+      </section>
+    </main>
+
+    <button class="chat-btn" onclick="abrirChat()">✨</button>
+
+    <script src="js/chat-ia.js"></script>
+    <script>
+      const sesion = JSON.parse(
+        localStorage.getItem("datosVisionales") ||
+          localStorage.getItem("usuarioActivo") ||
+          "{}",
+      );
+      if (!sesion.correo) window.location.href = "index.html";
+      const TOTAL_TEMAS = 5;
+      let temasCompletados = JSON.parse(
+        localStorage.getItem("ing_completados") || "[]",
+      );
+      window.addEventListener("DOMContentLoaded", () => {
+        temasCompletados.forEach((idx) => marcarUICompletado(idx));
+        actualizarProgreso();
+      });
+      function mostrarTema(idx) {
+        document
+          .querySelectorAll(".tema-seccion")
+          .forEach((s) => s.classList.remove("visible"));
+        document
+          .querySelectorAll(".temas-nav button")
+          .forEach((b) => b.classList.remove("activo"));
+        document.getElementById(`tema-${idx}`).classList.add("visible");
+        document.getElementById(`btn-tema-${idx}`).classList.add("activo");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function responder(btn, tema, ejercicio, esCorrecta) {
+        const card = document.getElementById(`ej-${tema}-${ejercicio}`);
+        const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
+        const botones = card.querySelectorAll(".opcion-btn");
+        botones.forEach((b) => {
+          b.disabled = true;
+          b.style.cursor = "default";
+        });
+        if (esCorrecta) {
+          btn.classList.add("correcta");
+          feedback.classList.add("correcto");
+        } else {
+          btn.classList.add("incorrecta");
+          feedback.classList.add("incorrecto");
+          botones.forEach((b) => {
+            if (b.getAttribute("onclick").includes("true"))
+              b.classList.add("correcta");
+          });
+        }
+        feedback.style.display = "block";
+      }
+      async function completarTema(idx) {
+        if (temasCompletados.includes(idx)) return;
+        temasCompletados.push(idx);
+        localStorage.setItem(
+          "ing_completados",
+          JSON.stringify(temasCompletados),
+        );
+        marcarUICompletado(idx);
+        actualizarProgreso();
+        try {
+          const s = JSON.parse(
+            localStorage.getItem("datosVisionales") ||
+              localStorage.getItem("usuarioActivo") ||
+              "{}",
+          );
+          if (s.correo) {
+            const pct = Math.round(
+              (temasCompletados.length / TOTAL_TEMAS) * 100,
+            );
+            await fetch("http://localhost:3000/api/progreso", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                correo: s.correo,
+                area: "ingles",
+                progreso: pct,
+              }),
+            });
+          }
+        } catch (e) {}
+        if (temasCompletados.length === TOTAL_TEMAS)
+          document.getElementById("moduloCompletado").style.display = "block";
+      }
+      function marcarUICompletado(idx) {
+        const btn = document.getElementById(`btnCompletar-${idx}`);
+        const badge = document.getElementById(`badge-${idx}`);
+        const navBtn = document.getElementById(`btn-tema-${idx}`);
+        if (btn) {
+          btn.textContent = "✓ Tema completado";
+          btn.classList.add("ya-completado");
+        }
+        if (badge) badge.style.display = "inline-block";
+        if (navBtn) navBtn.classList.add("completado-nav");
+      }
+      function actualizarProgreso() {
+        const n = temasCompletados.length;
+        const pct = Math.round((n / TOTAL_TEMAS) * 100);
+        document.getElementById("barraGlobal").style.width = pct + "%";
+        document.getElementById("textoGlobal").textContent =
+          `${n} de ${TOTAL_TEMAS} temas completados`;
+      }
+      function toggleMenu() {
+        const menu = document.getElementById("sidebar-menu");
+        const btn = document.getElementById("btn-menu");
+        menu.classList.toggle("abierto");
+        btn.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

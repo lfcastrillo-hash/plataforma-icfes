@@ -18,6 +18,13 @@ if (!sesion.correo) {
   window.location.href = "index.html";
 }
 
+// Helper: enviar token en headers
+function getAuthHeaders(extra = {}) {
+  const token = sesion.token || "";
+  const base = token ? { Authorization: `Bearer ${token}` } : {};
+  return { ...base, ...extra };
+}
+
 // ─────────────────────────────────────────────────────────────
 // Cargar datos
 // ─────────────────────────────────────────────────────────────
@@ -37,6 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `${API}/perfil/${encodeURIComponent(correo)}`,
       {
         credentials: "include",
+        headers: getAuthHeaders(),
       },
     );
 
@@ -129,6 +137,7 @@ async function cargarAnunciosEstudiante() {
       `${API}/estudiante/anuncios?correo=${encodeURIComponent(sesion.correo)}`,
       {
         credentials: "include",
+        headers: getAuthHeaders(),
       },
     );
 
@@ -203,6 +212,7 @@ async function cerrarSesion() {
     await fetch(`${API}/logout`, {
       method: "POST",
       credentials: "include",
+      headers: getAuthHeaders(),
     });
 
     localStorage.removeItem("datosVisionales");

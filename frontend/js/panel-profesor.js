@@ -12,6 +12,13 @@ if (!sesion.correo) {
   window.location.href = "index.html";
 }
 
+// ── Helper: headers con token ────────────────────────────────────────────────
+function getAuthHeaders(extraHeaders = {}) {
+  const token = sesion.token || "";
+  const base = token ? { Authorization: `Bearer ${token}` } : {};
+  return { ...base, ...extraHeaders };
+}
+
 // Muestra el nombre/avatar en la navbar
 document.addEventListener("DOMContentLoaded", async () => {
   const correo = sesion.correo || "";
@@ -20,47 +27,58 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("nav-nombre-profesor").textContent = correo;
 
   try {
-    const response = await fetch(`${API}/perfil/${encodeURIComponent(correo)}`, {
-        credentials: 'include'
-    });
+    const response = await fetch(
+      `${API}/perfil/${encodeURIComponent(correo)}`,
+      {
+        credentials: "include",
+        headers: getAuthHeaders(),
+      },
+    );
 
     if (response.ok) {
       const usuario = await response.json();
-      
+
       if (usuario.foto_perfil) {
-        document.getElementById("nav-avatar").innerHTML = 
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block;">`;
+        document.getElementById("nav-avatar-img").src =
+          `${SERVER_URL}${usuario.foto_perfil}`;
+        document.getElementById("nav-avatar-img").style.display = "block";
+        document.getElementById("nav-avatar-text").style.display = "none";
       } else {
-        document.getElementById("nav-avatar").textContent = correo.charAt(0).toUpperCase();
+        document.getElementById("nav-avatar-text").textContent = usuario.nombre
+          .charAt(0)
+          .toUpperCase();
       }
-    } else {
-      document.getElementById("nav-avatar").textContent = correo.charAt(0).toUpperCase();
+      document.getElementById("nav-nombre-profesor").textContent =
+        usuario.nombre;
     }
-  } catch (error) {
-    console.error("Error al cargar la foto en la barra de navegación:", error);
-    document.getElementById("nav-avatar").textContent = correo.charAt(0).toUpperCase();
+  } catch (err) {
+    console.error("Error cargando navbar del perfil:", err);
   }
 
   await cargarClasesSidebar();
 });
 
-// ── Estado global ────────────────────────────────────────────────────────────
-let claseActivaId   = null;
+// Variables de estado
+let claseActivaId = null;
 let claseActivaNombre = "";
-let listaClasesOriginal = []; 
-let listaEstudiantesOriginal = []; 
-let direccionOrden = { nombre: 'asc', puntaje: 'asc' }; // Control de ordenación
+let listaClasesOriginal = [];
+let listaEstudiantesOriginal = [];
+let direccionOrden = { nombre: "asc", puntaje: "asc" };
 
 // ══════════════════════════════════════════════════════════════════════════════
 // SIDEBAR: cargar clases del profesor
 // ══════════════════════════════════════════════════════════════════════════════
 async function cargarClasesSidebar() {
   try {
-    const res = await fetch(`${API}/clases?correo=${encodeURIComponent(sesion.correo)}`, {
-        credentials: 'include'
-    });
+    const res = await fetch(
+      `${API}/clases?correo=${encodeURIComponent(sesion.correo)}`,
+      {
+        credentials: "include",
+        headers: getAuthHeaders(),
+      },
+    );
     const data = await res.json();
-    
+
     if (!data.success || data.clases.length === 0) {
       mostrarEstadoVacio();
       return;
@@ -69,10 +87,18 @@ async function cargarClasesSidebar() {
     listaClasesOriginal = data.clases;
     renderizarClasesSidebar(listaClasesOriginal);
 
-    if (!claseActivaId || !listaClasesOriginal.some(c => c.id_clase === claseActivaId)) {
+    if (
+      !claseActivaId ||
+      !listaClasesOriginal.some((c) => c.id_clase === claseActivaId)
+    ) {
       const primera = listaClasesOriginal[0];
-      const primerEnlace = document.getElementById("listaClasesSidebar").firstChild;
-      await seleccionarClase(primera.id_clase, primera.nombre_clase, primerEnlace);
+      const primerEnlace =
+        document.getElementById("listaClasesSidebar").firstChild;
+      await seleccionarClase(
+        primera.id_clase,
+        primera.nombre_clase,
+        primerEnlace,
+      );
     }
   } catch (err) {
     console.error("Error cargando clases:", err);
@@ -86,8 +112,9 @@ function renderizarClasesSidebar(clases) {
 
   clases.forEach((clase) => {
     const a = document.createElement("a");
-    a.href      = "#";
-    a.className = "nav-item" + (claseActivaId === clase.id_clase ? " activa" : "");
+    a.href = "#";
+    a.className =
+      "nav-item" + (claseActivaId === clase.id_clase ? " activa" : "");
     a.textContent = `Grupo ${clase.nombre_clase}`;
     a.onclick = (e) => {
       e.preventDefault();
@@ -99,8 +126,8 @@ function renderizarClasesSidebar(clases) {
 
 function filtrarClasesSidebar(texto) {
   const query = texto.toLowerCase().trim();
-  const clasesFiltradas = listaClasesOriginal.filter(clase => 
-    clase.nombre_clase.toLowerCase().includes(query)
+  const clasesFiltradas = listaClasesOriginal.filter((clase) =>
+    clase.nombre_clase.toLowerCase().includes(query),
   );
   renderizarClasesSidebar(clasesFiltradas);
 }
@@ -109,26 +136,27 @@ function filtrarClasesSidebar(texto) {
 // SELECCIONAR CLASE (Carga estudiantes y sincroniza el Muro de Anuncios)
 // ══════════════════════════════════════════════════════════════════════════════
 async function seleccionarClase(idClase, nombreClase, elementoNav) {
-  claseActivaId     = idClase;
+  claseActivaId = idClase;
   claseActivaNombre = nombreClase;
 
-  document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("activa"));
-  
+  document
+    .querySelectorAll(".nav-item")
+    .forEach((n) => n.classList.remove("activa"));
+
   if (elementoNav) {
     elementoNav.classList.add("activa");
   } else {
     const enlaces = document.querySelectorAll(".nav-item");
-    enlaces.forEach(a => {
+    enlaces.forEach((a) => {
       if (a.textContent === `Grupo ${nombreClase}`) a.classList.add("activa");
     });
   }
 
-  document.getElementById("estado-vacio").style.display     = "none";
+  document.getElementById("estado-vacio").style.display = "none";
   document.getElementById("contenido-clase").style.display = "block";
-  document.getElementById("tituloClase").textContent       = `Grupo ${nombreClase}`;
+  document.getElementById("tituloClase").textContent = `Grupo ${nombreClase}`;
   document.getElementById("busquedaEstudiantes").value = "";
 
-  // Resetear íconos de ordenación al cambiar de grupo
   document.getElementById("icon-sort-nombre").textContent = "⇅";
   document.getElementById("icon-sort-puntaje").textContent = "⇅";
 
@@ -139,21 +167,22 @@ async function seleccionarClase(idClase, nombreClase, elementoNav) {
 // POST-IT: PUBLICAR ANUNCIO EN EL MURO (MODAL)
 // ══════════════════════════════════════════════════════════════════════════════
 function abrirModalAnuncio() {
-    document.getElementById("texto-anuncio").value = "";
-    abrirModal("modal-anuncio");
+  document.getElementById("texto-anuncio").value = "";
+  abrirModal("modal-anuncio");
 }
 
 async function guardarAnuncio() {
-  if (!claseActivaId) return mostrarToast("Selecciona una clase primero.", "error");
+  if (!claseActivaId)
+    return mostrarToast("Selecciona una clase primero.", "error");
 
   const textoAnuncio = document.getElementById("texto-anuncio").value;
 
   try {
     const response = await fetch(`${API}/clases/${claseActivaId}/anuncio`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ anuncio: textoAnuncio })
+      method: "POST",
+      headers: getAuthHeaders({ "Content-Type": "application/json" }),
+      credentials: "include",
+      body: JSON.stringify({ anuncio: textoAnuncio }),
     });
 
     if (response.ok) {
@@ -173,8 +202,9 @@ async function guardarAnuncio() {
 // ══════════════════════════════════════════════════════════════════════════════
 async function cargarEstudiantesDeClase(idClase) {
   try {
-    const res  = await fetch(`${API}/clases/${idClase}/estudiantes`, {
-        credentials: 'include'
+    const res = await fetch(`${API}/clases/${idClase}/estudiantes`, {
+      credentials: "include",
+      headers: getAuthHeaders(),
     });
     const data = await res.json();
 
@@ -196,28 +226,24 @@ async function cargarEstudiantesDeClase(idClase) {
 // ORDENACIÓN DINÁMICA DE COLUMNAS (Frontend 100%)
 // ══════════════════════════════════════════════════════════════════════════════
 function ordenarColumna(columna) {
-  // Cambiar dirección
-  const direccion = direccionOrden[columna] === 'asc' ? 'desc' : 'asc';
+  const direccion = direccionOrden[columna] === "asc" ? "desc" : "asc";
   direccionOrden[columna] = direccion;
 
-  // Restaurar todos los indicadores gráficos
   document.getElementById("icon-sort-nombre").textContent = "⇅";
   document.getElementById("icon-sort-puntaje").textContent = "⇅";
-  
-  // Asignar flecha a la columna activa
-  document.getElementById(`icon-sort-${columna}`).textContent = direccion === 'asc' ? '▲' : '▼';
 
-  // Algoritmo de Ordenación
+  document.getElementById(`icon-sort-${columna}`).textContent =
+    direccion === "asc" ? "▲" : "▼";
+
   listaEstudiantesOriginal.sort((a, b) => {
-    let valorA = columna === 'nombre' ? a.nombre.toLowerCase() : (a.puntaje || 0);
-    let valorB = columna === 'nombre' ? b.nombre.toLowerCase() : (b.puntaje || 0);
+    let valorA = columna === "nombre" ? a.nombre.toLowerCase() : a.puntaje || 0;
+    let valorB = columna === "nombre" ? b.nombre.toLowerCase() : b.puntaje || 0;
 
-    if (valorA < valorB) return direccion === 'asc' ? -1 : 1;
-    if (valorA > valorB) return direccion === 'asc' ? 1 : -1;
+    if (valorA < valorB) return direccion === "asc" ? -1 : 1;
+    if (valorA > valorB) return direccion === "asc" ? 1 : -1;
     return 0;
   });
 
-  // Re-renderizar con los datos reordenados
   renderizarTabla(listaEstudiantesOriginal);
 }
 
@@ -225,7 +251,7 @@ function ordenarColumna(columna) {
 // RENDERIZAR TABLA
 // ══════════════════════════════════════════════════════════════════════════════
 function renderizarTabla(estudiantes) {
-  const tbody    = document.getElementById("tablaEstudiantes");
+  const tbody = document.getElementById("tablaEstudiantes");
   const msgVacio = document.getElementById("tabla-vacia");
   tbody.innerHTML = "";
 
@@ -237,7 +263,7 @@ function renderizarTabla(estudiantes) {
   msgVacio.style.display = "none";
   estudiantes.forEach((est, i) => {
     const pct = est.puntaje || 0;
-    const tr  = document.createElement("tr");
+    const tr = document.createElement("tr");
     tr.innerHTML = `
       <td style="color:#aaa; font-weight:600;">${i + 1}</td>
       <td><strong>${est.nombre}</strong></td>
@@ -260,18 +286,28 @@ function renderizarTabla(estudiantes) {
 
 function actualizarStats(estudiantes) {
   const total = estudiantes.length;
-  const promedio = total > 0 ? Math.round(estudiantes.reduce((s, e) => s + (e.puntaje || 0), 0) / total) : 0;
-  const top = total > 0 ? estudiantes.reduce((a, b) => (b.puntaje || 0) > (a.puntaje || 0) ? b : a).nombre.split(" ")[0] : "—";
+  const promedio =
+    total > 0
+      ? Math.round(
+          estudiantes.reduce((s, e) => s + (e.puntaje || 0), 0) / total,
+        )
+      : 0;
+  const top =
+    total > 0
+      ? estudiantes
+          .reduce((a, b) => ((b.puntaje || 0) > (a.puntaje || 0) ? b : a))
+          .nombre.split(" ")[0]
+      : "—";
 
-  document.getElementById("statTotal").textContent   = total;
+  document.getElementById("statTotal").textContent = total;
   document.getElementById("statPromedio").textContent = promedio + "%";
-  document.getElementById("statTop").textContent      = top;
+  document.getElementById("statTop").textContent = top;
 }
 
 function mostrarEstadoVacio() {
-  document.getElementById("estado-vacio").style.display     = "block";
+  document.getElementById("estado-vacio").style.display = "block";
   document.getElementById("contenido-clase").style.display = "none";
-  document.getElementById("listaClasesSidebar").innerHTML  = "";
+  document.getElementById("listaClasesSidebar").innerHTML = "";
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -291,11 +327,14 @@ async function crearClase() {
   }
 
   try {
-    const res  = await fetch(`${API}/clases`, {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: 'include',
-      body:    JSON.stringify({ nombre_clase: nombre, correo_profesor: sesion.correo }),
+    const res = await fetch(`${API}/clases`, {
+      method: "POST",
+      headers: getAuthHeaders({ "Content-Type": "application/json" }),
+      credentials: "include",
+      body: JSON.stringify({
+        nombre_clase: nombre,
+        correo_profesor: sesion.correo,
+      }),
     });
     const data = await res.json();
 
@@ -319,18 +358,20 @@ function abrirModalAgregarEstudiante() {
 }
 
 async function agregarEstudiante() {
-  const correo = document.getElementById("input-correo-estudiante").value.trim();
+  const correo = document
+    .getElementById("input-correo-estudiante")
+    .value.trim();
   if (!correo) {
     mostrarError("error-agregar-estudiante", "Ingresa un correo válido.");
     return;
   }
 
   try {
-    const res  = await fetch(`${API}/inscripciones/agregar`, {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: 'include',
-      body:    JSON.stringify({ email: correo, id_clase: claseActivaId }),
+    const res = await fetch(`${API}/inscripciones/agregar`, {
+      method: "POST",
+      headers: getAuthHeaders({ "Content-Type": "application/json" }),
+      credentials: "include",
+      body: JSON.stringify({ email: correo, id_clase: claseActivaId }),
     });
     const data = await res.json();
 
@@ -343,7 +384,10 @@ async function agregarEstudiante() {
     mostrarToast("Estudiante agregado correctamente.", "success");
     await cargarEstudiantesDeClase(claseActivaId);
   } catch {
-    mostrarError("error-agregar-estudiante", "Error de conexión con el servidor.");
+    mostrarError(
+      "error-agregar-estudiante",
+      "Error de conexión con el servidor.",
+    );
   }
 }
 
@@ -351,11 +395,14 @@ async function confirmarEliminarEstudiante(correoEstudiante) {
   if (!confirm(`¿Remover a ${correoEstudiante} de esta clase?`)) return;
 
   try {
-    const res  = await fetch(`${API}/inscripciones/remover`, {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: 'include',
-      body:    JSON.stringify({ email: correoEstudiante, id_clase: claseActivaId }),
+    const res = await fetch(`${API}/inscripciones/remover`, {
+      method: "POST",
+      headers: getAuthHeaders({ "Content-Type": "application/json" }),
+      credentials: "include",
+      body: JSON.stringify({
+        email: correoEstudiante,
+        id_clase: claseActivaId,
+      }),
     });
     const data = await res.json();
 
@@ -372,12 +419,18 @@ async function confirmarEliminarEstudiante(correoEstudiante) {
 
 async function confirmarEliminarClase() {
   if (!claseActivaId) return;
-  if (!confirm(`¿Eliminar la clase "${claseActivaNombre}"? Se perderán todas las inscripciones.`)) return;
+  if (
+    !confirm(
+      `¿Eliminar la clase "${claseActivaNombre}"? Se perderán todas las inscripciones.`,
+    )
+  )
+    return;
 
   try {
-    const res  = await fetch(`${API}/clases/${claseActivaId}`, { 
-        method: "DELETE",
-        credentials: 'include'
+    const res = await fetch(`${API}/clases/${claseActivaId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: getAuthHeaders(),
     });
     const data = await res.json();
 
@@ -401,9 +454,13 @@ async function buscarEstudiante(query) {
 
   _buscarTimeout = setTimeout(async () => {
     try {
-      const res  = await fetch(`${API}/estudiantes/buscar?q=${encodeURIComponent(query)}&correo_profesor=${encodeURIComponent(sesion.correo)}`, {
-          credentials: 'include'
-      });
+      const res = await fetch(
+        `${API}/estudiantes/buscar?q=${encodeURIComponent(query)}&correo_profesor=${encodeURIComponent(sesion.correo)}`,
+        {
+          credentials: "include",
+          headers: getAuthHeaders(),
+        },
+      );
       const data = await res.json();
       const contenido = document.getElementById("resultado-busqueda");
 
@@ -411,7 +468,9 @@ async function buscarEstudiante(query) {
         contenido.innerHTML = `<p class="no-result">No se encontró ningún estudiante.</p>`;
       } else {
         const est = data.student;
-        const clases = (est.clases || []).map(c => `<span class="result-clase-tag">Grupo ${c}</span>`).join(" ");
+        const clases = (est.clases || [])
+          .map((c) => `<span class="result-clase-tag">Grupo ${c}</span>`)
+          .join(" ");
 
         contenido.innerHTML = `
           <div class="result-estudiante" style="padding: 10px; border-left: 4px solid #3d8bfd; background: #f8f9fa; border-radius: 4px;">
@@ -428,23 +487,28 @@ async function buscarEstudiante(query) {
     } catch {
       mostrarToast("Error al buscar el estudiante.", "error");
     }
-  }, 600); 
+  }, 600);
 }
 
 function filtrarEstudiantesTabla(texto) {
   const query = texto.toLowerCase().trim();
-  const estudiantesFiltrados = listaEstudiantesOriginal.filter(est => 
-    est.nombre.toLowerCase().includes(query) || 
-    est.correo.toLowerCase().includes(query)
+  const estudiantesFiltrados = listaEstudiantesOriginal.filter(
+    (est) =>
+      est.nombre.toLowerCase().includes(query) ||
+      est.correo.toLowerCase().includes(query),
   );
   renderizarTabla(estudiantesFiltrados);
 }
 
 // ── Utilidades de Interfaz ───────────────────────────────────────────────────
-function abrirModal(id) { document.getElementById(id).style.display = "flex"; }
-function cerrarModal(id) { document.getElementById(id).style.display = "none"; }
+function abrirModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+function cerrarModal(id) {
+  document.getElementById(id).style.display = "none";
+}
 
-document.querySelectorAll(".modal-overlay").forEach(overlay => {
+document.querySelectorAll(".modal-overlay").forEach((overlay) => {
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) overlay.style.display = "none";
   });
@@ -452,39 +516,51 @@ document.querySelectorAll(".modal-overlay").forEach(overlay => {
 
 function mostrarToast(msg, tipo = "success") {
   const t = document.getElementById("toast");
-  t.textContent   = msg;
-  t.className     = `toast ${tipo}`;
+  t.textContent = msg;
+  t.className = `toast ${tipo}`;
   t.style.display = "block";
-  setTimeout(() => { t.style.display = "none"; }, 3000);
+  setTimeout(() => {
+    t.style.display = "none";
+  }, 3000);
 }
 
 function mostrarError(id, msg) {
   const el = document.getElementById(id);
-  el.textContent   = msg;
+  el.textContent = msg;
   el.style.display = "block";
 }
-function ocultarError(id) { document.getElementById(id).style.display = "none"; }
+function ocultarError(id) {
+  document.getElementById(id).style.display = "none";
+}
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    if (document.getElementById("modal-crear-clase").style.display === "flex")       crearClase();
-    if (document.getElementById("modal-agregar-estudiante").style.display === "flex") agregarEstudiante();
+    if (document.getElementById("modal-crear-clase").style.display === "flex")
+      crearClase();
+    if (
+      document.getElementById("modal-agregar-estudiante").style.display ===
+      "flex"
+    )
+      agregarEstudiante();
   }
   if (e.key === "Escape") {
-    document.querySelectorAll(".modal-overlay").forEach(m => m.style.display = "none");
+    document
+      .querySelectorAll(".modal-overlay")
+      .forEach((m) => (m.style.display = "none"));
   }
 });
 
 // Función Segura de Cierre de Sesión Completo
 async function cerrarSesion() {
-    try {
-        await fetch(`${API}/logout`, {
-            method: 'POST',
-            credentials: 'include'
-        });
-        localStorage.removeItem('datosVisionales');
-        window.location.href = "index.html";
-    } catch (error) {
-        console.error("Error al cerrar sesión", error);
-    }
+  try {
+    await fetch(`${API}/logout`, {
+      method: "POST",
+      credentials: "include",
+      headers: getAuthHeaders(),
+    });
+    localStorage.removeItem("datosVisionales");
+    window.location.href = "index.html";
+  } catch (error) {
+    console.error("Error al cerrar sesión", error);
+  }
 }

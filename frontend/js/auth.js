@@ -3,41 +3,41 @@
 // ==========================================================================
 
 function alternarHeroForm(tipo) {
-    const loginForm = document.getElementById("hero-login-form");
-    const registroForm = document.getElementById("hero-registro-form");
-    limpiarMensajes();
+  const loginForm = document.getElementById("hero-login-form");
+  const registroForm = document.getElementById("hero-registro-form");
+  limpiarMensajes();
 
-    if (tipo === 'login') {
-        loginForm.style.display = "block";
-        registroForm.style.display = "none";
-    } else if (tipo === 'registro') {
-        loginForm.style.display = "none";
-        registroForm.style.display = "block";
-    }
+  if (tipo === "login") {
+    loginForm.style.display = "block";
+    registroForm.style.display = "none";
+  } else if (tipo === "registro") {
+    loginForm.style.display = "none";
+    registroForm.style.display = "block";
+  }
 }
 
 function mostrarFeedback(contenedorId, texto, esExito = false) {
-    const contenedor = document.getElementById(contenedorId);
-    if (!contenedor) return;
+  const contenedor = document.getElementById(contenedorId);
+  if (!contenedor) return;
 
-    let msgElement = contenedor.querySelector(".auth-msg");
-    
-    if (!msgElement) {
-        msgElement = document.createElement("p");
-        msgElement.className = "auth-msg";
-        msgElement.style.fontSize = "14px";
-        msgElement.style.marginTop = "12px";
-        msgElement.style.textAlign = "center";
-        msgElement.style.fontWeight = "bold";
-        contenedor.appendChild(msgElement);
-    }
-    
-    msgElement.textContent = texto;
-    msgElement.style.color = esExito ? "#2e7d32" : "#c62828"; 
+  let msgElement = contenedor.querySelector(".auth-msg");
+
+  if (!msgElement) {
+    msgElement = document.createElement("p");
+    msgElement.className = "auth-msg";
+    msgElement.style.fontSize = "14px";
+    msgElement.style.marginTop = "12px";
+    msgElement.style.textAlign = "center";
+    msgElement.style.fontWeight = "bold";
+    contenedor.appendChild(msgElement);
+  }
+
+  msgElement.textContent = texto;
+  msgElement.style.color = esExito ? "#2e7d32" : "#c62828";
 }
 
 function limpiarMensajes() {
-    document.querySelectorAll(".auth-msg").forEach(el => el.remove());
+  document.querySelectorAll(".auth-msg").forEach((el) => el.remove());
 }
 
 // ==========================================================================
@@ -51,7 +51,7 @@ async function registrarUsuario() {
   const nombre = document.getElementById("reg-nombre").value.trim();
   const correo = document.getElementById("reg-correo").value.trim();
   const password = document.getElementById("reg-password").value.trim();
-  
+
   const selectRol = document.querySelector("#hero-registro-form select");
   const rol = selectRol ? selectRol.value : "estudiante";
 
@@ -74,15 +74,18 @@ async function registrarUsuario() {
       return;
     }
 
-    mostrarFeedback("hero-registro-form", "¡Registro exitoso! Ya puedes ingresar.", true);
-    
+    mostrarFeedback(
+      "hero-registro-form",
+      "¡Registro exitoso! Ya puedes ingresar.",
+      true,
+    );
+
     document.getElementById("reg-nombre").value = "";
     document.getElementById("reg-correo").value = "";
     document.getElementById("reg-password").value = "";
     if (selectRol) selectRol.value = "estudiante";
-    
-    setTimeout(() => alternarHeroForm('login'), 1500);
 
+    setTimeout(() => alternarHeroForm("login"), 1500);
   } catch (error) {
     console.error("Error en registro:", error);
     mostrarFeedback("hero-registro-form", "Error de conexión con el servidor");
@@ -93,9 +96,9 @@ async function registrarUsuario() {
 async function iniciarSesion() {
   limpiarMensajes();
 
-  const correo   = document.getElementById("correo").value.trim();
+  const correo = document.getElementById("correo").value.trim();
   const password = document.getElementById("password").value.trim();
-  const rol      = document.getElementById("rol").value;
+  const rol = document.getElementById("rol").value;
 
   if (!correo || !password) {
     mostrarFeedback("hero-login-form", "Completa todos los campos");
@@ -109,7 +112,7 @@ async function iniciarSesion() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // IMPORTANTE: 'include' asegura que el navegador acepte y guarde la cookie HttpOnly
-      credentials: 'include', 
+      credentials: "include",
       body: JSON.stringify({ correo, password, rol }),
     });
 
@@ -119,21 +122,23 @@ async function iniciarSesion() {
       waterLoaderError(data.mensaje);
       return;
     }
-    
+
     // AQUÍ ESTABA EL ERROR: Agregamos el tipo_usuario para que el panel lo reconozca
-    localStorage.setItem("datosVisionales", JSON.stringify({
-      correo: data.usuario.correo, 
-      nombre: data.usuario.nombre,
-      tipo_usuario: rol 
-    }));
+    localStorage.setItem(
+      "datosVisionales",
+      JSON.stringify({
+        correo: data.usuario.correo,
+        nombre: data.usuario.nombre,
+        tipo_usuario: rol,
+        token: data.token,
+      }),
+    );
 
     // === RUTAS ACTUALIZADAS ===
-    const destino = rol === "estudiante"
-      ? "panel-estudiante.html"
-      : "panel-profesor.html";
+    const destino =
+      rol === "estudiante" ? "panel-estudiante.html" : "panel-profesor.html";
 
     waterLoaderExito(destino);
-
   } catch (error) {
     console.error("Error en login:", error);
     waterLoaderError("Error de conexión con el servidor");

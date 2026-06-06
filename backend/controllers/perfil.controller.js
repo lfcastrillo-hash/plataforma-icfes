@@ -26,7 +26,18 @@ const obtenerPerfil = async (req, res) => {
       });
     }
 
-    res.status(200).json(resultado.rows[0]);
+    const usuario = resultado.rows[0];
+
+    // Si es profesor, adjuntamos su lista de clases
+    if (usuario.rol === "profesor") {
+      const clasesResult = await pool.query(
+        `SELECT nombre_clase FROM clases WHERE id_profesor = $1 ORDER BY id_clase ASC`,
+        [id_usuario],
+      );
+      usuario.lista_clases = clasesResult.rows.map((r) => r.nombre_clase);
+    }
+
+    res.status(200).json(usuario);
   } catch (error) {
     console.error("Error al obtener perfil:", error);
 
