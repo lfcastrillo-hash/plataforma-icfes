@@ -1510,15 +1510,39 @@
           "{}",
       );
       if (!sesion.correo) window.location.href = "index.html";
-
       const TOTAL_TEMAS = 5;
+      const PREGUNTAS_POR_TEMA = 8;
       let temasCompletados = JSON.parse(
         localStorage.getItem("cie_completados") || "[]",
+      );
+      let preguntasCorrectas = JSON.parse(
+        localStorage.getItem("cie_correctas") || "{}",
       );
 
       window.addEventListener("DOMContentLoaded", () => {
         temasCompletados.forEach((idx) => marcarUICompletado(idx));
+        Object.keys(preguntasCorrectas).forEach((key) => {
+          const [tema, ejercicio] = key.split("-");
+          const card = document.getElementById(`ej-${tema}-${ejercicio}`);
+          if (card) {
+            card.querySelectorAll(".opcion-btn").forEach((b) => {
+              b.disabled = true;
+              b.style.cursor = "default";
+              if (
+                b.getAttribute("onclick") &&
+                b.getAttribute("onclick").includes("true")
+              )
+                b.classList.add("correcta");
+            });
+            const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
+            if (feedback) {
+              feedback.classList.add("correcto");
+              feedback.style.display = "block";
+            }
+          }
+        });
         actualizarProgreso();
+        actualizarBotonesCompletar();
       });
 
       function mostrarTema(idx) {
@@ -1533,7 +1557,44 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      function responder(btn, tema, ejercicio, esCorrecta) {
+      function correctasTema(t) {
+        return Object.keys(preguntasCorrectas).filter(
+          (k) => k.startsWith(`${t}-`) && preguntasCorrectas[k],
+        ).length;
+      }
+
+      function calcularProgresoArea() {
+        let totalCorrectas = 0;
+        for (let t = 0; t < TOTAL_TEMAS; t++) {
+          totalCorrectas += Math.min(correctasTema(t), PREGUNTAS_POR_TEMA);
+        }
+        return Math.round(
+          (totalCorrectas / (TOTAL_TEMAS * PREGUNTAS_POR_TEMA)) * 100,
+        );
+      }
+
+      async function guardarProgresoAreaDB(pct) {
+        try {
+          const s = JSON.parse(
+            localStorage.getItem("datosVisionales") ||
+              localStorage.getItem("usuarioActivo") ||
+              "{}",
+          );
+          if (s.correo) {
+            await fetch("http://localhost:3000/api/progreso-area", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                correo: s.correo,
+                area: "ciencias",
+                progreso: pct,
+              }),
+            });
+          }
+        } catch (e) {}
+      }
+
+      async function responder(btn, tema, ejercicio, esCorrecta) {
         const card = document.getElementById(`ej-${tema}-${ejercicio}`);
         const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
         const botones = card.querySelectorAll(".opcion-btn");
@@ -1544,6 +1605,17 @@
         if (esCorrecta) {
           btn.classList.add("correcta");
           feedback.classList.add("correcto");
+          const key = `${tema}-${ejercicio}`;
+          if (!preguntasCorrectas[key]) {
+            preguntasCorrectas[key] = true;
+            localStorage.setItem(
+              "cie_correctas",
+              JSON.stringify(preguntasCorrectas),
+            );
+            const pct = calcularProgresoArea();
+            actualizarProgreso();
+            await guardarProgresoAreaDB(pct);
+          }
         } else {
           btn.classList.add("incorrecta");
           feedback.classList.add("incorrecto");
@@ -1556,37 +1628,23 @@
           });
         }
         feedback.style.display = "block";
+        actualizarBotonesCompletar();
       }
 
       async function completarTema(idx) {
         if (temasCompletados.includes(idx)) return;
+        if (correctasTema(idx) < PREGUNTAS_POR_TEMA) return;
         temasCompletados.push(idx);
         localStorage.setItem(
           "cie_completados",
           JSON.stringify(temasCompletados),
         );
         marcarUICompletado(idx);
+        const pct = calcularProgresoArea();
         actualizarProgreso();
-        try {
-          if (sesion.correo) {
-            const pct = Math.round(
-              (temasCompletados.length / TOTAL_TEMAS) * 100,
-            );
-            await fetch("http://localhost:3000/api/progreso-area", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                correo: sesion.correo,
-                area: "ciencias",
-                progreso: pct,
-              }),
-            });
-          }
-        } catch (e) {}
-        if (temasCompletados.length === TOTAL_TEMAS) {
-          const banner = document.getElementById("moduloCompletado");
-          if (banner) banner.style.display = "block";
-        }
+        await guardarProgresoAreaDB(pct);
+        if (temasCompletados.length === TOTAL_TEMAS)
+          document.getElementById("moduloCompletado").style.display = "block";
       }
 
       function marcarUICompletado(idx) {
@@ -1596,19 +1654,35 @@
         if (btn) {
           btn.textContent = "✓ Tema completado";
           btn.classList.add("ya-completado");
+          btn.disabled = true;
         }
         if (badge) badge.style.display = "inline-block";
         if (navBtn) navBtn.classList.add("completado-nav");
       }
 
+      function actualizarBotonesCompletar() {
+        for (let t = 0; t < TOTAL_TEMAS; t++) {
+          if (temasCompletados.includes(t)) continue;
+          const btn = document.getElementById(`btnCompletar-${t}`);
+          if (!btn) continue;
+          const listas = correctasTema(t);
+          const listo = listas >= PREGUNTAS_POR_TEMA;
+          btn.disabled = !listo;
+          btn.style.opacity = listo ? "1" : "0.4";
+          btn.style.cursor = listo ? "pointer" : "not-allowed";
+          btn.title = listo
+            ? ""
+            : `Responde todas las preguntas primero (${listas}/${PREGUNTAS_POR_TEMA})`;
+        }
+      }
+
       function actualizarProgreso() {
-        const n = temasCompletados.length;
-        const pct = Math.round((n / TOTAL_TEMAS) * 100);
-        const barra = document.getElementById("barraGlobal");
+        const pct = calcularProgresoArea();
+        const fill = document.getElementById("barraGlobal");
         const texto = document.getElementById("textoGlobal");
-        if (barra) barra.style.width = pct + "%";
+        if (fill) fill.style.width = pct + "%";
         if (texto)
-          texto.textContent = `${n} de ${TOTAL_TEMAS} temas completados`;
+          texto.textContent = `${temasCompletados.length} de ${TOTAL_TEMAS} temas completados`;
       }
 
       function toggleMenu() {

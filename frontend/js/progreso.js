@@ -2,23 +2,22 @@ function obtenerUsuario() {
   return JSON.parse(localStorage.getItem("usuarioActivo"));
 }
 
-async function guardarProgreso(valor) {
+async function guardarProgresoArea(area, progreso) {
   const usuario = obtenerUsuario();
-
+  if (!usuario.correo) return;
   try {
-    await fetch("http://localhost:3000/api/progreso", {
+    await fetch("http://localhost:3000/api/progreso-area", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        correo: usuario.correo,
-        progreso: valor,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ correo: usuario.correo, area, progreso }),
     });
   } catch (error) {
-    console.log(error);
+    console.error("Error guardando progreso:", error);
   }
+}
+
+async function guardarProgreso(valor) {
+  console.warn("guardarProgreso() está deprecado, usa guardarProgresoArea()");
 }
 
 async function marcarTema(boton, valor = 30) {

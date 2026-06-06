@@ -27,16 +27,18 @@ async function obtenerProgresoGeneral(req, res) {
   try {
     const { correo } = req.params;
 
+    // Siempre dividir entre 5 áreas fijas aunque algunas aún no tengan progreso
     const resultado = await pool.query(
       `
-      SELECT AVG(progreso) AS progreso
+      SELECT COALESCE(SUM(progreso), 0) AS suma
       FROM progreso_areas
       WHERE correo = $1
+        AND area IN ('matematicas', 'lectura', 'ciencias', 'sociales', 'ingles')
       `,
       [correo],
     );
 
-    const progreso = Number(resultado.rows[0].progreso || 0);
+    const progreso = Math.round(Number(resultado.rows[0].suma || 0) / 5);
 
     res.json({
       success: true,
