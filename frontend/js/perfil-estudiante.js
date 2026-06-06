@@ -12,6 +12,13 @@ let sesion = JSON.parse(
 );
 let datosActuales = { nombre: "", correo: "", biografia: "" };
 
+// --- Helper: enviar token por header Authorization ---
+function getAuthHeaders(extraHeaders = {}) {
+  const token = sesion.token || "";
+  const base = token ? { Authorization: `Bearer ${token}` } : {};
+  return { ...base, ...extraHeaders };
+}
+
 // --- Menú Lateral ---
 function toggleMenu() {
   const menu = document.getElementById("sidebar-menu");
@@ -84,6 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `${API}/perfil/${encodeURIComponent(sesion.correo)}`,
       {
         credentials: "include",
+        headers: getAuthHeaders(),
       },
     );
 
@@ -96,6 +104,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       document.getElementById("estudiante-nombre").textContent =
         datosActuales.nombre;
+      const bioPerfil = document.getElementById("perfil-biografia");
+      if (bioPerfil) {
+        bioPerfil.innerHTML = datosActuales.biografia
+          ? `<i>${datosActuales.biografia}</i>`
+          : `<i>Hola, soy estudiante de grado 11 y me estoy preparando para reventar ese ICFES.</i>`;
+      }
 
       if (usuario.foto_perfil) {
         document.getElementById("foto-preview-main").innerHTML =
@@ -131,6 +145,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     datosActuales.nombre = nombre;
     datosActuales.correo = sesion.correo;
   }
+
+  cargarClasesEstudiante();
 });
 
 // --- Guardar Perfil (nombre, bio, foto) ---
@@ -175,6 +191,7 @@ async function enviarActualizacion(formData) {
     const response = await fetch(`${API}/perfil/actualizar`, {
       method: "POST",
       credentials: "include",
+      headers: getAuthHeaders(), // Sin Content-Type, FormData lo pone solo
       body: formData,
     });
 
@@ -192,6 +209,47 @@ async function enviarActualizacion(formData) {
   } catch (error) {
     console.error("Error al actualizar:", error);
     alert("Error de conexión con el servidor.");
+  }
+}
+
+// --- Cargar clases del estudiante desde la BD ---
+async function cargarClasesEstudiante() {
+  const contenedor = document.getElementById("lista-clases-perfil");
+  if (!contenedor) return;
+
+  contenedor.innerHTML =
+    "<p style='color:#888; font-size:14px;'>Cargando clases...</p>";
+
+  try {
+    const response = await fetch(`${API}/estudiante/mis-clases`, {
+      credentials: "include",
+      headers: getAuthHeaders(),
+    });
+
+    const data = await response.json();
+
+    if (data.success && data.clases.length > 0) {
+      const iconos = ["📚", "📐", "🔬", "🌍", "📝", "🎯"];
+      contenedor.innerHTML = "";
+      data.clases.forEach((clase, i) => {
+        const icono = iconos[i % iconos.length];
+        contenedor.innerHTML += `
+          <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 15px; border-radius:8px; font-size:14px; color:#333; display:flex; align-items:center; gap:10px;">
+            <span style="font-size:18px;">${icono}</span>
+            <div>
+              <b>${clase.nombre_clase}</b>
+              <span style="display:block; font-size:12px; color:#64748b; margin-top:2px;">Profesor: ${clase.nombre_profesor}</span>
+            </div>
+          </div>`;
+      });
+    } else {
+      contenedor.innerHTML =
+        "<p style='color:#888; font-size:14px;'>No estás inscrito en ninguna clase aún.</p>";
+    }
+  } catch (error) {
+    console.error("Error cargando clases:", error);
+    contenedor.innerHTML =
+      "<p style='color:#888; font-size:14px;'>No se pudieron cargar las clases.</p>";
   }
 }
 

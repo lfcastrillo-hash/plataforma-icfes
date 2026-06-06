@@ -14,6 +14,7 @@ const pool = require("./db");
 
 const authRoutes = require("./routes/auth.routes");
 const progresoRoutes = require("./routes/progreso.routes");
+const progresoAreasRoutes = require("./routes/progresoAreas.routes");
 const clasesRoutes = require("./routes/clases.routes");
 const perfilRoutes = require("./routes/perfil.routes");
 const iaRoutes = require("./routes/ia.routes");
@@ -38,6 +39,7 @@ app.use(cookieParser());
 // ===============================
 app.use("/api", authRoutes);
 app.use("/api", progresoRoutes);
+app.use("/api", progresoAreasRoutes);
 app.use("/api", clasesRoutes);
 app.use("/api", perfilRoutes);
 app.use("/api", iaRoutes);

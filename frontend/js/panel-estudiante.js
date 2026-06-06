@@ -62,19 +62,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         saludo.textContent = `¡Hola, ${nombreMostrar}!`;
       }
 
-      // Progreso
-      const progreso = usuario.puntaje || 0;
+      // Progreso real desde progreso_areas
+      try {
+        const resProg = await fetch(
+          `${API}/progreso-general/${encodeURIComponent(correo)}`,
+          { credentials: "include", headers: getAuthHeaders() },
+        );
+        const dataProg = await resProg.json();
+        const progreso = Math.round(dataProg.progreso || 0);
 
-      const barra = document.getElementById("barra-progreso-general");
+        const barra = document.getElementById("barra-progreso-general");
+        if (barra) barra.style.width = `${progreso}%`;
 
-      if (barra) {
-        barra.style.width = `${progreso}%`;
-      }
-
-      const textoProgreso = document.getElementById("texto-progreso-general");
-
-      if (textoProgreso) {
-        textoProgreso.textContent = `${progreso}%`;
+        const textoProgreso = document.getElementById("texto-progreso-general");
+        if (textoProgreso) textoProgreso.textContent = `${progreso}%`;
+      } catch (e) {
+        console.warn("No se pudo cargar el progreso general:", e);
       }
 
       // Avatar

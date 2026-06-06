@@ -17,6 +17,7 @@ function getAuthHeaders(extraHeaders = {}) {
 let datosActuales = { nombre: "", correo: "", biografia: "" };
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // --- Carga de Datos Inicial desde el Backend ---
   try {
     const response = await fetch(
       `${API}/perfil/${encodeURIComponent(sesion.correo)}`,
@@ -34,9 +35,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       datosActuales.biografia = usuario.biografia || "";
 
       document.getElementById("perfil-nombre").textContent = usuario.nombre;
-      if (usuario.biografia) {
-        document.getElementById("perfil-biografia").textContent =
-          usuario.biografia;
+      const bioPerfil = document.getElementById("perfil-biografia");
+      if (bioPerfil) {
+        bioPerfil.innerHTML = datosActuales.biografia
+          ? `<i>${datosActuales.biografia}</i>`
+          : `<i>Apasionado por la educación y comprometido con el éxito de mis estudiantes en el ICFES.</i>`;
       }
 
       document.getElementById("update-nombre").value = usuario.nombre;
@@ -78,6 +81,78 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error cargando perfil:", error);
   }
+
+  // --- Cerrar modales al hacer click fuera ---
+  document.querySelectorAll(".modal-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        cerrarModalEditar();
+        cerrarModalSeguridad();
+      }
+    });
+  });
+
+  // --- Preview de foto seleccionada ---
+  const inputFoto = document.getElementById("input-foto");
+  if (inputFoto) {
+    inputFoto.addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById("mini-preview").textContent =
+          "Seleccionaste: " + file.name;
+        document.getElementById("mini-preview").style.color = "#0ea5e9";
+      }
+    });
+  }
+
+  // --- Formulario 1: Editar Perfil (público) ---
+  const formPerfil = document.getElementById("form-perfil");
+  if (formPerfil) {
+    formPerfil.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById("update-nombre").value;
+      const biografia = document.getElementById("update-biografia").value;
+      const fotoInput = document.getElementById("input-foto");
+
+      if (!nombre.trim()) return alert("El nombre es obligatorio");
+
+      const formData = new FormData();
+      formData.append("nombre", nombre);
+      formData.append("biografia", biografia);
+      formData.append("nuevo_correo", datosActuales.correo);
+
+      if (fotoInput && fotoInput.files[0]) {
+        formData.append("foto", fotoInput.files[0]);
+      }
+
+      enviarActualizacion(formData);
+    });
+  }
+
+  // --- Formulario 2: Seguridad (correo y clave) ---
+  const formSeguridad = document.getElementById("form-seguridad");
+  if (formSeguridad) {
+    formSeguridad.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const nuevoCorreo = document.getElementById("update-correo").value;
+      const password = document.getElementById("update-password").value;
+
+      if (!nuevoCorreo.trim()) return alert("El correo es obligatorio");
+
+      const formData = new FormData();
+      formData.append("nuevo_correo", nuevoCorreo);
+      formData.append("nombre", datosActuales.nombre);
+      formData.append("biografia", datosActuales.biografia);
+
+      if (password.trim() !== "") {
+        formData.append("password", password);
+      }
+
+      enviarActualizacion(formData);
+    });
+  }
 });
 
 // ==========================================
@@ -96,75 +171,6 @@ function abrirModalSeguridad() {
 function cerrarModalSeguridad() {
   document.getElementById("modal-seguridad").style.display = "none";
 }
-
-document.querySelectorAll(".modal-overlay").forEach((overlay) => {
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) {
-      cerrarModalEditar();
-      cerrarModalSeguridad();
-    }
-  });
-});
-
-document
-  .getElementById("input-foto")
-  .addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    if (file) {
-      document.getElementById("mini-preview").textContent =
-        "Seleccionaste: " + file.name;
-      document.getElementById("mini-preview").style.color = "#0ea5e9";
-    }
-  });
-
-// ==========================================
-// FORMULARIO 1: EDITAR PERFIL (PÚBLICO)
-// ==========================================
-document.getElementById("form-perfil").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const nombre = document.getElementById("update-nombre").value;
-  const biografia = document.getElementById("update-biografia").value;
-  const fotoInput = document.getElementById("input-foto");
-
-  if (!nombre.trim()) return alert("El nombre es obligatorio");
-
-  const formData = new FormData();
-  formData.append("nombre", nombre);
-  formData.append("biografia", biografia);
-  formData.append("nuevo_correo", datosActuales.correo);
-
-  if (fotoInput.files[0]) {
-    formData.append("foto", fotoInput.files[0]);
-  }
-
-  enviarActualizacion(formData);
-});
-
-// ==========================================
-// FORMULARIO 2: SEGURIDAD (CORREO Y CLAVE)
-// ==========================================
-document
-  .getElementById("form-seguridad")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const nuevoCorreo = document.getElementById("update-correo").value;
-    const password = document.getElementById("update-password").value;
-
-    if (!nuevoCorreo.trim()) return alert("El correo es obligatorio");
-
-    const formData = new FormData();
-    formData.append("nuevo_correo", nuevoCorreo);
-    formData.append("nombre", datosActuales.nombre);
-    formData.append("biografia", datosActuales.biografia);
-
-    if (password.trim() !== "") {
-      formData.append("password", password);
-    }
-
-    enviarActualizacion(formData);
-  });
 
 // ==========================================
 // FUNCIÓN COMÚN DE ENVÍO

@@ -196,6 +196,50 @@
         menu.classList.toggle("abierto");
         btn.classList.toggle("active");
       }
+
+      // Cargar progreso por área desde la BD
+      (async () => {
+        const sesion = JSON.parse(
+          localStorage.getItem("datosVisionales") ||
+            localStorage.getItem("usuarioActivo") ||
+            "{}",
+        );
+        if (!sesion.correo) return;
+
+        const token = sesion.token || "";
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+        try {
+          const res = await fetch(
+            `http://localhost:3000/api/progreso-areas/${encodeURIComponent(sesion.correo)}`,
+            { credentials: "include", headers },
+          );
+          const data = await res.json();
+          if (!data.success) return;
+
+          const areas = data.areas;
+          const mapa = {
+            matematicas: {
+              barra: "barra-matematicas",
+              txt: "txt-progreso-matematicas",
+            },
+            lectura: { barra: "barra-lectura", txt: "txt-progreso-lectura" },
+            ciencias: { barra: "barra-ciencias", txt: "txt-progreso-ciencias" },
+            sociales: { barra: "barra-sociales", txt: "txt-progreso-sociales" },
+            ingles: { barra: "barra-ingles", txt: "txt-progreso-ingles" },
+          };
+
+          Object.entries(mapa).forEach(([area, ids]) => {
+            const pct = areas[area] || 0;
+            const barra = document.getElementById(ids.barra);
+            const txt = document.getElementById(ids.txt);
+            if (barra) barra.style.width = pct + "%";
+            if (txt) txt.textContent = pct + "%";
+          });
+        } catch (e) {
+          console.warn("No se pudo cargar el progreso de áreas:", e);
+        }
+      })();
     </script>
   </body>
 </html>

@@ -1992,7 +1992,7 @@
             const pct = Math.round(
               (temasCompletados.length / TOTAL_TEMAS) * 100,
             );
-            await fetch("http://localhost:3000/api/progreso", {
+            await fetch("http://localhost:3000/api/progreso-area", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({

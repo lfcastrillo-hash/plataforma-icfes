@@ -6,7 +6,7 @@ const {
   guardarProgreso,
   obtenerProgreso,
   obtenerRanking,
-} = require("../controllers/progreso.controller");
+} = require("../controllers/progreso.controller.js");
 
 router.post("/progreso", guardarProgreso);
 

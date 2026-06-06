@@ -1,15 +1,16 @@
 const express = require("express");
 const verificarToken = require("../middlewares/verificarToken");
 
-const { 
-  crearClase, 
-  eliminarClase, 
-  agregarEstudianteAClase, 
+const {
+  crearClase,
+  eliminarClase,
+  agregarEstudianteAClase,
   removerEstudianteDeClase,
   obtenerClases,
   obtenerEstudiantesDeClase,
   buscarEstudiante,
-  actualizarAnuncio // Importado
+  actualizarAnuncio,
+  obtenerClasesDeEstudiante,
 } = require("../controllers/clases.controller");
 
 const router = express.Router();
@@ -20,9 +21,15 @@ router.post("/clases", verificarToken, crearClase);
 router.delete("/clases/:id", verificarToken, eliminarClase);
 router.post("/clases/:id_clase/anuncio", verificarToken, actualizarAnuncio); // Nueva Ruta de Anuncios
 
-router.get("/clases/:id/estudiantes", verificarToken, obtenerEstudiantesDeClase);
+router.get(
+  "/clases/:id/estudiantes",
+  verificarToken,
+  obtenerEstudiantesDeClase,
+);
 router.post("/inscripciones/agregar", verificarToken, agregarEstudianteAClase);
 router.post("/inscripciones/remover", verificarToken, removerEstudianteDeClase);
+
+router.get("/estudiante/mis-clases", verificarToken, obtenerClasesDeEstudiante);
 
 router.get("/estudiantes/buscar", verificarToken, buscarEstudiante);
 
