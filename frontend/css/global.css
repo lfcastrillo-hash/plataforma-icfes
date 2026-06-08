@@ -47,7 +47,7 @@ button {
   border-radius: 10px;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block; 
+  display: inline-block;
   font-size: 15px;
   font-weight: bold;
   transition: all 0.3s ease;
@@ -80,7 +80,7 @@ button:hover {
 .hero {
   padding: 60px 8%;
   background: linear-gradient(135deg, #123c73, #3d8bfd);
-  min-height: calc(100vh - 72px); 
+  min-height: calc(100vh - 72px);
   display: flex;
   align-items: center;
 }
@@ -208,17 +208,19 @@ button:hover {
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px; 
+  gap: 25px;
   margin-top: 30px;
 }
 
 .card {
   background: white;
-  padding: 40px 20px; 
+  padding: 40px 20px;
   border-radius: 15px;
   text-align: center;
   box-shadow: 0 5px 15px rgba(5, 5, 5, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border: 1px solid #eef2f7;
 }
 
@@ -243,35 +245,35 @@ button:hover {
 /* ==========================================================================
    6. EXTENSIONES DE USUARIO Y DASHBOARDS (VÍDEOS, PERFIL, ETC.)
    ========================================================================== */
-.nav-right { 
-  display: flex; 
-  align-items: center; 
-  gap: 15px; 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.profile-nav-icon { 
-  width: 40px; 
-  height: 40px; 
-  background: #3d8bfd; 
-  color: white; 
-  border-radius: 50%; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  text-decoration: none; 
-  font-weight: bold; 
-  border: 2px solid white; 
-  transition: transform 0.2s ease; 
+.profile-nav-icon {
+  width: 40px;
+  height: 40px;
+  background: #3d8bfd;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid white;
+  transition: transform 0.2s ease;
 }
 
-.profile-nav-icon:hover { 
-  transform: scale(1.1); 
+.profile-nav-icon:hover {
+  transform: scale(1.1);
 }
 
 .video-preview {
   width: 100%;
   height: 120px;
-  background: #e0e0e0; 
+  background: #e0e0e0;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -292,7 +294,7 @@ button:hover {
   text-align: left !important;
   display: flex;
   flex-direction: column;
-  align-items: flex-start !important; 
+  align-items: flex-start !important;
 }
 
 .card-video h3 {
@@ -300,7 +302,7 @@ button:hover {
   margin-bottom: 10px !important;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
   width: 100%;
   color: #333;
 }
@@ -373,21 +375,23 @@ button:hover {
 .progreso-celda {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  min-width: 160px;
 }
 
 /* El riel o fondo de la barra */
 .barra-fondo {
   background-color: #e4e7ed;
   border-radius: 20px;
-  height: 14px;
-  width: 100%;
+  height: 10px;
+  width: 100px;
+  min-width: 100px;
   overflow: hidden;
 }
 
 /* El relleno que progresa */
 .barra-llena {
-  background-color: #123c73;
+  background: linear-gradient(90deg, #123c73, #2563eb);
   height: 100%;
   border-radius: 20px;
   transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -397,7 +401,7 @@ button:hover {
   font-weight: bold;
   font-size: 14px;
   color: #123c73;
-  min-width: 45px;
+  min-width: 40px;
   text-align: right;
 }
 
@@ -535,10 +539,10 @@ button:hover {
   background: white;
   border-radius: 8px;
   padding: 15px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.table-box-compact table th, 
+.table-box-compact table th,
 .table-box-compact table td {
   padding: 12px 15px;
   font-size: 14px;
@@ -548,26 +552,31 @@ button:hover {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 160px;
 }
 
 .barra-fondo {
   background-color: #e4e7ed;
   border-radius: 10px;
   height: 10px;
-  width: 100%;
+  width: 100px;
+  min-width: 100px;
+  overflow: hidden;
 }
 
 .barra-llena {
-  background-color: #123c73;
+  background: linear-gradient(90deg, #123c73, #2563eb);
   height: 100%;
   border-radius: 10px;
   transition: width 0.4s ease;
 }
 
 .porcentaje-texto {
-  font-size: 12px;
+  font-size: 13px;
   color: #123c73;
   font-weight: bold;
+  min-width: 40px;
+  text-align: right;
 }
 
 /* Botones y columna de acciones */
@@ -631,13 +640,13 @@ button:hover {
   gap: 8px;
 }
 
-.nav-item::before { 
-  content: "📂"; 
-  font-size: 13px; 
+.nav-item::before {
+  content: "📂";
+  font-size: 13px;
 }
 
-.nav-item.activa::before { 
-  content: "📖"; 
+.nav-item.activa::before {
+  content: "📖";
 }
 
 /* ── Avisos de tabla vacía o sin alumnos ── */
@@ -659,8 +668,8 @@ button:hover {
   gap: 16px;
 }
 
-.empty-icon { 
-  font-size: 64px; 
+.empty-icon {
+  font-size: 64px;
 }
 
 .empty-state h2 {
@@ -693,8 +702,12 @@ button:hover {
 }
 
 @keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ── Caja contenedora del Modal ── */
@@ -702,14 +715,20 @@ button:hover {
   background: white;
   border-radius: 16px;
   width: 420px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   animation: slideUpModal 0.25s ease;
   overflow: hidden;
 }
 
 @keyframes slideUpModal {
-  from { opacity: 0; transform: translateY(24px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .modal-header {
@@ -740,9 +759,9 @@ button:hover {
   width: auto !important;
 }
 
-.modal-close:hover { 
-  color: #c62828 !important; 
-  background: #fdecea !important; 
+.modal-close:hover {
+  color: #c62828 !important;
+  background: #fdecea !important;
 }
 
 .modal-body {
@@ -845,12 +864,22 @@ button:hover {
   animation: toastIn 0.3s ease;
 }
 
-.toast.error { background: #c62828; }
-.toast.success { background: #1D9E75; }
+.toast.error {
+  background: #c62828;
+}
+.toast.success {
+  background: #1d9e75;
+}
 
 @keyframes toastIn {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
@@ -902,17 +931,19 @@ button:hover {
   bottom: 0;
   right: 0;
   background: transparent !important; /* Quitamos el fondo azul/blanco */
-  border: none !important;            /* Sin bordes */
-  padding: 0 !important;              /* Quitamos todo el espaciado base */
-  border-radius: 0 !important;        /* Quitamos esquinas redondeadas */
-  box-shadow: none !important;        /* Quitamos sombras si las hubiera */
+  border: none !important; /* Sin bordes */
+  padding: 0 !important; /* Quitamos todo el espaciado base */
+  border-radius: 0 !important; /* Quitamos esquinas redondeadas */
+  box-shadow: none !important; /* Quitamos sombras si las hubiera */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 28px;                    /* Hacemos la camarita más grande */
+  font-size: 28px; /* Hacemos la camarita más grande */
   transition: transform 0.2s ease;
-  filter: drop-shadow(0px 2px 3px rgba(0,0,0,0.7)); /* Sombra para resaltar */
+  filter: drop-shadow(
+    0px 2px 3px rgba(0, 0, 0, 0.7)
+  ); /* Sombra para resaltar */
 }
 
 .btn-change-photo:hover {
@@ -1021,30 +1052,30 @@ button:hover {
    PANEL ESTUDIANTE: NAVBAR, MENÚ DESPLEGABLE Y HAMBURGUESA FINAL
    ========================================================================== */
 body.dashboard-estudiante {
-  overflow-x: hidden; 
+  overflow-x: hidden;
   background: #f4f7fb;
-  margin: 0; 
+  margin: 0;
 }
 
 /* --- NAVBAR CON GRID PARA CENTRAR TÍTULO --- */
 .navbar-estudiante {
-  display: grid !important; 
+  display: grid !important;
   grid-template-columns: auto 1fr auto !important; /* Izquierda, Centro, Derecha */
   align-items: center;
-  padding: 0 30px !important; 
+  padding: 0 30px !important;
   position: sticky;
   top: 0;
   z-index: 1001;
-  background: #123c73; 
+  background: #123c73;
   color: white;
-  height: 72px; 
+  height: 72px;
 }
 
 /* --- BOTÓN HAMBURGUESA (CAPA MÁXIMA E INMORTAL) --- */
 .navbar-estudiante .menu-toggle {
   grid-column: 1;
   position: relative !important;
-  z-index: 9999 !important; 
+  z-index: 9999 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
@@ -1058,20 +1089,26 @@ body.dashboard-estudiante {
 
 /* Las 3 rayitas blancas obligadas a aparecer */
 .navbar-estudiante .menu-toggle div {
-  background-color: #ffffff !important; 
-  height: 3px !important; 
-  width: 100% !important; 
+  background-color: #ffffff !important;
+  height: 3px !important;
+  width: 100% !important;
   border-radius: 5px !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
   display: block !important;
   transform-origin: left !important;
 }
 
 /* Animaciones de la X */
-.navbar-estudiante .menu-toggle.active div:first-child { transform: rotate(45deg) !important; }
-.navbar-estudiante .menu-toggle.active div:nth-child(2) { opacity: 0 !important; }
-.navbar-estudiante .menu-toggle.active div:last-child { transform: rotate(-45deg) !important; }
+.navbar-estudiante .menu-toggle.active div:first-child {
+  transform: rotate(45deg) !important;
+}
+.navbar-estudiante .menu-toggle.active div:nth-child(2) {
+  opacity: 0 !important;
+}
+.navbar-estudiante .menu-toggle.active div:last-child {
+  transform: rotate(-45deg) !important;
+}
 
 /* Título tirado a la izquierda */
 .navbar-estudiante h1 {
@@ -1081,7 +1118,7 @@ body.dashboard-estudiante {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 1.5rem;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 /* Usuario a la derecha */
@@ -1097,19 +1134,21 @@ body.dashboard-estudiante {
 .sidebar-oculta {
   position: fixed;
   top: 0;
-  left: -280px; 
+  left: -280px;
   width: 280px;
   height: 100vh;
-  background: #1a202c; 
-  box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+  background: #1a202c;
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
   transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000; /* Queda por debajo del navbar pero arriba del contenido */
-  padding-top: 90px; 
+  padding-top: 90px;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar-oculta.abierto { left: 0; }
+.sidebar-oculta.abierto {
+  left: 0;
+}
 
 .titulo-panel {
   color: white;
@@ -1121,7 +1160,7 @@ body.dashboard-estudiante {
 }
 
 .sidebar-oculta .nav-item {
-  color: #cbd5e1; 
+  color: #cbd5e1;
   padding: 12px 25px;
   font-size: 1.05rem;
   text-decoration: none;
@@ -1140,7 +1179,7 @@ body.dashboard-estudiante {
 .sidebar-oculta .nav-item.activa {
   background: #2a3441;
   color: #fff;
-  border-left-color: #3d8bfd; 
+  border-left-color: #3d8bfd;
   font-weight: bold;
 }
 
@@ -1160,8 +1199,6 @@ body.dashboard-estudiante .nav-item::before {
   margin: 0 auto;
 }
 
-
-
 /* ==========================================================================
    13. TARJETAS DE ÁREAS DE ESTUDIO (areas.html)
    ========================================================================== */
@@ -1178,12 +1215,14 @@ body.dashboard-estudiante .nav-item::before {
   background: white;
   border-radius: 15px;
   padding: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   border: 1px solid #eef2f7;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card-materia-progreso:hover {
@@ -1245,7 +1284,6 @@ body.dashboard-estudiante .nav-item::before {
   display: none !important;
 }
 
-
 /* =========================================
    CHAT IA - ESTILOS DEFINITIVOS
    ========================================= */
@@ -1262,7 +1300,7 @@ body.dashboard-estudiante .nav-item::before {
   border: none;
   font-size: 26px;
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -1338,7 +1376,7 @@ body.dashboard-estudiante .nav-item::before {
   color: #333 !important;
   align-self: flex-start !important;
   border-radius: 15px 15px 15px 0px !important; /* Forma de globo WhatsApp */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
 }
 
 .chat-footer {

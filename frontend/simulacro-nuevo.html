@@ -1,0 +1,2121 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Simulacro ICFES</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f0f4f8;
+        min-height: 100vh;
+      }
+      nav {
+        background: #0f2a4a;
+        color: #fff;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      nav h1 {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .nav-r {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 14px;
+      }
+      #timer-nav {
+        background: #1e4d8c;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 15px;
+      }
+
+      /* PANTALLAS */
+      .pantalla {
+        display: none;
+        max-width: 860px;
+        margin: 40px auto;
+        padding: 0 20px 60px;
+      }
+      .pantalla.vis {
+        display: block;
+      }
+
+      /* PREGUNTA */
+      .header-quiz {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      }
+      .area-badge {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .progreso-bar {
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 6px;
+      }
+      .progreso-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #2563eb, #7c3aed);
+        border-radius: 4px;
+        transition: width 0.3s;
+      }
+      .contador-txt {
+        font-size: 13px;
+        color: #64748b;
+      }
+      .fragmento-box {
+        background: #f8fafc;
+        border-left: 4px solid #2563eb;
+        padding: 16px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.7;
+        margin-bottom: 8px;
+        font-style: italic;
+      }
+      .fuente-txt {
+        font-size: 11px;
+        color: #94a3b8;
+        margin-bottom: 16px;
+      }
+      .enunciado-txt {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0f2a4a;
+        margin-bottom: 18px;
+        line-height: 1.5;
+      }
+      .opciones-lista {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .opcion-btn {
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 14px;
+        color: #334155;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .opcion-btn:hover {
+        border-color: #2563eb;
+        background: #eff6ff;
+      }
+      .opcion-btn.sel {
+        border-color: #2563eb;
+        background: #dbeafe;
+        color: #1e40af;
+        font-weight: 600;
+      }
+      .opcion-btn.correcta-r {
+        border-color: #16a34a;
+        background: #dcfce7;
+        color: #15803d;
+        font-weight: 600;
+      }
+      .opcion-btn.incorrecta-r {
+        border-color: #dc2626;
+        background: #fee2e2;
+        color: #dc2626;
+      }
+      .feedback-box {
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin-top: 12px;
+        display: none;
+      }
+      .feedback-box.ok {
+        background: #dcfce7;
+        color: #15803d;
+        border: 1px solid #86efac;
+      }
+      .feedback-box.mal {
+        background: #fee2e2;
+        color: #dc2626;
+        border: 1px solid #fca5a5;
+      }
+      .nav-btns {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        justify-content: space-between;
+      }
+      .btn-nav {
+        padding: 12px 28px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+        transition: opacity 0.2s;
+      }
+      .btn-nav:hover {
+        opacity: 0.85;
+      }
+      .btn-omit {
+        background: #f1f5f9;
+        color: #64748b;
+      }
+      .btn-sig {
+        background: linear-gradient(135deg, #1e4d8c, #2563eb);
+        color: #fff;
+      }
+      .btn-fin {
+        background: linear-gradient(135deg, #16a34a, #15803d);
+        color: #fff;
+      }
+      .section-sep {
+        background: #1e4d8c;
+        color: #fff;
+        border-radius: 12px;
+        padding: 28px 32px;
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .section-sep h3 {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .section-sep p {
+        color: #93c5fd;
+        font-size: 14px;
+      }
+
+      /* RESULTADO */
+      .resultado-wrap {
+        background: #fff;
+        border-radius: 16px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .puntaje-global {
+        font-size: 64px;
+        font-weight: 900;
+        color: #1e4d8c;
+        line-height: 1;
+      }
+      .puntaje-label {
+        font-size: 16px;
+        color: #64748b;
+        margin-top: 6px;
+        margin-bottom: 30px;
+      }
+      .areas-result {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .area-card-r {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 20px;
+        border: 2px solid #e2e8f0;
+      }
+      .area-card-r .area-nombre {
+        font-size: 13px;
+        font-weight: 700;
+        color: #64748b;
+        margin-bottom: 8px;
+      }
+      .area-card-r .area-puntaje {
+        font-size: 28px;
+        font-weight: 900;
+        color: #1e4d8c;
+      }
+      .area-card-r .area-sub {
+        font-size: 11px;
+        color: #94a3b8;
+      }
+      .barra-area {
+        height: 6px;
+        background: #e2e8f0;
+        border-radius: 4px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+      .barra-area-fill {
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.5s;
+      }
+      .stats-row {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-item .val {
+        font-size: 28px;
+        font-weight: 800;
+      }
+      .stat-item .lbl {
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 2px;
+      }
+      .verde {
+        color: #16a34a;
+      }
+      .rojo {
+        color: #dc2626;
+      }
+      .amarillo {
+        color: #ca8a04;
+      }
+      .btns-final {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 28px;
+      }
+      .btn-final {
+        padding: 14px 32px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn-final.prim {
+        background: linear-gradient(135deg, #1e4d8c, #2563eb);
+        color: #fff;
+      }
+      .btn-final.sec {
+        background: #f1f5f9;
+        color: #334155;
+      }
+      .revision-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #0f2a4a;
+        margin: 28px 0 16px;
+      }
+      .rev-area-sep {
+        background: #f1f5f9;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e4d8c;
+        margin: 20px 0 12px;
+      }
+      .rev-card {
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 10px;
+        font-size: 13px;
+      }
+      .rev-card.bien {
+        background: #f0fdf4;
+        border: 1px solid #86efac;
+      }
+      .rev-card.mal {
+        background: #fff1f2;
+        border: 1px solid #fca5a5;
+      }
+      .rev-card.omit {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+      }
+      .rev-enunciado {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 6px;
+      }
+      .rev-detalle {
+        color: #475569;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>📝 Simulacro ICFES</h1>
+      <div class="nav-r">
+        <span id="timer-nav">00:00</span>
+        <a
+          href="simulacro-selector.html"
+          style="color: #cbd5e1; text-decoration: none; font-size: 13px"
+          >← Salir</a
+        >
+      </div>
+    </nav>
+
+    <!-- PANTALLA: EXAMEN -->
+    <div class="pantalla vis" id="p-examen">
+      <div class="header-quiz">
+        <div id="area-badge-el" class="area-badge"></div>
+        <div class="progreso-bar">
+          <div class="progreso-fill" id="p-fill" style="width: 0%"></div>
+        </div>
+        <div class="contador-txt" id="contador-txt">Pregunta 1 de 85</div>
+      </div>
+
+      <div
+        style="
+          background: #fff;
+          border-radius: 12px;
+          padding: 28px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        "
+      >
+        <div
+          class="fragmento-box"
+          id="fragmento-box"
+          style="display: none"
+        ></div>
+        <div class="fuente-txt" id="fuente-txt"></div>
+        <div class="enunciado-txt" id="enunciado-txt"></div>
+        <div class="opciones-lista" id="opciones-lista"></div>
+        <div class="feedback-box" id="feedback-box"></div>
+        <div class="nav-btns">
+          <button class="btn-nav btn-omit" onclick="omitir()">⏭ Omitir</button>
+          <div style="display: flex; gap: 10px">
+            <button
+              class="btn-nav btn-sig"
+              id="btn-sig"
+              onclick="siguiente()"
+              disabled
+            >
+              Siguiente →
+            </button>
+            <button
+              class="btn-nav btn-fin"
+              id="btn-fin"
+              onclick="finalizar()"
+              style="display: none"
+            >
+              ✅ Ver resultados
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- separador entre secciones -->
+      <div class="section-sep" id="section-sep" style="display: none">
+        <h3 id="sep-titulo"></h3>
+        <p id="sep-desc"></p>
+        <button
+          class="btn-nav btn-sig"
+          style="margin-top: 16px"
+          onclick="continuarSeccion()"
+        >
+          Continuar →
+        </button>
+      </div>
+    </div>
+
+    <!-- PANTALLA: RESULTADO -->
+    <div class="pantalla" id="p-resultado">
+      <div class="resultado-wrap">
+        <div style="text-align: center; margin-bottom: 24px">
+          <div class="puntaje-global" id="res-global">—</div>
+          <div class="puntaje-label" id="res-label">Puntaje Global</div>
+          <div
+            id="res-titulo"
+            style="
+              font-size: 22px;
+              font-weight: 700;
+              color: #0f2a4a;
+              margin-top: 12px;
+            "
+          ></div>
+          <div
+            id="res-desc"
+            style="color: #64748b; margin-top: 6px; font-size: 14px"
+          ></div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="val verde" id="r-correctas">0</div>
+            <div class="lbl">✅ Correctas</div>
+          </div>
+          <div class="stat-item">
+            <div class="val rojo" id="r-incorrectas">0</div>
+            <div class="lbl">❌ Incorrectas</div>
+          </div>
+          <div class="stat-item">
+            <div class="val amarillo" id="r-omitidas">0</div>
+            <div class="lbl">⏭ Omitidas</div>
+          </div>
+          <div class="stat-item">
+            <div class="val" id="r-tiempo" style="color: #7c3aed">—</div>
+            <div class="lbl">⏱ Tiempo</div>
+          </div>
+        </div>
+
+        <div class="areas-result" id="areas-result"></div>
+
+        <div class="btns-final">
+          <button
+            class="btn-final prim"
+            onclick="window.location.href = 'simulacro-selector.html'"
+          >
+            🔄 Nuevo Simulacro
+          </button>
+          <button class="btn-final sec" onclick="verRevision()">
+            📋 Revisión detallada
+          </button>
+          <button
+            class="btn-final sec"
+            onclick="window.location.href = 'panel-estudiante.html'"
+          >
+            🏠 Panel
+          </button>
+        </div>
+
+        <div id="revision-wrap" style="display: none">
+          <div class="revision-title">📋 Revisión de respuestas</div>
+          <div id="revision-contenido"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ══════════════════════════════════════════════════════════════════
+      // BANCOS DE PREGUNTAS
+      // ══════════════════════════════════════════════════════════════════
+      const BANCOS = {
+        matematicas: [
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado:
+              "La suma de tres números enteros consecutivos es 72. ¿Cuál es el mayor?",
+            opciones: ["A) 22", "B) 23", "C) 25", "D) 26"],
+            correcta: 2,
+            explicacion:
+              "Sean n, n+1, n+2. 3n+3=72 → n=23. El mayor es n+2=25.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado: "Simplifica: (2³ × 2⁴) / 2⁵",
+            opciones: ["A) 2", "B) 4", "C) 8", "D) 16"],
+            correcta: 1,
+            explicacion: "2^(3+4−5) = 2² = 4.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado: "Si log₂(x) = 5, ¿cuánto vale x?",
+            opciones: ["A) 10", "B) 16", "C) 32", "D) 25"],
+            correcta: 2,
+            explicacion: "log₂(x)=5 ⟺ 2⁵=x → x=32.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado:
+              "Un artículo costaba $45.000. Lo rebajaron un 20%. ¿Cuál es el precio final?",
+            opciones: ["A) $34.000", "B) $36.000", "C) $38.000", "D) $40.000"],
+            correcta: 1,
+            explicacion:
+              "Descuento = 45.000×0,20 = 9.000. Precio final = 36.000.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado: "Resuelve: |3x − 6| = 9",
+            opciones: [
+              "A) x = 5",
+              "B) x = 5 y x = −1",
+              "C) x = −1",
+              "D) x = 3 y x = −3",
+            ],
+            correcta: 1,
+            explicacion: "3x−6=9 → x=5; o 3x−6=−9 → x=−1. Ambas soluciones.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado:
+              "$500.000 al 8% de interés compuesto anual. ¿Cuánto habrá después de 2 años?",
+            opciones: [
+              "A) $580.000",
+              "B) $583.200",
+              "C) $600.000",
+              "D) $540.000",
+            ],
+            correcta: 1,
+            explicacion: "M = 500.000×(1,08)² = 583.200.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado:
+              "8 impresoras imprimen 600 páginas en 5 horas. ¿Cuántas páginas imprimen 6 impresoras en 3 horas?",
+            opciones: ["A) 250", "B) 300", "C) 270", "D) 360"],
+            correcta: 2,
+            explicacion: "600 × (6/8) × (3/5) = 270.",
+          },
+          {
+            tema: "numerico",
+            temaLabel: "Pensamiento Numérico",
+            enunciado:
+              "Usando log 2 ≈ 0,301 y log 3 ≈ 0,477, ¿cuánto es log(72)?",
+            opciones: ["A) 1,556", "B) 1,857", "C) 1,778", "D) 2,301"],
+            correcta: 1,
+            explicacion: "72=2³×3². log72=3(0,301)+2(0,477)=1,857.",
+          },
+          {
+            tema: "algebra",
+            temaLabel: "Álgebra",
+            enunciado: "¿Para qué valor de x se cumple que 5x − 3 = 2x + 9?",
+            opciones: ["A) x = 2", "B) x = 3", "C) x = 4", "D) x = 6"],
+            correcta: 2,
+            explicacion: "3x=12 → x=4.",
+          },
+          {
+            tema: "algebra",
+            temaLabel: "Álgebra",
+            enunciado: "Las raíces de x² − 7x + 12 = 0 son:",
+            opciones: ["A) 2 y 6", "B) 3 y 4", "C) −3 y −4", "D) 1 y 12"],
+            correcta: 1,
+            explicacion: "(x−3)(x−4)=0 → x=3 y x=4.",
+          },
+          {
+            tema: "algebra",
+            temaLabel: "Álgebra",
+            enunciado: "El discriminante de 3x² − 4x + 2 = 0 indica que tiene:",
+            opciones: [
+              "A) Dos raíces reales distintas",
+              "B) Una raíz doble",
+              "C) No tiene raíces reales",
+              "D) Una raíz entera",
+            ],
+            correcta: 2,
+            explicacion: "Δ=16−24=−8<0 → no hay raíces reales.",
+          },
+          {
+            tema: "algebra",
+            temaLabel: "Álgebra",
+            enunciado: "Factoriza completamente: 3x³ − 12x",
+            opciones: [
+              "A) 3x(x−2)(x+2)",
+              "B) 3(x³−4x)",
+              "C) x(3x²−12)",
+              "D) 3x²(x−4)",
+            ],
+            correcta: 0,
+            explicacion: "3x(x²−4)=3x(x−2)(x+2).",
+          },
+          {
+            tema: "geometria",
+            temaLabel: "Geometría",
+            enunciado:
+              "Un triángulo rectángulo tiene catetos 5 y 12 cm. ¿Cuánto mide la hipotenusa?",
+            opciones: ["A) 11 cm", "B) 12,5 cm", "C) 13 cm", "D) 17 cm"],
+            correcta: 2,
+            explicacion: "c²=25+144=169 → c=13 cm.",
+          },
+          {
+            tema: "geometria",
+            temaLabel: "Geometría",
+            enunciado:
+              "¿Cuál es el área de un trapecio con bases 6 m y 10 m, y altura 4 m?",
+            opciones: ["A) 24 m²", "B) 28 m²", "C) 32 m²", "D) 40 m²"],
+            correcta: 2,
+            explicacion: "A=((6+10)/2)×4=32 m².",
+          },
+          {
+            tema: "estadistica",
+            temaLabel: "Estadística",
+            enunciado: "Notas: 3,5 – 4,0 – 3,0 – 4,5 – 4,0. ¿Cuál es la media?",
+            opciones: ["A) 3,7", "B) 3,8", "C) 4,0", "D) 3,9"],
+            correcta: 1,
+            explicacion: "19/5=3,8.",
+          },
+          {
+            tema: "estadistica",
+            temaLabel: "Estadística",
+            enunciado:
+              "En una bolsa hay 4 bolas rojas, 3 azules y 3 verdes. ¿Cuál es P(no roja)?",
+            opciones: ["A) 2/5", "B) 3/5", "C) 4/10", "D) 7/10"],
+            correcta: 1,
+            explicacion: "No rojas=6. P=6/10=3/5.",
+          },
+          {
+            tema: "calculo",
+            temaLabel: "Cálculo y Funciones",
+            enunciado:
+              "f(x) = 2x² − 8x + 6. ¿En qué valor de x alcanza su mínimo?",
+            opciones: ["A) x = 1", "B) x = 2", "C) x = 3", "D) x = 4"],
+            correcta: 1,
+            explicacion: "f'(x)=4x−8=0 → x=2.",
+          },
+          {
+            tema: "calculo",
+            temaLabel: "Cálculo y Funciones",
+            enunciado:
+              "¿Cuál es la ecuación de la recta que pasa por (0, 3) con pendiente −2?",
+            opciones: [
+              "A) y = 2x − 3",
+              "B) y = −2x + 3",
+              "C) y = 3x − 2",
+              "D) y = −3x + 2",
+            ],
+            correcta: 1,
+            explicacion: "y=−2x+3.",
+          },
+          {
+            tema: "calculo",
+            temaLabel: "Cálculo y Funciones",
+            enunciado:
+              "La pendiente de la recta que pasa por (−1, 2) y (3, 10) es:",
+            opciones: ["A) 1", "B) 2", "C) 3", "D) 4"],
+            correcta: 1,
+            explicacion: "m=(10−2)/(3+1)=2.",
+          },
+          {
+            tema: "calculo",
+            temaLabel: "Cálculo y Funciones",
+            enunciado: "Si f(x) = 3x−1 y g(x) = x+4, ¿cuánto es f(g(2))?",
+            opciones: ["A) 11", "B) 17", "C) 5", "D) 14"],
+            correcta: 1,
+            explicacion: "g(2)=6. f(6)=17.",
+          },
+          {
+            tema: "calculo",
+            temaLabel: "Cálculo y Funciones",
+            enunciado: "¿Cuál es el dominio de f(x) = √(x − 3)?",
+            opciones: ["A) x < 3", "B) x ≤ 3", "C) x ≥ 3", "D) x > 3"],
+            correcta: 2,
+            explicacion: "x−3≥0 → x≥3.",
+          },
+        ],
+
+        lectura: [
+          {
+            tema: "comprension",
+            temaLabel: "Comprensión Textual",
+            fragmento:
+              "«La ciencia no es una acumulación de hechos, sino un proceso de construcción de modelos que nos permiten comprender y predecir la realidad. Cada teoría científica es provisional: válida hasta que una nueva evidencia la reemplaza.»",
+            fuente: "Karl Popper (adaptado)",
+            enunciado:
+              "Según el fragmento, la ciencia se caracteriza principalmente por:",
+            opciones: [
+              "A) Acumular hechos definitivos",
+              "B) Construir modelos provisionales y revisables",
+              "C) Predecir el futuro con certeza absoluta",
+              "D) Reemplazar teorías solo cuando son falsas",
+            ],
+            correcta: 1,
+            explicacion:
+              "La ciencia construye modelos provisionales que se reemplazan con nueva evidencia.",
+          },
+          {
+            tema: "comprension",
+            temaLabel: "Comprensión Textual",
+            fragmento:
+              "«El lenguaje no es un espejo de la realidad; es el instrumento con el que construimos esa realidad. Las palabras no nombran cosas que existen independientemente: crean las categorías dentro de las cuales interpretamos el mundo.»",
+            fuente: "Wittgenstein (adaptado)",
+            enunciado: "La idea central del fragmento es que el lenguaje:",
+            opciones: [
+              "A) Refleja fielmente la realidad",
+              "B) Crea la realidad que percibimos",
+              "C) Es un espejo imperfecto",
+              "D) Nombra objetos que existen previamente",
+            ],
+            correcta: 1,
+            explicacion:
+              "El autor afirma que el lenguaje crea y construye categorías para interpretar el mundo.",
+          },
+          {
+            tema: "comprension",
+            temaLabel: "Comprensión Textual",
+            fragmento:
+              "«Afirmar que todos los cisnes son blancos es una proposición universal. Un solo cisne negro basta para refutar esa afirmación. Por esto la ciencia avanza mediante la falsación, no mediante la verificación.»",
+            fuente: "Karl Popper (adaptado)",
+            enunciado: 'El ejemplo del "cisne negro" sirve para ilustrar:',
+            opciones: [
+              "A) Que la observación es el fundamento absoluto",
+              "B) Que una sola excepción puede refutar una regla universal",
+              "C) Que los cisnes negros son la excepción natural",
+              "D) Que la inducción es el único método válido",
+            ],
+            correcta: 1,
+            explicacion:
+              "Una sola observación contraria puede falsear una proposición universal.",
+          },
+          {
+            tema: "comprension",
+            temaLabel: "Comprensión Textual",
+            fragmento:
+              "«La educación no es llenar un balde, sino encender un fuego.» Esta metáfora cuestiona el modelo de educación bancaria en el que el maestro deposita conocimiento en el estudiante pasivo.",
+            fuente: "Pedagogía crítica (adaptado)",
+            enunciado:
+              'La metáfora "encender un fuego" representa la educación como:',
+            opciones: [
+              "A) Transmisión ordenada de contenidos",
+              "B) Proceso que despierta la curiosidad y el pensamiento activo",
+              "C) Técnica para iluminar espacios oscuros",
+              "D) Método que requiere materiales previos",
+            ],
+            correcta: 1,
+            explicacion:
+              '"Encender un fuego" se opone a la educación bancaria y metaforiza despertar la curiosidad.',
+          },
+          {
+            tema: "comprension",
+            temaLabel: "Comprensión Textual",
+            fragmento:
+              "«La memoria no es el registro fiel del pasado, sino su reconstrucción permanente. Cada vez que recordamos algo, lo modificamos según nuestro estado emocional actual y la información nueva recibida.»",
+            fuente: "Psicología cognitiva (adaptado)",
+            enunciado: "Según el fragmento, los recuerdos son:",
+            opciones: [
+              "A) Registros exactos e inmutables",
+              "B) Construcciones influidas por el presente",
+              "C) Distorsiones provocadas por el olvido",
+              "D) Representaciones inconscientes de traumas",
+            ],
+            correcta: 1,
+            explicacion:
+              "Los recuerdos son reconstrucciones influidas por el estado presente.",
+          },
+          {
+            tema: "tipos",
+            temaLabel: "Tipos de Texto",
+            fragmento:
+              "«Se convoca a todos los estudiantes de undécimo grado a la reunión informativa sobre el proceso de inscripción al ICFES, el jueves 15 de octubre a las 2:00 p.m. La asistencia es obligatoria.»",
+            fuente: "Comunicado institucional",
+            enunciado: "El texto anterior es principalmente de tipo:",
+            opciones: [
+              "A) Narrativo",
+              "B) Argumentativo",
+              "C) Instructivo-informativo",
+              "D) Descriptivo",
+            ],
+            correcta: 2,
+            explicacion:
+              "Convoca (instrucción) e informa sobre un evento. Es instructivo-informativo.",
+          },
+          {
+            tema: "tipos",
+            temaLabel: "Tipos de Texto",
+            fragmento:
+              "«Los volcanes de escudo se caracterizan por sus laderas suaves y largas erupciones de lava fluida. A diferencia de los estratovolcanes, que tienen forma cónica y erupciones explosivas, los de escudo forman islas como Hawái.»",
+            fuente: "Enciclopedia geológica (adaptado)",
+            enunciado: "El texto es predominantemente:",
+            opciones: [
+              "A) Narrativo",
+              "B) Argumentativo",
+              "C) Expositivo",
+              "D) Descriptivo-literario",
+            ],
+            correcta: 2,
+            explicacion:
+              "Explica características y compara tipos de volcanes. Es texto expositivo.",
+          },
+          {
+            tema: "tipos",
+            temaLabel: "Tipos de Texto",
+            enunciado:
+              "Un texto cuya intención es convencer mediante razones, evidencias y refutación de posiciones contrarias se denomina:",
+            opciones: [
+              "A) Texto expositivo",
+              "B) Texto descriptivo",
+              "C) Texto narrativo",
+              "D) Texto argumentativo",
+            ],
+            correcta: 3,
+            explicacion:
+              "El texto argumentativo busca persuadir mediante razones y evidencias.",
+          },
+          {
+            tema: "retorica",
+            temaLabel: "Retórica y Discurso",
+            fragmento: "«La vida es sueño, y los sueños, sueños son.»",
+            fuente: "Calderón de la Barca",
+            enunciado: "La figura retórica predominante en el verso es:",
+            opciones: [
+              "A) Hipérbole",
+              "B) Metáfora",
+              "C) Ironía",
+              "D) Anáfora",
+            ],
+            correcta: 1,
+            explicacion:
+              '"La vida es sueño" es una comparación directa sin partícula comparativa: metáfora.',
+          },
+          {
+            tema: "retorica",
+            temaLabel: "Retórica y Discurso",
+            enunciado:
+              "La figura retórica que consiste en la repetición de una misma palabra al inicio de versos consecutivos se llama:",
+            opciones: [
+              "A) Epifora",
+              "B) Aliteración",
+              "C) Anáfora",
+              "D) Polisíndeton",
+            ],
+            correcta: 2,
+            explicacion:
+              "La anáfora repite palabras al inicio de versos o frases.",
+          },
+          {
+            tema: "retorica",
+            temaLabel: "Retórica y Discurso",
+            enunciado:
+              "La falacia que consiste en atacar a la persona en lugar de refutar su argumento se llama:",
+            opciones: [
+              "A) Falsa dicotomía",
+              "B) Pendiente resbaladiza",
+              "C) Ad hominem",
+              "D) Apelación a la autoridad",
+            ],
+            correcta: 2,
+            explicacion:
+              "Ad hominem ataca a quien argumenta en lugar de sus razones.",
+          },
+          {
+            tema: "literatura",
+            temaLabel: "Literatura y Contexto",
+            enunciado: "El Realismo Mágico se caracteriza por:",
+            opciones: [
+              "A) Narrar eventos sobrenaturales como normales en la realidad cotidiana",
+              "B) Describir mundos de fantasía desconectados de la realidad",
+              "C) Hacer crítica política directa con personajes alegóricos",
+              "D) Recrear hechos históricos con fidelidad documental",
+            ],
+            correcta: 0,
+            explicacion:
+              "El Realismo Mágico integra elementos mágicos en la realidad cotidiana sin que los personajes se sorprendan.",
+          },
+          {
+            tema: "literatura",
+            temaLabel: "Literatura y Contexto",
+            enunciado:
+              "En la estructura del cuento clásico, el momento de máxima tensión narrativa se denomina:",
+            opciones: [
+              "A) Exposición",
+              "B) Nudo o clímax",
+              "C) Desenlace",
+              "D) Analepsis",
+            ],
+            correcta: 1,
+            explicacion: "El clímax es el punto de mayor tensión narrativa.",
+          },
+          {
+            tema: "literatura",
+            temaLabel: "Literatura y Contexto",
+            enunciado:
+              "El narrador que usa la primera persona y es personaje principal de la historia se denomina:",
+            opciones: [
+              "A) Narrador omnisciente",
+              "B) Narrador testigo",
+              "C) Narrador protagonista",
+              "D) Narrador extradiegético",
+            ],
+            correcta: 2,
+            explicacion:
+              "El narrador protagonista narra en primera persona y es el personaje principal.",
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            fragmento:
+              "«Los jóvenes de hoy no leen. La prueba está en que mis tres hijos pasan todo el día pegados al celular. Esta generación está perdida.»",
+            fuente: "Comentario en redes sociales (ficticio)",
+            enunciado: "El argumento contiene principalmente la falacia de:",
+            opciones: [
+              "A) Ad hominem",
+              "B) Generalización apresurada",
+              "C) Hombre de paja",
+              "D) Pendiente resbaladiza",
+            ],
+            correcta: 1,
+            explicacion:
+              'Concluir que "los jóvenes no leen" basándose en solo tres casos es una generalización apresurada.',
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            enunciado:
+              "Si permites calculadora en exámenes, pronto olvidaremos las matemáticas básicas. ¿Qué falacia es esta?",
+            opciones: [
+              "A) Falsa dicotomía",
+              "B) Ad hominem",
+              "C) Pendiente resbaladiza",
+              "D) Apelación a la emoción",
+            ],
+            correcta: 2,
+            explicacion:
+              "La pendiente resbaladiza asume consecuencias extremas inevitables sin evidencia.",
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            enunciado:
+              "«Para ser feliz solo hay dos opciones: tener mucho dinero o vivir como monje. No hay término medio.» La falacia presente es:",
+            opciones: [
+              "A) Generalización apresurada",
+              "B) Hombre de paja",
+              "C) Falsa dicotomía",
+              "D) Pendiente resbaladiza",
+            ],
+            correcta: 2,
+            explicacion:
+              "Presentar solo dos opciones extremas ignorando alternativas es falsa dicotomía.",
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            enunciado: "Leer críticamente un texto significa principalmente:",
+            opciones: [
+              "A) Identificar todas las palabras desconocidas",
+              "B) Resumir el contenido en pocas palabras",
+              "C) Evaluar argumentos, identificar sesgos y relacionar con otros conocimientos",
+              "D) Copiar las ideas principales en orden de aparición",
+            ],
+            correcta: 2,
+            explicacion:
+              "La lectura crítica evalúa argumentos, detecta sesgos y conecta con otros saberes.",
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            enunciado:
+              'Un estudiante dice: "El profesor me puso mala nota porque no le caigo bien." Sin más evidencia, esto es:',
+            opciones: [
+              "A) Un argumento válido",
+              "B) Una generalización apresurada",
+              "C) Una apelación a la emoción",
+              "D) Una afirmación sin respaldo suficiente",
+            ],
+            correcta: 3,
+            explicacion:
+              "Sin evidencia adicional, la afirmación carece de respaldo suficiente para ser un argumento válido.",
+          },
+          {
+            tema: "critico",
+            temaLabel: "Pensamiento Crítico",
+            enunciado:
+              '¿Cuál de las siguientes opciones es una premisa implícita en el argumento: "Juan es médico, por tanto es confiable"?',
+            opciones: [
+              "A) Los médicos nunca se equivocan",
+              "B) Juan estudió medicina",
+              "C) Los médicos son personas confiables en general",
+              "D) La confianza depende del título universitario",
+            ],
+            correcta: 2,
+            explicacion:
+              'La premisa implícita es la generalización: "Los médicos son confiables en general".',
+          },
+        ],
+
+        ciencias: [
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado:
+              "¿Cuál es la función principal de la mitocondria en la célula?",
+            opciones: [
+              "A) Síntesis de proteínas",
+              "B) Producción de energía (ATP)",
+              "C) Almacenamiento de ADN",
+              "D) Digestión celular",
+            ],
+            correcta: 1,
+            explicacion:
+              "La mitocondria es la central energética de la célula, produce ATP mediante respiración celular.",
+          },
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado:
+              "El proceso por el cual las plantas convierten luz solar en energía química se denomina:",
+            opciones: [
+              "A) Respiración celular",
+              "B) Fermentación",
+              "C) Fotosíntesis",
+              "D) Quimiosíntesis",
+            ],
+            correcta: 2,
+            explicacion:
+              "La fotosíntesis usa luz solar, CO₂ y agua para producir glucosa y oxígeno.",
+          },
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado:
+              "¿Cuántos cromosomas tiene una célula humana somática normal?",
+            opciones: ["A) 23", "B) 44", "C) 46", "D) 48"],
+            correcta: 2,
+            explicacion:
+              "Las células somáticas humanas tienen 46 cromosomas (23 pares).",
+          },
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado:
+              "Dos guisantes con genotipo Aa × Aa. ¿Qué proporción de descendientes tendrá genotipo AA?",
+            opciones: ["A) 1/4", "B) 1/2", "C) 3/4", "D) 0"],
+            correcta: 0,
+            explicacion:
+              "Cruce Aa×Aa → 1/4 AA, 2/4 Aa, 1/4 aa. La proporción AA es 1/4.",
+          },
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado:
+              "¿Cuál de los siguientes NO es un organelo exclusivo de células vegetales?",
+            opciones: [
+              "A) Cloroplasto",
+              "B) Vacuola central",
+              "C) Pared celular",
+              "D) Ribosoma",
+            ],
+            correcta: 3,
+            explicacion:
+              "Los ribosomas están presentes en todas las células (procariotas y eucariotas).",
+          },
+          {
+            tema: "biologia",
+            temaLabel: "Biología",
+            enunciado: "La selección natural opera principalmente sobre:",
+            opciones: [
+              "A) El genotipo de los individuos",
+              "B) Las mutaciones antes de que ocurran",
+              "C) El fenotipo de los individuos",
+              "D) Las poblaciones de manera igual",
+            ],
+            correcta: 2,
+            explicacion:
+              "La selección natural actúa sobre el fenotipo (caracteres observables) que se expresa en el ambiente.",
+          },
+          {
+            tema: "quimica",
+            temaLabel: "Química",
+            enunciado: "¿Cuál es la fórmula química del agua?",
+            opciones: ["A) HO", "B) H₂O", "C) H₂O₂", "D) OH"],
+            correcta: 1,
+            explicacion:
+              "El agua está formada por 2 átomos de hidrógeno y 1 de oxígeno: H₂O.",
+          },
+          {
+            tema: "quimica",
+            temaLabel: "Química",
+            enunciado:
+              "En la tabla periódica, los elementos de un mismo grupo tienen en común:",
+            opciones: [
+              "A) El mismo número de masa",
+              "B) El mismo número de electrones de valencia",
+              "C) El mismo período",
+              "D) La misma masa atómica",
+            ],
+            correcta: 1,
+            explicacion:
+              "Los elementos de un mismo grupo tienen igual número de electrones de valencia, lo que determina propiedades similares.",
+          },
+          {
+            tema: "quimica",
+            temaLabel: "Química",
+            enunciado: "En la reacción: 2H₂ + O₂ → 2H₂O, el proceso es:",
+            opciones: [
+              "A) Descomposición",
+              "B) Síntesis (combinación)",
+              "C) Sustitución simple",
+              "D) Neutralización",
+            ],
+            correcta: 1,
+            explicacion:
+              "Dos elementos se combinan para formar un compuesto: reacción de síntesis.",
+          },
+          {
+            tema: "quimica",
+            temaLabel: "Química",
+            enunciado: "El pH de una solución ácida es:",
+            opciones: [
+              "A) Mayor que 7",
+              "B) Igual a 7",
+              "C) Menor que 7",
+              "D) Depende de la temperatura",
+            ],
+            correcta: 2,
+            explicacion:
+              "pH < 7 indica acidez. pH = 7 es neutro. pH > 7 es básico.",
+          },
+          {
+            tema: "fisica",
+            temaLabel: "Física",
+            enunciado:
+              "Un objeto cae libremente desde el reposo. Su velocidad después de 3 segundos es (g = 10 m/s²):",
+            opciones: ["A) 10 m/s", "B) 20 m/s", "C) 30 m/s", "D) 45 m/s"],
+            correcta: 2,
+            explicacion: "v = g×t = 10×3 = 30 m/s.",
+          },
+          {
+            tema: "fisica",
+            temaLabel: "Física",
+            enunciado: "La primera ley de Newton (inercia) establece que:",
+            opciones: [
+              "A) F = m×a",
+              "B) Todo cuerpo permanece en reposo o movimiento rectilíneo uniforme si la fuerza neta es cero",
+              "C) A toda acción le corresponde una reacción igual y opuesta",
+              "D) La energía no se crea ni se destruye",
+            ],
+            correcta: 1,
+            explicacion:
+              "La primera ley de Newton es el principio de inercia: sin fuerza neta, no hay cambio en el estado de movimiento.",
+          },
+          {
+            tema: "fisica",
+            temaLabel: "Física",
+            enunciado:
+              "La energía cinética de un objeto de 2 kg que se mueve a 10 m/s es:",
+            opciones: ["A) 20 J", "B) 50 J", "C) 100 J", "D) 200 J"],
+            correcta: 2,
+            explicacion: "Ec = ½mv² = ½×2×100 = 100 J.",
+          },
+          {
+            tema: "cts",
+            temaLabel: "Ciencia, Tecnología y Sociedad",
+            enunciado:
+              "¿Cuál de los siguientes gases tiene mayor responsabilidad en el efecto invernadero antropogénico?",
+            opciones: [
+              "A) Oxígeno (O₂)",
+              "B) Nitrógeno (N₂)",
+              "C) Dióxido de carbono (CO₂)",
+              "D) Argón (Ar)",
+            ],
+            correcta: 2,
+            explicacion:
+              "El CO₂ producido por la quema de combustibles fósiles es el principal gas de efecto invernadero de origen humano.",
+          },
+          {
+            tema: "cts",
+            temaLabel: "Ciencia, Tecnología y Sociedad",
+            enunciado: "La capa de ozono es importante porque:",
+            opciones: [
+              "A) Produce oxígeno para la atmósfera",
+              "B) Absorbe la radiación UV dañina del sol",
+              "C) Regula la temperatura oceánica",
+              "D) Filtra las partículas de polvo atmosférico",
+            ],
+            correcta: 1,
+            explicacion:
+              "La capa de ozono absorbe la mayor parte de la radiación ultravioleta (UV) proveniente del sol.",
+          },
+        ],
+
+        sociales: [
+          {
+            tema: "historia",
+            temaLabel: "Historia de Colombia",
+            enunciado:
+              "¿En qué año se firmó la Constitución Política de Colombia actualmente vigente?",
+            opciones: ["A) 1886", "B) 1948", "C) 1991", "D) 2001"],
+            correcta: 2,
+            explicacion:
+              "La Constitución Política de Colombia vigente fue promulgada en 1991, reemplazando a la de 1886.",
+          },
+          {
+            tema: "historia",
+            temaLabel: "Historia de Colombia",
+            enunciado:
+              "El proceso de independencia de Colombia de España culminó el:",
+            opciones: [
+              "A) 20 de julio de 1810",
+              "B) 7 de agosto de 1819",
+              "C) 17 de diciembre de 1819",
+              "D) 25 de julio de 1820",
+            ],
+            correcta: 1,
+            explicacion:
+              "La Batalla de Boyacá el 7 de agosto de 1819 consolidó la independencia de la Nueva Granada.",
+          },
+          {
+            tema: "historia",
+            temaLabel: "Historia de Colombia",
+            enunciado:
+              'El período conocido como "La Violencia" en Colombia (décadas 1940-1950) fue principalmente:',
+            opciones: [
+              "A) Un conflicto entre Colombia y Venezuela",
+              "B) Una guerra civil entre seguidores del Partido Liberal y Conservador",
+              "C) Una rebelión indígena contra el gobierno central",
+              "D) Una guerra contra el narcotráfico",
+            ],
+            correcta: 1,
+            explicacion:
+              "La Violencia fue un conflicto bipartidista entre liberales y conservadores que causó cientos de miles de muertos.",
+          },
+          {
+            tema: "historia",
+            temaLabel: "Historia de Colombia",
+            enunciado:
+              'El "Bogotazo" del 9 de abril de 1948 fue desencadenado por:',
+            opciones: [
+              "A) La llegada de tropas norteamericanas",
+              "B) El asesinato de Jorge Eliécer Gaitán",
+              "C) Un golpe de Estado militar",
+              "D) Una crisis económica internacional",
+            ],
+            correcta: 1,
+            explicacion:
+              "El asesinato del líder liberal Jorge Eliécer Gaitán el 9 de abril de 1948 desencadenó el Bogotazo.",
+          },
+          {
+            tema: "geografia",
+            temaLabel: "Geografía",
+            enunciado: "¿Cuántos departamentos tiene Colombia actualmente?",
+            opciones: ["A) 30", "B) 32", "C) 34", "D) 36"],
+            correcta: 1,
+            explicacion:
+              "Colombia tiene 32 departamentos más el Distrito Capital de Bogotá.",
+          },
+          {
+            tema: "geografia",
+            temaLabel: "Geografía",
+            enunciado: "El río más largo de Colombia es:",
+            opciones: [
+              "A) El río Cauca",
+              "B) El río Magdalena",
+              "C) El río Meta",
+              "D) El río Amazonas",
+            ],
+            correcta: 1,
+            explicacion:
+              "El río Magdalena es el río principal de Colombia con 1.528 km de longitud.",
+          },
+          {
+            tema: "geografia",
+            temaLabel: "Geografía",
+            enunciado:
+              "La región natural de Colombia con mayor biodiversidad es:",
+            opciones: [
+              "A) La región Andina",
+              "B) La región Caribe",
+              "C) La región Amazónica",
+              "D) La región Pacífica",
+            ],
+            correcta: 2,
+            explicacion:
+              "La región Amazónica alberga la mayor biodiversidad por su selva tropical.",
+          },
+          {
+            tema: "constitucion",
+            temaLabel: "Constitución Política",
+            enunciado: "Según la Constitución de 1991, Colombia es un Estado:",
+            opciones: [
+              "A) Federal, democrático y pluralista",
+              "B) Social de Derecho, organizado en forma de República unitaria",
+              "C) Confederal, descentralizado y autonómico",
+              "D) Monárquico constitucional y parlamentario",
+            ],
+            correcta: 1,
+            explicacion:
+              'El artículo 1 de la Constitución define a Colombia como un "Estado Social de Derecho, organizado en forma de República unitaria, descentralizada..."',
+          },
+          {
+            tema: "constitucion",
+            temaLabel: "Constitución Política",
+            enunciado:
+              "¿Cuál es la rama del poder público encargada de hacer las leyes en Colombia?",
+            opciones: [
+              "A) Rama Ejecutiva",
+              "B) Rama Judicial",
+              "C) Rama Legislativa",
+              "D) Ministerio Público",
+            ],
+            correcta: 2,
+            explicacion:
+              "La Rama Legislativa, compuesta por el Congreso (Senado y Cámara de Representantes), tiene la función de hacer las leyes.",
+          },
+          {
+            tema: "constitucion",
+            temaLabel: "Constitución Política",
+            enunciado: "La acción de tutela en Colombia protege:",
+            opciones: [
+              "A) Derechos colectivos del medio ambiente",
+              "B) Derechos fundamentales cuando son vulnerados o amenazados",
+              "C) Derechos de propiedad privada",
+              "D) Derechos laborales de los trabajadores",
+            ],
+            correcta: 1,
+            explicacion:
+              "La tutela (art. 86) protege derechos fundamentales ante vulneración o amenaza de autoridades o particulares.",
+          },
+          {
+            tema: "ciudadanas",
+            temaLabel: "Competencias Ciudadanas",
+            enunciado:
+              "La democracia participativa se diferencia de la representativa en que:",
+            opciones: [
+              "A) Solo existe en países desarrollados",
+              "B) Los ciudadanos toman decisiones directamente además de elegir representantes",
+              "C) Elimina los partidos políticos",
+              "D) Solo aplica en municipios pequeños",
+            ],
+            correcta: 1,
+            explicacion:
+              "La democracia participativa combina la elección de representantes con mecanismos de participación directa (referendos, cabildos, iniciativas populares).",
+          },
+          {
+            tema: "ciudadanas",
+            temaLabel: "Competencias Ciudadanas",
+            enunciado:
+              "¿Cuál de estos es un mecanismo de participación ciudadana consagrado en la Constitución de 1991?",
+            opciones: [
+              "A) Manifestación",
+              "B) Paro cívico",
+              "C) Referendo",
+              "D) Huelga",
+            ],
+            correcta: 2,
+            explicacion:
+              "Los mecanismos de participación ciudadana incluyen: voto, plebiscito, referendo, consulta popular, cabildo abierto, iniciativa legislativa y revocatoria del mandato.",
+          },
+          {
+            tema: "ciudadanas",
+            temaLabel: "Competencias Ciudadanas",
+            enunciado: "El principio de igualdad ante la ley implica que:",
+            opciones: [
+              "A) Todas las personas tienen los mismos ingresos económicos",
+              "B) Todas las personas son tratadas de la misma manera por las autoridades sin discriminación",
+              "C) Todos los delitos tienen la misma pena",
+              "D) Todas las culturas son idénticas",
+            ],
+            correcta: 1,
+            explicacion:
+              "La igualdad ante la ley significa que ninguna persona puede ser discriminada por razón de sexo, raza, origen, religión u opinión.",
+          },
+          {
+            tema: "ciudadanas",
+            temaLabel: "Competencias Ciudadanas",
+            enunciado:
+              "¿Qué organismo independiente vigila la conducta de los funcionarios públicos en Colombia?",
+            opciones: [
+              "A) La Fiscalía General",
+              "B) El Consejo de Estado",
+              "C) La Procuraduría General",
+              "D) La Contraloría General",
+            ],
+            correcta: 2,
+            explicacion:
+              "La Procuraduría General de la Nación es el órgano de control disciplinario que vigila la conducta de los servidores públicos.",
+          },
+          {
+            tema: "historia",
+            temaLabel: "Historia",
+            enunciado:
+              "El Plan Colombia fue un acuerdo de cooperación entre Colombia y Estados Unidos orientado principalmente a:",
+            opciones: [
+              "A) Fortalecer el comercio bilateral",
+              "B) Combatir el narcotráfico y los grupos armados ilegales",
+              "C) Desarrollar proyectos de infraestructura vial",
+              "D) Promover la educación bilingüe",
+            ],
+            correcta: 1,
+            explicacion:
+              "El Plan Colombia (1999) fue una estrategia de cooperación enfocada en combatir el narcotráfico y fortalecer las instituciones del Estado.",
+          },
+        ],
+
+        ingles: [
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado:
+              'Choose the correct option: "She ___ to school every day."',
+            opciones: ["A) go", "B) goes", "C) going", "D) gone"],
+            correcta: 1,
+            explicacion:
+              '"Goes" is the correct third-person singular present tense form.',
+          },
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado: "Which sentence is in the Past Perfect tense?",
+            opciones: [
+              "A) She was studying when I called.",
+              "B) She had finished her homework before dinner.",
+              "C) She has been studying for hours.",
+              "D) She will have completed the project.",
+            ],
+            correcta: 1,
+            explicacion:
+              'Past Perfect = had + past participle. "Had finished" indicates an action completed before another past action.',
+          },
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado:
+              'Choose the correct conditional: "If I ___ you, I would apologize."',
+            opciones: ["A) am", "B) was", "C) were", "D) be"],
+            correcta: 2,
+            explicacion:
+              'Second conditional (unreal present/future) uses "were" for all subjects: "If I were you..."',
+          },
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado:
+              'Select the passive voice form of: "The teacher explains the lesson."',
+            opciones: [
+              "A) The lesson explains the teacher.",
+              "B) The lesson is explained by the teacher.",
+              "C) The lesson was explained by the teacher.",
+              "D) The lesson has been explained.",
+            ],
+            correcta: 1,
+            explicacion:
+              'Passive voice: subject + to be + past participle. Present: "is explained."',
+          },
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado:
+              '"He suggested ___ the meeting to next week." Choose the correct form:',
+            opciones: [
+              "A) to postpone",
+              "B) postponing",
+              "C) postponed",
+              "D) postpone",
+            ],
+            correcta: 1,
+            explicacion:
+              '"Suggest" is followed by a gerund (-ing form): "suggested postponing."',
+          },
+          {
+            tema: "vocabulary",
+            temaLabel: "Vocabulary",
+            enunciado: 'What is the meaning of "benevolent"?',
+            opciones: [
+              "A) Harmful and dangerous",
+              "B) Kind and generous toward others",
+              "C) Extremely intelligent",
+              "D) Stubborn and inflexible",
+            ],
+            correcta: 1,
+            explicacion:
+              '"Benevolent" means well-meaning and kindly; having a desire to do good for others.',
+          },
+          {
+            tema: "vocabulary",
+            temaLabel: "Vocabulary",
+            enunciado:
+              'Choose the word that best completes: "The scientist made a remarkable ___ that changed medicine forever."',
+            opciones: [
+              "A) disaster",
+              "B) discovery",
+              "C) discussion",
+              "D) distraction",
+            ],
+            correcta: 1,
+            explicacion:
+              '"Discovery" fits the context of a scientist making a finding that had a significant impact.',
+          },
+          {
+            tema: "vocabulary",
+            temaLabel: "Vocabulary",
+            enunciado: 'The word "ambiguous" means:',
+            opciones: [
+              "A) Clear and precise",
+              "B) Open to more than one interpretation",
+              "C) Extremely large in size",
+              "D) Very enthusiastic",
+            ],
+            correcta: 1,
+            explicacion:
+              '"Ambiguous" describes something that can be understood in multiple ways or is unclear.',
+          },
+          {
+            tema: "vocabulary",
+            temaLabel: "Vocabulary",
+            enunciado: 'Which word is a synonym for "obstinate"?',
+            opciones: ["A) flexible", "B) stubborn", "C) generous", "D) timid"],
+            correcta: 1,
+            explicacion:
+              '"Obstinate" and "stubborn" both mean refusing to change one\'s opinion or course of action.',
+          },
+          {
+            tema: "reading",
+            temaLabel: "Reading Comprehension",
+            fragmento:
+              "Technology has transformed the way we communicate. Smartphones allow people to connect instantly regardless of distance. However, critics argue that this constant connectivity has reduced the quality of face-to-face interactions.",
+            fuente: "Tech and Society Magazine (adapted)",
+            enunciado:
+              "According to the text, what is the main criticism of smartphone connectivity?",
+            opciones: [
+              "A) It is too expensive for most people",
+              "B) It has weakened in-person social interaction",
+              "C) It creates technical problems frequently",
+              "D) It only benefits young people",
+            ],
+            correcta: 1,
+            explicacion:
+              'Critics argue that constant connectivity has "reduced the quality of face-to-face interactions," meaning it weakened in-person interaction.',
+          },
+          {
+            tema: "reading",
+            temaLabel: "Reading Comprehension",
+            fragmento:
+              "Renewable energy sources, such as solar and wind power, are becoming increasingly competitive with fossil fuels. Many governments are now investing heavily in clean energy infrastructure to reduce carbon emissions and meet climate goals.",
+            fuente: "Environmental Policy Report (adapted)",
+            enunciado:
+              "What is the main purpose of government investment in renewable energy?",
+            opciones: [
+              "A) To increase the price of fossil fuels",
+              "B) To reduce carbon emissions and meet climate objectives",
+              "C) To replace all existing energy sources immediately",
+              "D) To create new research universities",
+            ],
+            correcta: 1,
+            explicacion:
+              'The text states governments invest in clean energy "to reduce carbon emissions and meet climate goals."',
+          },
+          {
+            tema: "reading",
+            temaLabel: "Reading Comprehension",
+            fragmento:
+              'The Amazon rainforest, often called "the lungs of the Earth," produces about 20% of the world\'s oxygen and is home to millions of species. Deforestation threatens not only biodiversity but also global climate stability.',
+            fuente: "Nature Conservation Report (adapted)",
+            enunciado: 'Why is the Amazon called "the lungs of the Earth"?',
+            opciones: [
+              "A) Because it is located in the center of South America",
+              "B) Because it produces a significant portion of the world's oxygen",
+              "C) Because it filters water for the entire continent",
+              "D) Because it is the largest rainforest by area",
+            ],
+            correcta: 1,
+            explicacion:
+              'The text explains the Amazon "produces about 20% of the world\'s oxygen," which is why it is called the lungs of the Earth.',
+          },
+          {
+            tema: "reading",
+            temaLabel: "Reading Comprehension",
+            enunciado:
+              'Read: "Despite the heavy rain, the outdoor concert went ahead as planned. The organizers had set up waterproof covers and the audience came prepared with umbrellas." What can be inferred?',
+            opciones: [
+              "A) The concert was cancelled due to bad weather",
+              "B) Both organizers and audience anticipated the weather challenge",
+              "C) The audience was disappointed by the rain",
+              "D) The organizers did not know it would rain",
+            ],
+            correcta: 1,
+            explicacion:
+              "Both groups prepared for rain (covers + umbrellas), so it can be inferred they anticipated the weather challenge.",
+          },
+          {
+            tema: "grammar",
+            temaLabel: "Grammar",
+            enunciado: "Which sentence contains a relative clause?",
+            opciones: [
+              "A) She runs fast and wins races.",
+              "B) The book that I borrowed was fascinating.",
+              "C) He studied hard, so he passed the exam.",
+              "D) Although it was raining, they played outside.",
+            ],
+            correcta: 1,
+            explicacion:
+              '"That I borrowed" is a relative clause modifying "the book."',
+          },
+          {
+            tema: "vocabulary",
+            temaLabel: "Vocabulary",
+            enunciado:
+              'Choose the correct preposition: "She is very good ___ playing the piano."',
+            opciones: ["A) in", "B) on", "C) at", "D) for"],
+            correcta: 2,
+            explicacion:
+              '"Good at" is the correct collocation when describing a skill or ability.',
+          },
+        ],
+      };
+
+      // ══════════════════════════════════════════════════════════════════
+      // CONFIGURACIÓN ICFES
+      // ══════════════════════════════════════════════════════════════════
+      const CONFIG_AREAS = {
+        matematicas: {
+          label: "Matemáticas",
+          icono: "📐",
+          color: "#1e40af",
+          bg: "#dbeafe",
+          peso: 0.25,
+          nGeneral: 20,
+        },
+        lectura: {
+          label: "Lectura Crítica",
+          icono: "📖",
+          color: "#7c3aed",
+          bg: "#f3e8ff",
+          peso: 0.25,
+          nGeneral: 20,
+        },
+        ciencias: {
+          label: "Ciencias Naturales",
+          icono: "🔬",
+          color: "#16a34a",
+          bg: "#dcfce7",
+          peso: 0.2,
+          nGeneral: 15,
+        },
+        sociales: {
+          label: "Sociales y Ciudadanas",
+          icono: "🌍",
+          color: "#ca8a04",
+          bg: "#fef9c3",
+          peso: 0.15,
+          nGeneral: 15,
+        },
+        ingles: {
+          label: "Inglés",
+          icono: "🇺🇸",
+          color: "#dc2626",
+          bg: "#fee2e2",
+          peso: 0.15,
+          nGeneral: 15,
+        },
+      };
+
+      // ══════════════════════════════════════════════════════════════════
+      // ESTADO
+      // ══════════════════════════════════════════════════════════════════
+      let preguntas = [];
+      let idx = 0;
+      let respuestas = [];
+      let timerSeg = 0;
+      let timerInterval;
+      let modoRevision = false;
+      let config = {};
+
+      // ══════════════════════════════════════════════════════════════════
+      // INIT
+      // ══════════════════════════════════════════════════════════════════
+      window.addEventListener("DOMContentLoaded", () => {
+        const raw = sessionStorage.getItem("simulacro_config");
+        if (!raw) {
+          window.location.href = "simulacro-selector.html";
+          return;
+        }
+        config = JSON.parse(raw);
+        preguntas = construirPreguntas(config);
+        if (preguntas.length === 0) {
+          alert("No hay preguntas para los temas seleccionados.");
+          window.location.href = "simulacro-selector.html";
+          return;
+        }
+        iniciarTimer();
+        mostrarPregunta();
+      });
+
+      function construirPreguntas(cfg) {
+        let lista = [];
+
+        if (cfg.tipo === "general") {
+          Object.keys(CONFIG_AREAS).forEach((area) => {
+            const n = CONFIG_AREAS[area].nGeneral;
+            const banco = [...BANCOS[area]];
+            mezclar(banco);
+            lista.push(...banco.slice(0, n).map((p) => ({ ...p, area })));
+          });
+        } else if (cfg.tipo === "area") {
+          const banco = [...BANCOS[cfg.area]];
+          mezclar(banco);
+          lista = banco.map((p) => ({ ...p, area: cfg.area }));
+        } else if (cfg.tipo === "temas") {
+          cfg.temas.forEach(({ area, tema }) => {
+            const banco = BANCOS[area].filter((p) => p.tema === tema);
+            const copia = [...banco];
+            mezclar(copia);
+            lista.push(...copia.map((p) => ({ ...p, area })));
+          });
+          mezclar(lista);
+        }
+        return lista;
+      }
+
+      function mezclar(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+      }
+
+      // ══════════════════════════════════════════════════════════════════
+      // TIMER
+      // ══════════════════════════════════════════════════════════════════
+      function iniciarTimer() {
+        timerInterval = setInterval(() => {
+          timerSeg++;
+          const m = Math.floor(timerSeg / 60)
+            .toString()
+            .padStart(2, "0");
+          const s = (timerSeg % 60).toString().padStart(2, "0");
+          document.getElementById("timer-nav").textContent = m + ":" + s;
+        }, 1000);
+      }
+
+      // ══════════════════════════════════════════════════════════════════
+      // MOSTRAR PREGUNTA
+      // ══════════════════════════════════════════════════════════════════
+      function mostrarPregunta() {
+        if (idx >= preguntas.length) {
+          finalizar();
+          return;
+        }
+
+        const p = preguntas[idx];
+        const area = CONFIG_AREAS[p.area] || {};
+        modoRevision = false;
+
+        // Badge
+        const badge = document.getElementById("area-badge-el");
+        badge.textContent = (area.icono || "") + " " + (area.label || "");
+        badge.style.background = area.bg || "#f1f5f9";
+        badge.style.color = area.color || "#334155";
+
+        // Progreso
+        document.getElementById("p-fill").style.width =
+          (idx / preguntas.length) * 100 + "%";
+        document.getElementById("contador-txt").textContent =
+          `Pregunta ${idx + 1} de ${preguntas.length}`;
+
+        // Fragmento
+        const fragEl = document.getElementById("fragmento-box");
+        const fuenteEl = document.getElementById("fuente-txt");
+        if (p.fragmento) {
+          fragEl.style.display = "block";
+          fragEl.textContent = p.fragmento;
+          fuenteEl.textContent = p.fuente ? "— " + p.fuente : "";
+        } else {
+          fragEl.style.display = "none";
+          fuenteEl.textContent = "";
+        }
+
+        document.getElementById("enunciado-txt").textContent = p.enunciado;
+
+        // Opciones
+        const lista = document.getElementById("opciones-lista");
+        lista.innerHTML = "";
+        p.opciones.forEach((op, i) => {
+          const btn = document.createElement("button");
+          btn.className = "opcion-btn";
+          btn.textContent = op;
+          btn.onclick = () => seleccionar(i);
+          lista.appendChild(btn);
+        });
+
+        document.getElementById("feedback-box").style.display = "none";
+        const btnSig = document.getElementById("btn-sig");
+        btnSig.disabled = true;
+        btnSig.style.display = "inline-block";
+        btnSig.onclick = siguiente;
+        document.getElementById("btn-fin").style.display = "none";
+      }
+
+      let selActual = null;
+
+      function seleccionar(i) {
+        if (modoRevision) return;
+        selActual = i;
+        document.querySelectorAll(".opcion-btn").forEach((b, j) => {
+          b.classList.toggle("sel", j === i);
+        });
+        document.getElementById("btn-sig").disabled = false;
+      }
+
+      function siguiente() {
+        if (selActual === null) return;
+        confirmarRespuesta(selActual);
+      }
+
+      function omitir() {
+        respuestas.push({
+          idx,
+          omitida: true,
+          correcta: false,
+          seleccionada: null,
+        });
+        selActual = null;
+        idx++;
+        mostrarPregunta();
+      }
+
+      function confirmarRespuesta(sel) {
+        const p = preguntas[idx];
+        const esCorrecta = sel === p.correcta;
+        respuestas.push({
+          idx,
+          seleccionada: sel,
+          correcta: esCorrecta,
+          omitida: false,
+        });
+        modoRevision = true;
+
+        const btns = document.querySelectorAll(".opcion-btn");
+        btns.forEach((b, j) => {
+          b.disabled = true;
+          if (j === p.correcta) b.classList.add("correcta-r");
+          else if (j === sel && !esCorrecta) b.classList.add("incorrecta-r");
+        });
+
+        const fb = document.getElementById("feedback-box");
+        fb.style.display = "block";
+        fb.className = "feedback-box " + (esCorrecta ? "ok" : "mal");
+        fb.textContent =
+          (esCorrecta ? "✅ Correcto. " : "❌ Incorrecto. ") + p.explicacion;
+
+        selActual = null;
+        idx++;
+
+        const esFin = idx >= preguntas.length;
+        const btnSig2 = document.getElementById("btn-sig");
+        const btnFin2 = document.getElementById("btn-fin");
+        btnSig2.style.display = esFin ? "none" : "inline-block";
+        btnFin2.style.display = esFin ? "inline-block" : "none";
+        btnSig2.disabled = false;
+        btnSig2.onclick = mostrarPregunta;
+      }
+
+      function finalizar() {
+        if (selActual !== null) confirmarRespuesta(selActual);
+        clearInterval(timerInterval);
+
+        const totalCorrectas = respuestas.filter((r) => r.correcta).length;
+        const totalOmitidas = respuestas.filter((r) => r.omitida).length;
+        const totalIncorrectas =
+          preguntas.length - totalCorrectas - totalOmitidas;
+
+        // Calcular por área
+        const porArea = {};
+        Object.keys(CONFIG_AREAS).forEach((a) => {
+          porArea[a] = { total: 0, correctas: 0 };
+        });
+
+        preguntas.forEach((p, i) => {
+          const r = respuestas.find((r) => r.idx === i);
+          if (p.area) {
+            if (!porArea[p.area]) porArea[p.area] = { total: 0, correctas: 0 };
+            porArea[p.area].total++;
+            if (r && r.correcta) porArea[p.area].correctas++;
+          }
+        });
+
+        // Puntaje ICFES por área (escala 0-500)
+        // Fórmula ICFES: puntaje_area = (correctas / total_area) * 100, luego escala a 0-500
+        const puntajesArea = {};
+        let puntajeGlobal = 0;
+        let pesoTotal = 0;
+
+        Object.keys(porArea).forEach((area) => {
+          if (porArea[area].total === 0) return;
+          const pct = porArea[area].correctas / porArea[area].total;
+          const puntaje500 = Math.round(pct * 400 + 100); // para calcular global
+          const puntaje100 = Math.round(pct * 100); // para mostrar en card de área
+          puntajesArea[area] = { p500: puntaje500, p100: puntaje100 };
+          const peso = CONFIG_AREAS[area] ? CONFIG_AREAS[area].peso : 0.2;
+          puntajeGlobal += puntaje500 * peso;
+          pesoTotal += peso;
+        });
+
+        if (pesoTotal > 0)
+          puntajeGlobal = Math.round(puntajeGlobal / pesoTotal);
+        else
+          puntajeGlobal = Math.round(
+            (totalCorrectas / preguntas.length) * 400 + 100,
+          );
+
+        // Mostrar resultado
+        mostrarPantalla("p-resultado");
+
+        document.getElementById("res-global").textContent = puntajeGlobal;
+
+        const esGeneral = config.tipo === "general";
+        document.getElementById("res-label").textContent = esGeneral
+          ? "Puntaje Global ICFES (escala 100-500)"
+          : "Puntaje (escala 100-500)";
+
+        let titulo, desc;
+        if (puntajeGlobal >= 400) {
+          titulo = "🎉 ¡Resultado excelente!";
+          desc = "Estás muy bien preparado para el ICFES. ¡Sigue así!";
+        } else if (puntajeGlobal >= 300) {
+          titulo = "👍 ¡Buen resultado!";
+          desc = "Vas bien. Repasa las áreas con menor puntaje para mejorar.";
+        } else if (puntajeGlobal >= 200) {
+          titulo = "📚 Sigue practicando";
+          desc =
+            "Hay oportunidades de mejora. Estudia los módulos y vuelve a intentarlo.";
+        } else {
+          titulo = "💪 No te rindas";
+          desc =
+            "Revisa los módulos de estudio y practica más. ¡Puedes mejorar!";
+        }
+
+        document.getElementById("res-titulo").textContent = titulo;
+        document.getElementById("res-desc").textContent = desc;
+        document.getElementById("r-correctas").textContent = totalCorrectas;
+        document.getElementById("r-incorrectas").textContent = totalIncorrectas;
+        document.getElementById("r-omitidas").textContent = totalOmitidas;
+
+        const m = Math.floor(timerSeg / 60);
+        const s = timerSeg % 60;
+        document.getElementById("r-tiempo").textContent = m + "min " + s + "s";
+
+        // Cards por área
+        const areasEl = document.getElementById("areas-result");
+        areasEl.innerHTML = "";
+        Object.keys(puntajesArea).forEach((area) => {
+          const cfg2 = CONFIG_AREAS[area] || {};
+          const p = puntajesArea[area];
+          areasEl.innerHTML += `
+        <div class="area-card-r">
+          <div class="area-nombre">${cfg2.icono || ""} ${cfg2.label || area}</div>
+          <div class="area-puntaje" style="color:${cfg2.color || "#1e4d8c"}">${p.p100}</div>
+          <div class="area-sub">${porArea[area].correctas}/${porArea[area].total} correctas</div>
+          <div class="barra-area"><div class="barra-area-fill" style="width:${p.p100}%;background:${cfg2.color || "#1e4d8c"}"></div></div>
+        </div>`;
+
+          if (area === "ingles") {
+            let nivel, colorNivel;
+            const score = p.p100;
+            if (score >= 85) {
+              nivel = "B+";
+              colorNivel = "#16a34a";
+            } else if (score >= 70) {
+              nivel = "B1";
+              colorNivel = "#2563eb";
+            } else if (score >= 50) {
+              nivel = "A2";
+              colorNivel = "#7c3aed";
+            } else if (score >= 30) {
+              nivel = "A1";
+              colorNivel = "#ca8a04";
+            } else {
+              nivel = "A-";
+              colorNivel = "#dc2626";
+            }
+            const cards = areasEl.querySelectorAll(".area-card-r");
+            const ultima = cards[cards.length - 1];
+            ultima.innerHTML += `<div style="margin-top:8px;display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:700;background:${colorNivel}20;color:${colorNivel}">Nivel ${nivel}</div>`;
+          }
+        });
+
+        // Guardar progreso
+        guardarProgreso(puntajesArea);
+      }
+
+      async function guardarProgreso(puntajesArea) {
+        const sesion = JSON.parse(
+          localStorage.getItem("datosVisionales") || "{}",
+        );
+        if (!sesion.correo) return;
+        const token = sesion.token || "";
+        const headers = {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: "Bearer " + token } : {}),
+        };
+
+        for (const [area, puntaje] of Object.entries(puntajesArea)) {
+          const progresoPct = puntaje.p100;
+          try {
+            await fetch("http://localhost:3000/api/progreso-area", {
+              method: "POST",
+              headers,
+              body: JSON.stringify({
+                correo: sesion.correo,
+                area,
+                progreso: progresoPct,
+              }),
+            });
+          } catch (e) {}
+        }
+      }
+
+      function continuarSeccion() {
+        document.getElementById("section-sep").style.display = "none";
+        mostrarPregunta();
+      }
+
+      function mostrarPantalla(id) {
+        document
+          .querySelectorAll(".pantalla")
+          .forEach((p) => p.classList.remove("vis"));
+        document.getElementById(id).classList.add("vis");
+      }
+
+      function verRevision() {
+        const wrap = document.getElementById("revision-wrap");
+        if (wrap.style.display === "block") {
+          wrap.style.display = "none";
+          return;
+        }
+
+        const cont = document.getElementById("revision-contenido");
+        cont.innerHTML = "";
+
+        const areas = [...new Set(preguntas.map((p) => p.area))];
+        areas.forEach((area) => {
+          const cfg2 = CONFIG_AREAS[area] || {};
+          cont.innerHTML += `<div class="rev-area-sep">${cfg2.icono || ""} ${cfg2.label || area}</div>`;
+          preguntas.forEach((p, i) => {
+            if (p.area !== area) return;
+            const r = respuestas.find((r) => r.idx === i);
+            let cls, icono, textoResp;
+            if (!r || r.omitida) {
+              cls = "omit";
+              icono = "⏭";
+              textoResp = "No respondida";
+            } else if (r.correcta) {
+              cls = "bien";
+              icono = "✅";
+              textoResp = "Respuesta correcta";
+            } else {
+              cls = "mal";
+              icono = "❌";
+              textoResp = `Incorrecta. Correcta: ${p.opciones[p.correcta]}`;
+            }
+
+            cont.innerHTML += `
+        <div class="rev-card ${cls}">
+          <div class="rev-enunciado">${icono} ${i + 1}. ${p.enunciado}</div>
+          <div class="rev-detalle"><strong>${textoResp}.</strong> ${p.explicacion}</div>
+        </div>`;
+          });
+        });
+
+        wrap.style.display = "block";
+        wrap.scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

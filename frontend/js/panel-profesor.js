@@ -262,7 +262,7 @@ function renderizarTabla(estudiantes) {
 
   msgVacio.style.display = "none";
   estudiantes.forEach((est, i) => {
-    const pct = est.puntaje || 0;
+    const pct = Number(est.puntaje) || 0;
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td style="color:#aaa; font-weight:600;">${i + 1}</td>
@@ -289,13 +289,15 @@ function actualizarStats(estudiantes) {
   const promedio =
     total > 0
       ? Math.round(
-          estudiantes.reduce((s, e) => s + (e.puntaje || 0), 0) / total,
+          estudiantes.reduce((s, e) => s + (Number(e.puntaje) || 0), 0) / total,
         )
       : 0;
   const top =
     total > 0
       ? estudiantes
-          .reduce((a, b) => ((b.puntaje || 0) > (a.puntaje || 0) ? b : a))
+          .reduce((a, b) =>
+            (Number(b.puntaje) || 0) > (Number(a.puntaje) || 0) ? b : a,
+          )
           .nombre.split(" ")[0]
       : "—";
 

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="css/global.css" />
   </head>
   <body class="dashboard-estudiante">
-    
     <header class="navbar navbar-estudiante">
       <button class="menu-toggle" id="btn-menu" onclick="toggleMenu()">
         <div></div>
@@ -16,17 +15,26 @@
       </button>
       <h1>Material de Estudio</h1>
       <div class="nav-right">
-        <a href="panel-estudiante.html" style="color: white; text-decoration: none; font-size: 14px; opacity: 0.85;">Volver al Inicio</a>
+        <a
+          href="panel-estudiante.html"
+          style="
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.85;
+          "
+          >Volver al Inicio</a
+        >
       </div>
     </header>
 
     <aside class="sidebar-oculta" id="sidebar-menu">
       <div class="titulo-panel">Panel</div>
-      <nav style="display: flex; flex-direction: column; gap: 5px;">
+      <nav style="display: flex; flex-direction: column; gap: 5px">
         <a href="panel-estudiante.html" class="nav-item">Inicio</a>
         <a href="areas.html" class="nav-item">Áreas</a>
         <a href="cuadernillos.html" class="nav-item activa">Cuadernillos</a>
-        <a href="simulacro.html" class="nav-item">Simulacros</a>
+        <a href="simulacro-selector.html" class="nav-item">Simulacros</a>
       </nav>
     </aside>
 
@@ -44,8 +52,7 @@
             <h3>ICFES Filtrados</h3>
             <button onclick="window.location.href = 'filtros.html'">Ver</button>
           </div>
-
-          </div>
+        </div>
       </section>
     </main>
 
@@ -53,10 +60,10 @@
     <script src="js/chat-ia.js"></script>
     <script>
       function toggleMenu() {
-        const menu = document.getElementById('sidebar-menu');
-        const btn = document.getElementById('btn-menu');
-        menu.classList.toggle('abierto');
-        btn.classList.toggle('active');
+        const menu = document.getElementById("sidebar-menu");
+        const btn = document.getElementById("btn-menu");
+        menu.classList.toggle("abierto");
+        btn.classList.toggle("active");
       }
     </script>
   </body>
