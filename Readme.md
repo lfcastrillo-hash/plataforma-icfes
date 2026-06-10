@@ -4,7 +4,10 @@
 
 1. Descargar o clonar el repositorio.
 2. Abrir la carpeta del proyecto.
-3. Ejecutar el proyecto con Live Server o abrir index.html en el navegador.
+3. Abri terminal en la carpeta backend.
+4. Ejecutar npm install.
+5. Ejecutar node server.js
+6. Abrir el link generado en el navegador. 
 
 ## Estructura
 
