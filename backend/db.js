@@ -1,21 +1,23 @@
-const { Pool } = require('pg');
+require("dotenv").config();
 
-// 1. Pegamos el enlace de Supabase aquí dentro de una variable
-// ⚠️ RECUERDA: Cambia [YOUR-PASSWORD] por tu contraseña real de Supabase (y borra los corchetes)
-const urlConexion = 'postgresql://postgres.pbldeiwhsraryvluhbjt:Pavel11222134@aws-1-us-east-2.pooler.supabase.com:5432/postgres';
+const { Pool } = require("pg");
 
 const pool = new Pool({
-  connectionString: urlConexion,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-// 2. Verificación automática de la conexión al iniciar el servidor
-pool.query('SELECT NOW()', (err, res) => {
+// Verificación automática de la conexión al iniciar el servidor
+pool.query("SELECT NOW()", (err, res) => {
   if (err) {
-    console.error('Error de conexión en Supabase:', err.stack);
+    console.error("❌ Error de conexión con Supabase:", err.message);
   } else {
-    console.log('¡Conectado con éxito a la base de datos en Supabase!');
+    console.log("✅ ¡Conectado con éxito a la base de datos en Supabase!");
+    console.log("🕐 Hora del servidor:", res.rows[0].now);
   }
 });
 
-// Exportamos el pool directamente para usarlo en los controladores
+// Exportamos el pool para utilizarlo en los controladores
 module.exports = pool;
