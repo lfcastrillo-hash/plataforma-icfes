@@ -3,7 +3,8 @@
    Lógica del panel del profesor: sesión, modales, tabla, stats, búsquedas, filtros,
    anuncios del muro y ordenamiento dinámico por columnas.
    ========================================================================== */
-const API = "http://localhost:3000/api";
+const API = "/api";
+const SERVER_URL = "";
 
 // ── Sesión ──────────────────────────────────────────────────────────────────
 const sesion = JSON.parse(localStorage.getItem("datosVisionales") || "{}");

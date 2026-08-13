@@ -6,7 +6,7 @@ async function guardarProgresoArea(area, progreso) {
   const usuario = obtenerUsuario();
   if (!usuario.correo) return;
   try {
-    await fetch("http://localhost:3000/api/progreso-area", {
+    await fetch("/api/progreso-area", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ correo: usuario.correo, area, progreso }),

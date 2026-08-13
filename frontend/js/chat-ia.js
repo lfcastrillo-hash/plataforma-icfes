@@ -60,7 +60,7 @@ async function enviarMensaje() {
     // Buscar el token guardado en el navegador
     const token = localStorage.getItem("token") || "";
 
-    const respuesta = await fetch("http://localhost:3000/api/chat", {
+    const respuesta = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

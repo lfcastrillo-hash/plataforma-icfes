@@ -61,7 +61,7 @@ async function registrarUsuario() {
   }
 
   try {
-    const respuesta = await fetch("http://localhost:3000/api/registro", {
+    const respuesta = await fetch("/api/registro", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre, correo, password, rol }),
@@ -108,7 +108,7 @@ async function iniciarSesion() {
   mostrarWaterLoader();
 
   try {
-    const respuesta = await fetch("http://localhost:3000/api/login", {
+    const respuesta = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // IMPORTANTE: 'include' asegura que el navegador acepte y guarde la cookie HttpOnly

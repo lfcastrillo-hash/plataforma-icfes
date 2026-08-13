@@ -2,8 +2,8 @@
 // LÓGICA DEL PERFIL DEL ESTUDIANTE
 // ==========================================================================
 
-const API = "http://localhost:3000/api";
-const SERVER_URL = "http://localhost:3000";
+const API = "/api";
+const SERVER_URL = "";
 
 let sesion = JSON.parse(
   localStorage.getItem("datosVisionales") ||

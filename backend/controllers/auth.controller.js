@@ -57,13 +57,11 @@ async function login(req, res) {
     // Firmamos el token. Expira en 24 horas.
     const token = jwt.sign(tokenPayload, SECRET_KEY, { expiresIn: "24h" });
 
-    // 2. ENVIAR EL TOKEN EN UNA COOKIE HTTP-ONLY
-    // El navegador guardará esto automáticamente y lo enviará en futuras peticiones
     res.cookie("token_acceso", token, {
-      httpOnly: true, // Evita que JavaScript (XSS) lea la cookie
-      secure: false, // Ponlo en 'true' solo si usas HTTPS (producción)
-      sameSite: "none", // Permite envío de cookies en el mismo dominio (localhost)
-      maxAge: 24 * 60 * 60 * 1000, // 24 horas de vida en milisegundos
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     // 3. RESPONDER AL FRONTEND (Sin enviar el token en el JSON)

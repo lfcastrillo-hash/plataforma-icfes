@@ -3,7 +3,8 @@
    Lógica del panel del estudiante
    ========================================================================== */
 
-const API = "http://localhost:3000/api";
+const API = "/api";
+const SERVER_URL = "";
 
 // ─────────────────────────────────────────────────────────────
 // Verificar sesión
