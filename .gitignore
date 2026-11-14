@@ -1,3 +1,10 @@
 .env
 backend/.env
 node_modules/
+backend/uploads/
+.qa-private/
+.qa-data/
+coverage/
+test-results/
+playwright-report/
+*.log

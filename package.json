@@ -1,5 +1,28 @@
 {
-  "dependencies": {
-    "multer": "^2.1.1"
+  "name": "prepicfes",
+  "version": "1.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node backend/server.js",
+    "setup": "npm ci && npm --prefix backend ci",
+    "test": "node --test --test-concurrency=1 tests/unit/*.test.cjs tests/integration/*.test.cjs",
+    "test:coverage": "node scripts/qa/test-report.cjs",
+    "test:e2e": "node scripts/qa/e2e.cjs",
+    "qa:visual": "node scripts/qa/visual.cjs",
+    "qa:static": "node scripts/qa/static.cjs",
+    "metrics": "node medir-codigo.cjs",
+    "dev:test": "node scripts/qa/local-test-server.cjs",
+    "qa:security": "node scripts/qa/security.cjs",
+    "qa:performance": "node scripts/qa/performance.cjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.3.14",
+    "acorn": "^8.15.0",
+    "acorn-jsx": "^5.3.2",
+    "playwright": "^1.58.0",
+    "pngjs": "^7.0.0"
   }
 }
