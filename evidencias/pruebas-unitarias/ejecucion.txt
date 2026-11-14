@@ -1,0 +1,123 @@
+✔ IT01/CU02 registro, duplicado normalizado y hash en PostgreSQL (5960.1545ms)
+✔ IT01 negativos de autenticación y entrada obligatoria (69.0489ms)
+✔ IT02/CU03 progreso aislado, monotónico, persistente e idempotente (426.7788ms)
+✔ IT02 límites y tipos de aprendizaje (96.167ms)
+✔ IT03/CU11 crear clases, rol y propietario (102.3143ms)
+✔ IT04 inscripciones, duplicados y promedio entre cinco áreas (152.6914ms)
+✔ IT05 anuncios disponibles solo para inscritos (55.3133ms)
+✔ IT06/CU08 perfil, cambio correo conserva clases y progreso por ID (664.9014ms)
+✔ IT07 foto persistida en BD, límites y archivos peligrosos rechazados (997.3391ms)
+✔ IT08 contraseña revoca otras sesiones; logout revoca también JWT copiado (1338.5779ms)
+✔ CU05 simulacro: calificación servidor, idempotencia y aislamiento (395.3136ms)
+✔ IT09 retiro, eliminación transaccional y sin huérfanos (62.5494ms)
+✔ SEC origen, endpoints desconocidos y health (53.6208ms)
+✔ DB-MIG copia del esquema inferido: migración idempotente conserva avances y correo deja de ser identidad (1210.4288ms)
+✔ DB-MIG duplicados normalizados abortan sin borrar cuentas (696.8913ms)
+✔ M1-LEGACY conversión en login solo con compatibilidad explícita; no modifica clave incorrecta (1783.471ms)
+✔ INT-ASC repositorio PostgreSQL → transacción → rollback real (706.688ms)
+✔ INT-ASC migración repetible y persistencia en disco después de reiniciar (5081.3382ms)
+✔ INT-DESC API → controlador IA con proveedor stub (no llamada real) (1312.0536ms)
+✔ SEC límite de intentos y recuperación de fallo de BD sin exponer SQL (727.9694ms)
+✔ SEC archivos históricos HTML no se sirven; imágenes conservan compatibilidad (666.0578ms)
+✔ M1-CE correo "" (1.4582ms)
+✔ M1-CE correo "x" (0.1558ms)
+✔ M1-CE correo "a@example.test" (0.0639ms)
+✔ M1-CE correo " a@example.test " (0.0964ms)
+✔ M1-CE correo "a@b" (0.0561ms)
+✔ M1-CE correo null (0.0559ms)
+✔ M1-CE correo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (0.0641ms)
+✔ M1-VL contraseña longitud 0 (0.1122ms)
+✔ M1-VL contraseña longitud 1 (0.067ms)
+✔ M1-VL contraseña longitud 7 (0.0538ms)
+✔ M1-VL contraseña longitud 8 (0.0394ms)
+✔ M1-VL contraseña longitud 9 (0.0546ms)
+✔ M1-VL contraseña longitud 127 (0.0378ms)
+✔ M1-VL contraseña longitud 128 (0.0352ms)
+✔ M1-VL contraseña longitud 129 (0.0329ms)
+✔ M2-VL porcentaje -1 (0.0817ms)
+✔ M2-VL porcentaje 0 (0.0346ms)
+✔ M2-VL porcentaje 0.1 (0.0444ms)
+✔ M2-VL porcentaje 99.9 (0.0363ms)
+✔ M2-VL porcentaje 100 (0.0591ms)
+✔ M2-VL porcentaje 101 (0.0544ms)
+✔ M2-VL porcentaje NaN (0.0314ms)
+✔ M2-VL porcentaje Infinity (0.0273ms)
+✔ M2-VL porcentaje 50 (0.0387ms)
+✔ M2-VL porcentaje null (0.0246ms)
+✔ M4/M5-VL nombre 0 (0.077ms)
+✔ M4/M5-VL nombre 1 (0.0518ms)
+✔ M4/M5-VL nombre 119 (0.0338ms)
+✔ M4/M5-VL nombre 120 (0.0321ms)
+✔ M4/M5-VL nombre 121 (0.0334ms)
+✔ M5-VL biografía 0 (0.0702ms)
+✔ M5-VL biografía 1 (0.0345ms)
+✔ M5-VL biografía 1999 (0.0932ms)
+✔ M5-VL biografía 2000 (0.0331ms)
+✔ M5-VL biografía 2001 (0.0259ms)
+✔ M4-VL anuncio 0 (0.053ms)
+✔ M4-VL anuncio 1 (0.0829ms)
+✔ M4-VL anuncio 4999 (0.0452ms)
+✔ M4-VL anuncio 5000 (0.0359ms)
+✔ M4-VL anuncio 5001 (0.0289ms)
+✔ M4-CE identificador 0 (0.1039ms)
+✔ M4-CE identificador -1 (0.0536ms)
+✔ M4-CE identificador abc (0.0251ms)
+✔ M4-CE identificador 1 OR 1=1 (0.0278ms)
+✔ M4-CE identificador 1 (0.025ms)
+✔ M4-CE identificador 1 (0.0248ms)
+✔ M4-CE identificador 1.2 (0.025ms)
+✔ M4-CE identificador 9007199254740992 (0.0271ms)
+✔ M1-CB scrypt, sal única y verificación segura (1130.795ms)
+✔ M2-CB estado, duplicados y límites reales 5x8 (0.7856ms)
+✔ M3-CE/VL cero, todos, omitidos, repetidos y respuestas falsificadas (0.6438ms)
+✔ M3-CB configuración válida y caminos inválidos (0.2264ms)
+✔ M3-REANUDAR estado recuperable y cachés inválidas (0.5518ms)
+✔ M5-CE imágenes y archivos disfrazados (0.3893ms)
+✔ QA métricas distinguen regex, cadenas, comentarios, funciones y clases reales (8.1572ms)
+✔ M2 aislamiento en el mismo navegador, datos dañados y compatibilidad sin adjudicar dueño (2.7364ms)
+ℹ tests 77
+ℹ suites 0
+ℹ pass 77
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25474.5106
+ℹ start of coverage report
+ℹ ------------------------------------------------------------------------------
+ℹ file                          | line % | branch % | funcs % | uncovered lines
+ℹ ------------------------------------------------------------------------------
+ℹ backend                       |        |          |         |
+ℹ  config.js                    | 100.00 |    33.33 |  100.00 |
+ℹ  controllers                  |        |          |         |
+ℹ   auth.controller.js          | 100.00 |   100.00 |  100.00 |
+ℹ   clases.controller.js        | 100.00 |    95.92 |   94.12 |
+ℹ   ia.controller.js            | 100.00 |    87.50 |  100.00 |
+ℹ   perfil.controller.js        | 100.00 |    92.98 |   83.33 |
+ℹ   progreso.controller.js      |  44.44 |    75.00 |   40.00 | 5-8 11-12 14-17
+ℹ   progresoAreas.controller.js | 100.00 |   100.00 |  100.00 |
+ℹ  lib                          |        |          |         |
+ℹ   passwords.js                | 100.00 |    90.48 |  100.00 |
+ℹ   progress.js                 | 100.00 |    91.67 |  100.00 |
+ℹ   transaction.js              | 100.00 |    80.00 |  100.00 |
+ℹ   validation.js               | 100.00 |   100.00 |  100.00 |
+ℹ  middlewares                  |        |          |         |
+ℹ   access.js                   | 100.00 |   100.00 |  100.00 |
+ℹ   rateLimit.js                | 100.00 |    87.50 |  100.00 |
+ℹ   verificarToken.js           | 100.00 |    86.67 |  100.00 |
+ℹ  routes                       |        |          |         |
+ℹ   auth.routes.js              | 100.00 |   100.00 |  100.00 |
+ℹ   clases.routes.js            | 100.00 |   100.00 |  100.00 |
+ℹ   ia.routes.js                | 100.00 |   100.00 |  100.00 |
+ℹ   perfil.routes.js            | 100.00 |   100.00 |  100.00 |
+ℹ   progreso.routes.js          | 100.00 |   100.00 |  100.00 |
+ℹ   progresoAreas.routes.js     | 100.00 |   100.00 |  100.00 |
+ℹ   simulacros.routes.js        | 100.00 |    85.71 |  100.00 |
+ℹ  server.js                    |  94.55 |    65.38 |   81.82 | 52-54
+ℹ frontend                      |        |          |         |
+ℹ  js                           |        |          |         |
+ℹ   simulacro-core.js           |  98.28 |    95.08 |  100.00 | 4
+ℹ ------------------------------------------------------------------------------
+ℹ all files                     |  97.40 |    91.29 |   91.95 |
+ℹ ------------------------------------------------------------------------------
+ℹ end of coverage report

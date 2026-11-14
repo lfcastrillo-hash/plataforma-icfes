@@ -1,0 +1,5091 @@
+{
+  "date": "2026-11-14T22:01:14.335Z",
+  "node": "v24.14.1",
+  "environment": "Windows; HTTP local + PostgreSQL WASM aislado; datos ficticios",
+  "cases": [
+    {
+      "name": "IT01/CU02 registro, duplicado normalizado y hash en PostgreSQL",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 15,
+      "durationMs": 5960.1545,
+      "status": "PASS"
+    },
+    {
+      "name": "IT01 negativos de autenticación y entrada obligatoria",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 24,
+      "durationMs": 69.0489,
+      "status": "PASS"
+    },
+    {
+      "name": "IT02/CU03 progreso aislado, monotónico, persistente e idempotente",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 32,
+      "durationMs": 426.7788,
+      "status": "PASS"
+    },
+    {
+      "name": "IT02 límites y tipos de aprendizaje",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 46,
+      "durationMs": 96.167,
+      "status": "PASS"
+    },
+    {
+      "name": "IT03/CU11 crear clases, rol y propietario",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 52,
+      "durationMs": 102.3143,
+      "status": "PASS"
+    },
+    {
+      "name": "IT04 inscripciones, duplicados y promedio entre cinco áreas",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 62,
+      "durationMs": 152.6914,
+      "status": "PASS"
+    },
+    {
+      "name": "IT05 anuncios disponibles solo para inscritos",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 76,
+      "durationMs": 55.3133,
+      "status": "PASS"
+    },
+    {
+      "name": "IT06/CU08 perfil, cambio correo conserva clases y progreso por ID",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 83,
+      "durationMs": 664.9014,
+      "status": "PASS"
+    },
+    {
+      "name": "IT07 foto persistida en BD, límites y archivos peligrosos rechazados",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 95,
+      "durationMs": 997.3391,
+      "status": "PASS"
+    },
+    {
+      "name": "IT08 contraseña revoca otras sesiones; logout revoca también JWT copiado",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 110,
+      "durationMs": 1338.5779,
+      "status": "PASS"
+    },
+    {
+      "name": "CU05 simulacro: calificación servidor, idempotencia y aislamiento",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 119,
+      "durationMs": 395.3136,
+      "status": "PASS"
+    },
+    {
+      "name": "IT09 retiro, eliminación transaccional y sin huérfanos",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 131,
+      "durationMs": 62.5494,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC origen, endpoints desconocidos y health",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 140,
+      "durationMs": 53.6208,
+      "status": "PASS"
+    },
+    {
+      "name": "DB-MIG copia del esquema inferido: migración idempotente conserva avances y correo deja de ser identidad",
+      "file": "/tests/integration/migration.test.cjs",
+      "line": 14,
+      "durationMs": 1210.4288,
+      "status": "PASS"
+    },
+    {
+      "name": "DB-MIG duplicados normalizados abortan sin borrar cuentas",
+      "file": "/tests/integration/migration.test.cjs",
+      "line": 23,
+      "durationMs": 696.8913,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-LEGACY conversión en login solo con compatibilidad explícita; no modifica clave incorrecta",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 10,
+      "durationMs": 1783.471,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-ASC repositorio PostgreSQL → transacción → rollback real",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 21,
+      "durationMs": 706.688,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-ASC migración repetible y persistencia en disco después de reiniciar",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 30,
+      "durationMs": 5081.3382,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-DESC API → controlador IA con proveedor stub (no llamada real)",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 51,
+      "durationMs": 1312.0536,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC límite de intentos y recuperación de fallo de BD sin exponer SQL",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 64,
+      "durationMs": 727.9694,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC archivos históricos HTML no se sirven; imágenes conservan compatibilidad",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 76,
+      "durationMs": 666.0578,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \"\"",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 1.4582,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \"x\"",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.1558,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \"a@example.test\"",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.0639,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \" a@example.test \"",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.0964,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \"a@b\"",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.0561,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo null",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.0559,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CE correo \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 10,
+      "durationMs": 0.0641,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.1122,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.067,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 7",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0538,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 8",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0394,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 9",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0546,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 127",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0378,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 128",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0352,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-VL contraseña longitud 129",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 12,
+      "durationMs": 0.0329,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje -1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0817,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0346,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 0.1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0444,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 99.9",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0363,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 100",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0591,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 101",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0544,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje NaN",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0314,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje Infinity",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0273,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje 50",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0387,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-VL porcentaje null",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 13,
+      "durationMs": 0.0246,
+      "status": "PASS"
+    },
+    {
+      "name": "M4/M5-VL nombre 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 14,
+      "durationMs": 0.077,
+      "status": "PASS"
+    },
+    {
+      "name": "M4/M5-VL nombre 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 14,
+      "durationMs": 0.0518,
+      "status": "PASS"
+    },
+    {
+      "name": "M4/M5-VL nombre 119",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 14,
+      "durationMs": 0.0338,
+      "status": "PASS"
+    },
+    {
+      "name": "M4/M5-VL nombre 120",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 14,
+      "durationMs": 0.0321,
+      "status": "PASS"
+    },
+    {
+      "name": "M4/M5-VL nombre 121",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 14,
+      "durationMs": 0.0334,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-VL biografía 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 15,
+      "durationMs": 0.0702,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-VL biografía 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 15,
+      "durationMs": 0.0345,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-VL biografía 1999",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 15,
+      "durationMs": 0.0932,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-VL biografía 2000",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 15,
+      "durationMs": 0.0331,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-VL biografía 2001",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 15,
+      "durationMs": 0.0259,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-VL anuncio 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 16,
+      "durationMs": 0.053,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-VL anuncio 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 16,
+      "durationMs": 0.0829,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-VL anuncio 4999",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 16,
+      "durationMs": 0.0452,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-VL anuncio 5000",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 16,
+      "durationMs": 0.0359,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-VL anuncio 5001",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 16,
+      "durationMs": 0.0289,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 0",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.1039,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador -1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.0536,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador abc",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.0251,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 1 OR 1=1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.0278,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.025,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 1",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.0248,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 1.2",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.025,
+      "status": "PASS"
+    },
+    {
+      "name": "M4-CE identificador 9007199254740992",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 17,
+      "durationMs": 0.0271,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-CB scrypt, sal única y verificación segura",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 18,
+      "durationMs": 1130.795,
+      "status": "PASS"
+    },
+    {
+      "name": "M2-CB estado, duplicados y límites reales 5x8",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 26,
+      "durationMs": 0.7856,
+      "status": "PASS"
+    },
+    {
+      "name": "M3-CE/VL cero, todos, omitidos, repetidos y respuestas falsificadas",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 34,
+      "durationMs": 0.6438,
+      "status": "PASS"
+    },
+    {
+      "name": "M3-CB configuración válida y caminos inválidos",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 45,
+      "durationMs": 0.2264,
+      "status": "PASS"
+    },
+    {
+      "name": "M3-REANUDAR estado recuperable y cachés inválidas",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 50,
+      "durationMs": 0.5518,
+      "status": "PASS"
+    },
+    {
+      "name": "M5-CE imágenes y archivos disfrazados",
+      "file": "/tests/unit/domain.test.cjs",
+      "line": 58,
+      "durationMs": 0.3893,
+      "status": "PASS"
+    },
+    {
+      "name": "QA métricas distinguen regex, cadenas, comentarios, funciones y clases reales",
+      "file": "/tests/unit/metrics.test.cjs",
+      "line": 3,
+      "durationMs": 8.1572,
+      "status": "PASS"
+    },
+    {
+      "name": "M2 aislamiento en el mismo navegador, datos dañados y compatibilidad sin adjudicar dueño",
+      "file": "/tests/unit/storage.test.cjs",
+      "line": 6,
+      "durationMs": 2.7364,
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "success": true,
+    "counts": {
+      "tests": 77,
+      "failed": 0,
+      "passed": 77,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "topLevel": 77,
+      "suites": 0
+    },
+    "duration_ms": 25474.5106
+  },
+  "coverage": {
+    "workingDirectory": ".",
+    "files": [
+      {
+        "path": "backend/config.js",
+        "totalLineCount": 11,
+        "totalBranchCount": 3,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 11,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 33.33333333333333,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 0
+          },
+          {
+            "line": 5,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 2
+          },
+          {
+            "line": 10,
+            "count": 2
+          },
+          {
+            "line": 11,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/auth.controller.js",
+        "totalLineCount": 37,
+        "totalBranchCount": 24,
+        "totalFunctionCount": 4,
+        "coveredLineCount": 37,
+        "coveredBranchCount": 24,
+        "coveredFunctionCount": 4,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "registrar",
+            "count": 10,
+            "line": 7
+          },
+          {
+            "name": "login",
+            "count": 23,
+            "line": 15
+          },
+          {
+            "name": "",
+            "count": 14,
+            "line": 24
+          },
+          {
+            "name": "logout",
+            "count": 1,
+            "line": 33
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 10
+          },
+          {
+            "line": 9,
+            "count": 6
+          },
+          {
+            "line": 9,
+            "count": 5
+          },
+          {
+            "line": 9,
+            "count": 5
+          },
+          {
+            "line": 9,
+            "count": 3
+          },
+          {
+            "line": 9,
+            "count": 5
+          },
+          {
+            "line": 11,
+            "count": 4
+          },
+          {
+            "line": 13,
+            "count": 1
+          },
+          {
+            "line": 15,
+            "count": 23
+          },
+          {
+            "line": 17,
+            "count": 20
+          },
+          {
+            "line": 17,
+            "count": 20
+          },
+          {
+            "line": 17,
+            "count": 20
+          },
+          {
+            "line": 17,
+            "count": 20
+          },
+          {
+            "line": 17,
+            "count": 3
+          },
+          {
+            "line": 17,
+            "count": 15
+          },
+          {
+            "line": 21,
+            "count": 12
+          },
+          {
+            "line": 21,
+            "count": 3
+          },
+          {
+            "line": 22,
+            "count": 6
+          },
+          {
+            "line": 22,
+            "count": 14
+          },
+          {
+            "line": 17,
+            "count": 5
+          },
+          {
+            "line": 24,
+            "count": 14
+          },
+          {
+            "line": 25,
+            "count": 1
+          },
+          {
+            "line": 33,
+            "count": 1
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 10
+          },
+          {
+            "line": 8,
+            "count": 10
+          },
+          {
+            "line": 9,
+            "count": 10
+          },
+          {
+            "line": 10,
+            "count": 5
+          },
+          {
+            "line": 11,
+            "count": 5
+          },
+          {
+            "line": 12,
+            "count": 4
+          },
+          {
+            "line": 13,
+            "count": 10
+          },
+          {
+            "line": 14,
+            "count": 10
+          },
+          {
+            "line": 15,
+            "count": 23
+          },
+          {
+            "line": 16,
+            "count": 23
+          },
+          {
+            "line": 17,
+            "count": 23
+          },
+          {
+            "line": 18,
+            "count": 5
+          },
+          {
+            "line": 19,
+            "count": 5
+          },
+          {
+            "line": 20,
+            "count": 5
+          },
+          {
+            "line": 21,
+            "count": 23
+          },
+          {
+            "line": 22,
+            "count": 23
+          },
+          {
+            "line": 23,
+            "count": 14
+          },
+          {
+            "line": 24,
+            "count": 14
+          },
+          {
+            "line": 25,
+            "count": 14
+          },
+          {
+            "line": 26,
+            "count": 14
+          },
+          {
+            "line": 27,
+            "count": 14
+          },
+          {
+            "line": 28,
+            "count": 14
+          },
+          {
+            "line": 29,
+            "count": 14
+          },
+          {
+            "line": 30,
+            "count": 14
+          },
+          {
+            "line": 31,
+            "count": 14
+          },
+          {
+            "line": 32,
+            "count": 23
+          },
+          {
+            "line": 33,
+            "count": 1
+          },
+          {
+            "line": 34,
+            "count": 1
+          },
+          {
+            "line": 35,
+            "count": 1
+          },
+          {
+            "line": 36,
+            "count": 1
+          },
+          {
+            "line": 37,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/clases.controller.js",
+        "totalLineCount": 75,
+        "totalBranchCount": 49,
+        "totalFunctionCount": 17,
+        "coveredLineCount": 75,
+        "coveredBranchCount": 47,
+        "coveredFunctionCount": 16,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 95.91836734693877,
+        "coveredFunctionPercent": 94.11764705882352,
+        "functions": [
+          {
+            "name": "ownClass",
+            "count": 14,
+            "line": 4
+          },
+          {
+            "name": "obtenerClases",
+            "count": 2,
+            "line": 11
+          },
+          {
+            "name": "crearClase",
+            "count": 2,
+            "line": 15
+          },
+          {
+            "name": "eliminarClase",
+            "count": 3,
+            "line": 20
+          },
+          {
+            "name": "",
+            "count": 3,
+            "line": 21
+          },
+          {
+            "name": "actualizarAnuncio",
+            "count": 3,
+            "line": 29
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 31
+          },
+          {
+            "name": "obtenerEstudiantesDeClase",
+            "count": 3,
+            "line": 38
+          },
+          {
+            "name": "buscarEstudiante",
+            "count": 4,
+            "line": 43
+          },
+          {
+            "name": "",
+            "count": 0,
+            "line": 46
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 53
+          },
+          {
+            "name": "inscription",
+            "count": 6,
+            "line": 55
+          },
+          {
+            "name": "",
+            "count": 6,
+            "line": 57
+          },
+          {
+            "name": "obtenerClasesDeEstudiante",
+            "count": 5,
+            "line": 71
+          },
+          {
+            "name": "",
+            "count": 3,
+            "line": 73
+          },
+          {
+            "name": "agregarEstudianteAClase",
+            "count": 4,
+            "line": 75
+          },
+          {
+            "name": "removerEstudianteDeClase",
+            "count": 2,
+            "line": 75
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 14
+          },
+          {
+            "line": 5,
+            "count": 8
+          },
+          {
+            "line": 5,
+            "count": 6
+          },
+          {
+            "line": 6,
+            "count": 1
+          },
+          {
+            "line": 6,
+            "count": 13
+          },
+          {
+            "line": 8,
+            "count": 5
+          },
+          {
+            "line": 8,
+            "count": 8
+          },
+          {
+            "line": 11,
+            "count": 2
+          },
+          {
+            "line": 15,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 1
+          },
+          {
+            "line": 20,
+            "count": 3
+          },
+          {
+            "line": 27,
+            "count": 1
+          },
+          {
+            "line": 21,
+            "count": 3
+          },
+          {
+            "line": 22,
+            "count": 2
+          },
+          {
+            "line": 22,
+            "count": 1
+          },
+          {
+            "line": 29,
+            "count": 3
+          },
+          {
+            "line": 30,
+            "count": 1
+          },
+          {
+            "line": 30,
+            "count": 2
+          },
+          {
+            "line": 36,
+            "count": 1
+          },
+          {
+            "line": 31,
+            "count": 2
+          },
+          {
+            "line": 32,
+            "count": 1
+          },
+          {
+            "line": 38,
+            "count": 3
+          },
+          {
+            "line": 39,
+            "count": 1
+          },
+          {
+            "line": 39,
+            "count": 2
+          },
+          {
+            "line": 43,
+            "count": 4
+          },
+          {
+            "line": 44,
+            "count": 1
+          },
+          {
+            "line": 44,
+            "count": 3
+          },
+          {
+            "line": 51,
+            "count": 1
+          },
+          {
+            "line": 51,
+            "count": 2
+          },
+          {
+            "line": 53,
+            "count": 2
+          },
+          {
+            "line": 55,
+            "count": 6
+          },
+          {
+            "line": 56,
+            "count": 0
+          },
+          {
+            "line": 69,
+            "count": 3
+          },
+          {
+            "line": 69,
+            "count": 1
+          },
+          {
+            "line": 69,
+            "count": 2
+          },
+          {
+            "line": 57,
+            "count": 6
+          },
+          {
+            "line": 58,
+            "count": 2
+          },
+          {
+            "line": 58,
+            "count": 4
+          },
+          {
+            "line": 60,
+            "count": 0
+          },
+          {
+            "line": 60,
+            "count": 4
+          },
+          {
+            "line": 62,
+            "count": 1
+          },
+          {
+            "line": 62,
+            "count": 3
+          },
+          {
+            "line": 65,
+            "count": 1
+          },
+          {
+            "line": 66,
+            "count": 3
+          },
+          {
+            "line": 71,
+            "count": 5
+          },
+          {
+            "line": 73,
+            "count": 3
+          },
+          {
+            "line": 75,
+            "count": 4
+          },
+          {
+            "line": 75,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 14
+          },
+          {
+            "line": 5,
+            "count": 14
+          },
+          {
+            "line": 6,
+            "count": 14
+          },
+          {
+            "line": 7,
+            "count": 13
+          },
+          {
+            "line": 8,
+            "count": 14
+          },
+          {
+            "line": 9,
+            "count": 8
+          },
+          {
+            "line": 10,
+            "count": 14
+          },
+          {
+            "line": 11,
+            "count": 2
+          },
+          {
+            "line": 12,
+            "count": 2
+          },
+          {
+            "line": 13,
+            "count": 2
+          },
+          {
+            "line": 14,
+            "count": 2
+          },
+          {
+            "line": 15,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 17,
+            "count": 1
+          },
+          {
+            "line": 18,
+            "count": 1
+          },
+          {
+            "line": 19,
+            "count": 2
+          },
+          {
+            "line": 20,
+            "count": 3
+          },
+          {
+            "line": 21,
+            "count": 3
+          },
+          {
+            "line": 22,
+            "count": 3
+          },
+          {
+            "line": 23,
+            "count": 1
+          },
+          {
+            "line": 24,
+            "count": 1
+          },
+          {
+            "line": 25,
+            "count": 1
+          },
+          {
+            "line": 26,
+            "count": 3
+          },
+          {
+            "line": 27,
+            "count": 3
+          },
+          {
+            "line": 28,
+            "count": 3
+          },
+          {
+            "line": 29,
+            "count": 3
+          },
+          {
+            "line": 30,
+            "count": 3
+          },
+          {
+            "line": 31,
+            "count": 2
+          },
+          {
+            "line": 32,
+            "count": 2
+          },
+          {
+            "line": 33,
+            "count": 1
+          },
+          {
+            "line": 34,
+            "count": 1
+          },
+          {
+            "line": 35,
+            "count": 2
+          },
+          {
+            "line": 36,
+            "count": 3
+          },
+          {
+            "line": 37,
+            "count": 3
+          },
+          {
+            "line": 38,
+            "count": 3
+          },
+          {
+            "line": 39,
+            "count": 3
+          },
+          {
+            "line": 40,
+            "count": 2
+          },
+          {
+            "line": 41,
+            "count": 2
+          },
+          {
+            "line": 42,
+            "count": 3
+          },
+          {
+            "line": 43,
+            "count": 4
+          },
+          {
+            "line": 44,
+            "count": 4
+          },
+          {
+            "line": 45,
+            "count": 3
+          },
+          {
+            "line": 46,
+            "count": 3
+          },
+          {
+            "line": 47,
+            "count": 3
+          },
+          {
+            "line": 48,
+            "count": 3
+          },
+          {
+            "line": 49,
+            "count": 3
+          },
+          {
+            "line": 50,
+            "count": 3
+          },
+          {
+            "line": 51,
+            "count": 4
+          },
+          {
+            "line": 52,
+            "count": 2
+          },
+          {
+            "line": 53,
+            "count": 2
+          },
+          {
+            "line": 54,
+            "count": 4
+          },
+          {
+            "line": 55,
+            "count": 6
+          },
+          {
+            "line": 56,
+            "count": 6
+          },
+          {
+            "line": 57,
+            "count": 6
+          },
+          {
+            "line": 58,
+            "count": 6
+          },
+          {
+            "line": 59,
+            "count": 4
+          },
+          {
+            "line": 60,
+            "count": 6
+          },
+          {
+            "line": 61,
+            "count": 4
+          },
+          {
+            "line": 62,
+            "count": 6
+          },
+          {
+            "line": 63,
+            "count": 3
+          },
+          {
+            "line": 64,
+            "count": 3
+          },
+          {
+            "line": 65,
+            "count": 3
+          },
+          {
+            "line": 66,
+            "count": 3
+          },
+          {
+            "line": 67,
+            "count": 3
+          },
+          {
+            "line": 68,
+            "count": 6
+          },
+          {
+            "line": 69,
+            "count": 6
+          },
+          {
+            "line": 70,
+            "count": 6
+          },
+          {
+            "line": 71,
+            "count": 5
+          },
+          {
+            "line": 72,
+            "count": 5
+          },
+          {
+            "line": 73,
+            "count": 5
+          },
+          {
+            "line": 74,
+            "count": 5
+          },
+          {
+            "line": 75,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/ia.controller.js",
+        "totalLineCount": 14,
+        "totalBranchCount": 8,
+        "totalFunctionCount": 1,
+        "coveredLineCount": 14,
+        "coveredBranchCount": 7,
+        "coveredFunctionCount": 1,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 87.5,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "chatIA",
+            "count": 5,
+            "line": 3
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 5
+          },
+          {
+            "line": 4,
+            "count": 1
+          },
+          {
+            "line": 5,
+            "count": 1
+          },
+          {
+            "line": 7,
+            "count": 0
+          },
+          {
+            "line": 8,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 1
+          },
+          {
+            "line": 10,
+            "count": 1
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 5
+          },
+          {
+            "line": 4,
+            "count": 5
+          },
+          {
+            "line": 5,
+            "count": 5
+          },
+          {
+            "line": 6,
+            "count": 5
+          },
+          {
+            "line": 7,
+            "count": 5
+          },
+          {
+            "line": 8,
+            "count": 5
+          },
+          {
+            "line": 9,
+            "count": 5
+          },
+          {
+            "line": 10,
+            "count": 5
+          },
+          {
+            "line": 11,
+            "count": 1
+          },
+          {
+            "line": 12,
+            "count": 1
+          },
+          {
+            "line": 13,
+            "count": 5
+          },
+          {
+            "line": 14,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/perfil.controller.js",
+        "totalLineCount": 53,
+        "totalBranchCount": 57,
+        "totalFunctionCount": 6,
+        "coveredLineCount": 53,
+        "coveredBranchCount": 53,
+        "coveredFunctionCount": 5,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 92.98245614035088,
+        "coveredFunctionPercent": 83.33333333333334,
+        "functions": [
+          {
+            "name": "obtenerPerfil",
+            "count": 1,
+            "line": 5
+          },
+          {
+            "name": "imageType",
+            "count": 22,
+            "line": 12
+          },
+          {
+            "name": "actualizarPerfil",
+            "count": 9,
+            "line": 20
+          },
+          {
+            "name": "obtenerFoto",
+            "count": 4,
+            "line": 48
+          },
+          {
+            "name": "",
+            "count": 0,
+            "line": 9
+          },
+          {
+            "name": "",
+            "count": 7,
+            "line": 26
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 5,
+            "count": 1
+          },
+          {
+            "line": 7,
+            "count": 0
+          },
+          {
+            "line": 9,
+            "count": 0
+          },
+          {
+            "line": 12,
+            "count": 22
+          },
+          {
+            "line": 13,
+            "count": 4
+          },
+          {
+            "line": 13,
+            "count": 17
+          },
+          {
+            "line": 15,
+            "count": 5
+          },
+          {
+            "line": 15,
+            "count": 5
+          },
+          {
+            "line": 15,
+            "count": 4
+          },
+          {
+            "line": 15,
+            "count": 12
+          },
+          {
+            "line": 16,
+            "count": 11
+          },
+          {
+            "line": 16,
+            "count": 5
+          },
+          {
+            "line": 16,
+            "count": 4
+          },
+          {
+            "line": 16,
+            "count": 3
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 1
+          },
+          {
+            "line": 16,
+            "count": 11
+          },
+          {
+            "line": 17,
+            "count": 5
+          },
+          {
+            "line": 17,
+            "count": 2
+          },
+          {
+            "line": 17,
+            "count": 1
+          },
+          {
+            "line": 17,
+            "count": 11
+          },
+          {
+            "line": 15,
+            "count": 1
+          },
+          {
+            "line": 16,
+            "count": 1
+          },
+          {
+            "line": 20,
+            "count": 9
+          },
+          {
+            "line": 22,
+            "count": 2
+          },
+          {
+            "line": 22,
+            "count": 2
+          },
+          {
+            "line": 22,
+            "count": 2
+          },
+          {
+            "line": 22,
+            "count": 7
+          },
+          {
+            "line": 22,
+            "count": 1
+          },
+          {
+            "line": 22,
+            "count": 1
+          },
+          {
+            "line": 22,
+            "count": 7
+          },
+          {
+            "line": 24,
+            "count": 4
+          },
+          {
+            "line": 24,
+            "count": 1
+          },
+          {
+            "line": 24,
+            "count": 6
+          },
+          {
+            "line": 43,
+            "count": 5
+          },
+          {
+            "line": 44,
+            "count": 5
+          },
+          {
+            "line": 46,
+            "count": 1
+          },
+          {
+            "line": 44,
+            "count": 0
+          },
+          {
+            "line": 48,
+            "count": 4
+          },
+          {
+            "line": 50,
+            "count": 2
+          },
+          {
+            "line": 50,
+            "count": 1
+          },
+          {
+            "line": 26,
+            "count": 7
+          },
+          {
+            "line": 30,
+            "count": 4
+          },
+          {
+            "line": 30,
+            "count": 2
+          },
+          {
+            "line": 30,
+            "count": 4
+          },
+          {
+            "line": 30,
+            "count": 2
+          },
+          {
+            "line": 31,
+            "count": 5
+          },
+          {
+            "line": 31,
+            "count": 1
+          },
+          {
+            "line": 32,
+            "count": 3
+          },
+          {
+            "line": 32,
+            "count": 3
+          },
+          {
+            "line": 33,
+            "count": 5
+          },
+          {
+            "line": 34,
+            "count": 3
+          },
+          {
+            "line": 34,
+            "count": 5
+          },
+          {
+            "line": 35,
+            "count": 1
+          },
+          {
+            "line": 38,
+            "count": 5
+          },
+          {
+            "line": 28,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 3
+          },
+          {
+            "line": 3,
+            "count": 3
+          },
+          {
+            "line": 4,
+            "count": 3
+          },
+          {
+            "line": 5,
+            "count": 1
+          },
+          {
+            "line": 6,
+            "count": 1
+          },
+          {
+            "line": 7,
+            "count": 1
+          },
+          {
+            "line": 8,
+            "count": 1
+          },
+          {
+            "line": 9,
+            "count": 1
+          },
+          {
+            "line": 10,
+            "count": 1
+          },
+          {
+            "line": 11,
+            "count": 1
+          },
+          {
+            "line": 12,
+            "count": 22
+          },
+          {
+            "line": 13,
+            "count": 22
+          },
+          {
+            "line": 14,
+            "count": 17
+          },
+          {
+            "line": 15,
+            "count": 22
+          },
+          {
+            "line": 16,
+            "count": 22
+          },
+          {
+            "line": 17,
+            "count": 22
+          },
+          {
+            "line": 18,
+            "count": 11
+          },
+          {
+            "line": 19,
+            "count": 22
+          },
+          {
+            "line": 20,
+            "count": 9
+          },
+          {
+            "line": 21,
+            "count": 9
+          },
+          {
+            "line": 22,
+            "count": 9
+          },
+          {
+            "line": 23,
+            "count": 7
+          },
+          {
+            "line": 24,
+            "count": 9
+          },
+          {
+            "line": 25,
+            "count": 6
+          },
+          {
+            "line": 26,
+            "count": 6
+          },
+          {
+            "line": 27,
+            "count": 7
+          },
+          {
+            "line": 28,
+            "count": 7
+          },
+          {
+            "line": 29,
+            "count": 7
+          },
+          {
+            "line": 30,
+            "count": 7
+          },
+          {
+            "line": 31,
+            "count": 7
+          },
+          {
+            "line": 32,
+            "count": 7
+          },
+          {
+            "line": 33,
+            "count": 7
+          },
+          {
+            "line": 34,
+            "count": 7
+          },
+          {
+            "line": 35,
+            "count": 7
+          },
+          {
+            "line": 36,
+            "count": 1
+          },
+          {
+            "line": 37,
+            "count": 1
+          },
+          {
+            "line": 38,
+            "count": 1
+          },
+          {
+            "line": 39,
+            "count": 5
+          },
+          {
+            "line": 40,
+            "count": 5
+          },
+          {
+            "line": 41,
+            "count": 5
+          },
+          {
+            "line": 42,
+            "count": 5
+          },
+          {
+            "line": 43,
+            "count": 6
+          },
+          {
+            "line": 44,
+            "count": 9
+          },
+          {
+            "line": 45,
+            "count": 5
+          },
+          {
+            "line": 46,
+            "count": 9
+          },
+          {
+            "line": 47,
+            "count": 9
+          },
+          {
+            "line": 48,
+            "count": 4
+          },
+          {
+            "line": 49,
+            "count": 4
+          },
+          {
+            "line": 50,
+            "count": 4
+          },
+          {
+            "line": 51,
+            "count": 1
+          },
+          {
+            "line": 52,
+            "count": 4
+          },
+          {
+            "line": 53,
+            "count": 3
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/progreso.controller.js",
+        "totalLineCount": 18,
+        "totalBranchCount": 4,
+        "totalFunctionCount": 5,
+        "coveredLineCount": 8,
+        "coveredBranchCount": 3,
+        "coveredFunctionCount": 2,
+        "coveredLinePercent": 44.44444444444444,
+        "coveredBranchPercent": 75,
+        "coveredFunctionPercent": 40,
+        "functions": [
+          {
+            "name": "obtenerProgreso",
+            "count": 0,
+            "line": 5
+          },
+          {
+            "name": "guardarProgreso",
+            "count": 1,
+            "line": 9
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 10
+          },
+          {
+            "name": "",
+            "count": 0,
+            "line": 11
+          },
+          {
+            "name": "obtenerRanking",
+            "count": 0,
+            "line": 14
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 1
+          },
+          {
+            "line": 10,
+            "count": 0
+          },
+          {
+            "line": 10,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 0
+          },
+          {
+            "line": 6,
+            "count": 0
+          },
+          {
+            "line": 7,
+            "count": 0
+          },
+          {
+            "line": 8,
+            "count": 0
+          },
+          {
+            "line": 9,
+            "count": 1
+          },
+          {
+            "line": 10,
+            "count": 1
+          },
+          {
+            "line": 11,
+            "count": 0
+          },
+          {
+            "line": 12,
+            "count": 0
+          },
+          {
+            "line": 13,
+            "count": 1
+          },
+          {
+            "line": 14,
+            "count": 0
+          },
+          {
+            "line": 15,
+            "count": 0
+          },
+          {
+            "line": 16,
+            "count": 0
+          },
+          {
+            "line": 17,
+            "count": 0
+          },
+          {
+            "line": 18,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/controllers/progresoAreas.controller.js",
+        "totalLineCount": 21,
+        "totalBranchCount": 15,
+        "totalFunctionCount": 6,
+        "coveredLineCount": 21,
+        "coveredBranchCount": 15,
+        "coveredFunctionCount": 6,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "guardarProgresoArea",
+            "count": 9,
+            "line": 4
+          },
+          {
+            "name": "",
+            "count": 4,
+            "line": 7
+          },
+          {
+            "name": "readAreas",
+            "count": 6,
+            "line": 10
+          },
+          {
+            "name": "",
+            "count": 30,
+            "line": 12
+          },
+          {
+            "name": "obtenerProgresoAreas",
+            "count": 2,
+            "line": 16
+          },
+          {
+            "name": "obtenerProgresoGeneral",
+            "count": 4,
+            "line": 17
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 9
+          },
+          {
+            "line": 6,
+            "count": 7
+          },
+          {
+            "line": 6,
+            "count": 3
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 5
+          },
+          {
+            "line": 6,
+            "count": 3
+          },
+          {
+            "line": 7,
+            "count": 4
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 1
+          },
+          {
+            "line": 10,
+            "count": 6
+          },
+          {
+            "line": 13,
+            "count": 4
+          },
+          {
+            "line": 12,
+            "count": 30
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 17,
+            "count": 4
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 9
+          },
+          {
+            "line": 5,
+            "count": 9
+          },
+          {
+            "line": 6,
+            "count": 9
+          },
+          {
+            "line": 7,
+            "count": 3
+          },
+          {
+            "line": 8,
+            "count": 3
+          },
+          {
+            "line": 9,
+            "count": 9
+          },
+          {
+            "line": 10,
+            "count": 6
+          },
+          {
+            "line": 11,
+            "count": 6
+          },
+          {
+            "line": 12,
+            "count": 6
+          },
+          {
+            "line": 13,
+            "count": 6
+          },
+          {
+            "line": 14,
+            "count": 6
+          },
+          {
+            "line": 15,
+            "count": 6
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 17,
+            "count": 4
+          },
+          {
+            "line": 18,
+            "count": 4
+          },
+          {
+            "line": 19,
+            "count": 4
+          },
+          {
+            "line": 20,
+            "count": 4
+          },
+          {
+            "line": 21,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/lib/passwords.js",
+        "totalLineCount": 24,
+        "totalBranchCount": 21,
+        "totalFunctionCount": 2,
+        "coveredLineCount": 24,
+        "coveredBranchCount": 19,
+        "coveredFunctionCount": 2,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 90.47619047619048,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "hashPassword",
+            "count": 14,
+            "line": 6
+          },
+          {
+            "name": "verifyPassword",
+            "count": 25,
+            "line": 11
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 6,
+            "count": 14
+          },
+          {
+            "line": 11,
+            "count": 25
+          },
+          {
+            "line": 12,
+            "count": 7
+          },
+          {
+            "line": 12,
+            "count": 1
+          },
+          {
+            "line": 12,
+            "count": 7
+          },
+          {
+            "line": 13,
+            "count": 5
+          },
+          {
+            "line": 14,
+            "count": 1
+          },
+          {
+            "line": 14,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 17,
+            "count": 7
+          },
+          {
+            "line": 19,
+            "count": 6
+          },
+          {
+            "line": 19,
+            "count": 6
+          },
+          {
+            "line": 19,
+            "count": 6
+          },
+          {
+            "line": 19,
+            "count": 1
+          },
+          {
+            "line": 19,
+            "count": 6
+          },
+          {
+            "line": 20,
+            "count": 5
+          },
+          {
+            "line": 20,
+            "count": 1
+          },
+          {
+            "line": 20,
+            "count": 5
+          },
+          {
+            "line": 20,
+            "count": 0
+          },
+          {
+            "line": 20,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 3
+          },
+          {
+            "line": 3,
+            "count": 3
+          },
+          {
+            "line": 4,
+            "count": 3
+          },
+          {
+            "line": 5,
+            "count": 3
+          },
+          {
+            "line": 6,
+            "count": 14
+          },
+          {
+            "line": 7,
+            "count": 14
+          },
+          {
+            "line": 8,
+            "count": 14
+          },
+          {
+            "line": 9,
+            "count": 14
+          },
+          {
+            "line": 10,
+            "count": 14
+          },
+          {
+            "line": 11,
+            "count": 25
+          },
+          {
+            "line": 12,
+            "count": 25
+          },
+          {
+            "line": 13,
+            "count": 25
+          },
+          {
+            "line": 14,
+            "count": 5
+          },
+          {
+            "line": 15,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 5
+          },
+          {
+            "line": 17,
+            "count": 5
+          },
+          {
+            "line": 18,
+            "count": 7
+          },
+          {
+            "line": 19,
+            "count": 25
+          },
+          {
+            "line": 20,
+            "count": 25
+          },
+          {
+            "line": 21,
+            "count": 5
+          },
+          {
+            "line": 22,
+            "count": 5
+          },
+          {
+            "line": 23,
+            "count": 25
+          },
+          {
+            "line": 24,
+            "count": 3
+          }
+        ]
+      },
+      {
+        "path": "backend/lib/progress.js",
+        "totalLineCount": 30,
+        "totalBranchCount": 36,
+        "totalFunctionCount": 8,
+        "coveredLineCount": 30,
+        "coveredBranchCount": 33,
+        "coveredFunctionCount": 8,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 91.66666666666666,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "validateState",
+            "count": 15,
+            "line": 2
+          },
+          {
+            "name": "",
+            "count": 28,
+            "line": 7
+          },
+          {
+            "name": "",
+            "count": 4,
+            "line": 9
+          },
+          {
+            "name": "",
+            "count": 32,
+            "line": 10
+          },
+          {
+            "name": "progressFromState",
+            "count": 5,
+            "line": 12
+          },
+          {
+            "name": "general",
+            "count": 6,
+            "line": 13
+          },
+          {
+            "name": "",
+            "count": 30,
+            "line": 13
+          },
+          {
+            "name": "saveArea",
+            "count": 4,
+            "line": 14
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 15
+          },
+          {
+            "line": 3,
+            "count": 12
+          },
+          {
+            "line": 3,
+            "count": 12
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 11
+          },
+          {
+            "line": 4,
+            "count": 3
+          },
+          {
+            "line": 4,
+            "count": 8
+          },
+          {
+            "line": 5,
+            "count": 6
+          },
+          {
+            "line": 5,
+            "count": 5
+          },
+          {
+            "line": 6,
+            "count": 10
+          },
+          {
+            "line": 6,
+            "count": 9
+          },
+          {
+            "line": 6,
+            "count": 8
+          },
+          {
+            "line": 7,
+            "count": 8
+          },
+          {
+            "line": 8,
+            "count": 5
+          },
+          {
+            "line": 8,
+            "count": 4
+          },
+          {
+            "line": 9,
+            "count": 3
+          },
+          {
+            "line": 7,
+            "count": 28
+          },
+          {
+            "line": 7,
+            "count": 10
+          },
+          {
+            "line": 9,
+            "count": 4
+          },
+          {
+            "line": 10,
+            "count": 32
+          },
+          {
+            "line": 12,
+            "count": 5
+          },
+          {
+            "line": 12,
+            "count": 0
+          },
+          {
+            "line": 13,
+            "count": 6
+          },
+          {
+            "line": 13,
+            "count": 30
+          },
+          {
+            "line": 13,
+            "count": 26
+          },
+          {
+            "line": 14,
+            "count": 4
+          },
+          {
+            "line": 19,
+            "count": 1
+          },
+          {
+            "line": 20,
+            "count": 2
+          },
+          {
+            "line": 21,
+            "count": 1
+          },
+          {
+            "line": 22,
+            "count": 1
+          },
+          {
+            "line": 23,
+            "count": 1
+          },
+          {
+            "line": 24,
+            "count": 2
+          },
+          {
+            "line": 24,
+            "count": 1
+          },
+          {
+            "line": 15,
+            "count": 0
+          },
+          {
+            "line": 28,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 15
+          },
+          {
+            "line": 3,
+            "count": 15
+          },
+          {
+            "line": 4,
+            "count": 15
+          },
+          {
+            "line": 5,
+            "count": 15
+          },
+          {
+            "line": 6,
+            "count": 15
+          },
+          {
+            "line": 7,
+            "count": 15
+          },
+          {
+            "line": 8,
+            "count": 15
+          },
+          {
+            "line": 9,
+            "count": 15
+          },
+          {
+            "line": 10,
+            "count": 15
+          },
+          {
+            "line": 11,
+            "count": 15
+          },
+          {
+            "line": 12,
+            "count": 5
+          },
+          {
+            "line": 13,
+            "count": 6
+          },
+          {
+            "line": 14,
+            "count": 4
+          },
+          {
+            "line": 15,
+            "count": 4
+          },
+          {
+            "line": 16,
+            "count": 4
+          },
+          {
+            "line": 17,
+            "count": 4
+          },
+          {
+            "line": 18,
+            "count": 4
+          },
+          {
+            "line": 19,
+            "count": 4
+          },
+          {
+            "line": 20,
+            "count": 4
+          },
+          {
+            "line": 21,
+            "count": 2
+          },
+          {
+            "line": 22,
+            "count": 2
+          },
+          {
+            "line": 23,
+            "count": 4
+          },
+          {
+            "line": 24,
+            "count": 4
+          },
+          {
+            "line": 25,
+            "count": 4
+          },
+          {
+            "line": 26,
+            "count": 4
+          },
+          {
+            "line": 27,
+            "count": 4
+          },
+          {
+            "line": 28,
+            "count": 4
+          },
+          {
+            "line": 29,
+            "count": 4
+          },
+          {
+            "line": 30,
+            "count": 3
+          }
+        ]
+      },
+      {
+        "path": "backend/lib/transaction.js",
+        "totalLineCount": 6,
+        "totalBranchCount": 5,
+        "totalFunctionCount": 1,
+        "coveredLineCount": 6,
+        "coveredBranchCount": 4,
+        "coveredFunctionCount": 1,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 80,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "transaction",
+            "count": 37,
+            "line": 1
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 1,
+            "count": 37
+          },
+          {
+            "line": 3,
+            "count": 35
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 37
+          },
+          {
+            "line": 3,
+            "count": 37
+          },
+          {
+            "line": 4,
+            "count": 37
+          },
+          {
+            "line": 5,
+            "count": 37
+          },
+          {
+            "line": 6,
+            "count": 3
+          }
+        ]
+      },
+      {
+        "path": "backend/lib/validation.js",
+        "totalLineCount": 9,
+        "totalBranchCount": 17,
+        "totalFunctionCount": 7,
+        "coveredLineCount": 9,
+        "coveredBranchCount": 17,
+        "coveredFunctionCount": 7,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "text",
+            "count": 43,
+            "line": 2
+          },
+          {
+            "name": "email",
+            "count": 46,
+            "line": 3
+          },
+          {
+            "name": "normalizeEmail",
+            "count": 43,
+            "line": 4
+          },
+          {
+            "name": "password",
+            "count": 16,
+            "line": 5
+          },
+          {
+            "name": "percentage",
+            "count": 24,
+            "line": 6
+          },
+          {
+            "name": "id",
+            "count": 22,
+            "line": 7
+          },
+          {
+            "name": "fail",
+            "count": 47,
+            "line": 8
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 43
+          },
+          {
+            "line": 2,
+            "count": 32
+          },
+          {
+            "line": 2,
+            "count": 21
+          },
+          {
+            "line": 3,
+            "count": 46
+          },
+          {
+            "line": 3,
+            "count": 42
+          },
+          {
+            "line": 3,
+            "count": 41
+          },
+          {
+            "line": 4,
+            "count": 43
+          },
+          {
+            "line": 5,
+            "count": 16
+          },
+          {
+            "line": 5,
+            "count": 5
+          },
+          {
+            "line": 6,
+            "count": 24
+          },
+          {
+            "line": 6,
+            "count": 17
+          },
+          {
+            "line": 6,
+            "count": 15
+          },
+          {
+            "line": 6,
+            "count": 13
+          },
+          {
+            "line": 7,
+            "count": 22
+          },
+          {
+            "line": 7,
+            "count": 16
+          },
+          {
+            "line": 8,
+            "count": 47
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 43
+          },
+          {
+            "line": 3,
+            "count": 46
+          },
+          {
+            "line": 4,
+            "count": 43
+          },
+          {
+            "line": 5,
+            "count": 16
+          },
+          {
+            "line": 6,
+            "count": 24
+          },
+          {
+            "line": 7,
+            "count": 22
+          },
+          {
+            "line": 8,
+            "count": 47
+          },
+          {
+            "line": 9,
+            "count": 3
+          }
+        ]
+      },
+      {
+        "path": "backend/middlewares/access.js",
+        "totalLineCount": 8,
+        "totalBranchCount": 10,
+        "totalFunctionCount": 3,
+        "coveredLineCount": 8,
+        "coveredBranchCount": 10,
+        "coveredFunctionCount": 3,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "role",
+            "count": 18,
+            "line": 2
+          },
+          {
+            "name": "",
+            "count": 55,
+            "line": 2
+          },
+          {
+            "name": "ownEmail",
+            "count": 20,
+            "line": 3
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 18
+          },
+          {
+            "line": 2,
+            "count": 55
+          },
+          {
+            "line": 2,
+            "count": 51
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 20
+          },
+          {
+            "line": 4,
+            "count": 11
+          },
+          {
+            "line": 5,
+            "count": 10
+          },
+          {
+            "line": 5,
+            "count": 3
+          },
+          {
+            "line": 5,
+            "count": 15
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 20
+          },
+          {
+            "line": 4,
+            "count": 20
+          },
+          {
+            "line": 5,
+            "count": 20
+          },
+          {
+            "line": 6,
+            "count": 15
+          },
+          {
+            "line": 7,
+            "count": 20
+          },
+          {
+            "line": 8,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/middlewares/rateLimit.js",
+        "totalLineCount": 16,
+        "totalBranchCount": 8,
+        "totalFunctionCount": 2,
+        "coveredLineCount": 16,
+        "coveredBranchCount": 7,
+        "coveredFunctionCount": 2,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 87.5,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "rateLimit",
+            "count": 8,
+            "line": 2
+          },
+          {
+            "name": "",
+            "count": 39,
+            "line": 4
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 8
+          },
+          {
+            "line": 4,
+            "count": 39
+          },
+          {
+            "line": 6,
+            "count": 33
+          },
+          {
+            "line": 8,
+            "count": 6
+          },
+          {
+            "line": 6,
+            "count": 0
+          },
+          {
+            "line": 10,
+            "count": 1
+          },
+          {
+            "line": 13,
+            "count": 12
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 8
+          },
+          {
+            "line": 4,
+            "count": 8
+          },
+          {
+            "line": 5,
+            "count": 39
+          },
+          {
+            "line": 6,
+            "count": 39
+          },
+          {
+            "line": 7,
+            "count": 39
+          },
+          {
+            "line": 8,
+            "count": 39
+          },
+          {
+            "line": 9,
+            "count": 39
+          },
+          {
+            "line": 10,
+            "count": 39
+          },
+          {
+            "line": 11,
+            "count": 1
+          },
+          {
+            "line": 12,
+            "count": 1
+          },
+          {
+            "line": 13,
+            "count": 1
+          },
+          {
+            "line": 14,
+            "count": 12
+          },
+          {
+            "line": 15,
+            "count": 8
+          },
+          {
+            "line": 16,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/middlewares/verificarToken.js",
+        "totalLineCount": 17,
+        "totalBranchCount": 15,
+        "totalFunctionCount": 1,
+        "coveredLineCount": 17,
+        "coveredBranchCount": 13,
+        "coveredFunctionCount": 1,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 86.66666666666667,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "verificarToken",
+            "count": 79,
+            "line": 4
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 79
+          },
+          {
+            "line": 5,
+            "count": 1
+          },
+          {
+            "line": 6,
+            "count": 1
+          },
+          {
+            "line": 6,
+            "count": 72
+          },
+          {
+            "line": 9,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 70
+          },
+          {
+            "line": 10,
+            "count": 70
+          },
+          {
+            "line": 13,
+            "count": 2
+          },
+          {
+            "line": 13,
+            "count": 68
+          },
+          {
+            "line": 14,
+            "count": 1
+          },
+          {
+            "line": 14,
+            "count": 1
+          },
+          {
+            "line": 14,
+            "count": 67
+          },
+          {
+            "line": 10,
+            "count": 0
+          },
+          {
+            "line": 16,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 79
+          },
+          {
+            "line": 6,
+            "count": 79
+          },
+          {
+            "line": 7,
+            "count": 72
+          },
+          {
+            "line": 8,
+            "count": 72
+          },
+          {
+            "line": 9,
+            "count": 79
+          },
+          {
+            "line": 10,
+            "count": 79
+          },
+          {
+            "line": 11,
+            "count": 70
+          },
+          {
+            "line": 12,
+            "count": 70
+          },
+          {
+            "line": 13,
+            "count": 79
+          },
+          {
+            "line": 14,
+            "count": 79
+          },
+          {
+            "line": 15,
+            "count": 67
+          },
+          {
+            "line": 16,
+            "count": 79
+          },
+          {
+            "line": 17,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/auth.routes.js",
+        "totalLineCount": 5,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 5,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/clases.routes.js",
+        "totalLineCount": 15,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 15,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 2
+          },
+          {
+            "line": 10,
+            "count": 2
+          },
+          {
+            "line": 11,
+            "count": 2
+          },
+          {
+            "line": 12,
+            "count": 2
+          },
+          {
+            "line": 13,
+            "count": 2
+          },
+          {
+            "line": 14,
+            "count": 2
+          },
+          {
+            "line": 15,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/ia.routes.js",
+        "totalLineCount": 5,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 5,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/perfil.routes.js",
+        "totalLineCount": 9,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 9,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/progreso.routes.js",
+        "totalLineCount": 8,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 8,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/progresoAreas.routes.js",
+        "totalLineCount": 9,
+        "totalBranchCount": 1,
+        "totalFunctionCount": 0,
+        "coveredLineCount": 9,
+        "coveredBranchCount": 1,
+        "coveredFunctionCount": 0,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 100,
+        "coveredFunctionPercent": 100,
+        "functions": [],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 2
+          },
+          {
+            "line": 9,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/routes/simulacros.routes.js",
+        "totalLineCount": 35,
+        "totalBranchCount": 14,
+        "totalFunctionCount": 2,
+        "coveredLineCount": 35,
+        "coveredBranchCount": 12,
+        "coveredFunctionCount": 2,
+        "coveredLinePercent": 100,
+        "coveredBranchPercent": 85.71428571428571,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "",
+            "count": 6,
+            "line": 7
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 31
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 5
+          },
+          {
+            "line": 9,
+            "count": 0
+          },
+          {
+            "line": 11,
+            "count": 0
+          },
+          {
+            "line": 13,
+            "count": 6
+          },
+          {
+            "line": 16,
+            "count": 5
+          },
+          {
+            "line": 16,
+            "count": 4
+          },
+          {
+            "line": 16,
+            "count": 2
+          },
+          {
+            "line": 16,
+            "count": 4
+          },
+          {
+            "line": 19,
+            "count": 3
+          },
+          {
+            "line": 24,
+            "count": 2
+          },
+          {
+            "line": 26,
+            "count": 1
+          },
+          {
+            "line": 28,
+            "count": 1
+          },
+          {
+            "line": 31,
+            "count": 2
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 2
+          },
+          {
+            "line": 8,
+            "count": 5
+          },
+          {
+            "line": 9,
+            "count": 5
+          },
+          {
+            "line": 10,
+            "count": 5
+          },
+          {
+            "line": 11,
+            "count": 5
+          },
+          {
+            "line": 12,
+            "count": 5
+          },
+          {
+            "line": 13,
+            "count": 5
+          },
+          {
+            "line": 14,
+            "count": 6
+          },
+          {
+            "line": 15,
+            "count": 6
+          },
+          {
+            "line": 16,
+            "count": 6
+          },
+          {
+            "line": 17,
+            "count": 4
+          },
+          {
+            "line": 18,
+            "count": 4
+          },
+          {
+            "line": 19,
+            "count": 4
+          },
+          {
+            "line": 20,
+            "count": 3
+          },
+          {
+            "line": 21,
+            "count": 3
+          },
+          {
+            "line": 22,
+            "count": 3
+          },
+          {
+            "line": 23,
+            "count": 3
+          },
+          {
+            "line": 24,
+            "count": 5
+          },
+          {
+            "line": 25,
+            "count": 2
+          },
+          {
+            "line": 26,
+            "count": 2
+          },
+          {
+            "line": 27,
+            "count": 1
+          },
+          {
+            "line": 28,
+            "count": 1
+          },
+          {
+            "line": 29,
+            "count": 1
+          },
+          {
+            "line": 30,
+            "count": 2
+          },
+          {
+            "line": 31,
+            "count": 2
+          },
+          {
+            "line": 32,
+            "count": 2
+          },
+          {
+            "line": 33,
+            "count": 2
+          },
+          {
+            "line": 34,
+            "count": 2
+          },
+          {
+            "line": 35,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "backend/server.js",
+        "totalLineCount": 55,
+        "totalBranchCount": 26,
+        "totalFunctionCount": 11,
+        "coveredLineCount": 52,
+        "coveredBranchCount": 17,
+        "coveredFunctionCount": 9,
+        "coveredLinePercent": 94.54545454545455,
+        "coveredBranchPercent": 65.38461538461539,
+        "coveredFunctionPercent": 81.81818181818183,
+        "functions": [
+          {
+            "name": "createApp",
+            "count": 56,
+            "line": 7
+          },
+          {
+            "name": "",
+            "count": 121,
+            "line": 10
+          },
+          {
+            "name": "",
+            "count": 117,
+            "line": 17
+          },
+          {
+            "name": "origin",
+            "count": 120,
+            "line": 24
+          },
+          {
+            "name": "",
+            "count": 120,
+            "line": 26
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 28
+          },
+          {
+            "name": "",
+            "count": 1,
+            "line": 33
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 36
+          },
+          {
+            "name": "",
+            "count": 1,
+            "line": 41
+          },
+          {
+            "name": "",
+            "count": 0,
+            "line": 52
+          },
+          {
+            "name": "",
+            "count": 0,
+            "line": 53
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 51,
+            "count": 0
+          },
+          {
+            "line": 7,
+            "count": 8
+          },
+          {
+            "line": 32,
+            "count": 56
+          },
+          {
+            "line": 9,
+            "count": 0
+          },
+          {
+            "line": 10,
+            "count": 121
+          },
+          {
+            "line": 12,
+            "count": 0
+          },
+          {
+            "line": 17,
+            "count": 117
+          },
+          {
+            "line": 21,
+            "count": 1
+          },
+          {
+            "line": 21,
+            "count": 1
+          },
+          {
+            "line": 21,
+            "count": 99
+          },
+          {
+            "line": 21,
+            "count": 1
+          },
+          {
+            "line": 21,
+            "count": 99
+          },
+          {
+            "line": 24,
+            "count": 120
+          },
+          {
+            "line": 24,
+            "count": 0
+          },
+          {
+            "line": 26,
+            "count": 120
+          },
+          {
+            "line": 28,
+            "count": 2
+          },
+          {
+            "line": 33,
+            "count": 1
+          },
+          {
+            "line": 36,
+            "count": 2
+          },
+          {
+            "line": 37,
+            "count": 1
+          },
+          {
+            "line": 41,
+            "count": 1
+          },
+          {
+            "line": 42,
+            "count": 0
+          },
+          {
+            "line": 43,
+            "count": 0
+          },
+          {
+            "line": 45,
+            "count": 0
+          },
+          {
+            "line": 46,
+            "count": 0
+          },
+          {
+            "line": 47,
+            "count": 0
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 2
+          },
+          {
+            "line": 2,
+            "count": 2
+          },
+          {
+            "line": 3,
+            "count": 2
+          },
+          {
+            "line": 4,
+            "count": 2
+          },
+          {
+            "line": 5,
+            "count": 2
+          },
+          {
+            "line": 6,
+            "count": 2
+          },
+          {
+            "line": 7,
+            "count": 8
+          },
+          {
+            "line": 8,
+            "count": 8
+          },
+          {
+            "line": 9,
+            "count": 8
+          },
+          {
+            "line": 10,
+            "count": 8
+          },
+          {
+            "line": 11,
+            "count": 121
+          },
+          {
+            "line": 12,
+            "count": 121
+          },
+          {
+            "line": 13,
+            "count": 121
+          },
+          {
+            "line": 14,
+            "count": 121
+          },
+          {
+            "line": 15,
+            "count": 121
+          },
+          {
+            "line": 16,
+            "count": 8
+          },
+          {
+            "line": 17,
+            "count": 8
+          },
+          {
+            "line": 18,
+            "count": 117
+          },
+          {
+            "line": 19,
+            "count": 117
+          },
+          {
+            "line": 20,
+            "count": 117
+          },
+          {
+            "line": 21,
+            "count": 117
+          },
+          {
+            "line": 22,
+            "count": 99
+          },
+          {
+            "line": 23,
+            "count": 8
+          },
+          {
+            "line": 24,
+            "count": 8
+          },
+          {
+            "line": 25,
+            "count": 8
+          },
+          {
+            "line": 26,
+            "count": 8
+          },
+          {
+            "line": 27,
+            "count": 8
+          },
+          {
+            "line": 28,
+            "count": 8
+          },
+          {
+            "line": 29,
+            "count": 2
+          },
+          {
+            "line": 30,
+            "count": 2
+          },
+          {
+            "line": 31,
+            "count": 8
+          },
+          {
+            "line": 32,
+            "count": 8
+          },
+          {
+            "line": 33,
+            "count": 8
+          },
+          {
+            "line": 34,
+            "count": 8
+          },
+          {
+            "line": 35,
+            "count": 8
+          },
+          {
+            "line": 36,
+            "count": 8
+          },
+          {
+            "line": 37,
+            "count": 2
+          },
+          {
+            "line": 38,
+            "count": 1
+          },
+          {
+            "line": 39,
+            "count": 8
+          },
+          {
+            "line": 40,
+            "count": 8
+          },
+          {
+            "line": 41,
+            "count": 8
+          },
+          {
+            "line": 42,
+            "count": 1
+          },
+          {
+            "line": 43,
+            "count": 1
+          },
+          {
+            "line": 44,
+            "count": 1
+          },
+          {
+            "line": 45,
+            "count": 1
+          },
+          {
+            "line": 46,
+            "count": 1
+          },
+          {
+            "line": 47,
+            "count": 1
+          },
+          {
+            "line": 48,
+            "count": 8
+          },
+          {
+            "line": 49,
+            "count": 8
+          },
+          {
+            "line": 50,
+            "count": 8
+          },
+          {
+            "line": 51,
+            "count": 2
+          },
+          {
+            "line": 52,
+            "count": 0
+          },
+          {
+            "line": 53,
+            "count": 0
+          },
+          {
+            "line": 54,
+            "count": 0
+          },
+          {
+            "line": 55,
+            "count": 2
+          }
+        ]
+      },
+      {
+        "path": "frontend/js/simulacro-core.js",
+        "totalLineCount": 58,
+        "totalBranchCount": 61,
+        "totalFunctionCount": 11,
+        "coveredLineCount": 57,
+        "coveredBranchCount": 58,
+        "coveredFunctionCount": 11,
+        "coveredLinePercent": 98.27586206896551,
+        "coveredBranchPercent": 95.08196721311475,
+        "coveredFunctionPercent": 100,
+        "functions": [
+          {
+            "name": "",
+            "count": 3,
+            "line": 1
+          },
+          {
+            "name": "",
+            "count": 3,
+            "line": 5
+          },
+          {
+            "name": "score",
+            "count": 12,
+            "line": 6
+          },
+          {
+            "name": "",
+            "count": 15,
+            "line": 10
+          },
+          {
+            "name": "",
+            "count": 13,
+            "line": 11
+          },
+          {
+            "name": "validConfig",
+            "count": 14,
+            "line": 30
+          },
+          {
+            "name": "",
+            "count": 4,
+            "line": 35
+          },
+          {
+            "name": "",
+            "count": 2,
+            "line": 35
+          },
+          {
+            "name": "validAttempt",
+            "count": 12,
+            "line": 37
+          },
+          {
+            "name": "",
+            "count": 7,
+            "line": 43
+          },
+          {
+            "name": "",
+            "count": 7,
+            "line": 47
+          }
+        ],
+        "branches": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 5,
+            "count": 0
+          },
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 3,
+            "count": 0
+          },
+          {
+            "line": 5,
+            "count": 3
+          },
+          {
+            "line": 6,
+            "count": 10
+          },
+          {
+            "line": 7,
+            "count": 1
+          },
+          {
+            "line": 7,
+            "count": 6
+          },
+          {
+            "line": 20,
+            "count": 12
+          },
+          {
+            "line": 25,
+            "count": 6
+          },
+          {
+            "line": 10,
+            "count": 15
+          },
+          {
+            "line": 12,
+            "count": 5
+          },
+          {
+            "line": 12,
+            "count": 5
+          },
+          {
+            "line": 13,
+            "count": 5
+          },
+          {
+            "line": 16,
+            "count": 4
+          },
+          {
+            "line": 17,
+            "count": 7
+          },
+          {
+            "line": 11,
+            "count": 13
+          },
+          {
+            "line": 30,
+            "count": 14
+          },
+          {
+            "line": 31,
+            "count": 12
+          },
+          {
+            "line": 31,
+            "count": 3
+          },
+          {
+            "line": 31,
+            "count": 11
+          },
+          {
+            "line": 32,
+            "count": 1
+          },
+          {
+            "line": 32,
+            "count": 10
+          },
+          {
+            "line": 33,
+            "count": 2
+          },
+          {
+            "line": 33,
+            "count": 8
+          },
+          {
+            "line": 34,
+            "count": 7
+          },
+          {
+            "line": 34,
+            "count": 6
+          },
+          {
+            "line": 34,
+            "count": 5
+          },
+          {
+            "line": 35,
+            "count": 4
+          },
+          {
+            "line": 35,
+            "count": 4
+          },
+          {
+            "line": 35,
+            "count": 3
+          },
+          {
+            "line": 35,
+            "count": 2
+          },
+          {
+            "line": 35,
+            "count": 2
+          },
+          {
+            "line": 37,
+            "count": 12
+          },
+          {
+            "line": 38,
+            "count": 11
+          },
+          {
+            "line": 38,
+            "count": 11
+          },
+          {
+            "line": 38,
+            "count": 11
+          },
+          {
+            "line": 38,
+            "count": 10
+          },
+          {
+            "line": 39,
+            "count": 10
+          },
+          {
+            "line": 39,
+            "count": 10
+          },
+          {
+            "line": 39,
+            "count": 10
+          },
+          {
+            "line": 39,
+            "count": 9
+          },
+          {
+            "line": 40,
+            "count": 9
+          },
+          {
+            "line": 40,
+            "count": 9
+          },
+          {
+            "line": 40,
+            "count": 8
+          },
+          {
+            "line": 40,
+            "count": 8
+          },
+          {
+            "line": 41,
+            "count": 8
+          },
+          {
+            "line": 42,
+            "count": 8
+          },
+          {
+            "line": 42,
+            "count": 0
+          },
+          {
+            "line": 42,
+            "count": 5
+          },
+          {
+            "line": 42,
+            "count": 7
+          },
+          {
+            "line": 47,
+            "count": 2
+          },
+          {
+            "line": 47,
+            "count": 5
+          },
+          {
+            "line": 49,
+            "count": 4
+          },
+          {
+            "line": 51,
+            "count": 3
+          },
+          {
+            "line": 51,
+            "count": 2
+          },
+          {
+            "line": 53,
+            "count": 3
+          },
+          {
+            "line": 54,
+            "count": 2
+          },
+          {
+            "line": 43,
+            "count": 7
+          },
+          {
+            "line": 45,
+            "count": 6
+          },
+          {
+            "line": 47,
+            "count": 7
+          }
+        ],
+        "lines": [
+          {
+            "line": 1,
+            "count": 3
+          },
+          {
+            "line": 2,
+            "count": 3
+          },
+          {
+            "line": 3,
+            "count": 3
+          },
+          {
+            "line": 4,
+            "count": 0
+          },
+          {
+            "line": 5,
+            "count": 3
+          },
+          {
+            "line": 6,
+            "count": 3
+          },
+          {
+            "line": 7,
+            "count": 10
+          },
+          {
+            "line": 8,
+            "count": 6
+          },
+          {
+            "line": 9,
+            "count": 6
+          },
+          {
+            "line": 10,
+            "count": 6
+          },
+          {
+            "line": 11,
+            "count": 15
+          },
+          {
+            "line": 12,
+            "count": 15
+          },
+          {
+            "line": 13,
+            "count": 15
+          },
+          {
+            "line": 14,
+            "count": 15
+          },
+          {
+            "line": 15,
+            "count": 15
+          },
+          {
+            "line": 16,
+            "count": 15
+          },
+          {
+            "line": 17,
+            "count": 15
+          },
+          {
+            "line": 18,
+            "count": 6
+          },
+          {
+            "line": 19,
+            "count": 6
+          },
+          {
+            "line": 20,
+            "count": 10
+          },
+          {
+            "line": 21,
+            "count": 12
+          },
+          {
+            "line": 22,
+            "count": 12
+          },
+          {
+            "line": 23,
+            "count": 12
+          },
+          {
+            "line": 24,
+            "count": 12
+          },
+          {
+            "line": 25,
+            "count": 12
+          },
+          {
+            "line": 26,
+            "count": 6
+          },
+          {
+            "line": 27,
+            "count": 6
+          },
+          {
+            "line": 28,
+            "count": 6
+          },
+          {
+            "line": 29,
+            "count": 10
+          },
+          {
+            "line": 30,
+            "count": 3
+          },
+          {
+            "line": 31,
+            "count": 14
+          },
+          {
+            "line": 32,
+            "count": 14
+          },
+          {
+            "line": 33,
+            "count": 14
+          },
+          {
+            "line": 34,
+            "count": 14
+          },
+          {
+            "line": 35,
+            "count": 14
+          },
+          {
+            "line": 36,
+            "count": 14
+          },
+          {
+            "line": 37,
+            "count": 3
+          },
+          {
+            "line": 38,
+            "count": 12
+          },
+          {
+            "line": 39,
+            "count": 12
+          },
+          {
+            "line": 40,
+            "count": 12
+          },
+          {
+            "line": 41,
+            "count": 12
+          },
+          {
+            "line": 42,
+            "count": 12
+          },
+          {
+            "line": 43,
+            "count": 7
+          },
+          {
+            "line": 44,
+            "count": 7
+          },
+          {
+            "line": 45,
+            "count": 7
+          },
+          {
+            "line": 46,
+            "count": 7
+          },
+          {
+            "line": 47,
+            "count": 12
+          },
+          {
+            "line": 48,
+            "count": 5
+          },
+          {
+            "line": 49,
+            "count": 12
+          },
+          {
+            "line": 50,
+            "count": 4
+          },
+          {
+            "line": 51,
+            "count": 4
+          },
+          {
+            "line": 52,
+            "count": 2
+          },
+          {
+            "line": 53,
+            "count": 2
+          },
+          {
+            "line": 54,
+            "count": 12
+          },
+          {
+            "line": 55,
+            "count": 12
+          },
+          {
+            "line": 56,
+            "count": 12
+          },
+          {
+            "line": 57,
+            "count": 3
+          },
+          {
+            "line": 58,
+            "count": 3
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "totalLineCount": 538,
+      "totalBranchCount": 379,
+      "totalFunctionCount": 87,
+      "coveredLineCount": 524,
+      "coveredBranchCount": 346,
+      "coveredFunctionCount": 80,
+      "coveredLinePercent": 97.39776951672863,
+      "coveredBranchPercent": 91.2928759894459,
+      "coveredFunctionPercent": 91.95402298850574
+    },
+    "thresholds": {
+      "line": 0,
+      "branch": 0,
+      "function": 0
+    }
+  }
+}

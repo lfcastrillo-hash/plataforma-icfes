@@ -7,4 +7,8 @@ const args=['--experimental-test-coverage','--test','--test-concurrency=1',
  '--test-reporter=spec','--test-reporter-destination=evidencias/pruebas-unitarias/ejecucion.txt',
  '--test-reporter=./scripts/qa/reporter.cjs','--test-reporter-destination=stdout',
  'tests/unit/*.test.cjs','tests/integration/*.test.cjs'];
-const result=spawnSync(process.execPath,args,{stdio:'inherit'});process.exitCode=result.status??1;
+const result=spawnSync(process.execPath,args,{stdio:'inherit'});
+// Quitar únicamente relleno al final de línea de las tablas del reporter nativo.
+const output='evidencias/pruebas-unitarias/ejecucion.txt';
+if(fs.existsSync(output))fs.writeFileSync(output,fs.readFileSync(output,'utf8').replace(/[ \t]+(?=\r?$)/gm,''));
+process.exitCode=result.status??1;

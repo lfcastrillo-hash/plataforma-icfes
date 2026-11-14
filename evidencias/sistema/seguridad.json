@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-14T22:06:48.971Z",
+  "scope": "Fuentes propias; patrones de claves/JWT y secreto anterior. No sustituye revisión manual ni ZAP.",
+  "findings": [],
+  "root": {
+    "exitCode": 0,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "backend": {
+    "exitCode": 0,
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  }
+}

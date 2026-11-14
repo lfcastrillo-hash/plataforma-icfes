@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-14T21:57:39.149Z",
+  "node": "v24.14.1",
+  "scope": "Arranque nativo pg sin claves IA y con destino SQL local cerrado deliberadamente",
+  "frontend": {
+    "status": 200,
+    "result": "PASS"
+  },
+  "health": {
+    "status": 503,
+    "result": "PASS",
+    "expected": "503 con base no disponible; no se afirma conexión exitosa"
+  }
+}

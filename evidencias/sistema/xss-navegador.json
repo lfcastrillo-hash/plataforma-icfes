@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-14T22:02:48.388Z",
+  "browser": "157.0.8103.78",
+  "environment": "HTTP local y SQL WASM; payload benigno de prueba",
+  "cases": [
+    {
+      "file": "perfil-estudiante.html",
+      "status": "PASS",
+      "checks": "Biografía/nombre mostrados como texto; ruta histórica no crea atributo onerror ni ejecuta código"
+    },
+    {
+      "file": "panel-estudiante.html",
+      "status": "PASS",
+      "checks": "Biografía/nombre mostrados como texto; ruta histórica no crea atributo onerror ni ejecuta código"
+    },
+    {
+      "file": "perfil-profesor.html",
+      "status": "PASS",
+      "checks": "Biografía/nombre mostrados como texto; ruta histórica no crea atributo onerror ni ejecuta código"
+    }
+  ]
+}
