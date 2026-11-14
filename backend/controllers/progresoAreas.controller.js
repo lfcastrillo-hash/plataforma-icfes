@@ -1,85 +1,21 @@
-const pool = require("../db");
-
+const v = require('../lib/validation');
+const { validateState, progressFromState, general, saveArea } = require('../lib/progress');
+const transaction = require('../lib/transaction');
 async function guardarProgresoArea(req, res) {
-  try {
-    const { correo, area, progreso } = req.body;
-
-    await pool.query(
-      `
-      INSERT INTO progreso_areas(correo, area, progreso)
-      VALUES($1,$2,$3)
-      ON CONFLICT(correo, area)
-      DO UPDATE SET progreso = EXCLUDED.progreso
-      `,
-      [correo, area, progreso],
-    );
-
-    res.json({
-      success: true,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+ const { area, progreso, estado } = req.body;
+ if (!v.AREAS.includes(area) || !v.percentage(progreso) || (estado !== undefined && !validateState(estado))) return v.fail(res,400,'Área, progreso o estado inválidos.');
+ await transaction(req.app.locals.pool, client => saveArea(client,req.usuario,area,estado ? progressFromState(estado) : progreso,estado));
+ res.json({success:true});
 }
-
-async function obtenerProgresoGeneral(req, res) {
-  try {
-    const { correo } = req.params;
-
-    // Siempre dividir entre 5 áreas fijas aunque algunas aún no tengan progreso
-    const resultado = await pool.query(
-      `
-      SELECT COALESCE(SUM(progreso), 0) AS suma
-      FROM progreso_areas
-      WHERE correo = $1
-        AND area IN ('matematicas', 'lectura', 'ciencias', 'sociales', 'ingles')
-      `,
-      [correo],
-    );
-
-    const progreso = Math.round(Number(resultado.rows[0].suma || 0) / 5);
-
-    res.json({
-      success: true,
-      progreso,
-      simulacro1: progreso >= 50,
-      simulacro2: progreso >= 75,
-      simulacro3: progreso >= 100,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+async function readAreas(req) {
+ const result = await req.app.locals.pool.query('SELECT area,progreso,estado FROM progreso_areas WHERE id_usuario=$1',[req.usuario.id_usuario]);
+ const areas=Object.fromEntries(v.AREAS.map(a=>[a,0])), estados={};
+ for (const row of result.rows) if(v.AREAS.includes(row.area)){areas[row.area]=Number(row.progreso);estados[row.area]=row.estado;}
+ return {areas,estados};
 }
-
-async function obtenerProgresoAreas(req, res) {
-  try {
-    const { correo } = req.params;
-    const resultado = await pool.query(
-      `SELECT area, progreso FROM progreso_areas WHERE correo = $1`,
-      [correo],
-    );
-    // Devuelve un objeto { matematicas: 40, lectura: 60, ... }
-    const areas = {
-      matematicas: 0,
-      lectura: 0,
-      ciencias: 0,
-      sociales: 0,
-      ingles: 0,
-    };
-    resultado.rows.forEach((r) => {
-      if (areas.hasOwnProperty(r.area)) areas[r.area] = Number(r.progreso);
-    });
-    res.json({ success: true, areas });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+async function obtenerProgresoAreas(req,res) { res.json({success:true,...await readAreas(req)}); }
+async function obtenerProgresoGeneral(req,res) {
+ const progreso=general((await readAreas(req)).areas);
+ res.json({success:true,progreso,simulacro1:progreso>=50,simulacro2:progreso>=75,simulacro3:progreso>=100});
 }
-
-module.exports = {
-  guardarProgresoArea,
-  obtenerProgresoGeneral,
-  obtenerProgresoAreas,
-};
+module.exports={guardarProgresoArea,obtenerProgresoGeneral,obtenerProgresoAreas,readAreas};

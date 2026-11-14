@@ -1,52 +1,14 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-const chatIA = async (req, res) => {
-  try {
-    const { mensaje } = req.body;
-
-    if (!mensaje) {
-      return res.status(400).json({
-        error: "Debes enviar un mensaje",
-      });
-    }
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-    });
-
-    const prompt = `
-Eres un tutor virtual de preparación para las pruebas ICFES de Colombia.
-
-Reglas:
-- Explica de forma sencilla.
-- Ayuda a estudiantes de secundaria.
-- Responde en español.
-- Si es una pregunta matemática, muestra procedimiento paso a paso.
-- Si es una pregunta de lectura crítica, explica el razonamiento.
-- Mantén respuestas educativas.
-
-Pregunta:
-${mensaje}
-`;
-
-    const result = await model.generateContent(prompt);
-
-    const respuesta = result.response.text();
-
-    res.json({
-      respuesta,
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      error: "Error al consultar Gemini",
-    });
-  }
-};
-
-module.exports = {
-  chatIA,
-};
+const OpenAI=require('openai');
+const {text,fail}=require('../lib/validation');
+async function chatIA(req,res){
+ if(!text(req.body.mensaje,1,4000))return fail(res,400,'El mensaje debe tener entre 1 y 4000 caracteres.');
+ if(!process.env.OPENROUTER_API_KEY || !process.env.OPENROUTER_MODEL)return res.status(503).json({error:'El tutor no está configurado. Contacta al administrador.'});
+ try{
+  const client=req.app.locals.aiClient || new OpenAI({apiKey:process.env.OPENROUTER_API_KEY,baseURL:'https://openrouter.ai/api/v1',timeout:20000,maxRetries:0});
+  const completion=await client.chat.completions.create({model:process.env.OPENROUTER_MODEL,messages:[{role:'system',content:'Eres un tutor educativo de preparación Saber 11 de Colombia. Explica en español con ejemplos y razonamiento en Matemáticas, Lectura Crítica, Ciencias, Sociales e Inglés.'},{role:'user',content:req.body.mensaje.trim()}],max_tokens:1000});
+  const respuesta=completion.choices?.[0]?.message?.content;
+  if(!respuesta)return res.status(502).json({error:'El proveedor no gener? una respuesta.'});
+  res.json({respuesta});
+ }catch(error){res.status(error.status===429?503:502).json({error:'El tutor no está disponible temporalmente. Intenta nuevamente.'});}
+}
+module.exports={chatIA};

@@ -1,15 +1,9 @@
-const express = require("express");
-
-const {
-  guardarProgresoArea,
-  obtenerProgresoGeneral,
-  obtenerProgresoAreas,
-} = require("../controllers/progresoAreas.controller");
-
-const router = express.Router();
-
-router.post("/progreso-area", guardarProgresoArea);
-router.get("/progreso-general/:correo", obtenerProgresoGeneral);
-router.get("/progreso-areas/:correo", obtenerProgresoAreas);
-
-module.exports = router;
+const router=require('express').Router();
+const auth=require('../middlewares/verificarToken');
+const {ownEmail,role}=require('../middlewares/access');
+const c=require('../controllers/progresoAreas.controller');
+const student=[auth,role('estudiante'),ownEmail];
+router.post('/progreso-area',...student,c.guardarProgresoArea);
+router.get('/progreso-general/:correo',...student,c.obtenerProgresoGeneral);
+router.get('/progreso-areas/:correo',...student,c.obtenerProgresoAreas);
+module.exports=router;
