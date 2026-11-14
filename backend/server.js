@@ -33,7 +33,10 @@ function createApp({pool,aiClient,rateLimitOptions}={}){
  app.use('/api',(req,res)=>res.status(404).json({success:false,mensaje:'Ruta no encontrada.'}));
  app.get('/uploads/:nombre',require('./controllers/perfil.controller').obtenerFoto);
  // Conserva fotos hist?ricas locales; las nuevas se guardan en PostgreSQL.
- app.use('/uploads',express.static(path.join(__dirname,'uploads'),{dotfiles:'deny'}));
+ app.use('/uploads',(req,res,next)=>{
+  if(!/\.(png|jpe?g|webp)$/i.test(req.path))return res.sendStatus(404);
+  res.set('Content-Security-Policy',"default-src 'none'; sandbox");next();
+ },express.static(path.join(__dirname,'uploads'),{dotfiles:'deny'}));
  app.use(express.static(path.join(__dirname,'../frontend')));
  app.use((error,req,res,next)=>{
   if(res.headersSent)return next(error);

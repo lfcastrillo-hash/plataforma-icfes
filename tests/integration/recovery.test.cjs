@@ -73,3 +73,14 @@ test('SEC límite de intentos y recuperación de fallo de BD sin exponer SQL',as
   const response=await fetch('http://127.0.0.1:'+server.address().port+'/api/health');assert.equal(response.status,503);assert.ok(!(await response.text()).includes('private-connection-string'));
  }finally{await new Promise(resolve=>server.close(resolve));}
 });
+test('SEC archivos históricos HTML no se sirven; imágenes conservan compatibilidad',async()=>{
+ const crypto=require('node:crypto');const directory=path.resolve('backend/uploads');
+ await fs.mkdir(directory,{recursive:true});const key='qa-'+crypto.randomUUID();
+ const html=path.join(directory,key+'.html'),png=path.join(directory,key+'.png');
+ await fs.writeFile(html,'<script>alert(1)</script>',{flag:'wx'});await fs.writeFile(png,Buffer.from([137,80,78,71]),{flag:'wx'});
+ const f=await fixture();try{
+  assert.equal((await fetch(f.base+'/uploads/'+key+'.html')).status,404);
+  const response=await fetch(f.base+'/uploads/'+key+'.png');assert.equal(response.status,200);
+  assert.match(response.headers.get('content-security-policy'),/sandbox/);
+ }finally{await f.close();await fs.unlink(html);await fs.unlink(png);}
+});

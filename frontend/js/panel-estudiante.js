@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (usuario.foto_perfil) {
           avatar.innerHTML = `
             <img
-              src="${SERVER_URL}${usuario.foto_perfil}"
+              src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}"
               style="
                 width:100%;
                 height:100%;

@@ -109,9 +109,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (usuario.foto_perfil) {
         document.getElementById("foto-preview-main").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
         document.getElementById("nav-avatar").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">`;
       } else {
         const inicial = datosActuales.nombre.charAt(0).toUpperCase();
         document.getElementById("estudiante-avatar-grande").textContent =

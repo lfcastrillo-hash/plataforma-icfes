@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (usuario.foto_perfil) {
         document.getElementById("foto-preview-main").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width: 100%; height: 100%; object-fit: cover;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width: 100%; height: 100%; object-fit: cover;">`;
       } else {
         document.getElementById("nav-avatar-text").textContent = usuario.nombre
           .charAt(0)
