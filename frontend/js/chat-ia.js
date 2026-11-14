@@ -41,7 +41,7 @@ async function enviarMensaje() {
   // Imprimir mensaje del usuario
   mensajes.innerHTML += `
     <div class="msg usuario">
-      ${texto}
+      ${Prep.escapeHTML(texto)}
     </div>
   `;
 
@@ -58,10 +58,11 @@ async function enviarMensaje() {
 
   try {
     // Buscar el token guardado en el navegador
-    const token = localStorage.getItem("token") || "";
+    const token = "";
 
     const respuesta = await fetch("/api/chat", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}` // AQUÍ ESTÁ LA SOLUCIÓN AL 401
@@ -70,12 +71,12 @@ async function enviarMensaje() {
     });
 
     const data = await respuesta.json();
-    document.getElementById("cargandoIA").remove();
+    document.getElementById("cargandoIA")?.remove();
 
     // Imprimir respuesta de la IA
     mensajes.innerHTML += `
       <div class="msg ia">
-        ${data.respuesta || data.error || "Error desconocido"}
+        ${Prep.escapeHTML(data.respuesta || data.error || data.mensaje || "Error desconocido")}
       </div>
     `;
   } catch (error) {

@@ -7,7 +7,7 @@ const API = "/api";
 const SERVER_URL = "";
 
 // ── Sesión ──────────────────────────────────────────────────────────────────
-const sesion = JSON.parse(localStorage.getItem("datosVisionales") || "{}");
+const sesion = Prep.session();
 
 if (!sesion.correo) {
   window.location.href = "index.html";
@@ -15,7 +15,7 @@ if (!sesion.correo) {
 
 // ── Helper: headers con token ────────────────────────────────────────────────
 function getAuthHeaders(extraHeaders = {}) {
-  const token = sesion.token || "";
+  const token = "";
   const base = token ? { Authorization: `Bearer ${token}` } : {};
   return { ...base, ...extraHeaders };
 }
@@ -23,7 +23,7 @@ function getAuthHeaders(extraHeaders = {}) {
 // Muestra el nombre/avatar en la navbar
 document.addEventListener("DOMContentLoaded", async () => {
   const correo = sesion.correo || "";
-  const SERVER_URL = "http://localhost:3000";
+  const SERVER_URL = "";
 
   document.getElementById("nav-nombre-profesor").textContent = correo;
 
@@ -116,7 +116,7 @@ function renderizarClasesSidebar(clases) {
     a.href = "#";
     a.className =
       "nav-item" + (claseActivaId === clase.id_clase ? " activa" : "");
-    a.textContent = `Grupo ${clase.nombre_clase}`;
+    a.textContent = `Grupo ${Prep.escapeHTML(clase.nombre_clase)}`;
     a.onclick = (e) => {
       e.preventDefault();
       seleccionarClase(clase.id_clase, clase.nombre_clase, a);
@@ -267,8 +267,8 @@ function renderizarTabla(estudiantes) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td style="color:#aaa; font-weight:600;">${i + 1}</td>
-      <td><strong>${est.nombre}</strong></td>
-      <td style="color:#888;">${est.correo}</td>
+      <td><strong>${Prep.escapeHTML(est.nombre)}</strong></td>
+      <td style="color:#888;">${Prep.escapeHTML(est.correo)}</td>
       <td>
         <div class="progreso-celda">
           <div class="barra-fondo">
@@ -278,7 +278,7 @@ function renderizarTabla(estudiantes) {
         </div>
       </td>
       <td class="col-accion">
-        <button class="btn-danger" title="Eliminar estudiante" onclick="confirmarEliminarEstudiante('${est.correo}')">✕</button>
+        <button class="btn-danger" title="Eliminar estudiante" data-correo="${Prep.escapeHTML(est.correo)}" onclick="confirmarEliminarEstudiante(this.dataset.correo)">✕</button>
       </td>
     `;
     tbody.appendChild(tr);
@@ -472,13 +472,13 @@ async function buscarEstudiante(query) {
       } else {
         const est = data.student;
         const clases = (est.clases || [])
-          .map((c) => `<span class="result-clase-tag">Grupo ${c}</span>`)
+          .map((c) => `<span class="result-clase-tag">Grupo ${Prep.escapeHTML(c)}</span>`)
           .join(" ");
 
         contenido.innerHTML = `
           <div class="result-estudiante" style="padding: 10px; border-left: 4px solid #3d8bfd; background: #f8f9fa; border-radius: 4px;">
-            <strong style="font-size: 16px; color: #333;">${est.nombre}</strong><br/>
-            <span style="color: #666; font-size: 14px;">${est.correo}</span>
+            <strong style="font-size: 16px; color: #333;">${Prep.escapeHTML(est.nombre)}</strong><br/>
+            <span style="color: #666; font-size: 14px;">${Prep.escapeHTML(est.correo)}</span>
             <div style="margin-top:10px;">
               <small style="color:#444; font-weight:600; display:block; margin-bottom:4px;">Asignado a:</small>
               <div style="display:flex; gap:6px; flex-wrap:wrap;">${clases || '<span style="color:#aaa; font-size:13px;">Sin clases asignadas</span>'}</div>
@@ -561,7 +561,7 @@ async function cerrarSesion() {
       credentials: "include",
       headers: getAuthHeaders(),
     });
-    localStorage.removeItem("datosVisionales");
+    Prep.clearSession();
     window.location.href = "index.html";
   } catch (error) {
     console.error("Error al cerrar sesión", error);

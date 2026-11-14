@@ -187,6 +187,7 @@
 
     <button class="chat-btn" onclick="abrirChat()">✨</button>
 
+    <script src="js/prep.js"></script>
     <script src="js/chat-ia.js"></script>
     <script src="js/panel-estudiante.js"></script>
     <script>
@@ -211,7 +212,7 @@
 
         try {
           const res = await fetch(
-            `http://localhost:3000/api/progreso-areas/${encodeURIComponent(sesion.correo)}`,
+            `/api/progreso-areas/${encodeURIComponent(sesion.correo)}`,
             { credentials: "include", headers },
           );
           const data = await res.json();
