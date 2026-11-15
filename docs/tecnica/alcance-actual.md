@@ -1,5 +1,21 @@
 # Alcance técnico vigente de PrepICFES
 
+## Cierre académico del 15/11/2026
+
+Resumen definitivo: [cierre-academico.md](cierre-academico.md). El alcance comprometido es:
+registro y sesión, roles estudiante/profesor, cinco módulos con 200 ejercicios, simulacros
+con resultados, seguimiento del progreso, clases y gestión de estudiantes, perfil y
+persistencia PostgreSQL. Está probado localmente; no equivale a aceptación docente ni
+a despliegue remoto verificado.
+
+Los recursos secundarios no suministrados quedan fuera de lo comprometido: ocho sesiones PDF,
+dos grabaciones y tres Drive no acreditados se presentan sin enlace activo. Más Material
+ofrece tres cuadernillos oficiales y el catálogo ICFES, comprobados por GET real.
+No se modifican CSS ni estructura visual. Los reportes históricos conservan sus resultados;
+las pruebas del cierre están en `evidencias/cierre-academico-20261115/`.
+
+## Decisión histórica y exclusión de IA
+
 Base histórica: versión 1.1.0, commit 785be5edc3ee70bcc9f03b0c7387d9823874af23.
 Decisión del equipo y la profesora, recibida el 14/11/2026: el asistente de IA de OpenRouter
 queda excluido del producto y de la futura documentación de Ingeniería de Software II.

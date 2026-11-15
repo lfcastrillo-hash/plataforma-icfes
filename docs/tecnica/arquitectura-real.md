@@ -1,6 +1,7 @@
 # Arquitectura real
 
 Alcance vigente: [alcance-actual.md](alcance-actual.md). El asistente OpenRouter de la entrega 1.1.0 fue excluido.
+Resultados y arquitectura del cierre académico: [cierre-academico.md](cierre-academico.md).
 
 Se mantiene HTML/CSS/JavaScript sin framework. Express sirve archivos y API del mismo origen.
 Se eligieron módulos funcionales: esta aplicación no necesita clases artificiales para producir métricas OO.
@@ -11,7 +12,7 @@ flowchart LR
   H[HTML y CSS originales] --> P[Prep: sesión, peticiones, escape y almacenamiento por ID]
   H --> A[aprendizaje.js]
   H --> S[selector y simulacro]
-  S --> B[Banco conservado y SimulacroCore]
+  S --> B[Banco académico y SimulacroCore]
   P --> E[Express createApp]
   E --> M[JWT + sesión SQL + rol + propietario]
   M --> C[Controladores funcionales]
@@ -21,9 +22,10 @@ flowchart LR
 ```
 
 `createApp({pool})` permite integrar un pool real o un driver de pruebas sin tocar
-los controladores. Producción usa `pg`; las pruebas suministran un adaptador de PGlite con
-mutex de conexión/transacción. PGlite ejecuta PostgreSQL en WASM, no un mock de respuestas SQL.
-No cubre TLS, red, pool externo, RLS ni configuración propia de Supabase.
+los controladores. El backend usa `pg`. Las pruebas admiten PGlite/WASM o PostgreSQL nativo;
+en el cierre se ejecutaron con `pg` sobre PostgreSQL 17.12 local y PGlite bloqueado. Se probaron
+concurrencia, privilegios, migraciones, reinicio y TLS con CA local. No se verificaron red,
+pool externo, RLS ni configuración propia de Supabase real.
 
 ## Contratos relevantes
 
@@ -47,9 +49,11 @@ en la API. Los indicadores de sesión del frontend facilitan la navegación, y n
 
 ## Decisiones comprobables
 
-Se extrajeron los objetos originales `BANCOS` y `CONFIG_AREAS` a `banco-simulacro.js` sin cambiar
-sus valores: la prueba estática compara ambos objetos contra `c071262`. La lógica de cinco módulos
-se comparte conservando HTML y handlers de preguntas. Los tres CSS no se editaron.
+`BANCOS` y `CONFIG_AREAS` se centralizan en `banco-simulacro.js`. El banco activo contiene
+86 preguntas y las correcciones académicas autorizadas; no se afirma identidad de contenido
+con la primera auditoría. Se conservaron las claves válidas y la configuración del simulacro.
+Los cinco módulos contienen 200 ejercicios y comparten la lógica de aprendizaje. Los tres CSS
+no se editaron. Los cambios de recursos del cierre se limitan a textos, destinos y disponibilidad.
 
 Las claves globales históricas de ejercicios se conservan y no se asignan automáticamente a una
 cuenta: su propietario es ambiguo. Tras comprobarlo manualmente, iniciar sesión y ejecutar

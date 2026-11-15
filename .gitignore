@@ -13,3 +13,14 @@ coverage/
 test-results/
 playwright-report/
 *.log
+*.pem
+*.key
+*.p12
+*.pfx
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.backup
+*.har
+*.trace.zip
