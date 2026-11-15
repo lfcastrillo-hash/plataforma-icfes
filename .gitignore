@@ -1,5 +1,10 @@
 .env
 backend/.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+.qa-native/
 node_modules/
 backend/uploads/
 .qa-private/
