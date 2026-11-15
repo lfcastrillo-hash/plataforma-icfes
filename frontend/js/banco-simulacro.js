@@ -21,10 +21,10 @@
           {
             tema: "numerico",
             temaLabel: "Pensamiento Numérico",
-            enunciado: "Si log₂(x) = 5, ¿cuánto vale x?",
+            enunciado: "Una progresión geométrica empieza en 2 y duplica cada término. ¿Cuál es su quinto término?",
             opciones: ["A) 10", "B) 16", "C) 32", "D) 25"],
             correcta: 2,
-            explicacion: "log₂(x)=5 ⟺ 2⁵=x → x=32.",
+            explicacion: "Los términos son 2, 4, 8, 16 y 32; también a₅=2·2⁴=32.",
           },
           {
             tema: "numerico",
@@ -39,7 +39,7 @@
           {
             tema: "numerico",
             temaLabel: "Pensamiento Numérico",
-            enunciado: "Resuelve: |3x − 6| = 9",
+            enunciado: "Resuelve: |x − 2| = 3",
             opciones: [
               "A) x = 5",
               "B) x = 5 y x = −1",
@@ -47,7 +47,7 @@
               "D) x = 3 y x = −3",
             ],
             correcta: 1,
-            explicacion: "3x−6=9 → x=5; o 3x−6=−9 → x=−1. Ambas soluciones.",
+            explicacion: "x−2=3 da x=5; x−2=−3 da x=−1. Las dos soluciones forman la opción B.",
           },
           {
             tema: "numerico",
@@ -92,10 +92,10 @@
           {
             tema: "algebra",
             temaLabel: "Álgebra",
-            enunciado: "Las raíces de x² − 7x + 12 = 0 son:",
+            enunciado: "Las raíces de 2x² − 14x + 24 = 0 son:",
             opciones: ["A) 2 y 6", "B) 3 y 4", "C) −3 y −4", "D) 1 y 12"],
             correcta: 1,
-            explicacion: "(x−3)(x−4)=0 → x=3 y x=4.",
+            explicacion: "Dividiendo entre 2: x²−7x+12=(x−3)(x−4)=0. Las raíces son 3 y 4.",
           },
           {
             tema: "algebra",
@@ -582,7 +582,7 @@
             tema: "biologia",
             temaLabel: "Biología",
             enunciado:
-              "¿Cuál de los siguientes NO es un organelo exclusivo de células vegetales?",
+              "¿Qué estructura participa directamente en la síntesis de proteínas tanto en células procariotas como eucariotas?",
             opciones: [
               "A) Cloroplasto",
               "B) Vacuola central",
@@ -620,7 +620,7 @@
             tema: "quimica",
             temaLabel: "Química",
             enunciado:
-              "En la tabla periódica, los elementos de un mismo grupo tienen en común:",
+              "En los grupos representativos de la tabla periódica, salvo la excepción del helio, los elementos de un mismo grupo suelen tener:",
             opciones: [
               "A) El mismo número de masa",
               "B) El mismo número de electrones de valencia",
@@ -629,7 +629,7 @@
             ],
             correcta: 1,
             explicacion:
-              "Los elementos de un mismo grupo tienen igual número de electrones de valencia, lo que determina propiedades similares.",
+              "Los elementos de un mismo grupo representativo suelen compartir el número de electrones de valencia; el helio tiene dos y los demás gases nobles tienen ocho.",
           },
           {
             tema: "quimica",
@@ -648,7 +648,7 @@
           {
             tema: "quimica",
             temaLabel: "Química",
-            enunciado: "El pH de una solución ácida es:",
+            enunciado: "A 25 °C, el pH de una solución acuosa diluida ácida es:",
             opciones: [
               "A) Mayor que 7",
               "B) Igual a 7",
@@ -790,7 +790,7 @@
           {
             tema: "geografia",
             temaLabel: "Geografía",
-            enunciado: "El río más largo de Colombia es:",
+            enunciado: "Entre los siguientes ríos, ¿cuál recorre íntegramente territorio colombiano y tiene mayor longitud?",
             opciones: [
               "A) El río Cauca",
               "B) El río Magdalena",
@@ -799,13 +799,13 @@
             ],
             correcta: 1,
             explicacion:
-              "El río Magdalena es el río principal de Colombia con 1.528 km de longitud.",
+              "El Magdalena recorre íntegramente Colombia y tiene aproximadamente 1528 km. El Amazonas es mucho más largo en su recorrido internacional; por eso es indispensable la precisión del enunciado.",
           },
           {
             tema: "geografia",
             temaLabel: "Geografía",
             enunciado:
-              "La región natural de Colombia con mayor biodiversidad es:",
+              "¿Qué región natural colombiana corresponde a la cuenca del río Amazonas?",
             opciones: [
               "A) La región Andina",
               "B) La región Caribe",
@@ -814,7 +814,7 @@
             ],
             correcta: 2,
             explicacion:
-              "La región Amazónica alberga la mayor biodiversidad por su selva tropical.",
+              "La región Amazónica se ubica en la cuenca del Amazonas y alberga ecosistemas tropicales de alta diversidad. La pregunta no establece un ranking absoluto entre regiones.",
           },
           {
             tema: "constitucion",
@@ -964,7 +964,7 @@
             tema: "grammar",
             temaLabel: "Grammar",
             enunciado:
-              'Choose the correct conditional: "If I ___ you, I would apologize."',
+              "Choose the conditional form preferred in formal written English: \"If I ___ you, I would apologize.\"",
             opciones: ["A) am", "B) was", "C) were", "D) be"],
             correcta: 2,
             explicacion:
@@ -1092,18 +1092,18 @@
             tema: "reading",
             temaLabel: "Reading Comprehension",
             fragmento:
-              'The Amazon rainforest, often called "the lungs of the Earth," produces about 20% of the world\'s oxygen and is home to millions of species. Deforestation threatens not only biodiversity but also global climate stability.',
-            fuente: "Nature Conservation Report (adapted)",
+              "The Amazon rainforest is sometimes called the lungs of the Earth because its vegetation carries out photosynthesis. However, plants and decomposers also use oxygen. The forest is vital for biodiversity, carbon storage and the water cycle; its value should not be reduced to a claim about supplying a fixed share of our oxygen.",
+            fuente: "Texto didáctico original de PrepICFES, revisión 2026-11-15",
             enunciado: 'Why is the Amazon called "the lungs of the Earth"?',
             opciones: [
               "A) Because it is located in the center of South America",
-              "B) Because it produces a significant portion of the world's oxygen",
+              "Because the nickname refers to photosynthesis in its vegetation.",
               "C) Because it filters water for the entire continent",
               "D) Because it is the largest rainforest by area",
             ],
             correcta: 1,
             explicacion:
-              'The text explains the Amazon "produces about 20% of the world\'s oxygen," which is why it is called the lungs of the Earth.',
+              "The nickname in this passage refers to photosynthesis. The passage also warns that respiration and decomposition consume oxygen, so it does not claim a fixed net contribution to the atmosphere.",
           },
           {
             tema: "reading",

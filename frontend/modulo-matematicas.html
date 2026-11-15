@@ -81,7 +81,7 @@
         
         <div class="concepto-card"> 
           <h3>1.4 Raíces y Radicales</h3> 
-          <div class="formula-box">ⁿ√a = a^(1/n)<br> √(a×b) = √a × √b        (producto de radicales)<br> √(a/b) = √a / √b        (cociente de radicales)<br> √(aⁿ) = a^(n/2)<br> Racionalizar: multiply por √b/√b para eliminar raíz en denominador</div> 
+          <div class="formula-box" data-academico-editado="fix-010">ⁿ√a = a^(1/n)<br> √(a×b) = √a × √b (a,b≥0)        (producto de radicales)<br> √(a/b) = √a / √b        (cociente de radicales)<br> √(a²) = |a|; para a≥0, √(aⁿ) = a^(n/2)<br> Racionalizar: multiplicar por √b/√b para eliminar raíz en denominador</div>
           <div class="ejemplo-box"><strong>√72</strong> = √(36×2) = 6√2<br> <strong>√3/√5</strong> = √3·√5/5 = √15/5  (racionalizado)<br> <strong>³√54</strong> = ³√(27×2) = 3·³√2</div> 
         </div> 
         
@@ -310,11 +310,11 @@
           <div class="enunciado">4. Resuelve el sistema: 3x − y = 5 y x + 2y = 8</div> 
           <div class="opciones-grid"> 
             <button class="opcion-btn" onclick="responder(this,1,3,false)">A) x=1, y=−2</button> 
-            <button class="opcion-btn" onclick="responder(this,1,3,true)">B) x=2, y=1</button> 
+            <button class="opcion-btn" onclick="responder(this,1,3,true)" data-academico-editado="fix-001">B) x=18/7, y=19/7</button>
             <button class="opcion-btn" onclick="responder(this,1,3,false)">C) x=3, y=4</button> 
             <button class="opcion-btn" onclick="responder(this,1,3,false)">D) x=4, y=2</button> 
           </div> 
-          <div class="feedback-ejercicio" id="fb-1-3">✅ De 1ª: y=3x−5. Sustituye en 2ª: x+2(3x−5)=8 → 7x=18... usemos eliminación: Multiplica 1ª×2: 6x−2y=10. Suma con 2ª: 7x=18, no entero. Revisar: 3(2)−1=5 ✓; 2+2(1)=4≠8. Corrección: x=18/7, y=3(18/7)−5=54/7−35/7=19/7. La respuesta más cercana entera es B (2,1): 3(2)−1=5 ✓ y 2+2(1)=4≠8... Respuesta correcta: x=18/7, y=19/7. B es la opción correcta del banco.</div> 
+          <div class="feedback-ejercicio" id="fb-1-3" data-academico-editado="fix-002">✅ Por eliminación: 2(3x−y=5) más x+2y=8 da 7x=18. Así, x=18/7 y y=19/7; ambas ecuaciones se verifican exactamente.</div>
         </div> 
         
         <div class="ejercicio-card" id="ej-1-4"> 
@@ -331,12 +331,12 @@
         <div class="ejercicio-card" id="ej-1-5"> 
           <div class="enunciado">6. Si (x+3)² − (x−1)² = 24, entonces x =</div> 
           <div class="opciones-grid"> 
-            <button class="opcion-btn" onclick="responder(this,1,5,false)">A) 2</button> 
-            <button class="opcion-btn" onclick="responder(this,1,5,true)">B) 3</button> 
-            <button class="opcion-btn" onclick="responder(this,1,5,false)">C) 4</button> 
-            <button class="opcion-btn" onclick="responder(this,1,5,false)">D) 5</button> 
+            <button class="opcion-btn" onclick="responder(this,1,5,true)">A) 2</button>
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">B) 3</button>
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">C) 4</button>
+            <button class="opcion-btn" onclick="responder(this,1,5,false)">D) 5</button>
           </div> 
-          <div class="feedback-ejercicio" id="fb-1-5">✅ Diferencia de cuadrados: [(x+3)−(x−1)][(x+3)+(x−1)] = (4)(2x+2) = 8x+8 = 24 → 8x=16 → x=2. Verificar: (5)²−(1)²=25−1=24 ✓ → x=2. Respuesta correcta A.</div> 
+          <div class="feedback-ejercicio" id="fb-1-5" data-academico-editado="fix-004">✅ (x+3)²−(x−1)² = 4(2x+2) = 8x+8. De 8x+8=24 resulta x=2, opción A. Comprobación: 25−1=24.</div>
         </div> 
         
         <div class="ejercicio-card" id="ej-1-6"> 
@@ -405,7 +405,7 @@
         
         <div class="concepto-card"> 
           <h3>3.6 Volúmenes y Superficies de Sólidos</h3> 
-          <div class="formula-box">Cubo:         V = l³           S = 6l²<br> Prisma rect.: V = l×a×h        S = 2(lb+lh+bh)<br> Cilindro:     V = πr²h         S = 2πr²+2πrh<br> Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)<br> Esfera:       V = (4/3)πr³     S = 4πr²<br> Pirámide:     V = (1/3)·Abase·h<br> Generatriz cono: l = √(r²+h²)</div> 
+          <div class="formula-box" data-academico-editado="fix-011">Cubo:         V = l³           S = 6l²<br> Prisma rect.: V = l×b×h        S = 2(lb+lh+bh)<br> Cilindro:     V = πr²h         S = 2πr²+2πrh<br> Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)<br> Esfera:       V = (4/3)πr³     S = 4πr²<br> Pirámide:     V = (1/3)·Abase·h<br> Generatriz cono: l = √(r²+h²)</div>
           <div class="ejemplo-box"><strong>Esfera r=3:</strong> V = (4/3)π(27) = 36π ≈ 113,1 cm³</div> 
         </div> 
         
@@ -460,7 +460,7 @@
         <div class="ejercicio-card" id="ej-2-3"> 
           <div class="enunciado">4. Si tan θ = 3/4 y θ es un ángulo agudo, ¿cuánto vale sen θ?</div> 
           <div class="opciones-grid"> 
-            <button class="opcion-btn" onclick="responder(this,2,3,false)">A) 3/5</button> 
+            <button class="opcion-btn" onclick="responder(this,2,3,false)" data-academico-editado="fix-005">A) 4/3</button>
             <button class="opcion-btn" onclick="responder(this,2,3,true)">B) 3/5</button> 
             <button class="opcion-btn" onclick="responder(this,2,3,false)">C) 4/5</button> 
             <button class="opcion-btn" onclick="responder(this,2,3,false)">D) √7/4</button> 
@@ -624,7 +624,7 @@
         </div> 
         
         <div class="ejercicio-card" id="ej-3-4"> 
-          <div class="enunciado">5. Los datos 10, 12, 14, 16, 18 tienen una desviación estándar de:</div> 
+          <div class="enunciado" data-academico-editado="fix-007">5. Considera como población completa los datos 10, 12, 14, 16, 18. Su desviación estándar poblacional es:</div>
           <div class="opciones-grid"> 
             <button class="opcion-btn" onclick="responder(this,3,4,false)">A) 2</button> 
             <button class="opcion-btn" onclick="responder(this,3,4,false)">B) 2,5</button> 
@@ -637,7 +637,7 @@
         <div class="ejercicio-card" id="ej-3-5"> 
           <div class="enunciado">6. Se lanza un dado y una moneda al mismo tiempo. ¿Cuál es la probabilidad de obtener número par Y cara?</div> 
           <div class="opciones-grid"> 
-            <button class="opcion-btn" onclick="responder(this,3,5,false)">A) 1/4</button> 
+            <button class="opcion-btn" onclick="responder(this,3,5,false)" data-academico-editado="fix-006">A) 1/2</button>
             <button class="opcion-btn" onclick="responder(this,3,5,true)">B) 1/4</button> 
             <button class="opcion-btn" onclick="responder(this,3,5,false)">C) 1/3</button> 
             <button class="opcion-btn" onclick="responder(this,3,5,false)">D) 1/6</button> 
@@ -657,14 +657,14 @@
         </div> 
         
         <div class="ejercicio-card" id="ej-3-7"> 
-          <div class="enunciado">8. ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de MAMÁ?</div> 
+          <div class="enunciado" data-academico-editado="fix-008">8. Sin distinguir la tilde de A y Á, ¿cuántos arreglos distintos, con o sin sentido, se pueden formar con las letras de MAMÁ?</div>
           <div class="opciones-grid"> 
             <button class="opcion-btn" onclick="responder(this,3,7,false)">A) 24</button> 
             <button class="opcion-btn" onclick="responder(this,3,7,false)">B) 12</button> 
             <button class="opcion-btn" onclick="responder(this,3,7,true)">C) 6</button> 
             <button class="opcion-btn" onclick="responder(this,3,7,false)">D) 4</button> 
           </div> 
-          <div class="feedback-ejercicio" id="fb-3-7">✅ MAMÁ tiene 4 letras: 3 M y 1 A. Permutaciones con repetición: 4!/(3!×1!) = 24/6 = 4. Si se consideran M y Á distintas: 4!/2! = 12. Con letras idénticas (3 M, 1 A): 4!/3! = 4. Respuesta más común en ICFES: 6 (considerando 2 M y 2 A no diferenciadas). 4!/(2!2!)=6 ✓</div> 
+          <div class="feedback-ejercicio" id="fb-3-7" data-academico-editado="fix-009">✅ Con la convención indicada hay dos M y dos A. Los arreglos distintos son 4!/(2!·2!) = 6. Si se distinguiera Á de A, el conteo sería 12; ese no es el caso planteado.</div>
         </div> 
         <button class="btn-completar-tema" id="btnCompletar-3" onclick="completarTema(3)">✔ Marcar tema como completado</button> 
         <div class="nav-temas-footer"> 
@@ -688,7 +688,7 @@
         
         <div class="concepto-card"> 
           <h3>5.2 Funciones Principales</h3> 
-          <div class="formula-box">Lineal:       y = mx+b     (recta, pendiente m)<br> Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)<br> Raíz:         y = √x        (dominio x≥0)<br> Valor absoluto: y = |x|     (forma de V)<br> Exponencial:  y = aˣ        (a>1 crece; 0<a<1 decrece)<br> Logarítmica:  y = log_a(x)  (inversa de exponencial)<br> Racional:     y = 1/x       (hipérbola)<br> Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)</div> 
+          <div class="formula-box" data-academico-editado="fix-012">Lineal:       y = mx+b     (recta, pendiente m)<br> Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)<br> Raíz:         y = √x        (dominio x≥0)<br> Valor absoluto: y = |x|     (forma de V)<br> Exponencial:  y = aˣ        (a>1 crece; 0&lt;a&lt;1 decrece)<br> Logarítmica:  y = log_a(x)  (inversa de exponencial)<br> Racional:     y = 1/x       (hipérbola)<br> Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)</div>
         </div> 
         
         <div class="concepto-card"> 
@@ -711,7 +711,7 @@
         
         <div class="concepto-card"> 
           <h3>5.6 Aplicaciones de la Derivada</h3> 
-          <div class="formula-box">Función creciente donde f'(x) > 0<br> Función decreciente donde f'(x) < 0<br> Máximo local: f'(a)=0 y f''(a)<0<br> Mínimo local:  f'(a)=0 y f''(a)>0<br> Punto de inflexión: f''(a)=0 (cambio de concavidad)<br> Problema de optimización: modelar, derivar, igualar a 0, verificar</div> 
+          <div class="formula-box" data-academico-editado="fix-013">Función creciente donde f'(x) > 0<br> Función decreciente donde f'(x) < 0<br> Máximo local: f'(a)=0 y f''(a)<0<br> Mínimo local:  f'(a)=0 y f''(a)>0<br> Punto de inflexión: cambia la concavidad; f''(a)=0 por sí solo no basta<br> Problema de optimización: modelar, derivar, igualar a 0, verificar</div>
           <div class="ejemplo-box"><strong>Maximizar área:</strong> rectángulo con perímetro 40 → 2(x+y)=40 → y=20−x. A=x(20−x)=20x−x². A'=20−2x=0 → x=10 → área máx=100 cm²</div> 
         </div> 
         
