@@ -53,8 +53,12 @@ function createApp({pool,rateLimitOptions,accountLimitOptions,requestLimitOption
  });
  return app;
 }
-if(require.main===module){
- const app=createApp();const server=app.listen(process.env.PORT||3000,()=>console.log('PrepICFES en http://localhost:'+(process.env.PORT||3000)));
+async function start(){
+ const app=createApp();
+ try{await app.locals.pool.query('SELECT 1');}catch(error){await app.locals.pool.end();throw error;}
+ const server=app.listen(process.env.PORT||3000,()=>{console.log('PrepICFES en http://localhost:'+server.address().port);if(process.send)process.send({ready:true,port:server.address().port});});
  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>server.close(()=>app.locals.pool.end().then(()=>process.exit(0))));
+ return server;
 }
-module.exports={createApp};
+if(require.main===module)start().catch(error=>{console.error(error.message?.startsWith('Configuración PostgreSQL:')?error.message:'No se pudo iniciar: PostgreSQL no está disponible o rechazó la conexión.');process.exitCode=1;});
+module.exports={createApp,start};

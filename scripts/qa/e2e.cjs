@@ -4,7 +4,7 @@ const { fixture } = require('../../tests/fixtures/app.cjs');
 const { browser, paths } = require('./browser.cjs');
 const dir = require('node:path').join(process.env.QA_EVIDENCE_ROOT||'evidencias','aceptacion');
 fs.mkdirSync(dir,{recursive:true});
-const report = { date:new Date().toISOString(), environment:{ node:process.version, database:'PGlite/PostgreSQL WASM aislado', networkMocks:false }, cases:[] };
+const report = { date:new Date().toISOString(), environment:{ node:process.version, database:process.env.QA_DATABASE_ENGINE==='postgres'?'PostgreSQL nativo/pg aislado':'PGlite/PostgreSQL WASM aislado', networkMocks:false }, cases:[] };
 async function run(name) {
   const f=await fixture();const b=await browser(name);
   report.environment[name]=b.version();

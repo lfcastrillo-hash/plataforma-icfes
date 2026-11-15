@@ -1,0 +1,20 @@
+name: prepicfes-native-20261115
+services:
+  postgres:
+    image: postgres:17-alpine@sha256:a77aa70e641402a21411b92b721c58d10f23b50ae5fdd2333efd22d166e1e5f7
+    container_name: prepicfes-native-20261115
+    env_file: .qa-native/postgres.env
+    ports:
+      - "127.0.0.1:55439:5432"
+    volumes:
+      - native-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prepicfes_migrator -d prepicfes_native_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  native-data:
+    name: prepicfes-native-20261115-data
+    labels:
+      project: prepicfes-native-20261115

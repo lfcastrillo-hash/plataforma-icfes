@@ -1,4 +1,4 @@
-const { database } = require('./database.cjs');
+const { database } = require(process.env.QA_DATABASE_ENGINE==='postgres'?'./native-database.cjs':'./database.cjs');
 const { createApp } = require('../../backend/server');
 async function fixture(options = {}) {
   const pool = await database(options);

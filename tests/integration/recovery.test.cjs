@@ -5,7 +5,7 @@ const path=require('node:path');
 const os=require('node:os');
 const { fixture }=require('../fixtures/app.cjs');
 const {answer}=require('../fixtures/aprendizaje.cjs');
-const { database }=require('../fixtures/database.cjs');
+const { database }=require(process.env.QA_DATABASE_ENGINE==='postgres'?'../fixtures/native-database.cjs':'../fixtures/database.cjs');
 const { createApp }=require('../../backend/server');
 const transaction=require('../../backend/lib/transaction');
 test('M1-LEGACY conversión en login solo con compatibilidad explícita; no modifica clave incorrecta',async()=>{

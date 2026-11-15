@@ -1,7 +1,7 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');
-const fs=require('node:fs');const {PGlite}=require('@electric-sql/pglite');
+const fs=require('node:fs');
 const migration=fs.readFileSync('backend/migrations/002_compatibilidad_existente.sql','utf8');
-async function legacy(){const db=new PGlite();await db.exec(`
+async function legacy(){const db=process.env.QA_DATABASE_ENGINE==='postgres'?await require('../fixtures/native-database.cjs').database({empty:true}):new (require('@electric-sql/pglite').PGlite)();await db.exec(`
  CREATE TABLE usuarios(id_usuario SERIAL PRIMARY KEY,nombre TEXT,email TEXT UNIQUE,password VARCHAR(100),rol TEXT);
  CREATE TABLE clases(id_clase SERIAL PRIMARY KEY,nombre_clase TEXT,id_profesor INTEGER REFERENCES usuarios(id_usuario),codigo_acceso TEXT);
  CREATE TABLE inscripciones(id_usuario INTEGER REFERENCES usuarios(id_usuario),id_clase INTEGER REFERENCES clases(id_clase));
