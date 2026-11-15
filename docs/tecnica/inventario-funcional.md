@@ -1,5 +1,7 @@
 # Inventario funcional y matriz de auditoría
 
+Alcance vigente: [alcance-actual.md](alcance-actual.md). RF22 (asistente IA) está excluido por decisión del equipo; su descripción inferior es antecedente de 1.1.0.
+
 El comportamiento posterior se verifica con los tests indicados. Los archivos se dan relativos
 a la raíz; `controllers/` y `routes/` pertenecen a `backend/`, y `js/` a `frontend/`.
 Los resultados exactos y el listado completo están en `evidencias/pruebas-unitarias/resultados.json`

@@ -1,5 +1,7 @@
 # Arquitectura real
 
+Alcance vigente: [alcance-actual.md](alcance-actual.md). El asistente OpenRouter de la entrega 1.1.0 fue excluido.
+
 Se mantiene HTML/CSS/JavaScript sin framework. Express sirve archivos y API del mismo origen.
 Se eligieron módulos funcionales: esta aplicación no necesita clases artificiales para producir métricas OO.
 No hay clases declaradas propias. Las entidades SQL/conceptuales no equivalen a clases JavaScript.
@@ -15,11 +17,10 @@ flowchart LR
   M --> C[Controladores funcionales]
   C --> T[Validación, contraseñas, progreso y transacciones]
   T --> DB[(PostgreSQL)]
-  C --> OR[OpenRouter opcional]
   B --> C
 ```
 
-`createApp({pool, aiClient})` permite integrar un pool real o un driver de pruebas sin tocar
+`createApp({pool})` permite integrar un pool real o un driver de pruebas sin tocar
 los controladores. Producción usa `pg`; las pruebas suministran un adaptador de PGlite con
 mutex de conexión/transacción. PGlite ejecuta PostgreSQL en WASM, no un mock de respuestas SQL.
 No cubre TLS, red, pool externo, RLS ni configuración propia de Supabase.

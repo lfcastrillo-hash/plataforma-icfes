@@ -9,6 +9,6 @@
 | RF19–RF21 | M5/IT06–IT08/CA05 | Verificados localmente; alcance en informe-final.md |
 | RF23–RF24 | DB-MIG/QA/static/visual | Verificados localmente; alcance en informe-final.md |
 | RF12 | Inventario de recursos | Parcial:14 destinos/archivos no suministrados |
-| RF22 | INT-DESC y errores /chat | Fallos/stub verificados; proveedor real pendiente |
+| RF22 | Excluido por acuerdo del equipo y la profesora | No forma parte del alcance vigente; ver alcance-actual.md |
 
 La matriz funcional completa detalla archivos, correcciones y expectativas. casos.csv y resultados.json contienen cada ejecución con sus referencias al código.

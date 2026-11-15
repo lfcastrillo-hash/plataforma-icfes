@@ -15,8 +15,7 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 ~~~
 
 Guardar el valor generado como JWT_SECRET en backend/.env; configurar DATABASE_URL de una
-base preparada. No publicar .env. OpenRouter es opcional: sin su clave/modelo el sitio inicia
-y el chat informa que no está configurado. En producción JWT_SECRET es obligatorio y debe
+base preparada. No publicar .env. El asistente de IA fue excluido por acuerdo del equipo y la profesora. No se usa OpenRouter ni se requieren sus credenciales. Ver docs/tecnica/alcance-actual.md. En producción JWT_SECRET es obligatorio y debe
 contener al menos32 caracteres; usar una cadena aleatoria. DATABASE_SSL=true verifica TLS.
 
 ## Base de pruebas y ejecución
@@ -76,6 +75,6 @@ Los límites de cobertura y las verificaciones externas pendientes se explican e
 [Pruebas](docs/tecnica/trazabilidad-pruebas.md)
 
 No se aplicaron cambios a producción ni se publicaron commits. Falta cotejar Supabase real,
-probar OpenRouter con credenciales, suministrar el material ausente de Ciencias y recursos,
+suministrar el material ausente de Ciencias y recursos,
 y ejecutar las herramientas externas y la aceptación humana. La automatización de navegador
 no sustituye la aceptación formal de la docente.
