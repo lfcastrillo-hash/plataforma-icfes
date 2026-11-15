@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-14T23:13:21.121Z",
+  "cases": [
+    {
+      "status": "PASS",
+      "description": "Script, handler y eval no autorizados bloqueados; handler de login permitido.",
+      "actual": {
+        "script": false,
+        "handler": false,
+        "eval": false,
+        "violations": [
+          "script-src-elem",
+          "script-src-attr",
+          "script-src"
+        ]
+      }
+    }
+  ],
+  "header": "default-src 'self'; script-src 'self' 'unsafe-hashes' 'sha256-Ixo+w39Zr7vaAThaSHTskTTU2TC6riVsVVO6+Kw1Qqw=' 'sha256-/wVZR5MPjCCHvNH1TWneE+6Yjq8AheJ5driEULrf4So=' 'sha256-NeMuPyW8LlHJkkwOdXOayy7o+5TtkKjs9flXKLeGCZk=' 'sha256-fA9e68r205NIYFJ3a3gmW6+3dy/qjNfngyKmk28M3GI='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+}

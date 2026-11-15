@@ -1,36 +1,15 @@
-const express = require("express");
-const verificarToken = require("../middlewares/verificarToken");
-
-const {
-  crearClase,
-  eliminarClase,
-  agregarEstudianteAClase,
-  removerEstudianteDeClase,
-  obtenerClases,
-  obtenerEstudiantesDeClase,
-  buscarEstudiante,
-  actualizarAnuncio,
-  obtenerClasesDeEstudiante,
-} = require("../controllers/clases.controller");
-
-const router = express.Router();
-
-// Rutas protegidas con verificarToken
-router.get("/clases", verificarToken, obtenerClases);
-router.post("/clases", verificarToken, crearClase);
-router.delete("/clases/:id", verificarToken, eliminarClase);
-router.post("/clases/:id_clase/anuncio", verificarToken, actualizarAnuncio); // Nueva Ruta de Anuncios
-
-router.get(
-  "/clases/:id/estudiantes",
-  verificarToken,
-  obtenerEstudiantesDeClase,
-);
-router.post("/inscripciones/agregar", verificarToken, agregarEstudianteAClase);
-router.post("/inscripciones/remover", verificarToken, removerEstudianteDeClase);
-
-router.get("/estudiante/mis-clases", verificarToken, obtenerClasesDeEstudiante);
-
-router.get("/estudiantes/buscar", verificarToken, buscarEstudiante);
-
-module.exports = router;
+const router=require('express').Router();
+const auth=require('../middlewares/verificarToken');
+const {role}=require('../middlewares/access');
+const c=require('../controllers/clases.controller');
+const teacher=[auth,role('profesor')];
+router.get('/clases',...teacher,c.obtenerClases);router.post('/clases',...teacher,c.crearClase);
+router.delete('/clases/:id',...teacher,c.eliminarClase);
+router.post('/clases/:id_clase/anuncio',...teacher,c.actualizarAnuncio);
+router.get('/clases/:id/estudiantes',...teacher,c.obtenerEstudiantesDeClase);
+router.post('/inscripciones/agregar',...teacher,c.agregarEstudianteAClase);
+router.post('/inscripciones/remover',...teacher,c.removerEstudianteDeClase);
+router.get('/estudiantes/buscar',...teacher,c.buscarEstudiante);
+router.get('/estudiante/mis-clases',auth,role('estudiante'),c.obtenerClasesDeEstudiante);
+router.get('/estudiante/anuncios',auth,role('estudiante'),c.obtenerClasesDeEstudiante);
+module.exports=router;

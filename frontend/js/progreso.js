@@ -1,5 +1,5 @@
 function obtenerUsuario() {
-  return JSON.parse(localStorage.getItem("usuarioActivo"));
+  return Prep.session();
 }
 
 async function guardarProgresoArea(area, progreso) {

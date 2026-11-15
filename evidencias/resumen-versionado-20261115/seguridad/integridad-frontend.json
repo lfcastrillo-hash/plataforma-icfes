@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-14T23:18:41.930Z",
+  "html": [
+    {
+      "file": "frontend/areas.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/clases.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/clases_grabadas.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/cuadernillos.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/entrenando.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/filtros.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/index.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/mas-material.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/modulo-ciencias.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/modulo-ingles.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/modulo-lectura.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/modulo-matematicas.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/modulo-sociales.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/panel-estudiante.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/panel-profesor.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/perfil-estudiante.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 1
+    },
+    {
+      "file": "frontend/perfil-profesor.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/registro.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/simulacro-nuevo.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    },
+    {
+      "file": "frontend/simulacro-selector.html",
+      "onlyAuthorizedRemovals": true,
+      "removedButtons": 0
+    }
+  ],
+  "englishCurrentPixelsIdenticalBetween05And07": true,
+  "cssGitDiff": ""
+}

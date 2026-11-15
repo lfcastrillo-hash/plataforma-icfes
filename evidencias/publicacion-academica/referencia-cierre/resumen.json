@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-15T16:32:03.340Z",
+  "version": "1.1.0 + cambios locales académicos y cierre de recursos SIN commit",
+  "HEAD": "a28beb7cce3d03560424c52e613ead91d2f081af",
+  "branch": "codex/mejoras-calidad-prepicfes",
+  "assessment": "Apta para documentación y sustentación académica en el entorno local verificado; aceptación docente y despliegue remoto no acreditados",
+  "tests": {
+    "unitIntegration": {
+      "pass": 97,
+      "fail": 0
+    },
+    "native": {
+      "pass": 15,
+      "fail": 0
+    },
+    "e2e": {
+      "journeys": 14,
+      "jsChecks": 2
+    },
+    "academicBrowsers": 2,
+    "resourceBrowserJourneys": 2,
+    "visualPages": 20,
+    "cardGeometryChanges": 0,
+    "links": {
+      "unique": 18,
+      "external": 4,
+      "disabled": 13,
+      "failures": 0
+    }
+  },
+  "coverage": {
+    "totalLineCount": 650,
+    "totalBranchCount": 516,
+    "totalFunctionCount": 111,
+    "coveredLineCount": 632,
+    "coveredBranchCount": 470,
+    "coveredFunctionCount": 105,
+    "coveredLinePercent": 97.23076923076923,
+    "coveredBranchPercent": 91.08527131782945,
+    "coveredFunctionPercent": 94.5945945945946
+  },
+  "metrics": {
+    "files": 68,
+    "PLOC": 18701,
+    "NCLOC": 17235,
+    "CLOC": 317,
+    "BLOC": 1149,
+    "mixed": 17,
+    "functions": 342,
+    "classes": 0,
+    "commentDensity": 1.81
+  },
+  "notExecuted": [
+    "Usuarios reales/profesora: aceptación, usabilidad, accesibilidad y aprobación editorial",
+    "Supabase real: red, credenciales, RLS y pool remoto",
+    "Despliegue Vercel real y pruebas de carga/penetración con herramientas externas",
+    "Descarga completa/lectura de PDF oficiales y contenido/permisos de Drive"
+  ],
+  "scopeExclusions": [
+    "OpenRouter y asistente IA",
+    "Ocho cuadernillos exactos ausentes por año/sesión",
+    "Dos grabaciones ausentes",
+    "Tres Drive no acreditados: enlaces desactivados",
+    "Comercialización, escala o SLA de producción no comprometidos"
+  ]
+}

@@ -5,16 +5,12 @@
 const API = "/api";
 const SERVER_URL = "";
 
-let sesion = JSON.parse(
-  localStorage.getItem("datosVisionales") ||
-    localStorage.getItem("usuarioActivo") ||
-    "{}",
-);
+let sesion = Prep.session();
 let datosActuales = { nombre: "", correo: "", biografia: "" };
 
 // --- Helper: enviar token por header Authorization ---
 function getAuthHeaders(extraHeaders = {}) {
-  const token = sesion.token || "";
+  const token = "";
   const base = token ? { Authorization: `Bearer ${token}` } : {};
   return { ...base, ...extraHeaders };
 }
@@ -107,15 +103,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       const bioPerfil = document.getElementById("perfil-biografia");
       if (bioPerfil) {
         bioPerfil.innerHTML = datosActuales.biografia
-          ? `<i>${datosActuales.biografia}</i>`
+          ? `<i>${Prep.escapeHTML(datosActuales.biografia)}</i>`
           : `<i>Hola, soy estudiante de grado 11 y me estoy preparando para reventar ese ICFES.</i>`;
       }
 
       if (usuario.foto_perfil) {
         document.getElementById("foto-preview-main").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
         document.getElementById("nav-avatar").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">`;
       } else {
         const inicial = datosActuales.nombre.charAt(0).toUpperCase();
         document.getElementById("estudiante-avatar-grande").textContent =
@@ -237,8 +233,8 @@ async function cargarClasesEstudiante() {
           <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px 15px; border-radius:8px; font-size:14px; color:#333; display:flex; align-items:center; gap:10px;">
             <span style="font-size:18px;">${icono}</span>
             <div>
-              <b>${clase.nombre_clase}</b>
-              <span style="display:block; font-size:12px; color:#64748b; margin-top:2px;">Profesor: ${clase.nombre_profesor}</span>
+              <b>${Prep.escapeHTML(clase.nombre_clase)}</b>
+              <span style="display:block; font-size:12px; color:#64748b; margin-top:2px;">Profesor: ${Prep.escapeHTML(clase.nombre_profesor)}</span>
             </div>
           </div>`;
       });
@@ -257,8 +253,7 @@ async function cargarClasesEstudiante() {
 async function cerrarSesion() {
   try {
     await fetch(`${API}/logout`, { method: "POST", credentials: "include" });
-    localStorage.removeItem("datosVisionales");
-    localStorage.removeItem("usuarioActivo");
+    Prep.clearSession();
     window.location.href = "index.html";
   } catch (error) {
     console.error("Error al cerrar sesión", error);

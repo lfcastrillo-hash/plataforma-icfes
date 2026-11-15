@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-15T16:56:18.362Z",
+  "file": "modulo-ingles.html",
+  "dimensions": [
+    1440,
+    3784
+  ],
+  "differentPixels": 1,
+  "maxChannelDelta": 1,
+  "points": [
+    {
+      "x": 459,
+      "y": 2380,
+      "delta": 1
+    }
+  ],
+  "conclusion": "Variación de cuantización de un nivel en captura de 8 bits; el archivo, CSS y geometría no cambiaron. Comparación exacta del raster no es determinista incluso con fuentes listas."
+}

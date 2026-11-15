@@ -526,14 +526,14 @@
 
         <div class="concepto-card">
           <h3>1.4 Metabolismo Celular: Fotosíntesis y Respiración</h3>
-          <div class="formula-box">
-            FOTOSÍNTESIS (solo en organismos con cloroplastos):<br />
+          <div class="formula-box" data-academico-editado="fix-014">
+            FOTOSÍNTESIS (plantas, algas y algunas bacterias):<br />
             6CO₂ + 6H₂O + energía lumínica → C₆H₁₂O₆ + 6O₂<br />
             Fase luminosa: en tilacoides → captura de luz, produce ATP y
             NADPH<br />
-            Fase oscura (Calvin): en estroma → fija CO₂ y produce glucosa<br /><br />
+            Ciclo de Calvin (no requiere luz directamente): en estroma → fija CO₂ y forma precursores de azúcares<br /><br />
             RESPIRACIÓN CELULAR AEROBIA (en mitocondrias):<br />
-            C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36–38 ATP<br />
+            C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP (rendimiento variable)<br />
             Glucólisis: citoplasma → 2 piruvatos + 2 ATP<br />
             Ciclo de Krebs: matriz mitocondrial → CO₂ + NADH<br />
             Cadena transportadora: membrana interna → produce la mayor parte del
@@ -728,13 +728,7 @@
               D) Eliminar los cromosomas defectuosos antes de la fecundación.
             </button>
           </div>
-          <div class="feedback-ejercicio" id="fb-0-2">
-            ✓ El crossing-over intercambia segmentos entre cromosomas homólogos,
-            creando cromosomas recombinantes con nuevas combinaciones alélicas.
-            Esta variabilidad es fundamental para la evolución y la adaptación
-            de las especies. No duplica cromosomas (eso lo hace la replicación
-            del ADN en la fase S).
-          </div>
+          <div class="feedback-ejercicio" id="fb-0-2" data-academico-editado="fix-018">✓ El crossing-over intercambia segmentos entre cromátidas no hermanas de cromosomas homólogos y genera combinaciones de alelos. La replicación de la fase S duplica el ADN y forma cromátidas hermanas; no duplica por sí sola el número de cromosomas.</div>
         </div>
 
         <div class="ejercicio-card" id="ej-0-3">
@@ -810,10 +804,7 @@
             de 100 metros. Sus células musculares consumen el oxígeno disponible
             más rápido de lo que el sistema circulatorio puede suministrarlo.
           </div>
-          <div class="enunciado">
-            6. ¿Qué proceso metabólico predomina en sus células musculares
-            durante este esfuerzo extremo?
-          </div>
+          <div class="enunciado" data-academico-editado="fix-015">6. Cuando el aporte de oxígeno es insuficiente, ¿qué proceso permite regenerar NAD⁺ para que continúe la glucólisis muscular?</div>
           <div class="opciones-grid">
             <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
               A) Fotosíntesis en los cloroplastos musculares.
@@ -821,21 +812,12 @@
             <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
               B) Respiración aerobia con alta producción de ATP.
             </button>
-            <button class="opcion-btn" onclick="responder(this, 0, 5, true)">
-              C) Fermentación láctica, que produce ácido láctico y solo 2 ATP
-              por glucosa.
-            </button>
+            <button class="opcion-btn" onclick="responder(this, 0, 5, true)" data-academico-editado="fix-016">C) Fermentación láctica, que regenera NAD⁺ y permite continuar la glucólisis.</button>
             <button class="opcion-btn" onclick="responder(this, 0, 5, false)">
               D) Fermentación alcohólica, liberando etanol en la sangre.
             </button>
           </div>
-          <div class="feedback-ejercicio" id="fb-0-5">
-            ✓ Cuando el O₂ escasea, las células musculares recurren a la
-            fermentación láctica para regenerar el NAD⁺ y continuar la
-            glucólisis. Este proceso produce ácido láctico (responsable del
-            ardor muscular) y solo 2 ATP por glucosa, muy poco comparado con los
-            36–38 ATP de la respiración aerobia.
-          </div>
+          <div class="feedback-ejercicio" id="fb-0-5" data-academico-editado="fix-017">✓ La reducción de piruvato a lactato regenera NAD⁺. Así puede continuar la glucólisis, que aporta 2 ATP netos por glucosa. No debe atribuirse automáticamente al lactato el dolor muscular; la respiración aerobia también puede contribuir al esfuerzo.</div>
         </div>
 
         <div class="ejercicio-card" id="ej-0-6">
@@ -985,15 +967,14 @@
 
         <div class="concepto-card">
           <h3>2.3 Mutaciones Genéticas</h3>
-          <div class="formula-box">
+          <div class="formula-box" data-academico-editado="fix-019">
             MUTACIONES GÉNICAS (cambio en la secuencia de ADN):<br />
             Sustitución puntual: un nucleótido reemplaza a otro<br />
             → Silenciosa: mismo aminoácido (código degenerado)<br />
             → Missense: aminoácido diferente (puede cambiar la proteína)<br />
             → Nonsense: codón de parada prematuro → proteína truncada<br />
-            Inserción / Deleción: desplazamiento del marco de lectura
-            (frameshift)<br />
-            → Muy graves, alteran todos los aminoácidos posteriores<br /><br />
+            Inserción / Deleción no múltiplo de tres en la región codificante: puede desplazar el marco de lectura (frameshift)<br />
+            → Pueden alterar los codones posteriores; su efecto depende de la posición y de la secuencia<br /><br />
             MUTACIONES CROMOSÓMICAS:<br />
             Numéricas: trisomía 21 (síndrome de Down, 47 cromosomas)<br />
             Estructurales: deleción, inversión, translocación<br />
@@ -1400,15 +1381,14 @@
 
         <div class="concepto-card">
           <h3>3.2 Tabla Periódica y Tendencias</h3>
-          <div class="formula-box">
+          <div class="formula-box" data-academico-editado="fix-020">
             Grupos (columnas): misma configuración de electrones de valencia<br />
             → Propiedades químicas similares<br />
             → Grupo 1 (alcalinos): Li, Na, K → muy reactivos, 1 e⁻ de
             valencia<br />
             → Grupo 17 (halógenos): F, Cl, Br, I → 7 e⁻ de valencia, muy
             electronegativos<br />
-            → Grupo 18 (nobles): He, Ne, Ar → inertes, 8 e⁻ de valencia (octeto
-            completo)<br /><br />
+            → Grupo 18 (nobles): He tiene 2 e⁻; Ne y Ar, 8 e⁻ de valencia (nivel externo completo)<br /><br />
             Periodos (filas): mismo número de niveles de energía<br /><br />
             TENDENCIAS PERIÓDICAS (izquierda a derecha y abajo a arriba):<br />
             Electronegatividad: aumenta → (F es la más electronegativa)<br />
@@ -1462,14 +1442,14 @@
 
         <div class="concepto-card">
           <h3>3.5 Ácidos, Bases y pH</h3>
-          <div class="formula-box">
+          <div class="formula-box" data-academico-editado="fix-021">
             Ácido de Brønsted-Lowry: dona protones H⁺<br />
             Base de Brønsted-Lowry: acepta protones H⁺<br /><br />
-            ESCALA DE pH (0–14):<br />
+            pH EN SOLUCIONES ACUOSAS DILUIDAS A 25 °C (habitualmente 0–14):<br />
             pH < 7: ácido (mayor [H⁺]) → HCl, vinagre, jugo gástrico<br />
             pH = 7: neutro → agua pura<br />
             pH > 7: básico/alcalino (menor [H⁺]) → NaOH, jabón, bicarbonato<br />
-            pH = –log[H⁺] → Cada unidad de pH representa una diferencia de ×10
+            pH ≈ –log[H₃O⁺] (concentración en mol/L) → Cada unidad de pH representa una diferencia de ×10
             en [H⁺]<br />
             → pH 3 tiene 10 veces más H⁺ que pH 4<br /><br />
             Neutralización: ácido + base → sal + agua<br />
@@ -1497,200 +1477,331 @@
             → Descenso de la presión de vapor
           </div>
         </div>
+              <div class="ejercicios-titulo" data-academico-nuevo="titulo-2"><h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span></div>
+        <div class="ejercicio-card" id="ej-2-0" data-academico-nuevo="ciencias-2-0">
+          <div class="ejercicio-texto">Dos átomos neutros tienen 17 protones cada uno. El primero tiene 18 neutrones y el segundo, 20.</div>
+          <div class="enunciado">1. ¿Qué relación existe entre estos átomos?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">A) Son elementos distintos porque sus masas difieren.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">B) Son iones con cargas opuestas.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, true)">C) Son isótopos del mismo elemento.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 0, false)">D) Tienen diferente número atómico.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-0">✓ El elemento se identifica por sus 17 protones. Al variar los neutrones, cambian los números másicos: 35 y 37. Son isótopos; ambos siguen siendo neutros.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-1" data-academico-nuevo="ciencias-2-1">
+          <div class="ejercicio-texto">Una muestra de cloruro de sodio sólido no conduce corriente. Al disolverla en agua, la solución sí conduce.</div>
+          <div class="enunciado">2. ¿Cuál explicación concuerda con el modelo de enlace iónico?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">A) El agua transforma el sodio en un metal libre.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, true)">B) En solución hay iones que pueden desplazarse y transportar carga.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">C) En el sólido no existe ninguna partícula cargada.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 1, false)">D) Los electrones desaparecen cuando se disuelve la sal.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-1">✓ El sólido contiene iones sujetos a una red cristalina. Al disolverse, los iones se separan y pueden moverse; por eso transportan carga eléctrica. No se forma sodio metálico.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-2" data-academico-nuevo="ciencias-2-2">
+          <div class="ejercicio-texto">En la combustión completa del metano se forma dióxido de carbono y agua: CH₄ + O₂ → CO₂ + H₂O.</div>
+          <div class="enunciado">3. ¿Cuáles coeficientes enteros mínimos balancean la ecuación, en ese orden?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 2, true)">A) 1, 2, 1, 2</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">B) 1, 1, 1, 1</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">C) 2, 1, 2, 1</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 2, false)">D) 1, 3, 1, 2</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-2">✓ CH₄ + 2O₂ → CO₂ + 2H₂O conserva un átomo de carbono, cuatro de hidrógeno y cuatro de oxígeno a cada lado. Los coeficientes 1, 2, 1, 2 no tienen divisor común mayor que uno.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-3" data-academico-nuevo="ciencias-2-3">
+          <div class="ejercicio-texto">En un recipiente cerrado reaccionan por completo 5 g de una sustancia y 3 g de otra. No entra ni sale materia.</div>
+          <div class="enunciado">4. ¿Qué masa total deben tener los productos?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">A) 2 g, porque se resta la masa menor.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">B) 5 g, porque solo cuenta el reactivo más abundante.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, false)">C) 15 g, porque las masas se multiplican.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 3, true)">D) 8 g, porque se conserva la masa total.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-3">✓ En el sistema cerrado, la masa de los reactivos es 5 g + 3 g = 8 g y coincide con la masa total de los productos, incluidos los gases que permanezcan dentro del recipiente.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-4" data-academico-nuevo="ciencias-2-4">
+          <div class="ejercicio-texto">Dos soluciones acuosas diluidas, a 25 °C, tienen pH 3 y pH 5. Se usa pH ≈ −log₁₀[H₃O⁺].</div>
+          <div class="enunciado">5. ¿Cómo se comparan sus concentraciones de H₃O⁺?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">A) La de pH 3 es dos veces la de pH 5.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">B) Son iguales porque ambas son ácidas.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, true)">C) La de pH 3 es cien veces la de pH 5.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 4, false)">D) La de pH 5 es cien veces la de pH 3.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-4">✓ Las concentraciones aproximadas son 10⁻³ y 10⁻⁵ mol/L. Su cociente es 10⁻³/10⁻⁵ = 10² = 100: un pH menor corresponde aquí a mayor concentración de H₃O⁺.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-5" data-academico-nuevo="ciencias-2-5">
+          <div class="ejercicio-texto">Se disuelven completamente 15 g de sal en 135 g de agua, sin pérdida de materia.</div>
+          <div class="enunciado">6. ¿Cuál es el porcentaje masa/masa de sal en la solución?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">A) 11,1 %, usando solo la masa del agua.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, true)">B) 10 %, usando los 150 g de solución.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">C) 15 %, porque se agregaron 15 g de sal.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 5, false)">D) 90 %, porque predomina el agua.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-5">✓ La masa total de solución es 15 + 135 = 150 g. El porcentaje de sal es (15/150) × 100 = 10 %. El denominador es la solución, no únicamente el solvente.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-6" data-academico-nuevo="ciencias-2-6">
+          <div class="ejercicio-texto">Una preparación contiene 0,20 mol de soluto disuelto. Se ajusta el volumen final de la solución a 0,50 L.</div>
+          <div class="enunciado">7. ¿Cuál es su molaridad?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 6, true)">A) 0,40 mol/L</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">B) 0,10 mol/L</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">C) 2,50 mol/L</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 6, false)">D) 0,20 mol/L</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-6">✓ La molaridad se calcula con el volumen final de solución: M = n/V = 0,20 mol / 0,50 L = 0,40 mol/L. No se multiplica cantidad de sustancia por volumen.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-2-7" data-academico-nuevo="ciencias-2-7">
+          <div class="ejercicio-texto">Un grupo quiere investigar cómo influye la temperatura en la máxima cantidad de una sal que puede disolverse en agua.</div>
+          <div class="enunciado">8. ¿Qué procedimiento permite comparar ese efecto de forma adecuada?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">A) Cambiar al mismo tiempo la sal, el agua y la temperatura.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">B) Medir solo cuánto tarda en desaparecer una cantidad pequeña de sal.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, false)">C) Comparar masas de agua distintas sin registrar la temperatura.</button>
+            <button class="opcion-btn" onclick="responder(this, 2, 7, true)">D) Usar la misma sal y masa de agua, controlar la temperatura y alcanzar saturación en cada ensayo.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-2-7">✓ Para estudiar la solubilidad se mide la cantidad máxima disuelta a cada temperatura, manteniendo comparables la sal y la masa de solvente. El tiempo de disolución de una muestra pequeña mide rapidez, no necesariamente solubilidad.</div>
+        </div>
+        <button class="btn-completar-tema" id="btnCompletar-2" onclick="completarTema(2)" data-academico-nuevo="completar-2">✓ Marcar tema como completado</button>
+        <div class="nav-temas-footer" data-academico-nuevo="pie-2"><button onclick="mostrarTema(1)">← Genética y Evolución</button><button onclick="mostrarTema(3)">Siguiente: Física →</button></div>
+</section>
+
+      <section class="tema-seccion" id="tema-3" data-academico-nuevo="seccion-3">
+        <div class="tema-titulo"><h2>⚡ Física: Movimiento, Energía y Ondas</h2><span class="badge-completado" id="badge-3">✓ Completado</span></div>
+        <p class="tema-subtitulo">Medición, leyes de Newton, energía, electricidad, calor y ondas.</p>
+        <div class="concepto-card"><h3>4.1 Movimiento y medición</h3><div class="formula-box">Posición y desplazamiento se expresan en metros (m); el tiempo, en segundos (s). En movimiento rectilíneo uniforme, v = Δx/Δt. Una tabla posición-tiempo permite calcular la pendiente y reconocer velocidad constante.</div></div>
+        <div class="concepto-card"><h3>4.2 Fuerzas y leyes de Newton</h3><div class="formula-box">Una fuerza neta nula mantiene el reposo o la velocidad constante en un marco inercial. La segunda ley establece F neta = ma. Acción y reacción tienen igual magnitud y sentidos opuestos, pero actúan sobre cuerpos distintos.</div></div>
+        <div class="concepto-card"><h3>4.3 Caída libre</h3><div class="formula-box">Sin resistencia del aire y cerca de la superficie terrestre, la aceleración es aproximadamente constante. Si el cuerpo se suelta desde el reposo, la rapidez tras t segundos es gt y la distancia caída es ½gt². Indica el valor de g usado.</div></div>
+        <div class="concepto-card"><h3>4.4 Trabajo y energía</h3><div class="formula-box">El trabajo de una fuerza constante es W = Fd cos θ. La energía cinética es ½mv² y el cambio de energía potencial gravitatoria es mgΔh cerca de la superficie terrestre. Energía y trabajo se expresan en joules (J).</div></div>
+        <div class="concepto-card"><h3>4.5 Electricidad y circuitos</h3><div class="formula-box">La corriente I mide carga por tiempo; su unidad es el ampere (A). En un resistor óhmico a temperatura constante, V = IR. La resistencia se mide en ohmios (Ω). En serie circula la misma corriente; en paralelo se comparte la diferencia de potencial.</div></div>
+        <div class="concepto-card"><h3>4.6 Calor y temperatura</h3><div class="formula-box">La temperatura caracteriza el estado térmico; el calor es energía transferida por diferencia de temperatura. Sin cambio de estado, Q = mcΔT. La conducción, la convección y la radiación son formas de transferencia térmica.</div></div>
+        <div class="concepto-card"><h3>4.7 Ondas y sonido</h3><div class="formula-box">Una onda transporta energía. Su frecuencia f se mide en hertz (Hz), la longitud de onda λ en metros y la rapidez satisface v = λf. El sonido necesita un medio material; la luz puede propagarse en el vacío.</div></div>
+        <div class="concepto-card"><h3>4.8 Indagación en Física</h3><div class="formula-box">Define variables, unidades e instrumentos. Compara condiciones equivalentes, repite mediciones y registra incertidumbre. Para investigar una relación causal, controla otras variables relevantes y contrasta la predicción con los datos.</div></div>
+        <div class="ejercicios-titulo" data-academico-nuevo="titulo-3"><h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span></div>
+        <div class="ejercicio-card" id="ej-3-0" data-academico-nuevo="ciencias-3-0">
+          <div class="ejercicio-texto">Un móvil recorre una línea recta. A los 0, 2 y 4 s se encuentra en las posiciones 0, 6 y 12 m, respectivamente, y mantiene velocidad constante.</div>
+          <div class="enunciado">1. ¿Cuál es su velocidad?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">A) 2 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, true)">B) 3 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">C) 6 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 0, false)">D) 12 m/s</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-0">✓ La velocidad es el cambio de posición dividido por el tiempo: (12−0)/(4−0) = 3 m/s. Entre 0 y 2 s se obtiene también 6/2 = 3 m/s.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-1" data-academico-nuevo="ciencias-3-1">
+          <div class="ejercicio-texto">Un carrito de 3 kg experimenta una fuerza neta horizontal constante de 12 N.</div>
+          <div class="enunciado">2. ¿Qué aceleración adquiere según la segunda ley de Newton?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">A) 36 m/s²</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">B) 12 m/s²</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, false)">C) 0,25 m/s²</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 1, true)">D) 4 m/s²</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-1">✓ La fuerza indicada ya es la fuerza neta. De F = ma se obtiene a = 12 N / 3 kg = 4 m/s² en su dirección.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-2" data-academico-nuevo="ciencias-3-2">
+          <div class="ejercicio-texto">Se suelta una pelota desde el reposo. Durante 2 s cae sin resistencia del aire; usa g = 10 m/s².</div>
+          <div class="enunciado">3. ¿Cuál es la rapidez al finalizar esos 2 s?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">A) 5 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">B) 10 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, true)">C) 20 m/s</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 2, false)">D) 40 m/s</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-2">✓ Con aceleración constante y rapidez inicial nula, v = gt = 10 × 2 = 20 m/s, dirigida hacia abajo. La pregunta pide rapidez, por lo que se expresa su magnitud positiva.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-3" data-academico-nuevo="ciencias-3-3">
+          <div class="ejercicio-texto">Una caja de 2 kg se eleva 3 m cerca de la superficie terrestre. Usa g = 10 m/s² y toma como referencia su posición inicial.</div>
+          <div class="enunciado">4. ¿Cuánto aumenta su energía potencial gravitatoria?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 3, true)">A) 60 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">B) 15 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">C) 6 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 3, false)">D) 30 J</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-3">✓ El aumento de energía potencial es ΔE = mgΔh = 2 × 10 × 3 = 60 J. Depende del cambio de altura, no del camino seguido.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-4" data-academico-nuevo="ciencias-3-4">
+          <div class="ejercicio-texto">Dos mediciones de la misma bicicleta con su ciclista muestran que la rapidez final es el doble de la inicial. La masa total no cambia.</div>
+          <div class="enunciado">5. ¿Cómo cambia su energía cinética?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">A) Se mantiene igual.</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">B) Se duplica.</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, false)">C) Se reduce a la mitad.</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 4, true)">D) Se cuadruplica.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-4">✓ La energía cinética es E = ½mv². Al sustituir v por 2v y conservar m, resulta E final = ½m(2v)² = 4E inicial.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-5" data-academico-nuevo="ciencias-3-5">
+          <div class="ejercicio-texto">Una resistencia óhmica de 6 Ω está conectada a una diferencia de potencial de 12 V y se mantiene a temperatura constante.</div>
+          <div class="enunciado">6. ¿Qué corriente atraviesa la resistencia?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 5, true)">A) 2 A</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">B) 0,5 A</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">C) 6 A</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 5, false)">D) 72 A</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-5">✓ De V = IR se obtiene I = V/R = 12 V / 6 Ω = 2 A. El carácter óhmico y la temperatura constante permiten usar una resistencia fija.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-6" data-academico-nuevo="ciencias-3-6">
+          <div class="ejercicio-texto">Se calientan 100 g de agua de 20 a 25 °C, sin cambio de estado ni pérdidas de calor. Usa c = 4,2 J/(g·°C).</div>
+          <div class="enunciado">7. ¿Cuánta energía térmica recibe el agua?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">A) 420 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">B) 500 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, true)">C) 2100 J</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 6, false)">D) 10 500 J</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-6">✓ El cambio de temperatura es 25−20 = 5 °C. Q = mcΔT = 100 × 4,2 × 5 = 2100 J. No se usa la temperatura final como si fuera el incremento.</div>
+        </div>
+
+        <div class="ejercicio-card" id="ej-3-7" data-academico-nuevo="ciencias-3-7">
+          <div class="ejercicio-texto">Una onda periódica se propaga a 20 m/s y su frecuencia es de 5 Hz.</div>
+          <div class="enunciado">8. ¿Cuál es su longitud de onda?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">A) 100 m</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, true)">B) 4 m</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">C) 0,25 m</button>
+            <button class="opcion-btn" onclick="responder(this, 3, 7, false)">D) 15 m</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-3-7">✓ La rapidez de propagación satisface v = λf. Entonces λ = v/f = 20/5 = 4 m. La frecuencia indica cinco ciclos por segundo.</div>
+        </div>
+        <button class="btn-completar-tema" id="btnCompletar-3" onclick="completarTema(3)" data-academico-nuevo="completar-3">✓ Marcar tema como completado</button>
+        <div class="nav-temas-footer" data-academico-nuevo="pie-3"><button onclick="mostrarTema(2)">← Química</button><button onclick="mostrarTema(4)">Siguiente: Ecosistemas y Ambiente →</button></div>
       </section>
-    </main>
 
-    <button class="chat-btn" onclick="abrirChat()">✨</button>
+      <section class="tema-seccion" id="tema-4" data-academico-nuevo="seccion-4">
+        <div class="tema-titulo"><h2>🌿 Ecosistemas y Ambiente</h2><span class="badge-completado" id="badge-4">✓ Completado</span></div>
+        <p class="tema-subtitulo">Redes tróficas, ciclos, biodiversidad, contaminación e indagación ambiental.</p>
+        <div class="concepto-card"><h3>5.1 Ecosistemas y niveles de organización</h3><div class="formula-box">Una población reúne individuos de una especie; una comunidad incluye poblaciones de especies distintas. El ecosistema comprende la comunidad y factores abióticos como agua, luz, temperatura y suelo.</div></div>
+        <div class="concepto-card"><h3>5.2 Redes tróficas y energía</h3><div class="formula-box">Productores, consumidores y descomponedores participan en las redes alimentarias. La energía fluye y parte se disipa como calor; la materia se recicla. La transferencia entre niveles no tiene una eficiencia universal del 10 %: ese valor debe indicarse si se usa como modelo.</div></div>
+        <div class="concepto-card"><h3>5.3 Interacciones entre especies</h3><div class="formula-box">En el mutualismo ambos participantes se benefician; en la depredación uno consume a otro. La competencia surge por recursos limitados. La consecuencia de cambiar una población depende de la red y de las condiciones del ecosistema.</div></div>
+        <div class="concepto-card"><h3>5.4 Poblaciones y muestreo</h3><div class="formula-box">La densidad es el número de individuos por unidad de superficie o volumen. Cuadrantes representativos permiten estimarla y extrapolarla, expresando sus límites. Más réplicas y una selección adecuada reducen sesgos del muestreo.</div></div>
+        <div class="concepto-card"><h3>5.5 Ciclos del agua y del carbono</h3><div class="formula-box">La evaporación, la condensación, la precipitación, la infiltración y la escorrentía forman parte del ciclo del agua. La fotosíntesis fija carbono y libera oxígeno; la respiración y la descomposición consumen oxígeno y devuelven carbono. No debe confundirse producción bruta de oxígeno con aporte neto.</div></div>
+        <div class="concepto-card"><h3>5.6 Contaminación y eutrofización</h3><div class="formula-box">El exceso de nutrientes puede favorecer proliferaciones de algas; la descomposición posterior aumenta el consumo de oxígeno. Algunos contaminantes persistentes se acumulan en organismos y pueden biomagnificarse a lo largo de cadenas alimentarias.</div></div>
+        <div class="concepto-card"><h3>5.7 Biodiversidad y conservación</h3><div class="formula-box">La diversidad genética, de especies y de ecosistemas contribuye a la biodiversidad. La pérdida de hábitat, la contaminación y las especies invasoras pueden amenazarla. La restauración debe evaluar especies nativas, suelo, agua y seguimiento a largo plazo.</div></div>
+        <div class="concepto-card"><h3>5.8 Evaluación de intervenciones</h3><div class="formula-box">Una investigación de restauración necesita una pregunta comprobable, indicadores medibles, condiciones iniciales, controles comparables y réplicas. Una correlación por sí sola no demuestra causalidad; los resultados deben interpretarse con sus límites.</div></div>
+        <div class="ejercicios-titulo" data-academico-nuevo="titulo-4"><h3>Ejercicios tipo ICFES</h3><span>8 preguntas</span></div>
+        <div class="ejercicio-card" id="ej-4-0" data-academico-nuevo="ciencias-4-0">
+          <div class="ejercicio-texto">En un modelo simplificado hay plantas, saltamontes, ranas y serpientes, en ese orden de alimentación. Se reduce la población de ranas y los demás factores se mantienen inicialmente constantes.</div>
+          <div class="enunciado">1. ¿Qué cambio inicial es más esperable según ese modelo?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">A) Menos saltamontes y más plantas.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">B) Más ranas y menos serpientes inmediatamente.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, true)">C) Más saltamontes y mayor consumo de plantas.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 0, false)">D) Ningún cambio porque las poblaciones no se relacionan.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-0">✓ Al disminuir las ranas, se reduce la depredación de saltamontes. Estos pueden aumentar y consumir más plantas. Es una predicción inicial de un modelo simple, no una ley invariable para cualquier ecosistema real.</div>
+        </div>
 
-    <script src="js/chat-ia.js"></script>
-    <script>
-      const sesion = JSON.parse(
-        localStorage.getItem("datosVisionales") ||
-          localStorage.getItem("usuarioActivo") ||
-          "{}",
-      );
-      if (!sesion.correo) window.location.href = "index.html";
-      const TOTAL_TEMAS = 5;
-      const PREGUNTAS_POR_TEMA = 8;
-      let temasCompletados = JSON.parse(
-        localStorage.getItem("cie_completados") || "[]",
-      );
-      let preguntasCorrectas = JSON.parse(
-        localStorage.getItem("cie_correctas") || "{}",
-      );
+        <div class="ejercicio-card" id="ej-4-1" data-academico-nuevo="ciencias-4-1">
+          <div class="ejercicio-texto">En una cadena alimentaria hipotética se transfieren al siguiente nivel el 10 % de la energía disponible. Los productores aportan 20 000 J.</div>
+          <div class="enunciado">2. ¿Qué energía llega a los consumidores secundarios después de dos transferencias?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 1, true)">A) 200 J</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">B) 2000 J</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">C) 20 000 J</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 1, false)">D) 18 000 J</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-1">✓ Los consumidores primarios reciben 20 000 × 0,10 = 2000 J; los secundarios reciben 2000 × 0,10 = 200 J. El 10 % es un supuesto del ejercicio, no una eficiencia universal.</div>
+        </div>
 
-      window.addEventListener("DOMContentLoaded", () => {
-        temasCompletados.forEach((idx) => marcarUICompletado(idx));
-        Object.keys(preguntasCorrectas).forEach((key) => {
-          const [tema, ejercicio] = key.split("-");
-          const card = document.getElementById(`ej-${tema}-${ejercicio}`);
-          if (card) {
-            card.querySelectorAll(".opcion-btn").forEach((b) => {
-              b.disabled = true;
-              b.style.cursor = "default";
-              if (
-                b.getAttribute("onclick") &&
-                b.getAttribute("onclick").includes("true")
-              )
-                b.classList.add("correcta");
-            });
-            const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
-            if (feedback) {
-              feedback.classList.add("correcto");
-              feedback.style.display = "block";
-            }
-          }
-        });
-        actualizarProgreso();
-        actualizarBotonesCompletar();
-      });
+        <div class="ejercicio-card" id="ej-4-2" data-academico-nuevo="ciencias-4-2">
+          <div class="ejercicio-texto">Un contaminante persistente se almacena en los tejidos de organismos acuáticos y se elimina muy lentamente. La cadena es fitoplancton → zooplancton → peces pequeños → aves piscívoras.</div>
+          <div class="enunciado">3. ¿Dónde se espera la mayor concentración del contaminante por biomagnificación?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">A) Siempre en el agua, porque no existen tejidos allí.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">B) En el fitoplancton únicamente.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, false)">C) En todos los niveles por igual.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 2, true)">D) En las aves piscívoras del último nivel.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-2">✓ Los depredadores incorporan contaminante al consumir muchas presas contaminadas. Para una sustancia persistente y acumulable, la concentración puede aumentar hacia los niveles tróficos superiores.</div>
+        </div>
 
-      function mostrarTema(idx) {
-        document
-          .querySelectorAll(".tema-seccion")
-          .forEach((s) => s.classList.remove("visible"));
-        document
-          .querySelectorAll(".temas-nav button")
-          .forEach((b) => b.classList.remove("activo"));
-        document.getElementById(`tema-${idx}`).classList.add("visible");
-        document.getElementById(`btn-tema-${idx}`).classList.add("activo");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+        <div class="ejercicio-card" id="ej-4-3" data-academico-nuevo="ciencias-4-3">
+          <div class="ejercicio-texto">Después de recibir escorrentía con fertilizantes, un lago presenta proliferación de algas. Días después mueren muchas algas y disminuye el oxígeno disuelto.</div>
+          <div class="enunciado">4. ¿Qué proceso explica mejor la disminución del oxígeno?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">A) El nitrógeno convierte el agua en oxígeno gaseoso.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, true)">B) Los microorganismos descomponedores consumen oxígeno al degradar la materia orgánica.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">C) Todos los peces dejan de respirar al mismo tiempo.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 3, false)">D) La fotosíntesis nocturna consume todo el nitrógeno.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-3">✓ El aporte de nutrientes favorece la proliferación de algas. Su muerte aumenta la materia que degradan los microorganismos; la respiración de estos consume oxígeno y puede producir hipoxia.</div>
+        </div>
 
-      function correctasTema(t) {
-        return Object.keys(preguntasCorrectas).filter(
-          (k) => k.startsWith(`${t}-`) && preguntasCorrectas[k],
-        ).length;
-      }
+        <div class="ejercicio-card" id="ej-4-4" data-academico-nuevo="ciencias-4-4">
+          <div class="ejercicio-texto">En seis cuadrantes de 1 m², elegidos de forma representativa en un terreno homogéneo de 120 m², se cuentan 60 plantas en total.</div>
+          <div class="enunciado">5. ¿Qué estimación de abundancia resulta de extrapolar la densidad media?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">A) 60 plantas en todo el terreno.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">B) 7200 plantas en todo el terreno.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, true)">C) 1200 plantas en todo el terreno.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 4, false)">D) 20 plantas en todo el terreno.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-4">✓ La superficie muestreada es 6 m². La densidad estimada es 60/6 = 10 plantas/m². Al multiplicarla por 120 m² se estiman 1200 plantas; es una estimación sujeta al muestreo.</div>
+        </div>
 
-      function calcularProgresoArea() {
-        let totalCorrectas = 0;
-        for (let t = 0; t < TOTAL_TEMAS; t++) {
-          totalCorrectas += Math.min(correctasTema(t), PREGUNTAS_POR_TEMA);
-        }
-        return Math.round(
-          (totalCorrectas / (TOTAL_TEMAS * PREGUNTAS_POR_TEMA)) * 100,
-        );
-      }
+        <div class="ejercicio-card" id="ej-4-5" data-academico-nuevo="ciencias-4-5">
+          <div class="ejercicio-texto">Una abeja obtiene néctar de una flor. Al desplazarse transporta polen entre flores de la misma especie y favorece su reproducción.</div>
+          <div class="enunciado">6. ¿Cómo se clasifica esta interacción descrita?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">A) Parasitismo, porque ambos organismos pierden recursos.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, true)">B) Mutualismo, porque ambos obtienen un beneficio.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">C) Depredación, porque la abeja mata necesariamente la planta.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 5, false)">D) Competencia, porque consumen exactamente el mismo alimento.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-5">✓ La abeja recibe alimento y la planta obtiene transporte de polen que favorece su reproducción. En la situación descrita, los dos participantes se benefician.</div>
+        </div>
 
-      async function guardarProgresoAreaDB(pct) {
-        try {
-          const s = JSON.parse(
-            localStorage.getItem("datosVisionales") ||
-              localStorage.getItem("usuarioActivo") ||
-              "{}",
-          );
-          if (s.correo) {
-            await fetch("http://localhost:3000/api/progreso-area", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                correo: s.correo,
-                area: "ciencias",
-                progreso: pct,
-              }),
-            });
-          }
-        } catch (e) {}
-      }
+        <div class="ejercicio-card" id="ej-4-6" data-academico-nuevo="ciencias-4-6">
+          <div class="ejercicio-texto">Se retira la cobertura vegetal de una ladera. En comparación con una ladera equivalente conservada, se observa más agua escurriendo superficialmente durante lluvias similares.</div>
+          <div class="enunciado">7. ¿Qué explicación es coherente con esta observación?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 6, true)">A) La pérdida de vegetación reduce la retención y puede disminuir la infiltración, aumentando la escorrentía.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">B) La gravedad deja de actuar cuando se retiran las raíces.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">C) El suelo sin vegetación siempre absorbe toda la lluvia.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 6, false)">D) Las plantas crean el agua de lluvia mediante sus raíces.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-6">✓ La vegetación intercepta parte de la lluvia y contribuye a conservar estructura y porosidad del suelo. Al perderse, puede aumentar la escorrentía y el riesgo de erosión, bajo condiciones comparables.</div>
+        </div>
 
-      async function responder(btn, tema, ejercicio, esCorrecta) {
-        const card = document.getElementById(`ej-${tema}-${ejercicio}`);
-        const feedback = document.getElementById(`fb-${tema}-${ejercicio}`);
-        const botones = card.querySelectorAll(".opcion-btn");
-        botones.forEach((b) => {
-          b.disabled = true;
-          b.style.cursor = "default";
-        });
-        if (esCorrecta) {
-          btn.classList.add("correcta");
-          feedback.classList.add("correcto");
-          const key = `${tema}-${ejercicio}`;
-          if (!preguntasCorrectas[key]) {
-            preguntasCorrectas[key] = true;
-            localStorage.setItem(
-              "cie_correctas",
-              JSON.stringify(preguntasCorrectas),
-            );
-            const pct = calcularProgresoArea();
-            actualizarProgreso();
-            await guardarProgresoAreaDB(pct);
-          }
-        } else {
-          btn.classList.add("incorrecta");
-          feedback.classList.add("incorrecto");
-          botones.forEach((b) => {
-            if (
-              b.getAttribute("onclick") &&
-              b.getAttribute("onclick").includes("true")
-            )
-              b.classList.add("correcta");
-          });
-        }
-        feedback.style.display = "block";
-        actualizarBotonesCompletar();
-      }
+        <div class="ejercicio-card" id="ej-4-7" data-academico-nuevo="ciencias-4-7">
+          <div class="ejercicio-texto">Un equipo quiere evaluar si reforestar con especies nativas mejora la infiltración del agua en un terreno degradado.</div>
+          <div class="enunciado">8. ¿Qué diseño proporciona la evidencia más sólida entre estas opciones?</div>
+          <div class="opciones-grid">
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">A) Comparar un único bosque antiguo con un desierto sin medir las condiciones iniciales.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">B) Reforestar y concluir que funcionó solo por observar hojas verdes.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, false)">C) Cambiar a la vez suelo, pendiente y lluvia sin registrarlos.</button>
+            <button class="opcion-btn" onclick="responder(this, 4, 7, true)">D) Comparar parcelas inicialmente semejantes, con y sin reforestación, usando réplicas y la misma medición de infiltración.</button>
+          </div>
+          <div class="feedback-ejercicio" id="fb-4-7">✓ Un control comparable, réplicas y mediciones consistentes permiten evaluar si los cambios se asocian al tratamiento. Registrar las condiciones iniciales ayuda a distinguir su efecto de diferencias previas.</div>
+        </div>
+        <button class="btn-completar-tema" id="btnCompletar-4" onclick="completarTema(4)" data-academico-nuevo="completar-4">✓ Marcar tema como completado</button>
+        <div class="nav-temas-footer" data-academico-nuevo="pie-4"><button onclick="mostrarTema(3)">← Física</button><span></span></div>
+      </section>
+</main>
 
-      async function completarTema(idx) {
-        if (temasCompletados.includes(idx)) return;
-        if (correctasTema(idx) < PREGUNTAS_POR_TEMA) return;
-        temasCompletados.push(idx);
-        localStorage.setItem(
-          "cie_completados",
-          JSON.stringify(temasCompletados),
-        );
-        marcarUICompletado(idx);
-        const pct = calcularProgresoArea();
-        actualizarProgreso();
-        await guardarProgresoAreaDB(pct);
-        if (temasCompletados.length === TOTAL_TEMAS)
-          document.getElementById("moduloCompletado").style.display = "block";
-      }
 
-      function marcarUICompletado(idx) {
-        const btn = document.getElementById(`btnCompletar-${idx}`);
-        const badge = document.getElementById(`badge-${idx}`);
-        const navBtn = document.getElementById(`btn-tema-${idx}`);
-        if (btn) {
-          btn.textContent = "✓ Tema completado";
-          btn.classList.add("ya-completado");
-          btn.disabled = true;
-        }
-        if (badge) badge.style.display = "inline-block";
-        if (navBtn) navBtn.classList.add("completado-nav");
-      }
-
-      function actualizarBotonesCompletar() {
-        for (let t = 0; t < TOTAL_TEMAS; t++) {
-          if (temasCompletados.includes(t)) continue;
-          const btn = document.getElementById(`btnCompletar-${t}`);
-          if (!btn) continue;
-          const listas = correctasTema(t);
-          const listo = listas >= PREGUNTAS_POR_TEMA;
-          btn.disabled = !listo;
-          btn.style.opacity = listo ? "1" : "0.4";
-          btn.style.cursor = listo ? "pointer" : "not-allowed";
-          btn.title = listo
-            ? ""
-            : `Responde todas las preguntas primero (${listas}/${PREGUNTAS_POR_TEMA})`;
-        }
-      }
-
-      function actualizarProgreso() {
-        const pct = calcularProgresoArea();
-        const fill = document.getElementById("barraGlobal");
-        const texto = document.getElementById("textoGlobal");
-        if (fill) fill.style.width = pct + "%";
-        if (texto)
-          texto.textContent = `${temasCompletados.length} de ${TOTAL_TEMAS} temas completados`;
-      }
-
-      function toggleMenu() {
-        const menu = document.getElementById("sidebar-menu");
-        const btn = document.getElementById("btn-menu");
-        if (menu) menu.classList.toggle("abierto");
-        if (btn) btn.classList.toggle("active");
-      }
-    </script>
+    <script src="js/prep.js"></script>
+    <script src="js/aprendizaje.js" data-area="ciencias"></script>
   </body>
 </html>

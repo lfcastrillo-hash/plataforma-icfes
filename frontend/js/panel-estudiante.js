@@ -9,11 +9,7 @@ const SERVER_URL = "";
 // ─────────────────────────────────────────────────────────────
 // Verificar sesión
 // ─────────────────────────────────────────────────────────────
-const sesion = JSON.parse(
-  localStorage.getItem("datosVisionales") ||
-    localStorage.getItem("usuarioActivo") ||
-    "{}",
-);
+const sesion = Prep.session();
 
 if (!sesion.correo) {
   window.location.href = "index.html";
@@ -21,7 +17,7 @@ if (!sesion.correo) {
 
 // Helper: enviar token en headers
 function getAuthHeaders(extra = {}) {
-  const token = sesion.token || "";
+  const token = "";
   const base = token ? { Authorization: `Bearer ${token}` } : {};
   return { ...base, ...extra };
 }
@@ -31,7 +27,7 @@ function getAuthHeaders(extra = {}) {
 // ─────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", async () => {
   const correo = sesion.correo || "";
-  const SERVER_URL = "http://localhost:3000";
+  const SERVER_URL = "";
 
   // Mostrar correo en navbar
   const navNombre = document.getElementById("nav-nombre-estudiante");
@@ -88,7 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (usuario.foto_perfil) {
           avatar.innerHTML = `
             <img
-              src="${SERVER_URL}${usuario.foto_perfil}"
+              src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}"
               style="
                 width:100%;
                 height:100%;
@@ -183,7 +179,7 @@ async function cargarAnunciosEstudiante() {
                     font-size:15px;
                   "
                 >
-                  📌 Anuncio de ${clase.nombre_clase}
+                  📌 Anuncio de ${Prep.escapeHTML(clase.nombre_clase)}
                 </h4>
               </div>
 
@@ -196,7 +192,7 @@ async function cargarAnunciosEstudiante() {
                   white-space:pre-wrap;
                 "
               >
-                ${clase.anuncio}
+                ${Prep.escapeHTML(clase.anuncio)}
               </p>
             </div>
           `;
@@ -219,8 +215,7 @@ async function cerrarSesion() {
       headers: getAuthHeaders(),
     });
 
-    localStorage.removeItem("datosVisionales");
-    localStorage.removeItem("usuarioActivo");
+    Prep.clearSession();
 
     window.location.href = "index.html";
   } catch (error) {

@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-14T21:55:09.617Z",
+  "environment": {
+    "node": "v24.14.1",
+    "database": "PGlite/PostgreSQL WASM, sin servidor de red"
+  },
+  "scope": "Microprueba local secuencial, 20 muestras por operación; no ensayo de carga en producción ni ejecución JMeter",
+  "results": [
+    {
+      "id": "M1-login",
+      "samples": 20,
+      "concurrency": 1,
+      "errors": 0,
+      "meanMs": 362.861395,
+      "p50Ms": 355.201,
+      "p95Ms": 374.27500000000055,
+      "p99Ms": 423.1862999999994,
+      "throughputPerSecond": 2.755856280717032
+    },
+    {
+      "id": "M2-aprendizaje",
+      "samples": 20,
+      "concurrency": 1,
+      "errors": 0,
+      "meanMs": 17.160650000000167,
+      "p50Ms": 16.670400000000882,
+      "p95Ms": 19.298800000000483,
+      "p99Ms": 23.25920000000042,
+      "throughputPerSecond": 58.263768821018125
+    },
+    {
+      "id": "M3-simulacro",
+      "samples": 20,
+      "concurrency": 1,
+      "errors": 0,
+      "meanMs": 15.250675000000228,
+      "p50Ms": 15.135200000000623,
+      "p95Ms": 16.832099999999627,
+      "p99Ms": 18.07430000000022,
+      "throughputPerSecond": 65.56033599672197
+    },
+    {
+      "id": "M4-clases",
+      "samples": 20,
+      "concurrency": 1,
+      "errors": 0,
+      "meanMs": 16.300095000000148,
+      "p50Ms": 15.937699999998586,
+      "p95Ms": 18.44380000000092,
+      "p99Ms": 18.674700000001394,
+      "throughputPerSecond": 61.33315587606925
+    },
+    {
+      "id": "M5-perfil",
+      "samples": 20,
+      "concurrency": 1,
+      "errors": 0,
+      "meanMs": 11.19995499999941,
+      "p50Ms": 11.032799999999042,
+      "p95Ms": 12.276899999998932,
+      "p99Ms": 12.351599999999962,
+      "throughputPerSecond": 89.26718337487962
+    }
+  ]
+}

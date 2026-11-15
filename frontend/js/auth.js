@@ -7,6 +7,7 @@ function alternarHeroForm(tipo) {
   const registroForm = document.getElementById("hero-registro-form");
   limpiarMensajes();
 
+  if (!loginForm || !registroForm) { window.location.href="index.html"; return; }
   if (tipo === "login") {
     loginForm.style.display = "block";
     registroForm.style.display = "none";
@@ -17,7 +18,7 @@ function alternarHeroForm(tipo) {
 }
 
 function mostrarFeedback(contenedorId, texto, esExito = false) {
-  const contenedor = document.getElementById(contenedorId);
+  const contenedor = document.getElementById(contenedorId) || document.getElementById("mensajeRegistro");
   if (!contenedor) return;
 
   let msgElement = contenedor.querySelector(".auth-msg");
@@ -48,11 +49,11 @@ function limpiarMensajes() {
 async function registrarUsuario() {
   limpiarMensajes();
 
-  const nombre = document.getElementById("reg-nombre").value.trim();
-  const correo = document.getElementById("reg-correo").value.trim();
-  const password = document.getElementById("reg-password").value.trim();
+  const nombre = (document.getElementById("reg-nombre") || document.getElementById("nombreRegistro")).value.trim();
+  const correo = (document.getElementById("reg-correo") || document.getElementById("correoRegistro")).value.trim();
+  const password = (document.getElementById("reg-password") || document.getElementById("passwordRegistro")).value;
 
-  const selectRol = document.querySelector("#hero-registro-form select");
+  const selectRol = (document.querySelector("#hero-registro-form select") || document.getElementById("rolRegistro"));
   const rol = selectRol ? selectRol.value : "estudiante";
 
   if (!nombre || !correo || !password) {
@@ -80,9 +81,9 @@ async function registrarUsuario() {
       true,
     );
 
-    document.getElementById("reg-nombre").value = "";
-    document.getElementById("reg-correo").value = "";
-    document.getElementById("reg-password").value = "";
+    (document.getElementById("reg-nombre") || document.getElementById("nombreRegistro")).value = "";
+    (document.getElementById("reg-correo") || document.getElementById("correoRegistro")).value = "";
+    (document.getElementById("reg-password") || document.getElementById("passwordRegistro")).value = "";
     if (selectRol) selectRol.value = "estudiante";
 
     setTimeout(() => alternarHeroForm("login"), 1500);
@@ -97,7 +98,7 @@ async function iniciarSesion() {
   limpiarMensajes();
 
   const correo = document.getElementById("correo").value.trim();
-  const password = document.getElementById("password").value.trim();
+  const password = document.getElementById("password").value;
   const rol = document.getElementById("rol").value;
 
   if (!correo || !password) {
@@ -127,10 +128,11 @@ async function iniciarSesion() {
     localStorage.setItem(
       "datosVisionales",
       JSON.stringify({
+        id_usuario: data.usuario.id_usuario,
         correo: data.usuario.correo,
         nombre: data.usuario.nombre,
         tipo_usuario: rol,
-        token: data.token,
+
       }),
     );
 

@@ -1,0 +1,325 @@
+{
+  "date": "2026-11-15T16:57:36.846Z",
+  "method": "GET",
+  "links": [
+    {
+      "url": "/perfil-estudiante.html",
+      "external": false,
+      "from": [
+        "areas.html",
+        "panel-estudiante.html",
+        "perfil-estudiante.html",
+        "perfil-estudiante.html",
+        "perfil-estudiante.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/areas.html",
+      "external": false,
+      "from": [
+        "areas.html",
+        "areas.html",
+        "clases_grabadas.html",
+        "cuadernillos.html",
+        "modulo-ciencias.html",
+        "modulo-ciencias.html",
+        "modulo-ingles.html",
+        "modulo-ingles.html",
+        "modulo-ingles.html",
+        "modulo-lectura.html",
+        "modulo-lectura.html",
+        "modulo-lectura.html",
+        "modulo-matematicas.html",
+        "modulo-matematicas.html",
+        "modulo-matematicas.html",
+        "modulo-sociales.html",
+        "modulo-sociales.html",
+        "modulo-sociales.html",
+        "panel-estudiante.html",
+        "perfil-estudiante.html",
+        "simulacro-selector.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/panel-estudiante.html",
+      "external": false,
+      "from": [
+        "areas.html",
+        "cuadernillos.html",
+        "cuadernillos.html",
+        "modulo-ciencias.html",
+        "modulo-ingles.html",
+        "modulo-lectura.html",
+        "modulo-matematicas.html",
+        "modulo-sociales.html",
+        "panel-estudiante.html",
+        "panel-estudiante.html",
+        "perfil-estudiante.html",
+        "simulacro-selector.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/cuadernillos.html",
+      "external": false,
+      "from": [
+        "areas.html",
+        "cuadernillos.html",
+        "entrenando.html",
+        "filtros.html",
+        "mas-material.html",
+        "modulo-ciencias.html",
+        "modulo-ingles.html",
+        "modulo-lectura.html",
+        "modulo-matematicas.html",
+        "modulo-sociales.html",
+        "panel-estudiante.html",
+        "perfil-estudiante.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/simulacro-selector.html",
+      "external": false,
+      "from": [
+        "areas.html",
+        "cuadernillos.html",
+        "modulo-ciencias.html",
+        "modulo-ingles.html",
+        "modulo-ingles.html",
+        "modulo-lectura.html",
+        "modulo-lectura.html",
+        "modulo-matematicas.html",
+        "modulo-matematicas.html",
+        "modulo-sociales.html",
+        "modulo-sociales.html",
+        "panel-estudiante.html",
+        "perfil-estudiante.html",
+        "simulacro-nuevo.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/modulo-matematicas.html",
+      "external": false,
+      "from": [
+        "areas.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/modulo-lectura.html",
+      "external": false,
+      "from": [
+        "areas.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/modulo-ciencias.html",
+      "external": false,
+      "from": [
+        "areas.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/modulo-sociales.html",
+      "external": false,
+      "from": [
+        "areas.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/modulo-ingles.html",
+      "external": false,
+      "from": [
+        "areas.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/index.html",
+      "external": false,
+      "from": [
+        "index.html",
+        "index.html",
+        "perfil-profesor.html",
+        "registro.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "https://www.icfes.gov.co/wp-content/uploads/2026/04/09-Marzo_Cuadernillo-de-Preguntas-Matematicas-Saber-11-2026.pdf",
+      "external": true,
+      "from": [
+        "mas-material.html"
+      ],
+      "status": 206,
+      "mime": "application/pdf",
+      "bytesExamined": 1024,
+      "pdfSignature": true,
+      "ok": true
+    },
+    {
+      "url": "https://www.icfes.gov.co/wp-content/uploads/2026/10/09-Sept-cuadernillo-preguntas-lectura-critica-saber-11-2026.pdf",
+      "external": true,
+      "from": [
+        "mas-material.html"
+      ],
+      "status": 206,
+      "mime": "application/pdf",
+      "bytesExamined": 1024,
+      "pdfSignature": true,
+      "ok": true
+    },
+    {
+      "url": "https://www.icfes.gov.co/wp-content/uploads/2026/03/24-feb-cuadernillo-preguntas-ciencias-naturales-saber-11-2026.pdf",
+      "external": true,
+      "from": [
+        "mas-material.html"
+      ],
+      "status": 206,
+      "mime": "application/pdf",
+      "bytesExamined": 1024,
+      "pdfSignature": true,
+      "ok": true
+    },
+    {
+      "url": "https://www.icfes.gov.co/caja-de-herramientas-saber-11/practica/",
+      "external": true,
+      "from": [
+        "mas-material.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=UTF-8",
+      "ok": true
+    },
+    {
+      "url": "/perfil-profesor.html",
+      "external": false,
+      "from": [
+        "panel-profesor.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/panel-profesor.html",
+      "external": false,
+      "from": [
+        "panel-profesor.html",
+        "perfil-profesor.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    },
+    {
+      "url": "/clases_grabadas.html",
+      "external": false,
+      "from": [
+        "perfil-estudiante.html"
+      ],
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "ok": true
+    }
+  ],
+  "disabled": [
+    {
+      "file": "clases_grabadas.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "clases_grabadas.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "entrenando.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "entrenando.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "entrenando.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    },
+    {
+      "file": "filtros.html",
+      "noHref": true,
+      "noHandler": true
+    }
+  ],
+  "databaseQueries": 0,
+  "limits": "HTML local servido por Express real; pool bloqueado. GET PDF parcial con Range y firma, no lectura editorial completa ni descarga completa. No prueba la disponibilidad futura del proveedor.",
+  "status": "PASS"
+}

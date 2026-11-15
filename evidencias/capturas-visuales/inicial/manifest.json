@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-14T21:05:47.954Z",
+  "commit": "c071262",
+  "environment": "Chrome headless 1440x1000; API interceptada solo para referencia visual, no prueba funcional",
+  "pages": [
+    "areas.html",
+    "clases.html",
+    "clases_grabadas.html",
+    "cuadernillos.html",
+    "entrenando.html",
+    "filtros.html",
+    "index.html",
+    "mas-material.html",
+    "modulo-ciencias.html",
+    "modulo-ingles.html",
+    "modulo-lectura.html",
+    "modulo-matematicas.html",
+    "modulo-sociales.html",
+    "panel-estudiante.html",
+    "panel-profesor.html",
+    "perfil-estudiante.html",
+    "perfil-profesor.html",
+    "registro.html",
+    "simulacro-nuevo.html",
+    "simulacro-selector.html"
+  ],
+  "errors": [],
+  "css": [
+    {
+      "file": "dashboard.css",
+      "sha256": "482666566f19f82e7db4e3f87880d8afef9535901cb77fc6d03abcbde881935e"
+    },
+    {
+      "file": "global.css",
+      "sha256": "20ff2e1c0929472f7f9da7b9fcf7f1a5608bb12535c7d2795641232c514ca2c4"
+    },
+    {
+      "file": "modulos.css",
+      "sha256": "2d34ccf72c20eaaa8af1825a4fdc8a80dbb62ef16a97c81e64250433413294f2"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-15T16:54:38.077Z",
+  "baseCommit": "a28beb7cce3d03560424c52e613ead91d2f081af",
+  "scope": "Comparación del diseño neutralizando exclusivamente los cambios de contenido registrados; capturas actuales conservadas sin neutralizar.",
+  "cases": [
+    {
+      "file": "areas.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "clases.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "clases_grabadas.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "cuadernillos.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "entrenando.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "filtros.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "index.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "mas-material.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "modulo-ciencias.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 8
+    },
+    {
+      "file": "modulo-ingles.html",
+      "status": "FAIL",
+      "differentPixelsAfterContentNormalization": 1,
+      "errors": [],
+      "contentEdits": 6
+    },
+    {
+      "file": "modulo-lectura.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 9
+    },
+    {
+      "file": "modulo-matematicas.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 13
+    },
+    {
+      "file": "modulo-sociales.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 32
+    },
+    {
+      "file": "panel-estudiante.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "panel-profesor.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "perfil-estudiante.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "perfil-profesor.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "registro.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "simulacro-nuevo.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    },
+    {
+      "file": "simulacro-selector.html",
+      "status": "PASS",
+      "differentPixelsAfterContentNormalization": 0,
+      "errors": [],
+      "contentEdits": 0
+    }
+  ],
+  "newCards": [
+    {
+      "viewport": 1440,
+      "count": 24,
+      "status": "PASS"
+    },
+    {
+      "viewport": 390,
+      "count": 24,
+      "status": "PASS"
+    }
+  ]
+}

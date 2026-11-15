@@ -8,6 +8,7 @@ const preguntas = [
 
 let actual = 0;
 let puntaje = 0;
+const respondidas = new Set();
 
 function cargarPregunta() {
   const p = preguntas[actual];
@@ -25,6 +26,8 @@ function cargarPregunta() {
 }
 
 function responder(i) {
+  if(respondidas.has(actual) || !preguntas[actual])return;
+  respondidas.add(actual);
   if (i === preguntas[actual].correcta) {
     puntaje++;
   }

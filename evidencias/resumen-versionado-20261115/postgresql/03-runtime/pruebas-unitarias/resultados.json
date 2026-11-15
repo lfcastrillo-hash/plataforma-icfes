@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-15T14:32:11.195Z",
+  "node": "v24.14.1",
+  "environment": "Windows; HTTP local + PostgreSQL nativo/pg; datos ficticios; PGlite bloqueado",
+  "cases": [
+    {
+      "name": "PG-N04 privilegios mínimos: app no crea/altera/trunca tablas ni lee otros esquemas",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 6,
+      "durationMs": 333.4047,
+      "status": "FAIL",
+      "error": "Missing expected rejection."
+    },
+    {
+      "name": "PG-N05 dos conexiones reales: bloqueo de fila y rollback liberan al segundo escritor",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 13,
+      "durationMs": 1668.2584,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N06 progreso concurrente no pierde respuestas ni duplica crédito",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 30,
+      "durationMs": 982.8167,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N07 restricciones únicas y FK rechazan duplicados y huérfanos",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 37,
+      "durationMs": 203.9793,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N08 reinicio de proceso: sesión, progreso, simulacro y foto permanecen",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 51,
+      "durationMs": 2011.5463,
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "success": false,
+    "counts": {
+      "tests": 5,
+      "failed": 1,
+      "passed": 4,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "topLevel": 5,
+      "suites": 0
+    },
+    "duration_ms": 5688.4104
+  }
+}

@@ -1,107 +1,15 @@
-const pool = require("../db");
-
-async function obtenerProgreso(req, res) {
-  try {
-    const { correo } = req.params;
-
-    const resultado = await pool.query(
-      `
-      SELECT *
-      FROM progreso_estudiante
-      WHERE correo = $1
-      `,
-      [correo],
-    );
-
-    if (resultado.rows.length === 0) {
-      return res.json({
-        progreso_global: 0,
-        progreso_matematicas: 0,
-        progreso_lectura: 0,
-        progreso_ciencias: 0,
-        progreso_sociales: 0,
-        progreso_ingles: 0,
-      });
-    }
-
-    res.json(resultado.rows[0]);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+const v=require('../lib/validation');
+const {readAreas}=require('./progresoAreas.controller');
+const {general}=require('../lib/progress');
+async function obtenerProgreso(req,res){
+ const {areas}=await readAreas(req);
+ res.json({...Object.fromEntries(v.AREAS.map(a=>['progreso_'+a,areas[a]])),progreso_global:general(areas)});
 }
-
-async function guardarProgreso(req, res) {
-  try {
-    const { correo, matematicas, lectura, ciencias, sociales, ingles } =
-      req.body;
-
-    const progresoGlobal = Math.round(
-      (matematicas + lectura + ciencias + sociales + ingles) / 5,
-    );
-
-    await pool.query(
-      `
-      INSERT INTO progreso_estudiante(
-        correo,
-        progreso_matematicas,
-        progreso_lectura,
-        progreso_ciencias,
-        progreso_sociales,
-        progreso_ingles,
-        progreso_global
-      )
-      VALUES($1,$2,$3,$4,$5,$6,$7)
-
-      ON CONFLICT(correo)
-      DO UPDATE SET
-        progreso_matematicas = EXCLUDED.progreso_matematicas,
-        progreso_lectura = EXCLUDED.progreso_lectura,
-        progreso_ciencias = EXCLUDED.progreso_ciencias,
-        progreso_sociales = EXCLUDED.progreso_sociales,
-        progreso_ingles = EXCLUDED.progreso_ingles,
-        progreso_global = EXCLUDED.progreso_global
-      `,
-      [
-        correo,
-        matematicas,
-        lectura,
-        ciencias,
-        sociales,
-        ingles,
-        progresoGlobal,
-      ],
-    );
-
-    res.json({
-      success: true,
-      progresoGlobal,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+async function guardarProgreso(req,res){
+ return v.fail(res,410,'La escritura directa de porcentajes fue retirada. Envía respuestas a /api/progreso-area.');
 }
-
-async function obtenerRanking(req, res) {
-  try {
-    const resultado = await pool.query(`
-      SELECT
-      correo,
-      progreso_global
-      FROM progreso_estudiante
-      ORDER BY progreso_global DESC
-    `);
-
-    res.json(resultado.rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json(error);
-  }
+async function obtenerRanking(req,res){
+ const result=await req.app.locals.pool.query('SELECT u.nombre, ROUND(SUM(p.progreso)/5) AS progreso_global FROM usuarios u JOIN progreso_areas p ON p.id_usuario=u.id_usuario WHERE EXISTS (SELECT 1 FROM inscripciones i JOIN clases c ON c.id_clase=i.id_clase WHERE i.id_usuario=u.id_usuario AND c.id_profesor=$1) GROUP BY u.id_usuario,u.nombre ORDER BY progreso_global DESC',[req.usuario.id_usuario]);
+ res.json(result.rows);
 }
-
-module.exports = {
-  guardarProgreso,
-  obtenerProgreso,
-  obtenerRanking,
-};
+module.exports={obtenerProgreso,guardarProgreso,obtenerRanking};

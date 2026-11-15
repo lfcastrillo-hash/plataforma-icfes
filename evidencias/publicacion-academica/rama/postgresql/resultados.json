@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-15T16:51:12.682Z",
+  "node": "v24.14.1",
+  "environment": "Windows; HTTP local + PostgreSQL nativo/pg; datos ficticios; PGlite bloqueado",
+  "cases": [
+    {
+      "name": "PG-N04 privilegios mínimos: app no crea/altera/trunca tablas ni lee tablas no autorizadas",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 6,
+      "durationMs": 622.2913,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N05 dos conexiones reales: bloqueo de fila y rollback liberan al segundo escritor",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 14,
+      "durationMs": 2410.2533,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N06 progreso concurrente no pierde respuestas ni duplica crédito",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 31,
+      "durationMs": 3120.9725,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N07 restricciones únicas y FK rechazan duplicados y huérfanos",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 38,
+      "durationMs": 642.3589,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N08 reinicio de proceso: sesión, progreso, simulacro y foto permanecen",
+      "file": "/tests/native/runtime.test.cjs",
+      "line": 52,
+      "durationMs": 3670.4675,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N01 esquemas nuevo/histórico equivalentes, repetibles y sin perder filas",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 12,
+      "durationMs": 1094.2583,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N02 preflight aborta nulo sin borrar datos",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 28,
+      "durationMs": 228.4116,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N02 preflight aborta duplicado sin borrar datos",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 28,
+      "durationMs": 189.6481,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N02 preflight aborta huerfano sin borrar datos",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 28,
+      "durationMs": 200.7289,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N02 preflight aborta longitud sin borrar datos",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 28,
+      "durationMs": 203.3553,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N02 preflight aborta porcentaje sin borrar datos",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 28,
+      "durationMs": 254.7587,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-N03 todas las PK/FK y NOT NULL requeridas existen en PostgreSQL",
+      "file": "/tests/native/schema.test.cjs",
+      "line": 37,
+      "durationMs": 688.8044,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-TLS01 conexión pg real con CA local verificada y cifrado comprobado",
+      "file": "/tests/native/tls.test.cjs",
+      "line": 8,
+      "durationMs": 92.3488,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-TLS02 CA no confiable rechazada sin desactivar verificación",
+      "file": "/tests/native/tls.test.cjs",
+      "line": 11,
+      "durationMs": 16.4174,
+      "status": "PASS"
+    },
+    {
+      "name": "PG-TLS03 identidad del servidor incorrecta rechazada en loopback",
+      "file": "/tests/native/tls.test.cjs",
+      "line": 14,
+      "durationMs": 16.1186,
+      "status": "PASS"
+    }
+  ],
+  "summary": {
+    "success": true,
+    "counts": {
+      "tests": 15,
+      "failed": 0,
+      "passed": 15,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "topLevel": 15,
+      "suites": 0
+    },
+    "duration_ms": 14647.2312
+  }
+}

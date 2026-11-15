@@ -1,0 +1,252 @@
+{
+  "date": "2026-11-14T22:02:07.742Z",
+  "base": "c071262",
+  "checks": [
+    {
+      "id": "HTML-areas.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-clases.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-clases_grabadas.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-cuadernillos.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-entrenando.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-filtros.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-index.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-mas-material.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-modulo-ciencias.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-modulo-ingles.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-modulo-lectura.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-modulo-matematicas.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-modulo-sociales.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-panel-estudiante.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-panel-profesor.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-perfil-estudiante.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-perfil-profesor.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-registro.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-simulacro-nuevo.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "HTML-simulacro-selector.html",
+      "status": "PASS",
+      "detail": "Estructura/estilos/contenido conservados. Única excepción explícita: descripción y cinco máximos de escala corregidos en selector; se excluyen scripts y rel."
+    },
+    {
+      "id": "CSS-dashboard.css",
+      "status": "PASS",
+      "detail": "Contenido idéntico; se normalizan solo finales CRLF/LF de Git en Windows"
+    },
+    {
+      "id": "CSS-global.css",
+      "status": "PASS",
+      "detail": "Contenido idéntico; se normalizan solo finales CRLF/LF de Git en Windows"
+    },
+    {
+      "id": "CSS-modulos.css",
+      "status": "PASS",
+      "detail": "Contenido idéntico; se normalizan solo finales CRLF/LF de Git en Windows"
+    },
+    {
+      "id": "BANCO-SIMULACRO",
+      "status": "PASS",
+      "detail": "Preguntas, opciones, respuestas, explicaciones y configuración conservadas al extraerlas a módulo compartido"
+    },
+    {
+      "id": "OPCIONES-matematicas",
+      "status": "PASS",
+      "detail": "Cada ejercicio tiene cuatro opciones, una marcada correcta y feedback asociado"
+    },
+    {
+      "id": "EJERCICIOS-matematicas",
+      "status": "INFO",
+      "count": 40,
+      "missingAgainstDeclared40": 0
+    },
+    {
+      "id": "OPCIONES-lectura",
+      "status": "PASS",
+      "detail": "Cada ejercicio tiene cuatro opciones, una marcada correcta y feedback asociado"
+    },
+    {
+      "id": "EJERCICIOS-lectura",
+      "status": "INFO",
+      "count": 40,
+      "missingAgainstDeclared40": 0
+    },
+    {
+      "id": "OPCIONES-ciencias",
+      "status": "PASS",
+      "detail": "Cada ejercicio tiene cuatro opciones, una marcada correcta y feedback asociado"
+    },
+    {
+      "id": "EJERCICIOS-ciencias",
+      "status": "INFO",
+      "count": 16,
+      "missingAgainstDeclared40": 24
+    },
+    {
+      "id": "OPCIONES-sociales",
+      "status": "PASS",
+      "detail": "Cada ejercicio tiene cuatro opciones, una marcada correcta y feedback asociado"
+    },
+    {
+      "id": "EJERCICIOS-sociales",
+      "status": "INFO",
+      "count": 40,
+      "missingAgainstDeclared40": 0
+    },
+    {
+      "id": "OPCIONES-ingles",
+      "status": "PASS",
+      "detail": "Cada ejercicio tiene cuatro opciones, una marcada correcta y feedback asociado"
+    },
+    {
+      "id": "EJERCICIOS-ingles",
+      "status": "INFO",
+      "count": 40,
+      "missingAgainstDeclared40": 0
+    },
+    {
+      "id": "OPCIONES-BANCO",
+      "status": "PASS",
+      "detail": "Índices de respuestas correctas dentro de opciones"
+    }
+  ],
+  "pendingResources": [
+    {
+      "page": "clases_grabadas.html",
+      "target": "LINK_DRIVE"
+    },
+    {
+      "page": "clases_grabadas.html",
+      "target": "LINK_DRIVE"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2025-sesion1.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2025-sesion2.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2024-sesion1.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2024-sesion2.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2023-sesion1.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2023-sesion2.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2022-sesion1.pdf"
+    },
+    {
+      "page": "filtros.html",
+      "target": "pdfs/2022-sesion2.pdf"
+    },
+    {
+      "page": "mas-material.html",
+      "target": "LINK_AQUÍ"
+    },
+    {
+      "page": "mas-material.html",
+      "target": "LINK_AQUÍ"
+    },
+    {
+      "page": "mas-material.html",
+      "target": "LINK_AQUÍ"
+    },
+    {
+      "page": "mas-material.html",
+      "target": "LINK_AQUÍ"
+    }
+  ],
+  "emptyTopics": [],
+  "questionCounts": {
+    "matematicas": 21,
+    "lectura": 20,
+    "ciencias": 15,
+    "sociales": 15,
+    "ingles": 15
+  }
+}

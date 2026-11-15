@@ -1,8 +1,2 @@
-const path = require("path");
-
-require("dotenv").config({
-  path: path.join(__dirname, ".env"),
-});
-
-console.log("VARIABLE:");
-console.log(process.env.GEMINI_API_KEY);
+require('./config');
+for(const name of ['DATABASE_URL','JWT_SECRET'])console.log(name+': '+(process.env[name]?'configurada':'pendiente'));

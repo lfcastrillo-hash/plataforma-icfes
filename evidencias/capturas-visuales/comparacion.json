@@ -1,0 +1,227 @@
+{
+  "date": "2026-11-14T22:01:39.717Z",
+  "environment": "Chrome headless 1440x1000; API interceptada exclusivamente para comparación visual",
+  "cases": [
+    {
+      "file": "areas.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "clases.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "clases_grabadas.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "cuadernillos.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "entrenando.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "filtros.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "mas-material.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "modulo-ciencias.html",
+      "width": 1440,
+      "height": 6928,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "modulo-ingles.html",
+      "width": 1440,
+      "height": 3784,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "modulo-lectura.html",
+      "width": 1440,
+      "height": 6782,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "modulo-matematicas.html",
+      "width": 1440,
+      "height": 5761,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "modulo-sociales.html",
+      "width": 1440,
+      "height": 6704,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "panel-estudiante.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "panel-profesor.html",
+      "width": 1440,
+      "height": 1002,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "perfil-estudiante.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "perfil-profesor.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "registro.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "simulacro-nuevo.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 0,
+      "errors": [],
+      "status": "PASS"
+    },
+    {
+      "file": "simulacro-selector.html",
+      "width": 1440,
+      "height": 1000,
+      "differentPixels": 7287,
+      "errors": [],
+      "expectedCorrection": {
+        "reason": "Texto de práctica y cinco escalas por área:100 en lugar de500; estilos y estructura sin cambios",
+        "regions": [
+          {
+            "x": 326,
+            "y": 428,
+            "width": 788,
+            "height": 48
+          },
+          {
+            "x": 813.96875,
+            "y": 537,
+            "width": 187.84375,
+            "height": 39.5
+          },
+          {
+            "x": 813.96875,
+            "y": 576.5,
+            "width": 187.84375,
+            "height": 40
+          },
+          {
+            "x": 813.96875,
+            "y": 616.5,
+            "width": 187.84375,
+            "height": 40
+          },
+          {
+            "x": 813.96875,
+            "y": 656.5,
+            "width": 187.84375,
+            "height": 40
+          },
+          {
+            "x": 813.96875,
+            "y": 696.5,
+            "width": 187.84375,
+            "height": 40
+          }
+        ],
+        "geometryStable": true,
+        "baselineMatches": true,
+        "differentPixelsOutsideText": 0
+      },
+      "status": "PASS"
+    }
+  ],
+  "css": [
+    {
+      "file": "dashboard.css",
+      "sha256": "482666566f19f82e7db4e3f87880d8afef9535901cb77fc6d03abcbde881935e",
+      "unchanged": true
+    },
+    {
+      "file": "global.css",
+      "sha256": "20ff2e1c0929472f7f9da7b9fcf7f1a5608bb12535c7d2795641232c514ca2c4",
+      "unchanged": true
+    },
+    {
+      "file": "modulos.css",
+      "sha256": "2d34ccf72c20eaaa8af1825a4fdc8a80dbb62ef16a97c81e64250433413294f2",
+      "unchanged": true
+    }
+  ]
+}

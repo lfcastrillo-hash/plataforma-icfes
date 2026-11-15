@@ -1,7 +1,7 @@
 const API = "/api";
 const SERVER_URL = "";
 
-let sesion = JSON.parse(localStorage.getItem("datosVisionales") || "{}");
+let sesion = Prep.session();
 
 if (!sesion.correo) {
   window.location.href = "index.html";
@@ -9,7 +9,7 @@ if (!sesion.correo) {
 
 // Helper: headers con token
 function getAuthHeaders(extraHeaders = {}) {
-  const token = sesion.token || "";
+  const token = "";
   const base = token ? { Authorization: `Bearer ${token}` } : {};
   return { ...base, ...extraHeaders };
 }
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const bioPerfil = document.getElementById("perfil-biografia");
       if (bioPerfil) {
         bioPerfil.innerHTML = datosActuales.biografia
-          ? `<i>${datosActuales.biografia}</i>`
+          ? `<i>${Prep.escapeHTML(datosActuales.biografia)}</i>`
           : `<i>Apasionado por la educación y comprometido con el éxito de mis estudiantes en el ICFES.</i>`;
       }
 
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (usuario.foto_perfil) {
         document.getElementById("foto-preview-main").innerHTML =
-          `<img src="${SERVER_URL}${usuario.foto_perfil}" style="width: 100%; height: 100%; object-fit: cover;">`;
+          `<img src="${SERVER_URL}${Prep.escapeHTML(usuario.foto_perfil)}" style="width: 100%; height: 100%; object-fit: cover;">`;
       } else {
         document.getElementById("nav-avatar-text").textContent = usuario.nombre
           .charAt(0)

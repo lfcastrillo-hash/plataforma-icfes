@@ -1,0 +1,167 @@
+{
+  "date": "2026-11-14T22:06:51.302Z",
+  "timezone": "America/Bogota",
+  "version": "1.1.0",
+  "commit": "29c870727dc3becc067ce0f41e25f173df4b6187",
+  "sourceSha256": "1ab75aa1472afa368e487f0e94bf6f80168a0e72840498301c8af13cede76a26",
+  "sourceDirty": false,
+  "node": "v24.14.1",
+  "platform": "win32",
+  "scope": "Pruebas de integración HTTP/SQL reales en PostgreSQL WASM; proveedor IA stub explícito",
+  "reportFiles": [
+    "evidencias/pruebas-unitarias/resultados.json",
+    "evidencias/aceptacion/resultados.json",
+    "evidencias/capturas-visuales/comparacion.json",
+    "evidencias/sistema/seguridad.json",
+    "evidencias/sistema/rendimiento-local.json"
+  ],
+  "cases": [
+    {
+      "name": "IT01/CU02 registro, duplicado normalizado y hash en PostgreSQL",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 15,
+      "durationMs": 5960.1545,
+      "status": "PASS"
+    },
+    {
+      "name": "IT01 negativos de autenticación y entrada obligatoria",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 24,
+      "durationMs": 69.0489,
+      "status": "PASS"
+    },
+    {
+      "name": "IT02/CU03 progreso aislado, monotónico, persistente e idempotente",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 32,
+      "durationMs": 426.7788,
+      "status": "PASS"
+    },
+    {
+      "name": "IT02 límites y tipos de aprendizaje",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 46,
+      "durationMs": 96.167,
+      "status": "PASS"
+    },
+    {
+      "name": "IT03/CU11 crear clases, rol y propietario",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 52,
+      "durationMs": 102.3143,
+      "status": "PASS"
+    },
+    {
+      "name": "IT04 inscripciones, duplicados y promedio entre cinco áreas",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 62,
+      "durationMs": 152.6914,
+      "status": "PASS"
+    },
+    {
+      "name": "IT05 anuncios disponibles solo para inscritos",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 76,
+      "durationMs": 55.3133,
+      "status": "PASS"
+    },
+    {
+      "name": "IT06/CU08 perfil, cambio correo conserva clases y progreso por ID",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 83,
+      "durationMs": 664.9014,
+      "status": "PASS"
+    },
+    {
+      "name": "IT07 foto persistida en BD, límites y archivos peligrosos rechazados",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 95,
+      "durationMs": 997.3391,
+      "status": "PASS"
+    },
+    {
+      "name": "IT08 contraseña revoca otras sesiones; logout revoca también JWT copiado",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 110,
+      "durationMs": 1338.5779,
+      "status": "PASS"
+    },
+    {
+      "name": "CU05 simulacro: calificación servidor, idempotencia y aislamiento",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 119,
+      "durationMs": 395.3136,
+      "status": "PASS"
+    },
+    {
+      "name": "IT09 retiro, eliminación transaccional y sin huérfanos",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 131,
+      "durationMs": 62.5494,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC origen, endpoints desconocidos y health",
+      "file": "/tests/integration/http.test.cjs",
+      "line": 140,
+      "durationMs": 53.6208,
+      "status": "PASS"
+    },
+    {
+      "name": "DB-MIG copia del esquema inferido: migración idempotente conserva avances y correo deja de ser identidad",
+      "file": "/tests/integration/migration.test.cjs",
+      "line": 14,
+      "durationMs": 1210.4288,
+      "status": "PASS"
+    },
+    {
+      "name": "DB-MIG duplicados normalizados abortan sin borrar cuentas",
+      "file": "/tests/integration/migration.test.cjs",
+      "line": 23,
+      "durationMs": 696.8913,
+      "status": "PASS"
+    },
+    {
+      "name": "M1-LEGACY conversión en login solo con compatibilidad explícita; no modifica clave incorrecta",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 10,
+      "durationMs": 1783.471,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-ASC repositorio PostgreSQL → transacción → rollback real",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 21,
+      "durationMs": 706.688,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-ASC migración repetible y persistencia en disco después de reiniciar",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 30,
+      "durationMs": 5081.3382,
+      "status": "PASS"
+    },
+    {
+      "name": "INT-DESC API → controlador IA con proveedor stub (no llamada real)",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 51,
+      "durationMs": 1312.0536,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC límite de intentos y recuperación de fallo de BD sin exponer SQL",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 64,
+      "durationMs": 727.9694,
+      "status": "PASS"
+    },
+    {
+      "name": "SEC archivos históricos HTML no se sirven; imágenes conservan compatibilidad",
+      "file": "/tests/integration/recovery.test.cjs",
+      "line": 76,
+      "durationMs": 666.0578,
+      "status": "PASS"
+    }
+  ]
+}

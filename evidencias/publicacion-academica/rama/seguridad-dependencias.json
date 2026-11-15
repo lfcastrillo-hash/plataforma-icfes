@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-15T19:28:29.913Z",
+  "historicalReview": {
+    "localCommits": 16,
+    "gitBlobs": 292,
+    "realSecrets": 0,
+    "review": "Las siete coincidencias de URI fueron fixtures locales explícitos, no credenciales reales."
+  },
+  "npmAudit": {
+    "root": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 1,
+        "dev": 6,
+        "optional": 0,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 6
+      }
+    },
+    "backend": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 113,
+        "dev": 0,
+        "optional": 29,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 141
+      }
+    }
+  },
+  "scriptsChecked": 99,
+  "syntaxFailures": 0,
+  "ignored": "Configuración privada, certificados, bases, dependencias, perfiles y trazas permanecen fuera de Git."
+}

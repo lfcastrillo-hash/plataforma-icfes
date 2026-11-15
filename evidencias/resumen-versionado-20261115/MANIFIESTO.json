@@ -1,0 +1,161 @@
+{
+  "created": "2026-11-15T15:09:48.933Z",
+  "projectVersion": "1.1.0",
+  "historicalBaseCommit": "785be5edc3ee70bcc9f03b0c7387d9823874af23",
+  "organizedSourceCommit": "94af619b2338c2a0a916eeb43baf7add5dc4f2de",
+  "type": "Selección de resultados históricos copiados sin modificar; no es una nueva ejecución de pruebas",
+  "fullOriginalPackages": [
+    "evidencias/verificacion-final",
+    "evidencias/estabilizacion-seguridad-20261114",
+    "evidencias/postgresql-local-20261115"
+  ],
+  "copies": [
+    {
+      "file": "seguridad/estado-final.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/estado-final.json",
+      "sha256": "5556979f823cec684813d86e346b21c28dc8703a82fa56002bb26584ccef0e24",
+      "bytes": 421,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/integridad-frontend.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/integridad-frontend.json",
+      "sha256": "5862c836e4bc7fed56a1cfd9d7aa83c7eb174ec39f3ec78c738ada6e06528a52",
+      "bytes": 2561,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/inventario-openrouter.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/inventario-openrouter.json",
+      "sha256": "2dc82e8b184e8d4eff1ca12fce8a9f0162f7113b6757fd6d76beeb0d8ed8d114",
+      "bytes": 379,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/contexto-fase.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/contexto-fase.json",
+      "sha256": "c28f5f413f2bace4a544ae06c49ff8c1b5396c779949297a73aab4192bda5fec",
+      "bytes": 12143,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/pruebas-unitarias/resultados.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/pruebas-unitarias/resultados.json",
+      "sha256": "b67693c3676c1878cef51417637fd6350439b2ff0269f6f5ccf03b70b057e47b",
+      "bytes": 119505,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/pruebas-unitarias/junit.xml",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/pruebas-unitarias/junit.xml",
+      "sha256": "0bae6111d7bbb921dc45b9a42e484e0f58e778762cff88bef243bd4ea6186b3b",
+      "bytes": 11979,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/pruebas-unitarias/lcov.info",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/pruebas-unitarias/lcov.info",
+      "sha256": "0fa9e9f99790f0cf4526e5483251c267c662cc22bc4bd251e39f39bd9cd043ac",
+      "bytes": 6665,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/csp-browser/resultados.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/csp-browser/resultados.json",
+      "sha256": "3d09a601b68c3287025d6183dc51e4f8a433f037ddd48a62900105cc013596a6",
+      "bytes": 858,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/05-csp/aceptacion/resultados.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/05-csp/aceptacion/resultados.json",
+      "sha256": "12c85e1bc1ad6588c00cdad9857d66506697f38d269b7ce6fd8f0b4d4fcaee3b",
+      "bytes": 3807,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "seguridad/07-cierre/revision-visual/visual/comparacion.json",
+      "original": "evidencias/estabilizacion-seguridad-20261114/07-cierre/revision-visual/visual/comparacion.json",
+      "sha256": "46516c9c0a0d12c09631c1b81507576c5ea0c81425d5cb0bcda0886cc13f69ee",
+      "bytes": 8767,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/contexto-resultados.json",
+      "original": "evidencias/postgresql-local-20261115/contexto-resultados.json",
+      "sha256": "f759248710371338edeeddeb3d4e21165431626f263f52c0466ad07a931dd474",
+      "bytes": 16481,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/proteccion-final.json",
+      "original": "evidencias/postgresql-local-20261115/proteccion-final.json",
+      "sha256": "fcc94efb27052c289342a567a702efa4e7a5d6c603ab335a06f330ed5e7b61aa",
+      "bytes": 647,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/respaldo-restauracion.json",
+      "original": "evidencias/postgresql-local-20261115/respaldo-restauracion.json",
+      "sha256": "3e8b4e53574e0f003dc4dc82b51520d4959a2346c87bd49a79339a46e16ee2c5",
+      "bytes": 518,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/08-permisos-final/regresion/pruebas-unitarias/resultados.json",
+      "original": "evidencias/postgresql-local-20261115/08-permisos-final/regresion/pruebas-unitarias/resultados.json",
+      "sha256": "00a3f13650cd03029258c556e09504d6e0efb4186a0952107fd945808750eaaf",
+      "bytes": 126657,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/08-permisos-final/regresion/pruebas-unitarias/junit.xml",
+      "original": "evidencias/postgresql-local-20261115/08-permisos-final/regresion/pruebas-unitarias/junit.xml",
+      "sha256": "2cccbc0698b6557726bbf3ee9713a9bac13185091a7a98f0d9293499d03e9a95",
+      "bytes": 12827,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/08-permisos-final/regresion/pruebas-unitarias/lcov.info",
+      "original": "evidencias/postgresql-local-20261115/08-permisos-final/regresion/pruebas-unitarias/lcov.info",
+      "sha256": "8425b56d00fee72e1140415308794325fa11d942acc742210937d4b1703c9f68",
+      "bytes": 6975,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/08-permisos-final/nativas/pruebas-unitarias/resultados.json",
+      "original": "evidencias/postgresql-local-20261115/08-permisos-final/nativas/pruebas-unitarias/resultados.json",
+      "sha256": "4e5dd0f1d6d23b3d370dd73fd2ba08f255ada01cd04a80d2754a8f4f65f6db70",
+      "bytes": 3618,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/08-permisos-final/nativas/pruebas-unitarias/junit.xml",
+      "original": "evidencias/postgresql-local-20261115/08-permisos-final/nativas/pruebas-unitarias/junit.xml",
+      "sha256": "e915953ba62b08f856fd05122208b7d4fad0135037a8b53ec00953052bb79bcf",
+      "bytes": 2460,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/09-e2e-permisos-final/aceptacion/resultados.json",
+      "original": "evidencias/postgresql-local-20261115/09-e2e-permisos-final/aceptacion/resultados.json",
+      "sha256": "ade88ab1bdad864181fce56b8a5b2a369e8f65d26a3c878b031e8e373217052f",
+      "bytes": 3805,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/06-navegador/visual/comparacion.json",
+      "original": "evidencias/postgresql-local-20261115/06-navegador/visual/comparacion.json",
+      "sha256": "f16fb3ce91aaaed9e67db5862e1c021929632209ef93a35f8b2d7f01d941d5db",
+      "bytes": 8767,
+      "copiedByteForByte": true
+    },
+    {
+      "file": "postgresql/03-runtime/pruebas-unitarias/resultados.json",
+      "original": "evidencias/postgresql-local-20261115/03-runtime/pruebas-unitarias/resultados.json",
+      "sha256": "cdd9a5085c6d13282a1c3ddf8c49f73f90581baf07f4ca9cd94caeef08172562",
+      "bytes": 1597,
+      "copiedByteForByte": true
+    }
+  ]
+}

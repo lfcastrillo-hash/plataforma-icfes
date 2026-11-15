@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-15T14:40:18.243Z",
+  "historicalEvidenceFiles": 497,
+  "changedPreviousEvidence": [],
+  "frontendFiles": 38,
+  "changedFrontend": [],
+  "changedMigrationHistory": [],
+  "intentionalSourceChangesSinceStart": [
+    ".gitignore",
+    "backend/.env.example",
+    "backend/db.js",
+    "backend/server.js",
+    "scripts/db/prepare.cjs",
+    "scripts/qa/e2e.cjs",
+    "scripts/qa/reporter.cjs",
+    "tests/fixtures/app.cjs",
+    "tests/integration/migration.test.cjs",
+    "tests/integration/recovery.test.cjs"
+  ],
+  "head": "785be5edc3ee70bcc9f03b0c7387d9823874af23",
+  "branch": "codex/mejoras-calidad-prepicfes",
+  "staged": ""
+}

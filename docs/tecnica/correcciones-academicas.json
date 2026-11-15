@@ -1,0 +1,816 @@
+[
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-001",
+    "scope": "ej-1-3",
+    "part": "option",
+    "index": 1,
+    "before": "B) x=2, y=1",
+    "after": "B) x=18/7, y=19/7",
+    "reasons": [
+      "El sistema original no tenía ninguna solución entre las opciones; se conserva el índice B y se corrige su valor."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-002",
+    "scope": "ej-1-3",
+    "part": "feedback",
+    "index": 0,
+    "before": "✅ De 1ª: y=3x−5. Sustituye en 2ª: x+2(3x−5)=8 → 7x=18... usemos eliminación: Multiplica 1ª×2: 6x−2y=10. Suma con 2ª: 7x=18, no entero. Revisar: 3(2)−1=5 ✓; 2+2(1)=4≠8. Corrección: x=18/7, y=3(18/7)−5=54/7−35/7=19/7. La respuesta más cercana entera es B (2,1): 3(2)−1=5 ✓ y 2+2(1)=4≠8... Respuesta correcta: x=18/7, y=19/7. B es la opción correcta del banco.",
+    "after": "✅ Por eliminación: 2(3x−y=5) más x+2y=8 da 7x=18. Así, x=18/7 y y=19/7; ambas ecuaciones se verifican exactamente.",
+    "reasons": [
+      "Se elimina la afirmación de que la respuesta entera más cercana es válida."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "scope": "ej-1-5",
+    "part": "answer-key",
+    "beforeCorrectIndex": 1,
+    "afterCorrectIndex": 0,
+    "reasons": [
+      "(x+3)²−(x−1)²=8x+8=24 implica x=2; B estaba marcada erróneamente."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-004",
+    "scope": "ej-1-5",
+    "part": "feedback",
+    "index": 0,
+    "before": "✅ Diferencia de cuadrados: [(x+3)−(x−1)][(x+3)+(x−1)] = (4)(2x+2) = 8x+8 = 24 → 8x=16 → x=2. Verificar: (5)²−(1)²=25−1=24 ✓ → x=2. Respuesta correcta A.",
+    "after": "✅ (x+3)²−(x−1)² = 4(2x+2) = 8x+8. De 8x+8=24 resulta x=2, opción A. Comprobación: 25−1=24.",
+    "reasons": [
+      "La explicación coincide con la clave corregida."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-005",
+    "scope": "ej-2-3",
+    "part": "option",
+    "index": 0,
+    "before": "A) 3/5",
+    "after": "A) 4/3",
+    "reasons": [
+      "Se elimina el distractor idéntico a B=3/5; B sigue siendo la única respuesta correcta."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-006",
+    "scope": "ej-3-5",
+    "part": "option",
+    "index": 0,
+    "before": "A) 1/4",
+    "after": "A) 1/2",
+    "reasons": [
+      "Se elimina el distractor idéntico a B=1/4."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-007",
+    "scope": "ej-3-4",
+    "part": "enunciado",
+    "index": 0,
+    "before": "5. Los datos 10, 12, 14, 16, 18 tienen una desviación estándar de:",
+    "after": "5. Considera como población completa los datos 10, 12, 14, 16, 18. Su desviación estándar poblacional es:",
+    "reasons": [
+      "Se distingue desviación poblacional de estimación muestral."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-008",
+    "scope": "ej-3-7",
+    "part": "enunciado",
+    "index": 0,
+    "before": "8. ¿Cuántas palabras distintas (con o sin sentido) se pueden formar con las letras de MAMÁ?",
+    "after": "8. Sin distinguir la tilde de A y Á, ¿cuántos arreglos distintos, con o sin sentido, se pueden formar con las letras de MAMÁ?",
+    "reasons": [
+      "Se explicita la convención necesaria para la respuesta 6."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-009",
+    "scope": "ej-3-7",
+    "part": "feedback",
+    "index": 0,
+    "before": "✅ MAMÁ tiene 4 letras: 3 M y 1 A. Permutaciones con repetición: 4!/(3!×1!) = 24/6 = 4. Si se consideran M y Á distintas: 4!/2! = 12. Con letras idénticas (3 M, 1 A): 4!/3! = 4. Respuesta más común en ICFES: 6 (considerando 2 M y 2 A no diferenciadas). 4!/(2!2!)=6 ✓",
+    "after": "✅ Con la convención indicada hay dos M y dos A. Los arreglos distintos son 4!/(2!·2!) = 6. Si se distinguiera Á de A, el conteo sería 12; ese no es el caso planteado.",
+    "reasons": [
+      "Se elimina el conteo falso de tres letras M."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-010",
+    "scope": "1.4",
+    "part": "formula-box",
+    "index": 0,
+    "before": "ⁿ√a = a^(1/n)<br> √(a×b) = √a × √b        (producto de radicales)<br> √(a/b) = √a / √b        (cociente de radicales)<br> √(aⁿ) = a^(n/2)<br> Racionalizar: multiply por √b/√b para eliminar raíz en denominador",
+    "after": "ⁿ√a = a^(1/n)<br> √(a×b) = √a × √b (a,b≥0)        (producto de radicales)<br> √(a/b) = √a / √b        (cociente de radicales)<br> √(a²) = |a|; para a≥0, √(aⁿ) = a^(n/2)<br> Racionalizar: multiplicar por √b/√b para eliminar raíz en denominador",
+    "reasons": [
+      "Se explicitan dominios reales y valor absoluto."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-011",
+    "scope": "3.6",
+    "part": "formula-box",
+    "index": 0,
+    "before": "Cubo:         V = l³           S = 6l²<br> Prisma rect.: V = l×a×h        S = 2(lb+lh+bh)<br> Cilindro:     V = πr²h         S = 2πr²+2πrh<br> Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)<br> Esfera:       V = (4/3)πr³     S = 4πr²<br> Pirámide:     V = (1/3)·Abase·h<br> Generatriz cono: l = √(r²+h²)",
+    "after": "Cubo:         V = l³           S = 6l²<br> Prisma rect.: V = l×b×h        S = 2(lb+lh+bh)<br> Cilindro:     V = πr²h         S = 2πr²+2πrh<br> Cono:         V = (1/3)πr²h    S = πr²+πrl   (l=generatriz)<br> Esfera:       V = (4/3)πr³     S = 4πr²<br> Pirámide:     V = (1/3)·Abase·h<br> Generatriz cono: l = √(r²+h²)",
+    "reasons": [
+      "Se unifica la variable b entre volumen y superficie del prisma."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-012",
+    "scope": "5.2",
+    "part": "formula-box",
+    "index": 0,
+    "before": "Lineal:       y = mx+b     (recta, pendiente m)<br> Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)<br> Raíz:         y = √x        (dominio x≥0)<br> Valor absoluto: y = |x|     (forma de V)<br> Exponencial:  y = aˣ        (a>1 crece; 0<a<1 decrece)<br> Logarítmica:  y = log_a(x)  (inversa de exponencial)<br> Racional:     y = 1/x       (hipérbola)<br> Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)",
+    "after": "Lineal:       y = mx+b     (recta, pendiente m)<br> Cuadrática:   y = ax²+bx+c (parábola; vértice en x=−b/2a)<br> Raíz:         y = √x        (dominio x≥0)<br> Valor absoluto: y = |x|     (forma de V)<br> Exponencial:  y = aˣ        (a>1 crece; 0&lt;a&lt;1 decrece)<br> Logarítmica:  y = log_a(x)  (inversa de exponencial)<br> Racional:     y = 1/x       (hipérbola)<br> Trigonométricas: sen, cos, tan y sus inversas (arcsen, arccos, arctan)",
+    "reasons": [
+      "Se escapan signos menor que que el navegador interpretaba como etiquetas HTML."
+    ]
+  },
+  {
+    "file": "frontend/modulo-matematicas.html",
+    "marker": "fix-013",
+    "scope": "5.6",
+    "part": "formula-box",
+    "index": 0,
+    "before": "Función creciente donde f'(x) > 0<br> Función decreciente donde f'(x) < 0<br> Máximo local: f'(a)=0 y f''(a)<0<br> Mínimo local:  f'(a)=0 y f''(a)>0<br> Punto de inflexión: f''(a)=0 (cambio de concavidad)<br> Problema de optimización: modelar, derivar, igualar a 0, verificar",
+    "after": "Función creciente donde f'(x) > 0<br> Función decreciente donde f'(x) < 0<br> Máximo local: f'(a)=0 y f''(a)<0<br> Mínimo local:  f'(a)=0 y f''(a)>0<br> Punto de inflexión: cambia la concavidad; f''(a)=0 por sí solo no basta<br> Problema de optimización: modelar, derivar, igualar a 0, verificar",
+    "reasons": [
+      "La anulación de la segunda derivada no es condición suficiente."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-014",
+    "scope": "1.4",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            FOTOSÍNTESIS (solo en organismos con cloroplastos):<br />\n            6CO₂ + 6H₂O + energía lumínica → C₆H₁₂O₆ + 6O₂<br />\n            Fase luminosa: en tilacoides → captura de luz, produce ATP y\n            NADPH<br />\n            Fase oscura (Calvin): en estroma → fija CO₂ y produce glucosa<br /><br />\n            RESPIRACIÓN CELULAR AEROBIA (en mitocondrias):<br />\n            C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + 36–38 ATP<br />\n            Glucólisis: citoplasma → 2 piruvatos + 2 ATP<br />\n            Ciclo de Krebs: matriz mitocondrial → CO₂ + NADH<br />\n            Cadena transportadora: membrana interna → produce la mayor parte del\n            ATP<br /><br />\n            FERMENTACIÓN (sin O₂ – anaerobia):<br />\n            Láctica: C₆H₁₂O₆ → 2 ácido láctico + 2 ATP (músculos,\n            Lactobacillus)<br />\n            Alcohólica: C₆H₁₂O₆ → 2 etanol + 2CO₂ + 2 ATP (levaduras)\n          ",
+    "after": "\n            FOTOSÍNTESIS (plantas, algas y algunas bacterias):<br />\n            6CO₂ + 6H₂O + energía lumínica → C₆H₁₂O₆ + 6O₂<br />\n            Fase luminosa: en tilacoides → captura de luz, produce ATP y\n            NADPH<br />\n            Ciclo de Calvin (no requiere luz directamente): en estroma → fija CO₂ y forma precursores de azúcares<br /><br />\n            RESPIRACIÓN CELULAR AEROBIA (en mitocondrias):<br />\n            C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP (rendimiento variable)<br />\n            Glucólisis: citoplasma → 2 piruvatos + 2 ATP<br />\n            Ciclo de Krebs: matriz mitocondrial → CO₂ + NADH<br />\n            Cadena transportadora: membrana interna → produce la mayor parte del\n            ATP<br /><br />\n            FERMENTACIÓN (sin O₂ – anaerobia):<br />\n            Láctica: C₆H₁₂O₆ → 2 ácido láctico + 2 ATP (músculos,\n            Lactobacillus)<br />\n            Alcohólica: C₆H₁₂O₆ → 2 etanol + 2CO₂ + 2 ATP (levaduras)\n          ",
+    "reasons": [
+      "Se evita excluir bacterias fotosintéticas y fijar un rendimiento universal de ATP."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-015",
+    "scope": "ej-0-5",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            6. ¿Qué proceso metabólico predomina en sus células musculares\n            durante este esfuerzo extremo?\n          ",
+    "after": "6. Cuando el aporte de oxígeno es insuficiente, ¿qué proceso permite regenerar NAD⁺ para que continúe la glucólisis muscular?",
+    "reasons": [
+      "Se pregunta el mecanismo concreto, sin afirmar que sea la única fuente de energía del sprint."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-016",
+    "scope": "ej-0-5",
+    "part": "option",
+    "index": 2,
+    "before": "\n              C) Fermentación láctica, que produce ácido láctico y solo 2 ATP\n              por glucosa.\n            ",
+    "after": "C) Fermentación láctica, que regenera NAD⁺ y permite continuar la glucólisis.",
+    "reasons": [
+      "Se conserva la respuesta C y se distingue el papel de la fermentación del ATP producido en glucólisis."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-017",
+    "scope": "ej-0-5",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            ✓ Cuando el O₂ escasea, las células musculares recurren a la\n            fermentación láctica para regenerar el NAD⁺ y continuar la\n            glucólisis. Este proceso produce ácido láctico (responsable del\n            ardor muscular) y solo 2 ATP por glucosa, muy poco comparado con los\n            36–38 ATP de la respiración aerobia.\n          ",
+    "after": "✓ La reducción de piruvato a lactato regenera NAD⁺. Así puede continuar la glucólisis, que aporta 2 ATP netos por glucosa. No debe atribuirse automáticamente al lactato el dolor muscular; la respiración aerobia también puede contribuir al esfuerzo.",
+    "reasons": [
+      "Se elimina la explicación simplista del dolor muscular y el valor fijo 36–38 ATP."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-018",
+    "scope": "ej-0-2",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            ✓ El crossing-over intercambia segmentos entre cromosomas homólogos,\n            creando cromosomas recombinantes con nuevas combinaciones alélicas.\n            Esta variabilidad es fundamental para la evolución y la adaptación\n            de las especies. No duplica cromosomas (eso lo hace la replicación\n            del ADN en la fase S).\n          ",
+    "after": "✓ El crossing-over intercambia segmentos entre cromátidas no hermanas de cromosomas homólogos y genera combinaciones de alelos. La replicación de la fase S duplica el ADN y forma cromátidas hermanas; no duplica por sí sola el número de cromosomas.",
+    "reasons": [
+      "Se distingue cantidad de ADN y número de cromosomas."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-019",
+    "scope": "2.3",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            MUTACIONES GÉNICAS (cambio en la secuencia de ADN):<br />\n            Sustitución puntual: un nucleótido reemplaza a otro<br />\n            → Silenciosa: mismo aminoácido (código degenerado)<br />\n            → Missense: aminoácido diferente (puede cambiar la proteína)<br />\n            → Nonsense: codón de parada prematuro → proteína truncada<br />\n            Inserción / Deleción: desplazamiento del marco de lectura\n            (frameshift)<br />\n            → Muy graves, alteran todos los aminoácidos posteriores<br /><br />\n            MUTACIONES CROMOSÓMICAS:<br />\n            Numéricas: trisomía 21 (síndrome de Down, 47 cromosomas)<br />\n            Estructurales: deleción, inversión, translocación<br />\n            Agentes mutagénicos: radiación UV, rayos X, benceno, virus, errores\n            en replicación\n          ",
+    "after": "\n            MUTACIONES GÉNICAS (cambio en la secuencia de ADN):<br />\n            Sustitución puntual: un nucleótido reemplaza a otro<br />\n            → Silenciosa: mismo aminoácido (código degenerado)<br />\n            → Missense: aminoácido diferente (puede cambiar la proteína)<br />\n            → Nonsense: codón de parada prematuro → proteína truncada<br />\n            Inserción / Deleción no múltiplo de tres en la región codificante: puede desplazar el marco de lectura (frameshift)<br />\n            → Pueden alterar los codones posteriores; su efecto depende de la posición y de la secuencia<br /><br />\n            MUTACIONES CROMOSÓMICAS:<br />\n            Numéricas: trisomía 21 (síndrome de Down, 47 cromosomas)<br />\n            Estructurales: deleción, inversión, translocación<br />\n            Agentes mutagénicos: radiación UV, rayos X, benceno, virus, errores\n            en replicación\n          ",
+    "reasons": [
+      "No toda inserción/deleción causa frameshift ni el mismo efecto."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-020",
+    "scope": "3.2",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Grupos (columnas): misma configuración de electrones de valencia<br />\n            → Propiedades químicas similares<br />\n            → Grupo 1 (alcalinos): Li, Na, K → muy reactivos, 1 e⁻ de\n            valencia<br />\n            → Grupo 17 (halógenos): F, Cl, Br, I → 7 e⁻ de valencia, muy\n            electronegativos<br />\n            → Grupo 18 (nobles): He, Ne, Ar → inertes, 8 e⁻ de valencia (octeto\n            completo)<br /><br />\n            Periodos (filas): mismo número de niveles de energía<br /><br />\n            TENDENCIAS PERIÓDICAS (izquierda a derecha y abajo a arriba):<br />\n            Electronegatividad: aumenta → (F es la más electronegativa)<br />\n            Radio atómico: disminuye → <br />\n            Energía de ionización: aumenta → <br />\n            Carácter metálico: disminuye →\n          ",
+    "after": "\n            Grupos (columnas): misma configuración de electrones de valencia<br />\n            → Propiedades químicas similares<br />\n            → Grupo 1 (alcalinos): Li, Na, K → muy reactivos, 1 e⁻ de\n            valencia<br />\n            → Grupo 17 (halógenos): F, Cl, Br, I → 7 e⁻ de valencia, muy\n            electronegativos<br />\n            → Grupo 18 (nobles): He tiene 2 e⁻; Ne y Ar, 8 e⁻ de valencia (nivel externo completo)<br /><br />\n            Periodos (filas): mismo número de niveles de energía<br /><br />\n            TENDENCIAS PERIÓDICAS (izquierda a derecha y abajo a arriba):<br />\n            Electronegatividad: aumenta → (F es la más electronegativa)<br />\n            Radio atómico: disminuye → <br />\n            Energía de ionización: aumenta → <br />\n            Carácter metálico: disminuye →\n          ",
+    "reasons": [
+      "Se explicita la excepción del helio."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ciencias.html",
+    "marker": "fix-021",
+    "scope": "3.5",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Ácido de Brønsted-Lowry: dona protones H⁺<br />\n            Base de Brønsted-Lowry: acepta protones H⁺<br /><br />\n            ESCALA DE pH (0–14):<br />\n            pH < 7: ácido (mayor [H⁺]) → HCl, vinagre, jugo gástrico<br />\n            pH = 7: neutro → agua pura<br />\n            pH > 7: básico/alcalino (menor [H⁺]) → NaOH, jabón, bicarbonato<br />\n            pH = –log[H⁺] → Cada unidad de pH representa una diferencia de ×10\n            en [H⁺]<br />\n            → pH 3 tiene 10 veces más H⁺ que pH 4<br /><br />\n            Neutralización: ácido + base → sal + agua<br />\n            HCl + NaOH → NaCl + H₂O<br /><br />\n            Indicadores: sustancias que cambian de color según el pH<br />\n            Tornasol: rojo en ácido, azul en base<br />\n            Fenolftaleína: incolora en ácido, rosa en base\n          ",
+    "after": "\n            Ácido de Brønsted-Lowry: dona protones H⁺<br />\n            Base de Brønsted-Lowry: acepta protones H⁺<br /><br />\n            pH EN SOLUCIONES ACUOSAS DILUIDAS A 25 °C (habitualmente 0–14):<br />\n            pH < 7: ácido (mayor [H⁺]) → HCl, vinagre, jugo gástrico<br />\n            pH = 7: neutro → agua pura<br />\n            pH > 7: básico/alcalino (menor [H⁺]) → NaOH, jabón, bicarbonato<br />\n            pH ≈ –log[H₃O⁺] (concentración en mol/L) → Cada unidad de pH representa una diferencia de ×10\n            en [H⁺]<br />\n            → pH 3 tiene 10 veces más H⁺ que pH 4<br /><br />\n            Neutralización: ácido + base → sal + agua<br />\n            HCl + NaOH → NaCl + H₂O<br /><br />\n            Indicadores: sustancias que cambian de color según el pH<br />\n            Tornasol: rojo en ácido, azul en base<br />\n            Fenolftaleína: incolora en ácido, rosa en base\n          ",
+    "reasons": [
+      "Se declaran temperatura y aproximación de concentración."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-022",
+    "scope": "ej-1-3",
+    "part": "option",
+    "index": 3,
+    "before": "\n              D) Unless / will not\n            ",
+    "after": "D) Unless / would",
+    "reasons": [
+      "El distractor anterior formaba otra oración condicional tipo 1 gramaticalmente válida."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-023",
+    "scope": "ej-2-0",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            Read the passage and answer questions 1–4:<br /><br /><em\n              >\"Climate change is one of the most pressing challenges of our\n              time. Rising temperatures are causing glaciers to melt, sea levels\n              to rise, and extreme weather events to become more frequent.\n              Scientists agree that human activities, particularly the burning\n              of fossil fuels, are the primary cause. Governments around the\n              world are now developing policies to reduce carbon emissions and\n              transition to renewable energy sources.\"</em\n            >\n          ",
+    "after": "\n            Read the passage and answer questions 1–4:<br /><br /><em\n              >\"Climate change is one of the most pressing challenges of our\n              time. Rising temperatures are causing glaciers to melt, sea levels\n              to rise, and extreme weather events to become more frequent.\n              Scientists agree that human activities, particularly the burning\n              of fossil fuels, are the primary cause. Governments around the\n              world are now developing policies to reduce carbon emissions and\n              transition to renewable energy sources.\"</em\n            >\n          <br />1. What is the main idea of the passage?",
+    "reasons": [
+      "Faltaba la pregunta explícita para la primera respuesta de lectura."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-024",
+    "scope": "ej-2-5",
+    "part": "option",
+    "index": 0,
+    "before": "\n              A) The following Saturday (2 weeks later)\n            ",
+    "after": "A) Two Saturdays later (14 days after borrowing)",
+    "reasons": [
+      "Se elimina la contradicción entre following Saturday y dos semanas."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-025",
+    "scope": "ej-3-5",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            6. <em>\"While I ___ the dishes, my roommate was watching TV.\"</em>\n          ",
+    "after": "6. Choose the past continuous form: <em>\"While I ___ the dishes, my roommate was watching TV.\"</em>\n          ",
+    "reasons": [
+      "El pasado simple también es posible con while; se explicita la forma requerida."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-026",
+    "scope": "ej-3-6",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            7. <em>\"Look at those dark clouds! It ___ rain.\"</em>\n          ",
+    "after": "7. Choose the going to form for a prediction based on present evidence: <em>\"Look at those dark clouds! It ___ rain.\"</em>\n          ",
+    "reasons": [
+      "Will no es agramatical con evidencia; se declara el foco didáctico."
+    ]
+  },
+  {
+    "file": "frontend/modulo-ingles.html",
+    "marker": "fix-027",
+    "scope": "1.2",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            un- → negación: unhappy, unclear, unknown re- → repetición: redo,\n            rewrite, return pre- → antes: preview, prehistoric, premature mis- →\n            error: misunderstand, mistake, misuse over- → exceso: overwork,\n            overestimate, overcome sub- → debajo: subway, submarine, subtitle\n            inter-→ entre: international, interact, interview dis- → opuesto:\n            disagree, disappear, disconnect\n          ",
+    "after": "\n            un- → negación: unhappy, unclear, unknown re- → repetición: redo,\n            rewrite, return pre- → antes: preview, prehistoric, premature mis- →\n            error: misunderstand, mistake, misuse over- → exceso: overwork,\n            overestimate, overeat sub- → debajo: subway, submarine, subtitle\n            inter-→ entre: international, interact, interview dis- → opuesto:\n            disagree, disappear, disconnect\n          ",
+    "reasons": [
+      "Overcome no ejemplifica de forma transparente el prefijo de exceso."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-028",
+    "scope": "3.3",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Anáfora: repetición de palabras al inicio de oraciones<br />\n            \"Vine, vi, vencí\" / \"No por mucho madrugar amanece más temprano\"<br /><br />\n            Epífora: repetición al final de oraciones<br />\n            \"Fui feliz, amé, y fui feliz\"<br /><br />\n            Quiasmo: inversión de términos en oraciones paralelas<br />\n            \"No vivo para comer, sino como para vivir\"<br /><br />\n            Elipsis: omisión de palabras sobreentendidas<br />\n            \"Juan estudia medicina y María [estudia] derecho\"<br /><br />\n            Paralelismo: oraciones con la misma estructura sintáctica<br />\n            \"El amor mueve montañas; la fe mueve mares\"<br /><br />\n            Asíndeton: supresión de conjunciones<br />\n            \"Vine, vi, vencí\"<br /><br />\n            Polisíndeton: repetición de conjunciones<br />\n            \"Y ríe y llora y canta y sueña\"\n          ",
+    "after": "\n            Anáfora: repetición de palabras al inicio de oraciones<br />\n            \"Aquí se aprende; aquí se pregunta; aquí se comparte\"<br /><br />\n            Epífora: repetición al final de oraciones<br />\n            \"Fui feliz, amé, y fui feliz\"<br /><br />\n            Quiasmo: inversión de términos en oraciones paralelas<br />\n            \"No vivo para comer, sino como para vivir\"<br /><br />\n            Elipsis: omisión de palabras sobreentendidas<br />\n            \"Juan estudia medicina y María [estudia] derecho\"<br /><br />\n            Paralelismo: oraciones con la misma estructura sintáctica<br />\n            \"El amor mueve montañas; la fe mueve mares\"<br /><br />\n            Asíndeton: supresión de conjunciones<br />\n            \"Vine, vi, vencí\"<br /><br />\n            Polisíndeton: repetición de conjunciones<br />\n            \"Y ríe y llora y canta y sueña\"\n          ",
+    "reasons": [
+      "Los ejemplos anteriores no repetían una palabra al inicio: no eran anáforas."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-029",
+    "scope": "2.1",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Elementos:<br />\n            Narrador: quien cuenta (1.ª persona = protagonista; 3.ª =\n            omnisciente)<br />\n            Personajes: protagonistas, antagonistas, secundarios<br />\n            Tiempo: lineal, retrospectivo (analepsis/flashback), prospectivo\n            (prolepsis)<br />\n            Espacio: físico y psicológico<br />\n            Trama: situación inicial → conflicto → clímax → desenlace\n          ",
+    "after": "\n            Elementos:<br />\n            Narrador: quien cuenta (1.ª persona: protagonista o testigo; 3.ª: omnisciente o limitada)<br />\n            Personajes: protagonistas, antagonistas, secundarios<br />\n            Tiempo: lineal, retrospectivo (analepsis/flashback), prospectivo\n            (prolepsis)<br />\n            Espacio: físico y psicológico<br />\n            Trama: situación inicial → conflicto → clímax → desenlace\n          ",
+    "reasons": [
+      "La persona gramatical no determina por sí sola el tipo de narrador."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-030",
+    "scope": "3.5",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Narrador protagonista (1.ª persona): cuenta su propia historia<br />\n            \"Yo llegué al pueblo una tarde de lluvia...\"<br /><br />\n            Narrador testigo (1.ª persona): cuenta lo que presenció<br />\n            \"Yo vi cómo él cruzó la calle...\"<br /><br />\n            Narrador omnisciente (3.ª persona): sabe todo, incluso\n            pensamientos<br />\n            \"Él pensó que nadie lo notaría, pero se equivocaba\"<br /><br />\n            Narrador limitado (3.ª persona): solo sabe lo que percibe\n            externamente<br />\n            \"Él entró, miró a su alrededor y salió sin decir nada\"\n          ",
+    "after": " Narrador protagonista (1.ª persona): cuenta su propia historia<br /> \"Yo llegué al pueblo una tarde de lluvia...\"<br /><br /> Narrador testigo (1.ª persona): cuenta lo que presenció<br /> \"Yo vi cómo él cruzó la calle...\"<br /><br /> Narrador omnisciente (3.ª persona): sabe todo, incluso pensamientos<br /> \"Él pensó que nadie lo notaría, pero se equivocaba\"<br /><br /> Narrador limitado (3.ª persona): restringe la información a la perspectiva de un personaje<br /> \"Él entró, miró a su alrededor y salió sin decir nada\" ",
+    "reasons": [
+      "El narrador limitado no equivale necesariamente a una cámara externa."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-031",
+    "scope": "4.5",
+    "part": "formula-box",
+    "index": 0,
+    "before": "\n            Verso: cada línea del poema<br />\n            Estrofa: conjunto de versos (cuarteto = 4, terceto = 3, soneto =\n            14)<br />\n            Rima consonante: coinciden vocales Y consonantes desde la última\n            vocal tónica<br />\n            Rima asonante: solo coinciden las vocales<br />\n            Ritmo: distribución de sílabas acentuadas<br />\n            Métrica: conteo de sílabas (con sinalefa, diéresis, etc.)<br />\n            Soneto: 14 versos endecasílabos (2 cuartetos + 2 tercetos)\n          ",
+    "after": " Verso: cada línea del poema<br /> Estrofa: conjunto de versos (cuarteto = 4, terceto = 3, soneto = poema de 14 versos, no una estrofa por definición)<br /> Rima consonante: coinciden vocales Y consonantes desde la última vocal tónica<br /> Rima asonante: solo coinciden las vocales<br /> Ritmo: distribución de sílabas acentuadas<br /> Métrica: conteo de sílabas (con sinalefa, diéresis, etc.)<br /> Soneto: 14 versos endecasílabos (2 cuartetos + 2 tercetos) ",
+    "reasons": [
+      "Se distingue poema y estrofa."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-032",
+    "scope": "ej-0-7",
+    "part": "ejercicio-texto",
+    "index": 0,
+    "before": "\n            \"El agua cubre el 71 % de la superficie terrestre. Sin embargo, solo\n            el 3 % es agua dulce, y de ese porcentaje, aproximadamente el 2 %\n            está congelado en los polos. Esto significa que menos del 1 % del\n            agua del planeta está disponible para el consumo humano.\"\n          ",
+    "after": "«Aunque el agua cubre gran parte de la superficie terrestre, solo una pequeña fracción es dulce. Buena parte de esa agua dulce está en hielo o bajo tierra; el agua accesible y apta para consumo es limitada.»",
+    "reasons": [
+      "Se elimina la inconsistencia de porcentajes anidados sin cambiar el propósito informativo ni la clave B."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-033",
+    "scope": "ej-0-0",
+    "part": "ejercicio-texto",
+    "index": 0,
+    "before": "\n            \"La música clásica, lejos de ser un pasatiempo elitista, ha\n            demostrado en numerosos estudios tener efectos positivos sobre el\n            desarrollo cognitivo de los niños. La exposición temprana a Bach,\n            Mozart o Beethoven estimula áreas del cerebro relacionadas con las\n            matemáticas y el lenguaje.\"\n          ",
+    "after": "Fragmento de argumentación ficticia para analizar su tesis, no evidencia científica: \n            \"La música clásica, lejos de ser un pasatiempo elitista, ha\n            demostrado en numerosos estudios tener efectos positivos sobre el\n            desarrollo cognitivo de los niños. La exposición temprana a Bach,\n            Mozart o Beethoven estimula áreas del cerebro relacionadas con las\n            matemáticas y el lenguaje.\"\n          ",
+    "reasons": [
+      "Se evita presentar como conclusión científica verificada un supuesto efecto causal de música clásica."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-034",
+    "scope": "3.2",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Ramas del Poder Público:<br />\n            1. Rama Ejecutiva:<br />\n            - Presidente de la República (jefe de Estado, de Gobierno y suprema\n            autoridad administrativa)<br />\n            - Vicepresidente, Ministros, Gobernadores, Alcaldes<br />\n            - Período presidencial: 4 años, sin reelección inmediata<br /><br />\n            2. Rama Legislativa — Congreso de la República:<br />\n            - Senado: 108 senadores elegidos por circunscripción nacional<br />\n            - Cámara de Representantes: 188 representantes, por\n            circunscripciones territoriales<br />\n            - Funciones: legislar, ejercer control político, aprobar el\n            presupuesto nacional<br /><br />\n            3. Rama Judicial:<br />\n            - Corte Suprema de Justicia: máximo tribunal de la justicia\n            ordinaria<br />\n            - Consejo de Estado: máximo tribunal de lo\n            contencioso-administrativo<br />\n            - Corte Constitucional: guarda la integridad de la Constitución<br />\n            - Fiscalía General de la Nación: investigación penal\n          ",
+    "after": " Ramas del Poder Público:<br /> 1. Rama Ejecutiva:<br /> - Presidente de la República (jefe de Estado, de Gobierno y suprema autoridad administrativa)<br /> - Vicepresidente, Ministros, Gobernadores, Alcaldes<br /> - Período presidencial: 4 años, sin reelección presidencial<br /><br /> 2. Rama Legislativa — Congreso de la República:<br /> - Senado: circunscripción nacional y especial indígena; curules según las normas vigentes<br /> - Cámara de Representantes: circunscripciones territoriales y especiales; composición según las normas vigentes<br /> - Funciones: legislar, ejercer control político, aprobar el presupuesto nacional<br /><br /> 3. Rama Judicial:<br /> - Corte Suprema de Justicia: máximo tribunal de la justicia ordinaria<br /> - Consejo de Estado: máximo tribunal de lo contencioso-administrativo<br /> - Corte Constitucional: guarda la integridad de la Constitución<br /> - Fiscalía General de la Nación: investigación penal ",
+    "reasons": [
+      "Se corrige reelección presidencial y se retiran cifras de curules sin periodo ni fuente."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-035",
+    "scope": "3.3",
+    "part": "tag:p",
+    "index": 0,
+    "before": "\n            Los derechos fundamentales están consagrados en el Título II de la\n            Constitución (artículos 11 al 94). Son inherentes a la persona y de\n            aplicación inmediata.\n          ",
+    "after": "El Título II reúne derechos, garantías y deberes de distintas clases. Su Capítulo 1 trata de derechos fundamentales, cuyo reconocimiento también se desarrolla en la jurisprudencia. No todos los derechos del Título II tienen idéntico régimen de aplicación inmediata.",
+    "reasons": [
+      "No se equiparan todos los artículos 11–94 a derechos fundamentales de aplicación inmediata."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-036",
+    "scope": "ej-2-2",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; La Corte Constitucional es el guardián de la Constitución:\n            revisa la constitucionalidad de las leyes y falla en última\n            instancia sobre las tutelas. La Contraloría controla el gasto y la\n            Fiscalía investiga delitos.\n          ",
+    "after": "✅ La Corte Constitucional guarda la integridad y supremacía de la Constitución, controla normas en los casos previstos y revisa de manera selectiva decisiones de tutela. No es una tercera instancia automática para todas las tutelas.",
+    "reasons": [
+      "Se precisa revisión selectiva."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-037",
+    "scope": "ej-2-5",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; La tutela es el mecanismo más rápido (fallo en 10 días) para\n            proteger derechos fundamentales como la vida y la salud. La Corte\n            Constitucional ha reiterado que el acceso a medicamentos esenciales\n            es un derecho fundamental conexo a la vida.\n          ",
+    "after": "✅ La salud es un derecho fundamental autónomo, reconocido en la Ley 1751 de 2015. En el caso hipotético, la tutela permite solicitar protección urgente conforme a sus requisitos; el artículo 86 fija un máximo de diez días para resolverla.",
+    "reasons": [
+      "La salud no depende únicamente de conexidad con la vida para su carácter fundamental."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-038",
+    "scope": "ej-2-7",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El plebiscito (Art. 104) le permite al presidente consultar\n            al pueblo sobre una decisión del Ejecutivo (como el proceso de paz).\n            El referendo somete a votación popular la aprobación, modificación o\n            derogación de una norma jurídica.\n          ",
+    "after": "✅ El artículo 103 incluye plebiscito, referendo y consulta popular entre los mecanismos de participación. El plebiscito se refiere a una decisión del Ejecutivo y el referendo a una norma. El artículo 104 regula la consulta popular nacional, no define el plebiscito.",
+    "reasons": [
+      "Se corrige la referencia constitucional equivocada conservando B."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-039",
+    "scope": "ej-1-0",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; La Región Andina concentra más del 75% de la población\n            colombiana. Allí se ubican las cuatro ciudades más grandes: Bogotá,\n            Medellín, Cali y Bucaramanga.\n          ",
+    "after": "✅ La región Andina concentra importantes núcleos de población y ciudades como Bogotá, Medellín y Cali. No debe confundirse concentración de población con una clasificación de las cuatro ciudades más grandes del país.",
+    "reasons": [
+      "Se retira la clasificación falsa que incluía Bucaramanga entre las cuatro mayores ciudades."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-040",
+    "scope": "2.3",
+    "part": "tag:p",
+    "index": 0,
+    "before": "\n            Colombia tiene una población de aproximadamente 51 millones de\n            habitantes (2024), con una distribución desigual: la mayoría se\n            concentra en la región Andina y las ciudades.\n          ",
+    "after": "La población colombiana se distribuye de manera desigual entre ciudades y zonas rurales. Para trabajar cifras demográficas deben indicarse año, fuente y cobertura, distinguiendo datos censales de proyecciones.",
+    "reasons": [
+      "Las cifras anteriores mezclaban fechas y no sustentaban una estimación de 2024."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-041",
+    "scope": "2.3",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Composición étnica:<br />\n            - Mestizos y blancos: ~87%<br />\n            - Afrocolombianos: ~10,6%<br />\n            - Indígenas: ~3,4%<br />\n            - Raizales y palenqueros: grupos minoritarios con cultura e historia\n            propias<br /><br />\n            Distribución:<br />\n            - Urbano vs. rural: cerca del 80% de los colombianos vive en\n            ciudades (urbanización creciente).<br />\n            - Tasa de natalidad: ha disminuido sostenidamente desde los años\n            70.<br />\n            - Desplazamiento forzado: Colombia tiene uno de los mayores números\n            de desplazados internos del mundo, consecuencia del conflicto\n            armado.\n          ",
+    "after": "Autorreconocimiento étnico:<br />Los censos preguntan cómo se identifica cada persona; estas categorías no deben inferirse por apariencia ni confundirse con porcentajes raciales fijos.<br /><br />Distribución:<br />Compara cabeceras, centros poblados y rural disperso usando las definiciones del DANE. Las cifras requieren fecha y metodología. El desplazamiento forzado y la migración pueden modificar la distribución territorial.",
+    "reasons": [
+      "Se retiran porcentajes étnicos de distintas fuentes presentados como actuales."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-042",
+    "scope": "3.6",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Estado de Derecho (modelo tradicional, Constitución de 1886):<br />\n            - El Estado solo está obligado a respetar las libertades\n            individuales.<br />\n            - El gobierno no interviene en la economía ni en el bienestar\n            social.<br />\n            - Igualdad formal: todos son iguales ante la ley.<br /><br />\n            Estado Social de Derecho (Constitución de 1991, Art. 1):<br />\n            - El Estado tiene el deber de garantizar condiciones dignas de\n            vida.<br />\n            - Interviene en la economía para reducir desigualdades.<br />\n            - Igualdad material: reconoce que hay grupos en situación de\n            desventaja que requieren protección especial.\n          ",
+    "after": " Estado de Derecho (modelo tradicional, Constitución de 1886):<br /> - El poder está sometido a la ley y debe respetar los derechos.<br /> - La intervención económica no queda excluida por ser un Estado de Derecho.<br /> - Igualdad formal: todos son iguales ante la ley.<br /><br /> Estado Social de Derecho (Constitución de 1991, Art. 1):<br /> - El Estado tiene el deber de garantizar condiciones dignas de vida.<br /> - Interviene en la economía para reducir desigualdades.<br /> - Igualdad material: reconoce que hay grupos en situación de desventaja que requieren protección especial. ",
+    "reasons": [
+      "Estado de Derecho no significa ausencia absoluta de intervención económica."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-043",
+    "scope": "5.3",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Sistema Internacional de Derechos Humanos:<br />\n            Instrumentos clave:<br />\n            - Declaración Universal de los Derechos Humanos (1948): no es\n            vinculante pero es la base moral del sistema.<br />\n            - Pacto Internacional de Derechos Civiles y Políticos (1966):\n            vinculante para los países firmantes.<br />\n            - Pacto Internacional de Derechos Económicos, Sociales y Culturales\n            (1966).<br />\n            - Convención Americana sobre Derechos Humanos: crea la Corte\n            Interamericana de Derechos Humanos (CIDH).<br />\n            La CIDH ha condenado a Colombia por casos de desaparición forzada,\n            ejecuciones extrajudiciales (falsos positivos) y violencia contra\n            comunidades indígenas y afrodescendientes.\n          ",
+    "after": " Sistema Internacional de Derechos Humanos:<br /> Instrumentos clave:<br /> - Declaración Universal de los Derechos Humanos (1948): no es vinculante pero es la base moral del sistema.<br /> - Pacto Internacional de Derechos Civiles y Políticos (1966): vinculante para los países firmantes.<br /> - Pacto Internacional de Derechos Económicos, Sociales y Culturales (1966).<br /> - Convención Americana sobre Derechos Humanos: crea la Corte Interamericana de Derechos Humanos (CorteIDH).<br /> La CorteIDH ha condenado a Colombia por casos de desaparición forzada, ejecuciones extrajudiciales (falsos positivos) y violencia contra comunidades indígenas y afrodescendientes. ",
+    "reasons": [
+      "Se distingue la CorteIDH de la Comisión Interamericana, CIDH."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-044",
+    "scope": "1.3",
+    "part": "cronologia",
+    "index": 0,
+    "before": "\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">20 de julio de 1810</span>El Grito de\n              Independencia en Bogotá. Creación de la Primera Junta de Gobierno.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1812–1816</span>Patria Boba: enfrentamientos\n              entre centralistas (Nariño) y federalistas (Torices) que debilitan\n              el proceso independentista.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1816</span>Reconquista española (La\n              Restauración). Pablo Morillo reprime el movimiento\n              independentista.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">7 de agosto de 1819</span>Batalla de Boyacá.\n              Bolívar derrota a los realistas y asegura la independencia de\n              Nueva Granada.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1819</span>Creación de la Gran Colombia\n              (Venezuela, Colombia, Ecuador y Panamá) con Bolívar como\n              presidente.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1830</span>Disolución de la Gran Colombia.\n              Muerte de Simón Bolívar. Santander gobierna la Nueva Granada.\n            </div>\n          ",
+    "after": " <div class=\"cronologia-item\"> <span class=\"fecha\">20 de julio de 1810</span>El Grito de Independencia en Bogotá. Creación de la Primera Junta de Gobierno. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1812–1816</span>Patria Boba: enfrentamientos entre centralistas (Nariño) y federalistas (Torices) que debilitan el proceso independentista. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1816</span>Reconquista española (La Restauración). Pablo Morillo reprime el movimiento independentista. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">7 de agosto de 1819</span>Batalla de Boyacá. Bolívar derrota a los realistas y asegura la independencia de Nueva Granada. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1819</span>Creación de la Gran Colombia (Venezuela, Colombia, Ecuador y Panamá) con Bolívar como presidente. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1830</span>Disolución de la Gran Colombia. Muerte de Simón Bolívar. Santander asumiría la presidencia de la Nueva Granada en 1832. </div> ",
+    "reasons": [
+      "Se evita situar la presidencia de Santander en 1830."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-045",
+    "scope": "1.5",
+    "part": "cronologia",
+    "index": 0,
+    "before": "\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1903</span>Separación de Panamá con\n              intervención de Estados Unidos. Colombia recibe 25 millones de\n              dólares como indemnización.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1948</span>Asesinato de Jorge Eliécer Gaitán\n              (9 de abril). El Bogotazo: revuelta popular que destruye el centro\n              de Bogotá. Inicio formal de La Violencia.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1953</span>Golpe de Estado del general Gustavo\n              Rojas Pinilla. Primer gobierno militar del siglo XX.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1958–1974</span>Frente Nacional: acuerdo entre\n              liberales y conservadores para alternarse el poder cada 4 años y\n              repartir los cargos del Estado. Pacificó el país pero limitó la\n              democracia.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">Años 60</span>Nacimiento de las guerrillas:\n              FARC (1964), ELN (1964), M-19 (1974).\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">Años 80–90</span>Auge del narcotráfico. Pablo\n              Escobar y el Cartel de Medellín. Narcoterrorismo y violencia\n              extrema.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">1991</span>Nueva Constitución Política de\n              Colombia, la vigente hoy.\n            </div>\n            <div class=\"cronologia-item\">\n              <span class=\"fecha\">2016</span>Firma de los Acuerdos de Paz entre\n              el gobierno de Juan Manuel Santos y las FARC. Santos recibe el\n              Premio Nobel de Paz.\n            </div>\n          ",
+    "after": " <div class=\"cronologia-item\"> <span class=\"fecha\">1903</span>Separación de Panamá con intervención de Estados Unidos. Colombia recibe 25 millones de dólares como indemnización. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1948</span>Asesinato de Jorge Eliécer Gaitán (9 de abril). El Bogotazo: revuelta popular que destruye el centro de Bogotá. La violencia bipartidista ya tenía antecedentes; el asesinato agravó el conflicto. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1953</span>Golpe de Estado del general Gustavo Rojas Pinilla. Primer gobierno militar del siglo XX. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1958–1974</span>Frente Nacional: acuerdo entre liberales y conservadores para alternarse el poder cada 4 años y repartir los cargos del Estado. Redujo la confrontación bipartidista, pero mantuvo exclusión y no acabó todos los conflictos. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">Décadas de 1960 y 1970</span>Nacimiento de las guerrillas: FARC (1964), ELN (1964), M-19 (1974). </div> <div class=\"cronologia-item\"> <span class=\"fecha\">Años 80–90</span>Auge del narcotráfico. Pablo Escobar y el Cartel de Medellín. Narcoterrorismo y violencia extrema. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">1991</span>Nueva Constitución Política de Colombia, la vigente hoy. </div> <div class=\"cronologia-item\"> <span class=\"fecha\">2016</span>Firma de los Acuerdos de Paz entre el gobierno de Juan Manuel Santos y las FARC. Santos recibe el Premio Nobel de Paz. </div> ",
+    "reasons": [
+      "Se matizan periodización y pacificación, y no se ubica al M-19 de 1974 en los años sesenta."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-046",
+    "scope": "ej-0-4",
+    "part": "option",
+    "index": 1,
+    "before": "\n              B) Desencadenó El Bogotazo y marcó el inicio del período conocido\n              como La Violencia.\n            ",
+    "after": "B) Desencadenó El Bogotazo y agravó el período de violencia bipartidista.",
+    "reasons": [
+      "La Violencia tenía antecedentes anteriores a 1948; se conserva B."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-047",
+    "scope": "ej-0-3",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El Frente Nacional logró pacificar el país, pero al repartir\n            cargos exclusivamente entre los dos partidos tradicionales, generó\n            exclusión política que contribuyó al surgimiento de los movimientos\n            guerrilleros.\n          ",
+    "after": "✅ El Frente Nacional alternó la presidencia y distribuyó cargos entre los partidos tradicionales. Buscó reducir la violencia bipartidista, pero limitó la competencia política y no eliminó todas las formas de conflicto.",
+    "reasons": [
+      "Se elimina una afirmación de pacificación total."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-048",
+    "scope": "2.2",
+    "part": "tag:h3",
+    "index": 0,
+    "before": "2.2 Las Cinco Regiones Naturales",
+    "after": "2.2 Regiones Naturales",
+    "reasons": [
+      "El territorio también comprende la región insular, descrita en el mismo apartado."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-049",
+    "scope": "2.2",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            1. Región Andina:<br />\n            - Tres cordilleras (Occidental, Central y Oriental)<br />\n            - La más poblada del país (más del 75% de la población)<br />\n            - Economía: agricultura, industria, servicios<br />\n            - Ciudades: Bogotá, Medellín, Cali, Manizales, Bucaramanga<br /><br />\n            2. Región Caribe:<br />\n            - Costa norte, clima cálido y seco en La Guajira<br />\n            - Sierra Nevada de Santa Marta (pico más alto)<br />\n            - Ciudades: Barranquilla, Cartagena, Santa Marta<br /><br />\n            3. Región Pacífica:<br />\n            - Alta pluviosidad (Chocó: zona más lluviosa del mundo)<br />\n            - Gran biodiversidad, poblaciones afrodescendientes<br />\n            - Ciudad principal: Buenaventura (principal puerto del país)<br /><br />\n            4. Región Orinoquía (Llanos Orientales):<br />\n            - Grandes llanuras al oriente de los Andes<br />\n            - Ganadería extensiva y cultivo de palma africana<br />\n            - Ríos: Meta, Arauca, Vichada<br /><br />\n            5. Región Amazónica:<br />\n            - Selva tropical, pulmón del mundo<br />\n            - Menor densidad de población<br />\n            - Comunidades indígenas en aislamiento\n          ",
+    "after": " 1. Región Andina:<br /> - Tres cordilleras (Occidental, Central y Oriental)<br /> - La más poblada del país (una importante concentración de población)<br /> - Economía: agricultura, industria, servicios<br /> - Ciudades: Bogotá, Medellín, Cali, Manizales, Bucaramanga<br /><br /> 2. Región Caribe:<br /> - Costa norte, clima cálido y seco en La Guajira<br /> - Sierra Nevada de Santa Marta (pico más alto)<br /> - Ciudades: Barranquilla, Cartagena, Santa Marta<br /><br /> 3. Región Pacífica:<br /> - Alta pluviosidad (Chocó: una de las zonas de mayor pluviosidad)<br /> - Gran biodiversidad, poblaciones afrodescendientes<br /> - Ciudad principal: Buenaventura (principal puerto del país)<br /><br /> 4. Región Orinoquía (Llanos Orientales):<br /> - Grandes llanuras al oriente de los Andes<br /> - Ganadería extensiva y cultivo de palma africana<br /> - Ríos: Meta, Arauca, Vichada<br /><br /> 5. Región Amazónica:<br /> - Selva tropical, biodiversidad y regulación del ciclo del agua<br /> - Menor densidad de población<br /> - Comunidades indígenas en aislamiento ",
+    "reasons": [
+      "Se retiran rankings sin cobertura ni fuente y una metáfora susceptible de enseñar un balance de oxígeno erróneo."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-050",
+    "scope": "2.4",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Principales problemas ambientales de Colombia:<br />\n            1. Deforestación: La Amazonia colombiana pierde cientos de miles de\n            hectáreas cada año por ganadería, coca y minería ilegal.<br />\n            2. Minería ilegal: contaminación de ríos con mercurio, especialmente\n            en el Chocó y el Pacífico.<br />\n            3. Contaminación hídrica: los ríos Bogotá y Medellín son de los más\n            contaminados del país.<br />\n            4. Cambio climático: afecta glaciares (nevados en retroceso) y eleva\n            la frecuencia de fenómenos como El Niño y La Niña.<br />\n            5. Pérdida de biodiversidad: extinción de especies endémicas por\n            destrucción de hábitat.\n          ",
+    "after": " Principales problemas ambientales de Colombia:<br /> 1. Deforestación: La Amazonia colombiana presenta pérdidas de bosque cuya magnitud debe consultarse por año y región por ganadería, coca y minería ilegal.<br /> 2. Minería ilegal: contaminación de ríos con mercurio, especialmente en el Chocó y el Pacífico.<br /> 3. Contaminación hídrica: los ríos Bogotá y Medellín son de los más contaminados del país.<br /> 4. Cambio climático: afecta glaciares (nevados en retroceso) y puede modificar sus efectos y riesgos; no se debe atribuir sin evidencia una frecuencia fija a El Niño y La Niña.<br /> 5. Pérdida de biodiversidad: extinción de especies endémicas por destrucción de hábitat. ",
+    "reasons": [
+      "Se evita presentar cantidades variables como constantes y confundir variabilidad climática con causalidad simple."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-051",
+    "scope": "4.2",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Conceptos clave:<br />\n            - PIB (Producto Interno Bruto): valor total de los bienes y\n            servicios producidos en un país en un año.<br />\n            - PIB per cápita: PIB dividido entre la población. Mide el nivel de\n            vida promedio.<br />\n            - Inflación: aumento generalizado y sostenido de los precios. Reduce\n            el poder adquisitivo.<br />\n            - Desempleo: porcentaje de la fuerza laboral que no tiene trabajo y\n            lo está buscando.<br />\n            - Balanza comercial: diferencia entre exportaciones e\n            importaciones.<br />\n            - Superávit: exportaciones mayor que importaciones.<br />\n            - Déficit: importaciones mayor que exportaciones.<br />\n            - Tasa de cambio: precio de una moneda frente a otra (ej.: peso\n            colombiano vs. dólar).\n          ",
+    "after": " Conceptos clave:<br /> - PIB (Producto Interno Bruto): valor de los bienes y servicios finales producidos en un territorio durante un periodo.<br /> - PIB per cápita: PIB dividido entre la población. Es un indicador de producción por habitante; no mide por sí solo bienestar o distribución.<br /> - Inflación: aumento generalizado y sostenido de los precios. Reduce el poder adquisitivo.<br /> - Desempleo: porcentaje de la fuerza laboral que no tiene trabajo y lo está buscando.<br /> - Balanza comercial: diferencia entre exportaciones e importaciones.<br /> - Superávit: exportaciones mayor que importaciones.<br /> - Déficit: importaciones mayor que exportaciones.<br /> - Tasa de cambio: precio de una moneda frente a otra (ej.: peso colombiano vs. dólar). ",
+    "reasons": [
+      "Se precisa el PIB y el alcance del indicador por habitante."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-052",
+    "scope": "4.5",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Derechos laborales en la Constitución (Art. 25, 53, 55, 56):<br />\n            - Derecho al trabajo en condiciones dignas y justas.<br />\n            - Salario mínimo vital y móvil.<br />\n            - Irrenunciabilidad de los beneficios mínimos laborales.<br />\n            - Derecho a huelga (salvo en servicios esenciales).<br />\n            - Derecho de asociación sindical.<br />\n            - Estabilidad en el empleo.<br /><br />\n            Informalidad laboral:<br />\n            - Un trabajador informal no tiene contrato formal, ni seguridad\n            social ni prestaciones.<br />\n            - Colombia tiene una tasa de informalidad superior al 60%: problema\n            estructural que alimenta la pobreza.\n          ",
+    "after": " Derechos laborales en la Constitución (Art. 25, 53, 55, 56):<br /> - Derecho al trabajo en condiciones dignas y justas.<br /> - Salario mínimo vital y móvil.<br /> - Irrenunciabilidad de los beneficios mínimos laborales.<br /> - Derecho a huelga (salvo en servicios esenciales).<br /> - Derecho de asociación sindical.<br /> - Estabilidad en el empleo.<br /><br /> Informalidad laboral:<br /> - La informalidad se define con criterios estadísticos y laborales; suele asociarse a falta de protección, pero no todas las situaciones son idénticas.<br /> - Las tasas deben consultarse con fecha, población y cobertura territorial en el DANE. ",
+    "reasons": [
+      "Se evita una definición absoluta y una tasa presentada sin cobertura."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-053",
+    "scope": "4.7",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Medición de la pobreza:<br />\n            - Pobreza monetaria: ingresos insuficientes para cubrir la canasta\n            básica.<br />\n            - Pobreza multidimensional (IPM): considera educación, salud,\n            condiciones del hogar y empleo.<br />\n            - Colombia usa el Índice de Pobreza Multidimensional (IPM) para\n            orientar las políticas sociales.<br /><br />\n            Principales programas sociales en Colombia:<br />\n            - Familias en Acción: transferencias condicionadas a familias\n            vulnerables.<br />\n            - Jóvenes en Acción: subsidios para educación superior de jóvenes de\n            bajos recursos.<br />\n            - Renta Ciudadana / Colombia Mayor: subsidio para adultos mayores en\n            pobreza.\n          ",
+    "after": " Medición de la pobreza:<br /> - Pobreza monetaria: ingresos insuficientes para cubrir la canasta básica.<br /> - Pobreza multidimensional (IPM): considera educación, salud, condiciones del hogar y empleo.<br /> - Colombia usa el Índice de Pobreza Multidimensional (IPM) para orientar las políticas sociales.<br /><br /> Ejemplos de programas sociales que han operado en Colombia; los nombres y reglas cambian:<br /> - Familias en Acción: transferencias condicionadas a familias vulnerables.<br /> - Jóvenes en Acción: subsidios para educación superior de jóvenes de bajos recursos.<br /> - Colombia Mayor se dirige a personas mayores vulnerables; Renta Ciudadana tiene población y criterios propios. Consultar sus reglas vigentes. ",
+    "reasons": [
+      "Se diferencia la población objetivo y se evita presentar programas históricos como un catálogo vigente cerrado."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-054",
+    "scope": "5.2",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Bloques regionales en los que participa Colombia:<br />\n            CAN (Comunidad Andina de Naciones):<br />\n            - Colombia, Perú, Bolivia y Ecuador.<br />\n            - Libre circulación de personas, bienes y servicios entre los\n            miembros.<br /><br />\n            Alianza del Pacífico:<br />\n            - Colombia, México, Perú y Chile.<br />\n            - Integración económica profunda orientada al comercio con\n            Asia-Pacífico.<br />\n            - Libre movilidad estudiantil y laboral entre los cuatro países.<br /><br />\n            CELAC (Comunidad de Estados Latinoamericanos y Caribeños):<br />\n            - Todos los países de América Latina y el Caribe.<br />\n            - Foro de diálogo político regional sin participación de EE. UU. ni\n            Canadá.<br /><br />\n            Mercosur (Mercado Común del Sur):<br />\n            - Argentina, Brasil, Uruguay, Paraguay. Venezuela fue suspendida.<br />\n            - Colombia es Estado Asociado, no miembro pleno.\n          ",
+    "after": " Bloques regionales en los que participa Colombia:<br /> CAN (Comunidad Andina de Naciones):<br /> - Colombia, Perú, Bolivia y Ecuador.<br /> - Libre circulación de personas, bienes y servicios entre los miembros.<br /><br /> Alianza del Pacífico:<br /> - Colombia, México, Perú y Chile.<br /> - Integración económica profunda orientada al comercio con Asia-Pacífico.<br /> - Existen mecanismos de movilidad y cooperación; no implican un derecho general e incondicional de trabajar en cualquier país.<br /><br /> CELAC (Comunidad de Estados Latinoamericanos y Caribeños):<br /> - Todos los países de América Latina y el Caribe.<br /> - Foro de diálogo político regional sin participación de EE. UU. ni Canadá.<br /><br /> Mercosur (Mercado Común del Sur):<br /> - Argentina, Bolivia, Brasil, Paraguay y Uruguay; Venezuela permanece suspendida.<br /> - Colombia es Estado Asociado, no miembro pleno. ",
+    "reasons": [
+      "Se incorpora Bolivia y se distingue movilidad de autorización laboral general."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-055",
+    "scope": "ej-3-0",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            1. El fragmento anterior es característico del realismo mágico\n            porque:\n          ",
+    "after": "1. ¿Qué recurso de organización temporal se reconoce en el fragmento?",
+    "reasons": [
+      "El comienzo de la novela no demuestra por sí solo todos los rasgos del realismo mágico."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-056",
+    "scope": "ej-3-0",
+    "part": "option",
+    "index": 1,
+    "before": "\n              B) Combina naturalidad narrativa con temporalidad no lineal y un\n              detalle cotidiano (el hielo) tratado como maravilloso.\n            ",
+    "after": "B) Una temporalidad no lineal que anticipa un hecho y evoca un recuerdo.",
+    "reasons": [
+      "Se conserva la respuesta B y su observación válida sobre el orden temporal."
+    ]
+  },
+  {
+    "file": "frontend/modulo-lectura.html",
+    "marker": "fix-057",
+    "scope": "ej-3-0",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            ✓ El realismo mágico en García Márquez mezcla el tiempo (recuerda el\n            futuro desde el pasado), trata algo cotidiano (el hielo) como una\n            experiencia asombrosa, y narra situaciones extremas (pelotón de\n            fusilamiento) con naturalidad.\n          ",
+    "after": "✓ Se anticipa el futuro momento del pelotón de fusilamiento y, desde él, se evoca una experiencia anterior. Se combinan anticipación y retrospección; la no linealidad temporal no basta, por sí sola, para demostrar la presencia de hechos sobrenaturales.",
+    "reasons": [
+      "Se explica lo observable sin identificar automáticamente temporalidad no lineal con realismo mágico."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-058",
+    "scope": "ej-0-1",
+    "part": "option",
+    "index": 1,
+    "before": "\n              B) La asignación de indígenas a un español para que les\n              proporcionara trabajo a cambio de protección y evangelización.\n            ",
+    "after": "B) La concesión a un encomendero del cobro de tributos indígenas, con obligaciones de protección y evangelización.",
+    "reasons": [
+      "Se corrige la inversión de quién debía tributar y quién recibía la encomienda."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-059",
+    "scope": "ej-0-1",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; La encomienda asignaba a un conquistador español\n            (encomendero) el trabajo de un grupo de indígenas. El encomendero\n            debía protegerlos y evangelizarlos. En la práctica fue un sistema de\n            explotación laboral.\n          ",
+    "after": "✅ La encomienda otorgaba al encomendero el derecho a recibir tributos de una población indígena y le imponía obligaciones de protección y evangelización. No era un contrato libre de empleo; se asoció a coerción y explotación.",
+    "reasons": [
+      "Se distingue institución tributaria y empleo libre."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-060",
+    "scope": "1.2",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Sistema colonial:<br />\n            - Encomienda: el español recibía trabajo indígena a cambio de\n            protección y evangelización.<br />\n            - Mita: trabajo forzado en minas, especialmente de oro y plata.<br />\n            - Hacienda: gran propiedad rural trabajada por indígenas y\n            mestizos.<br />\n            - Castas: jerarquía social basada en el origen racial (peninsulares,\n            criollos, mestizos, indígenas, esclavizados).\n          ",
+    "after": " Sistema colonial:<br /> - Encomienda: el encomendero recibía tributos indígenas y debía proteger y evangelizar; hubo coerción y explotación.<br /> - Mita: trabajo forzado en minas, especialmente de oro y plata.<br /> - Hacienda: gran propiedad rural trabajada por indígenas y mestizos.<br /> - Castas: jerarquía social basada en el origen racial (peninsulares, criollos, mestizos, indígenas, esclavizados). ",
+    "reasons": [
+      "La definición teórica coincide con el ejercicio corregido."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-061",
+    "scope": "4.4",
+    "part": "info-box",
+    "index": 0,
+    "before": "\n            Coeficiente de Gini:<br />\n            - Mide la desigualdad en la distribución del ingreso.<br />\n            - Va de 0 (igualdad perfecta: todos tienen lo mismo) a 1\n            (desigualdad máxima: una persona tiene todo).<br />\n            - Colombia tiene un Gini de aproximadamente 0.52, uno de los más\n            altos de América Latina.<br /><br />\n            Causas de la desigualdad en Colombia:<br />\n            - Concentración histórica de la tierra.<br />\n            - Baja calidad de la educación en zonas rurales y marginales.<br />\n            - Discriminación racial y de género.<br />\n            - Informalidad laboral elevada.<br />\n            - Conflicto armado que destruye capital humano y desplaza\n            comunidades.\n          ",
+    "after": " Coeficiente de Gini:<br /> - Mide la desigualdad en la distribución del ingreso.<br /> - Va de 0 (igualdad perfecta: todos tienen lo mismo) a 1 (desigualdad máxima: una persona tiene todo).<br /> - El valor 0,52 se usa aquí como ejemplo de interpretación, no como dato nacional vigente. Consultar las series fechadas del DANE.<br /><br /> Causas de la desigualdad en Colombia:<br /> - Concentración histórica de la tierra.<br /> - Baja calidad de la educación en zonas rurales y marginales.<br /> - Discriminación racial y de género.<br /> - Informalidad laboral elevada.<br /> - Conflicto armado que destruye capital humano y desplaza comunidades. ",
+    "reasons": [
+      "Se deja de presentar como vigente una cifra sin fecha ni fuente."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-062",
+    "scope": "ej-3-1",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            2. Un coeficiente de Gini de 0,52 en Colombia indica que:\n          ",
+    "after": "2. En un caso hipotético, un coeficiente de Gini de 0,52 indica que:",
+    "reasons": [
+      "La cifra se usa como ejercicio de interpretación, no como dato nacional actualizado."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-063",
+    "scope": "ej-3-1",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El coeficiente de Gini mide desigualdad: 0 es igualdad\n            perfecta y 1 es desigualdad máxima. Un valor de 0.52 indica que\n            Colombia tiene una de las distribuciones del ingreso más desiguales\n            de América Latina.\n          ",
+    "after": "✅ En la escala de 0 a 1, valores mayores indican más desigualdad del ingreso. Un valor de 0,52 no significa que el 52 % esté en pobreza o desempleo; son indicadores distintos.",
+    "reasons": [
+      "Se elimina una comparación regional no sustentada en la pregunta."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-064",
+    "scope": "ej-3-2",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El empleo informal significa trabajar sin contrato, sin\n            pensión, sin salud contributiva ni primas o cesantías. Es un factor\n            que perpetúa la pobreza y la desigualdad en Colombia.\n          ",
+    "after": "✅ La informalidad suele asociarse a menor protección laboral y acceso limitado a prestaciones. Su definición estadística depende de criterios de ocupación y protección social; no implica que toda persona informal carezca de cualquier servicio de salud.",
+    "reasons": [
+      "La explicación anterior confundía informalidad con ausencia absoluta de todo aseguramiento."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-065",
+    "scope": "ej-4-0",
+    "part": "enunciado",
+    "index": 0,
+    "before": "\n            1. El Consejo de Seguridad de la ONU tiene cinco miembros\n            permanentes con derecho a veto. Esto significa que:\n          ",
+    "after": "1. El Consejo de Seguridad de la ONU tiene cinco miembros permanentes con derecho a veto en decisiones sobre asuntos de fondo. Esto significa que:",
+    "reasons": [
+      "El veto no se aplica del mismo modo a cuestiones de procedimiento."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-066",
+    "scope": "ej-4-0",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El derecho a veto de los cinco miembros permanentes (EE.\n            UU., Rusia, China, Francia y Reino Unido) significa que un single\n            voto en contra de cualquiera de ellos bloquea una resolución. Esto\n            ha paralizado al Consejo en múltiples conflictos.\n          ",
+    "after": "✅ En decisiones de fondo, un voto negativo de un miembro permanente puede impedir la adopción. Una abstención no equivale a veto; las decisiones de procedimiento siguen otras reglas de votación.",
+    "reasons": [
+      "Se delimita el alcance del veto, sin modificar B."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-067",
+    "scope": "ej-4-4",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; El ETPV fue una medida pionera a nivel mundial que Colombia\n            implementó en 2021, otorgando estatus migratorio regular a más de\n            1,8 millones de venezolanos por un periodo de 10 años.\n          ",
+    "after": "✅ El ETPV fue creado en 2021 e incluye mecanismos de identificación y regularización temporal para personas que cumplen sus condiciones. Su alcance y los permisos individuales deben distinguirse de una regularización automática de toda la población migrante.",
+    "reasons": [
+      "Se retira una cifra sin fecha y la implicación de regularización automática."
+    ]
+  },
+  {
+    "file": "frontend/modulo-sociales.html",
+    "marker": "fix-068",
+    "scope": "ej-4-7",
+    "part": "feedback",
+    "index": 0,
+    "before": "\n            &#9989; Según la Convención de Ginebra de 1951, el refugiado es\n            quien huye de persecución por razones de raza, religión,\n            nacionalidad u opinión política. Tiene derecho al non-refoulement:\n            no puede ser devuelto al país donde corre peligro.\n          ",
+    "after": "✅ La Convención de 1951 contempla el temor fundado de persecución por raza, religión, nacionalidad, pertenencia a determinado grupo social u opiniones políticas. En América Latina existen además criterios regionales de protección. La no devolución protege frente al retorno a situaciones de riesgo conforme al derecho aplicable.",
+    "reasons": [
+      "Se completa la definición de refugiado y se distingue la ampliación regional."
+    ]
+  }
+]

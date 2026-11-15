@@ -1,89 +1,37 @@
-// Importamos el pool de PostgreSQL y la librería JWT
-const pool = require("../db");
-const jwt = require("jsonwebtoken");
-
-// ESTA CLAVE DEBE SER SECRETA. (En producción se guarda en un archivo .env)
-const SECRET_KEY = "icfes_secreto_123_ultra_seguro";
-
+const jwt = require('jsonwebtoken');
+const { randomUUID } = require('node:crypto');
+const config = require('../config');
+const v = require('../lib/validation');
+const { hashPassword, verifyPassword } = require('../lib/passwords');
+const transaction = require('../lib/transaction');
 async function registrar(req, res) {
-  try {
-    const { nombre, correo, password, rol } = req.body;
-
-    const existe = await pool.query(`SELECT * FROM usuarios WHERE email = $1`, [
-      correo,
-    ]);
-
-    if (existe.rows.length > 0) {
-      return res.json({ success: false, mensaje: "El usuario ya existe" });
-    }
-
-    await pool.query(
-      `INSERT INTO usuarios(nombre, email, password, rol)
-       VALUES($1, $2, $3, $4)`,
-      [nombre, correo, password, rol],
-    );
-
-    res.json({ success: true, mensaje: "Usuario registrado con éxito" });
-  } catch (error) {
-    console.error("Error en registro:", error);
-    res.status(500).json({ success: false, error: error.message });
-  }
+ const { nombre, correo, password, rol } = req.body;
+ if (!v.text(nombre, 1, 120) || !v.email(correo) || !v.password(password) || !['estudiante', 'profesor'].includes(rol)) return v.fail(res, 400, 'Nombre (1?120), correo válido, contraseña (8?128) y rol válido son obligatorios.');
+ try {
+  await req.app.locals.pool.query('INSERT INTO usuarios (nombre,email,password,rol) VALUES ($1,$2,$3,$4)', [nombre.trim(), v.normalizeEmail(correo), await hashPassword(password), rol]);
+  res.status(201).json({ success: true, mensaje: 'Usuario registrado con éxito' });
+ } catch (error) { if (error.code === '23505') return v.fail(res, 409, 'El correo ya está registrado.'); throw error; }
 }
-
 async function login(req, res) {
-  try {
-    const { correo, password, rol } = req.body;
-
-    const resultado = await pool.query(
-      `SELECT id_usuario, nombre, email, rol, foto_perfil FROM usuarios
-       WHERE email = $1 AND password = $2 AND rol = $3`,
-      [correo, password, rol],
-    );
-
-    if (resultado.rows.length === 0) {
-      return res.json({ success: false, mensaje: "Credenciales incorrectas" });
-    }
-
-    const usuario = resultado.rows[0];
-
-    // 1. GENERAR EL TOKEN JWT
-    // Guardamos datos básicos (payload) que usaremos luego, sin incluir la contraseña
-    const tokenPayload = {
-      id_usuario: usuario.id_usuario,
-      correo: usuario.email,
-      rol: usuario.rol,
-    };
-
-    // Firmamos el token. Expira en 24 horas.
-    const token = jwt.sign(tokenPayload, SECRET_KEY, { expiresIn: "24h" });
-
-    res.cookie("token_acceso", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    // 3. RESPONDER AL FRONTEND (Sin enviar el token en el JSON)
-    res.json({
-      success: true,
-      token: token,
-      usuario: {
-        nombre: usuario.nombre,
-        correo: usuario.email,
-        rol: usuario.rol,
-      },
-    });
-  } catch (error) {
-    console.error("Error en login:", error);
-    res.status(500).json({ success: false, error: error.message });
-  }
+ const { correo, password, rol } = req.body;
+ if (!v.email(correo) || typeof password !== 'string' || !password.length || password.length > 128 || !['estudiante','profesor'].includes(rol)) return v.fail(res, 400, 'Completa los datos de acceso correctamente.');
+ const pool = req.app.locals.pool;
+ const result = await pool.query('SELECT id_usuario,nombre,email,password,rol FROM usuarios WHERE lower(email) = $1 AND rol = $2', [v.normalizeEmail(correo), rol]);
+ const usuario = result.rows[0];
+ const valid = usuario ? await verifyPassword(password, usuario.password, config.legacyPasswords) : (await hashPassword(password), false);
+ if (!valid) return v.fail(res, 401, 'Credenciales incorrectas.');
+ const sessionId = randomUUID();
+ await transaction(pool, async client => {
+  if (!usuario.password.startsWith('scrypt$')) await client.query('UPDATE usuarios SET password = $1 WHERE id_usuario = $2 AND password = $3', [await hashPassword(password), usuario.id_usuario, usuario.password]);
+  await client.query('DELETE FROM sesiones WHERE expira <= NOW()');
+  await client.query("INSERT INTO sesiones (id_sesion,id_usuario,expira) VALUES ($1,$2,NOW() + INTERVAL '24 hours')", [sessionId, usuario.id_usuario]);
+ });
+ const token = jwt.sign({ id_usuario: usuario.id_usuario }, config.jwtSecret, { algorithm:'HS256', expiresIn:'24h', jwtid:sessionId, issuer:'prepicfes', audience:'prepicfes-web' });
+ res.cookie('token_acceso', token, { ...config.cookie, maxAge:86400000 });
+ res.json({ success:true, usuario:{ id_usuario:usuario.id_usuario, nombre:usuario.nombre, correo:usuario.email, rol:usuario.rol } });
 }
-
-// Nueva función para cerrar sesión (borrar la cookie)
 async function logout(req, res) {
-  res.clearCookie("token_acceso");
-  res.json({ success: true, mensaje: "Sesión cerrada correctamente" });
+ await req.app.locals.pool.query('DELETE FROM sesiones WHERE id_sesion = $1', [req.sessionId]);
+ res.clearCookie('token_acceso', config.cookie); res.json({ success:true, mensaje:'Sesión cerrada correctamente' });
 }
-
 module.exports = { registrar, login, logout };

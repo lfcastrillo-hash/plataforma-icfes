@@ -1,0 +1,22 @@
+env:
+  contexts:
+    - name: PrepICFES-local
+      urls:
+        - http://127.0.0.1:3001
+      includePaths:
+        - http://127.0.0.1:3001/.*
+      excludePaths:
+        - .*/api/logout
+jobs:
+  - type: spider
+    parameters:
+      context: PrepICFES-local
+      maxDuration: 1
+  - type: passiveScan-wait
+    parameters:
+      maxDuration: 2
+  - type: report
+    parameters:
+      template: traditional-html
+      reportDir: evidencias/sistema
+      reportFile: zap-local

@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-15T16:32:36.580Z",
+  "originalFilesChecked": 1027,
+  "changesExpected": [
+    "docs/tecnica/alcance-actual.md",
+    "docs/tecnica/arquitectura-real.md",
+    "docs/tecnica/matriz-requisitos.md",
+    "frontend/clases_grabadas.html",
+    "frontend/cuadernillos.html",
+    "frontend/entrenando.html",
+    "frontend/filtros.html",
+    "frontend/mas-material.html"
+  ],
+  "unexpectedChanges": [],
+  "historicalEvidenceChecked": 873,
+  "historicalEvidenceChanges": [],
+  "existingVisualAssetsChecked": 4,
+  "alteredAssets": [],
+  "structures": [
+    {
+      "file": "frontend/clases_grabadas.html",
+      "sameStructureAndClasses": true
+    },
+    {
+      "file": "frontend/cuadernillos.html",
+      "sameStructureAndClasses": true
+    },
+    {
+      "file": "frontend/entrenando.html",
+      "sameStructureAndClasses": true
+    },
+    {
+      "file": "frontend/filtros.html",
+      "sameStructureAndClasses": true
+    },
+    {
+      "file": "frontend/mas-material.html",
+      "sameStructureAndClasses": true
+    }
+  ],
+  "academicModulesAndBankUnchanged": true,
+  "branch": "codex/mejoras-calidad-prepicfes",
+  "HEAD": "a28beb7cce3d03560424c52e613ead91d2f081af",
+  "staged": ""
+}

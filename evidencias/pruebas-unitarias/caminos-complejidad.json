@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-14T22:06:51.302Z",
+  "sourceSha256": "1ab75aa1472afa368e487f0e94bf6f80168a0e72840498301c8af13cede76a26",
+  "criterion": "1 + decisiones + cortocircuitos lógicos; callbacks separados; grafos y casos en docs/tecnica/trazabilidad-pruebas.md",
+  "functions": [
+    {
+      "module": "M1",
+      "file": "backend/lib/validation.js",
+      "name": "password",
+      "line": 5,
+      "complexity": 3
+    },
+    {
+      "module": "M2",
+      "file": "backend/lib/validation.js",
+      "name": "percentage",
+      "line": 6,
+      "complexity": 4
+    },
+    {
+      "module": "M3",
+      "file": "frontend/js/simulacro-core.js",
+      "name": "validConfig",
+      "line": 30,
+      "complexity": 9
+    },
+    {
+      "module": "M4",
+      "file": "backend/controllers/clases.controller.js",
+      "name": "ownClass",
+      "line": 4,
+      "complexity": 5
+    },
+    {
+      "module": "M5",
+      "file": "backend/controllers/perfil.controller.js",
+      "name": "imageType",
+      "line": 12,
+      "complexity": 14
+    }
+  ]
+}

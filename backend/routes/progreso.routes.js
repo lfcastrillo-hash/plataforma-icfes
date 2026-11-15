@@ -1,17 +1,8 @@
-const express = require("express");
-
-const router = express.Router();
-
-const {
-  guardarProgreso,
-  obtenerProgreso,
-  obtenerRanking,
-} = require("../controllers/progreso.controller.js");
-
-router.post("/progreso", guardarProgreso);
-
-router.get("/progreso/:correo", obtenerProgreso);
-
-router.get("/ranking", obtenerRanking);
-
-module.exports = router;
+const router=require('express').Router();
+const auth=require('../middlewares/verificarToken');
+const {ownEmail,role}=require('../middlewares/access');
+const c=require('../controllers/progreso.controller');
+router.post('/progreso',auth,role('estudiante'),ownEmail,c.guardarProgreso);
+router.get('/progreso/:correo',auth,role('estudiante'),ownEmail,c.obtenerProgreso);
+router.get('/ranking',auth,role('profesor'),c.obtenerRanking);
+module.exports=router;

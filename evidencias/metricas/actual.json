@@ -1,0 +1,2488 @@
+{
+  "date": "2026-11-14T22:03:58.540Z",
+  "version": "1.1.0",
+  "commit": "29c870727dc3becc067ce0f41e25f173df4b6187",
+  "workingTree": true,
+  "sourceDirty": false,
+  "sourceSha256": "1ab75aa1472afa368e487f0e94bf6f80168a0e72840498301c8af13cede76a26",
+  "node": "v24.14.1",
+  "scope": [
+    "frontend",
+    "backend"
+  ],
+  "exclusions": [
+    "node_modules",
+    "uploads",
+    "dist",
+    "build",
+    "coverage",
+    ".git"
+  ],
+  "criteria": "PLOC=NCLOC+CLOC+BLOC; CLOC solo líneas exclusivamente de comentarios; mixtas incluidas en NCLOC. AST Acorn para JS/JSX e inline HTML. CSS/SQL escáner léxico. Funciones incluyen callbacks; complejidad=1+decisiones+operadores lógicos, excluye funciones anidadas. Clases AST reales.",
+  "totals": {
+    "files": 66,
+    "PLOC": 18489,
+    "NCLOC": 17132,
+    "CLOC": 313,
+    "BLOC": 1044,
+    "mixed": 18,
+    "functions": 312,
+    "classes": 0,
+    "commentDensity": 1.79
+  },
+  "rows": [
+    {
+      "file": "frontend/areas.html",
+      "language": "html",
+      "PLOC": 246,
+      "NCLOC": 227,
+      "CLOC": 1,
+      "BLOC": 18,
+      "mixed": 0,
+      "functions": 3,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "toggleMenu",
+          "line": 194,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 202,
+          "complexity": 8
+        },
+        {
+          "name": "<callback>",
+          "line": 233,
+          "complexity": 4
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/clases.html",
+      "language": "html",
+      "PLOC": 27,
+      "NCLOC": 23,
+      "CLOC": 0,
+      "BLOC": 4,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/clases_grabadas.html",
+      "language": "html",
+      "PLOC": 43,
+      "NCLOC": 40,
+      "CLOC": 0,
+      "BLOC": 3,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/components/ChatIA.jsx",
+      "language": "jsx",
+      "PLOC": 21,
+      "NCLOC": 21,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 2,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "ChatIA",
+          "line": 1,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 16,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/css/dashboard.css",
+      "language": "css",
+      "PLOC": 43,
+      "NCLOC": 37,
+      "CLOC": 0,
+      "BLOC": 6,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/css/global.css",
+      "language": "css",
+      "PLOC": 1415,
+      "NCLOC": 1141,
+      "CLOC": 99,
+      "BLOC": 175,
+      "mixed": 14,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/css/modulos.css",
+      "language": "css",
+      "PLOC": 205,
+      "NCLOC": 170,
+      "CLOC": 13,
+      "BLOC": 22,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/cuadernillos.html",
+      "language": "html",
+      "PLOC": 71,
+      "NCLOC": 67,
+      "CLOC": 0,
+      "BLOC": 4,
+      "mixed": 0,
+      "functions": 1,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "toggleMenu",
+          "line": 63,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/entrenando.html",
+      "language": "html",
+      "PLOC": 44,
+      "NCLOC": 37,
+      "CLOC": 0,
+      "BLOC": 7,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/filtros.html",
+      "language": "html",
+      "PLOC": 76,
+      "NCLOC": 67,
+      "CLOC": 0,
+      "BLOC": 9,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/index.html",
+      "language": "html",
+      "PLOC": 81,
+      "NCLOC": 69,
+      "CLOC": 1,
+      "BLOC": 11,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/aprendizaje.js",
+      "language": "js",
+      "PLOC": 161,
+      "NCLOC": 147,
+      "CLOC": 2,
+      "BLOC": 12,
+      "mixed": 0,
+      "functions": 25,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 12,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 14,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 16,
+          "complexity": 7
+        },
+        {
+          "name": "<callback>",
+          "line": 29,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 30,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 34,
+          "complexity": 3
+        },
+        {
+          "name": "mostrarTema",
+          "line": 49,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 50,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 51,
+          "complexity": 1
+        },
+        {
+          "name": "correctasTema",
+          "line": 57,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 58,
+          "complexity": 2
+        },
+        {
+          "name": "calcularProgresoArea",
+          "line": 61,
+          "complexity": 2
+        },
+        {
+          "name": "guardarProgresoAreaDB",
+          "line": 70,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 74,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 74,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 77,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 77,
+          "complexity": 1
+        },
+        {
+          "name": "responder",
+          "line": 83,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 88,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 103,
+          "complexity": 3
+        },
+        {
+          "name": "completarTema",
+          "line": 111,
+          "complexity": 5
+        },
+        {
+          "name": "marcarUICompletado",
+          "line": 125,
+          "complexity": 4
+        },
+        {
+          "name": "actualizarBotonesCompletar",
+          "line": 134,
+          "complexity": 7
+        },
+        {
+          "name": "actualizarProgreso",
+          "line": 148,
+          "complexity": 3
+        },
+        {
+          "name": "toggleMenu",
+          "line": 156,
+          "complexity": 3
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/auth.js",
+      "language": "js",
+      "PLOC": 148,
+      "NCLOC": 108,
+      "CLOC": 11,
+      "BLOC": 29,
+      "mixed": 0,
+      "functions": 7,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "alternarHeroForm",
+          "line": 5,
+          "complexity": 5
+        },
+        {
+          "name": "mostrarFeedback",
+          "line": 20,
+          "complexity": 5
+        },
+        {
+          "name": "limpiarMensajes",
+          "line": 40,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 41,
+          "complexity": 1
+        },
+        {
+          "name": "registrarUsuario",
+          "line": 49,
+          "complexity": 15
+        },
+        {
+          "name": "<callback>",
+          "line": 89,
+          "complexity": 1
+        },
+        {
+          "name": "iniciarSesion",
+          "line": 97,
+          "complexity": 6
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/banco-simulacro.js",
+      "language": "js",
+      "PLOC": 1197,
+      "NCLOC": 1187,
+      "CLOC": 3,
+      "BLOC": 7,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/chat-ia.js",
+      "language": "js",
+      "PLOC": 93,
+      "NCLOC": 74,
+      "CLOC": 4,
+      "BLOC": 15,
+      "mixed": 1,
+      "functions": 3,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "abrirChat",
+          "line": 1,
+          "complexity": 2
+        },
+        {
+          "name": "cerrarChat",
+          "line": 27,
+          "complexity": 2
+        },
+        {
+          "name": "enviarMensaje",
+          "line": 34,
+          "complexity": 6
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/clases.js",
+      "language": "js",
+      "PLOC": 21,
+      "NCLOC": 21,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 2,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "cargarClases",
+          "line": 1,
+          "complexity": 3
+        },
+        {
+          "name": "crearClase",
+          "line": 13,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/panel-estudiante.js",
+      "language": "js",
+      "PLOC": 241,
+      "NCLOC": 179,
+      "CLOC": 24,
+      "BLOC": 38,
+      "mixed": 0,
+      "functions": 6,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "getAuthHeaders",
+          "line": 19,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 28,
+          "complexity": 17
+        },
+        {
+          "name": "cargarAnunciosEstudiante",
+          "line": 134,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 154,
+          "complexity": 3
+        },
+        {
+          "name": "cerrarSesion",
+          "line": 210,
+          "complexity": 2
+        },
+        {
+          "name": "toggleMenu",
+          "line": 229,
+          "complexity": 3
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/panel-profesor.js",
+      "language": "js",
+      "PLOC": 569,
+      "NCLOC": 466,
+      "CLOC": 33,
+      "BLOC": 70,
+      "mixed": 0,
+      "functions": 45,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "getAuthHeaders",
+          "line": 17,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 24,
+          "complexity": 5
+        },
+        {
+          "name": "cargarClasesSidebar",
+          "line": 72,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 93,
+          "complexity": 1
+        },
+        {
+          "name": "renderizarClasesSidebar",
+          "line": 110,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 114,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 120,
+          "complexity": 1
+        },
+        {
+          "name": "filtrarClasesSidebar",
+          "line": 128,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 130,
+          "complexity": 1
+        },
+        {
+          "name": "seleccionarClase",
+          "line": 139,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 145,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 151,
+          "complexity": 2
+        },
+        {
+          "name": "abrirModalAnuncio",
+          "line": 170,
+          "complexity": 1
+        },
+        {
+          "name": "guardarAnuncio",
+          "line": 175,
+          "complexity": 4
+        },
+        {
+          "name": "cargarEstudiantesDeClase",
+          "line": 204,
+          "complexity": 4
+        },
+        {
+          "name": "ordenarColumna",
+          "line": 229,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 239,
+          "complexity": 9
+        },
+        {
+          "name": "renderizarTabla",
+          "line": 254,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 265,
+          "complexity": 2
+        },
+        {
+          "name": "actualizarStats",
+          "line": 288,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 293,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 299,
+          "complexity": 4
+        },
+        {
+          "name": "mostrarEstadoVacio",
+          "line": 310,
+          "complexity": 1
+        },
+        {
+          "name": "abrirModalCrearClase",
+          "line": 319,
+          "complexity": 1
+        },
+        {
+          "name": "crearClase",
+          "line": 325,
+          "complexity": 4
+        },
+        {
+          "name": "abrirModalAgregarEstudiante",
+          "line": 357,
+          "complexity": 1
+        },
+        {
+          "name": "agregarEstudiante",
+          "line": 363,
+          "complexity": 4
+        },
+        {
+          "name": "confirmarEliminarEstudiante",
+          "line": 397,
+          "complexity": 4
+        },
+        {
+          "name": "confirmarEliminarClase",
+          "line": 423,
+          "complexity": 5
+        },
+        {
+          "name": "buscarEstudiante",
+          "line": 454,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 458,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 475,
+          "complexity": 1
+        },
+        {
+          "name": "filtrarEstudiantesTabla",
+          "line": 496,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 499,
+          "complexity": 2
+        },
+        {
+          "name": "abrirModal",
+          "line": 507,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarModal",
+          "line": 510,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 514,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 515,
+          "complexity": 2
+        },
+        {
+          "name": "mostrarToast",
+          "line": 520,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 525,
+          "complexity": 1
+        },
+        {
+          "name": "mostrarError",
+          "line": 530,
+          "complexity": 1
+        },
+        {
+          "name": "ocultarError",
+          "line": 535,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 539,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 552,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarSesion",
+          "line": 557,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/perfil-estudiante.js",
+      "language": "js",
+      "PLOC": 261,
+      "NCLOC": 214,
+      "CLOC": 14,
+      "BLOC": 33,
+      "mixed": 1,
+      "functions": 19,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "getAuthHeaders",
+          "line": 12,
+          "complexity": 2
+        },
+        {
+          "name": "toggleMenu",
+          "line": 19,
+          "complexity": 1
+        },
+        {
+          "name": "abrirModalEditar",
+          "line": 27,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarModalEditar",
+          "line": 32,
+          "complexity": 1
+        },
+        {
+          "name": "abrirModalSeguridad",
+          "line": 35,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarModalSeguridad",
+          "line": 40,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 45,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 46,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 47,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 57,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 60,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 64,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 75,
+          "complexity": 14
+        },
+        {
+          "name": "guardarPerfil",
+          "line": 149,
+          "complexity": 4
+        },
+        {
+          "name": "guardarSeguridad",
+          "line": 168,
+          "complexity": 3
+        },
+        {
+          "name": "enviarActualizacion",
+          "line": 185,
+          "complexity": 4
+        },
+        {
+          "name": "cargarClasesEstudiante",
+          "line": 212,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 230,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarSesion",
+          "line": 253,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/perfil-profesor.js",
+      "language": "js",
+      "PLOC": 204,
+      "NCLOC": 159,
+      "CLOC": 12,
+      "BLOC": 33,
+      "mixed": 1,
+      "functions": 15,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "getAuthHeaders",
+          "line": 11,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 19,
+          "complexity": 13
+        },
+        {
+          "name": "<callback>",
+          "line": 54,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 61,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 62,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 86,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 87,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 98,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 111,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 136,
+          "complexity": 3
+        },
+        {
+          "name": "abrirModalEditar",
+          "line": 161,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarModalEditar",
+          "line": 164,
+          "complexity": 1
+        },
+        {
+          "name": "abrirModalSeguridad",
+          "line": 168,
+          "complexity": 1
+        },
+        {
+          "name": "cerrarModalSeguridad",
+          "line": 171,
+          "complexity": 1
+        },
+        {
+          "name": "enviarActualizacion",
+          "line": 178,
+          "complexity": 3
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/perfil.js",
+      "language": "js",
+      "PLOC": 99,
+      "NCLOC": 67,
+      "CLOC": 16,
+      "BLOC": 16,
+      "mixed": 1,
+      "functions": 4,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 11,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 38,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 42,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 53,
+          "complexity": 7
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/prep.js",
+      "language": "js",
+      "PLOC": 70,
+      "NCLOC": 68,
+      "CLOC": 2,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 22,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 1,
+          "complexity": 2
+        },
+        {
+          "name": "parse",
+          "line": 3,
+          "complexity": 3
+        },
+        {
+          "name": "session",
+          "line": 4,
+          "complexity": 2
+        },
+        {
+          "name": "prefix",
+          "line": 5,
+          "complexity": 3
+        },
+        {
+          "name": "getItem",
+          "line": 9,
+          "complexity": 1
+        },
+        {
+          "name": "setItem",
+          "line": 10,
+          "complexity": 1
+        },
+        {
+          "name": "forUser",
+          "line": 12,
+          "complexity": 1
+        },
+        {
+          "name": "getItem",
+          "line": 14,
+          "complexity": 1
+        },
+        {
+          "name": "setItem",
+          "line": 14,
+          "complexity": 1
+        },
+        {
+          "name": "removeItem",
+          "line": 14,
+          "complexity": 1
+        },
+        {
+          "name": "sameSession",
+          "line": 17,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 24,
+          "complexity": 9
+        },
+        {
+          "name": "<callback>",
+          "line": 31,
+          "complexity": 2
+        },
+        {
+          "name": "api",
+          "line": 39,
+          "complexity": 4
+        },
+        {
+          "name": "clearSession",
+          "line": 45,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 46,
+          "complexity": 1
+        },
+        {
+          "name": "escapeHTML",
+          "line": 49,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 49,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 50,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 51,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 52,
+          "complexity": 1
+        },
+        {
+          "name": "importLegacyProgress",
+          "line": 57,
+          "complexity": 6
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/progreso.js",
+      "language": "js",
+      "PLOC": 57,
+      "NCLOC": 46,
+      "CLOC": 0,
+      "BLOC": 11,
+      "mixed": 0,
+      "functions": 5,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "obtenerUsuario",
+          "line": 1,
+          "complexity": 1
+        },
+        {
+          "name": "guardarProgresoArea",
+          "line": 5,
+          "complexity": 3
+        },
+        {
+          "name": "guardarProgreso",
+          "line": 19,
+          "complexity": 1
+        },
+        {
+          "name": "marcarTema",
+          "line": 23,
+          "complexity": 4
+        },
+        {
+          "name": "responderReto",
+          "line": 47,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/simulacro-core.js",
+      "language": "js",
+      "PLOC": 58,
+      "NCLOC": 58,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 11,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 1,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 5,
+          "complexity": 1
+        },
+        {
+          "name": "score",
+          "line": 6,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 10,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 11,
+          "complexity": 1
+        },
+        {
+          "name": "validConfig",
+          "line": 30,
+          "complexity": 9
+        },
+        {
+          "name": "<callback>",
+          "line": 35,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 35,
+          "complexity": 1
+        },
+        {
+          "name": "validAttempt",
+          "line": 37,
+          "complexity": 32
+        },
+        {
+          "name": "<callback>",
+          "line": 43,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 47,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/simulacro.js",
+      "language": "js",
+      "PLOC": 48,
+      "NCLOC": 40,
+      "CLOC": 0,
+      "BLOC": 8,
+      "mixed": 0,
+      "functions": 4,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "cargarPregunta",
+          "line": 13,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 20,
+          "complexity": 1
+        },
+        {
+          "name": "responder",
+          "line": 28,
+          "complexity": 4
+        },
+        {
+          "name": "siguiente",
+          "line": 36,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/js/water-loader.js",
+      "language": "js",
+      "PLOC": 110,
+      "NCLOC": 80,
+      "CLOC": 9,
+      "BLOC": 21,
+      "mixed": 0,
+      "functions": 7,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "mostrarWaterLoader",
+          "line": 21,
+          "complexity": 1
+        },
+        {
+          "name": "frame",
+          "line": 37,
+          "complexity": 4
+        },
+        {
+          "name": "waterLoaderExito",
+          "line": 74,
+          "complexity": 2
+        },
+        {
+          "name": "accion",
+          "line": 75,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 78,
+          "complexity": 2
+        },
+        {
+          "name": "waterLoaderError",
+          "line": 90,
+          "complexity": 2
+        },
+        {
+          "name": "alternarHeroForm",
+          "line": 101,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/mas-material.html",
+      "language": "html",
+      "PLOC": 49,
+      "NCLOC": 42,
+      "CLOC": 0,
+      "BLOC": 7,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/modulo-ciencias.html",
+      "language": "html",
+      "PLOC": 1509,
+      "NCLOC": 1450,
+      "CLOC": 7,
+      "BLOC": 52,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/modulo-ingles.html",
+      "language": "html",
+      "PLOC": 1932,
+      "NCLOC": 1844,
+      "CLOC": 6,
+      "BLOC": 82,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/modulo-lectura.html",
+      "language": "html",
+      "PLOC": 2525,
+      "NCLOC": 2516,
+      "CLOC": 0,
+      "BLOC": 9,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/modulo-matematicas.html",
+      "language": "html",
+      "PLOC": 847,
+      "NCLOC": 747,
+      "CLOC": 0,
+      "BLOC": 100,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/modulo-sociales.html",
+      "language": "html",
+      "PLOC": 2742,
+      "NCLOC": 2647,
+      "CLOC": 0,
+      "BLOC": 95,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/panel-estudiante.html",
+      "language": "html",
+      "PLOC": 166,
+      "NCLOC": 158,
+      "CLOC": 1,
+      "BLOC": 7,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/panel-profesor.html",
+      "language": "html",
+      "PLOC": 367,
+      "NCLOC": 353,
+      "CLOC": 2,
+      "BLOC": 12,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/perfil-estudiante.html",
+      "language": "html",
+      "PLOC": 401,
+      "NCLOC": 377,
+      "CLOC": 0,
+      "BLOC": 24,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/perfil-profesor.html",
+      "language": "html",
+      "PLOC": 99,
+      "NCLOC": 78,
+      "CLOC": 0,
+      "BLOC": 21,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/registro.html",
+      "language": "html",
+      "PLOC": 32,
+      "NCLOC": 26,
+      "CLOC": 0,
+      "BLOC": 6,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/simulacro-nuevo.html",
+      "language": "html",
+      "PLOC": 907,
+      "NCLOC": 825,
+      "CLOC": 28,
+      "BLOC": 54,
+      "mixed": 0,
+      "functions": 41,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 535,
+          "complexity": 8
+        },
+        {
+          "name": "<callback>",
+          "line": 545,
+          "complexity": 1
+        },
+        {
+          "name": "construirPreguntas",
+          "line": 562,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 566,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 568,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 570,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 573,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 575,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 577,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 577,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 578,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 578,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 581,
+          "complexity": 1
+        },
+        {
+          "name": "mezclar",
+          "line": 588,
+          "complexity": 2
+        },
+        {
+          "name": "iniciarTimer",
+          "line": 598,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 600,
+          "complexity": 1
+        },
+        {
+          "name": "guardarIntento",
+          "line": 611,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 614,
+          "complexity": 1
+        },
+        {
+          "name": "mostrarPregunta",
+          "line": 622,
+          "complexity": 10
+        },
+        {
+          "name": "<callback>",
+          "line": 663,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 667,
+          "complexity": 1
+        },
+        {
+          "name": "seleccionar",
+          "line": 681,
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 684,
+          "complexity": 1
+        },
+        {
+          "name": "siguiente",
+          "line": 691,
+          "complexity": 2
+        },
+        {
+          "name": "omitir",
+          "line": 696,
+          "complexity": 3
+        },
+        {
+          "name": "confirmarRespuesta",
+          "line": 711,
+          "complexity": 9
+        },
+        {
+          "name": "<callback>",
+          "line": 712,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 724,
+          "complexity": 4
+        },
+        {
+          "name": "finalizar",
+          "line": 749,
+          "complexity": 8
+        },
+        {
+          "name": "<callback>",
+          "line": 799,
+          "complexity": 11
+        },
+        {
+          "name": "guardarProgreso",
+          "line": 839,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 842,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 842,
+          "complexity": 1
+        },
+        {
+          "name": "continuarSeccion",
+          "line": 850,
+          "complexity": 1
+        },
+        {
+          "name": "mostrarPantalla",
+          "line": 855,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 858,
+          "complexity": 1
+        },
+        {
+          "name": "verRevision",
+          "line": 862,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 872,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 873,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 876,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 878,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "frontend/simulacro-selector.html",
+      "language": "html",
+      "PLOC": 688,
+      "NCLOC": 654,
+      "CLOC": 11,
+      "BLOC": 23,
+      "mixed": 0,
+      "functions": 10,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "mostrarTab",
+          "line": 620,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 623,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 626,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 632,
+          "complexity": 3
+        },
+        {
+          "name": "toggleTema",
+          "line": 638,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 649,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 656,
+          "complexity": 1
+        },
+        {
+          "name": "iniciarGeneral",
+          "line": 662,
+          "complexity": 1
+        },
+        {
+          "name": "iniciarArea",
+          "line": 670,
+          "complexity": 1
+        },
+        {
+          "name": "iniciarTemas",
+          "line": 678,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/api.js",
+      "language": "js",
+      "PLOC": 2,
+      "NCLOC": 1,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/config.js",
+      "language": "js",
+      "PLOC": 11,
+      "NCLOC": 11,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/auth.controller.js",
+      "language": "js",
+      "PLOC": 37,
+      "NCLOC": 37,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 4,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "registrar",
+          "line": 7,
+          "complexity": 7
+        },
+        {
+          "name": "login",
+          "line": 15,
+          "complexity": 8
+        },
+        {
+          "name": "<callback>",
+          "line": 24,
+          "complexity": 2
+        },
+        {
+          "name": "logout",
+          "line": 33,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/clases.controller.js",
+      "language": "js",
+      "PLOC": 75,
+      "NCLOC": 75,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 17,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "ownClass",
+          "line": 4,
+          "complexity": 5
+        },
+        {
+          "name": "obtenerClases",
+          "line": 11,
+          "complexity": 1
+        },
+        {
+          "name": "crearClase",
+          "line": 15,
+          "complexity": 2
+        },
+        {
+          "name": "eliminarClase",
+          "line": 20,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 21,
+          "complexity": 2
+        },
+        {
+          "name": "actualizarAnuncio",
+          "line": 29,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 31,
+          "complexity": 2
+        },
+        {
+          "name": "obtenerEstudiantesDeClase",
+          "line": 38,
+          "complexity": 2
+        },
+        {
+          "name": "buscarEstudiante",
+          "line": 43,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 46,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 53,
+          "complexity": 1
+        },
+        {
+          "name": "inscription",
+          "line": 55,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 57,
+          "complexity": 5
+        },
+        {
+          "name": "obtenerClasesDeEstudiante",
+          "line": 71,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 73,
+          "complexity": 1
+        },
+        {
+          "name": "agregarEstudianteAClase",
+          "line": 75,
+          "complexity": 1
+        },
+        {
+          "name": "removerEstudianteDeClase",
+          "line": 75,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/ia.controller.js",
+      "language": "js",
+      "PLOC": 14,
+      "NCLOC": 14,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 1,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "chatIA",
+          "line": 3,
+          "complexity": 8
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/perfil.controller.js",
+      "language": "js",
+      "PLOC": 53,
+      "NCLOC": 52,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 6,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "obtenerPerfil",
+          "line": 5,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 9,
+          "complexity": 1
+        },
+        {
+          "name": "imageType",
+          "line": 12,
+          "complexity": 14
+        },
+        {
+          "name": "actualizarPerfil",
+          "line": 20,
+          "complexity": 15
+        },
+        {
+          "name": "<callback>",
+          "line": 26,
+          "complexity": 9
+        },
+        {
+          "name": "obtenerFoto",
+          "line": 48,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/progreso.controller.js",
+      "language": "js",
+      "PLOC": 18,
+      "NCLOC": 18,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 6,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "obtenerProgreso",
+          "line": 5,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 7,
+          "complexity": 1
+        },
+        {
+          "name": "guardarProgreso",
+          "line": 9,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 10,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 11,
+          "complexity": 2
+        },
+        {
+          "name": "obtenerRanking",
+          "line": 14,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/controllers/progresoAreas.controller.js",
+      "language": "js",
+      "PLOC": 21,
+      "NCLOC": 21,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 6,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "guardarProgresoArea",
+          "line": 4,
+          "complexity": 5
+        },
+        {
+          "name": "<callback>",
+          "line": 7,
+          "complexity": 2
+        },
+        {
+          "name": "readAreas",
+          "line": 10,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 12,
+          "complexity": 1
+        },
+        {
+          "name": "obtenerProgresoAreas",
+          "line": 16,
+          "complexity": 1
+        },
+        {
+          "name": "obtenerProgresoGeneral",
+          "line": 17,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/db.js",
+      "language": "js",
+      "PLOC": 7,
+      "NCLOC": 7,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 1,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 6,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/lib/passwords.js",
+      "language": "js",
+      "PLOC": 24,
+      "NCLOC": 23,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 2,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "hashPassword",
+          "line": 6,
+          "complexity": 1
+        },
+        {
+          "name": "verifyPassword",
+          "line": 11,
+          "complexity": 15
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/lib/progress.js",
+      "language": "js",
+      "PLOC": 30,
+      "NCLOC": 29,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 8,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "validateState",
+          "line": 2,
+          "complexity": 13
+        },
+        {
+          "name": "<callback>",
+          "line": 7,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 9,
+          "complexity": 4
+        },
+        {
+          "name": "<callback>",
+          "line": 10,
+          "complexity": 1
+        },
+        {
+          "name": "progressFromState",
+          "line": 12,
+          "complexity": 2
+        },
+        {
+          "name": "general",
+          "line": 13,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 13,
+          "complexity": 2
+        },
+        {
+          "name": "saveArea",
+          "line": 14,
+          "complexity": 11
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/lib/transaction.js",
+      "language": "js",
+      "PLOC": 6,
+      "NCLOC": 6,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 1,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "transaction",
+          "line": 1,
+          "complexity": 2
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/lib/validation.js",
+      "language": "js",
+      "PLOC": 9,
+      "NCLOC": 9,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 7,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "text",
+          "line": 2,
+          "complexity": 3
+        },
+        {
+          "name": "email",
+          "line": 3,
+          "complexity": 3
+        },
+        {
+          "name": "normalizeEmail",
+          "line": 4,
+          "complexity": 1
+        },
+        {
+          "name": "password",
+          "line": 5,
+          "complexity": 3
+        },
+        {
+          "name": "percentage",
+          "line": 6,
+          "complexity": 4
+        },
+        {
+          "name": "id",
+          "line": 7,
+          "complexity": 2
+        },
+        {
+          "name": "fail",
+          "line": 8,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/middlewares/access.js",
+      "language": "js",
+      "PLOC": 8,
+      "NCLOC": 8,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 3,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "role",
+          "line": 2,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 2,
+          "complexity": 2
+        },
+        {
+          "name": "ownEmail",
+          "line": 3,
+          "complexity": 5
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/middlewares/rateLimit.js",
+      "language": "js",
+      "PLOC": 16,
+      "NCLOC": 15,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 2,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "rateLimit",
+          "line": 2,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 4,
+          "complexity": 5
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/middlewares/verificarToken.js",
+      "language": "js",
+      "PLOC": 17,
+      "NCLOC": 17,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 1,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "verificarToken",
+          "line": 4,
+          "complexity": 10
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/migrations/001_esquema.sql",
+      "language": "sql",
+      "PLOC": 57,
+      "NCLOC": 56,
+      "CLOC": 1,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/migrations/002_compatibilidad_existente.sql",
+      "language": "sql",
+      "PLOC": 68,
+      "NCLOC": 62,
+      "CLOC": 6,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/auth.routes.js",
+      "language": "js",
+      "PLOC": 5,
+      "NCLOC": 5,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/clases.routes.js",
+      "language": "js",
+      "PLOC": 15,
+      "NCLOC": 15,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/ia.routes.js",
+      "language": "js",
+      "PLOC": 5,
+      "NCLOC": 5,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/perfil.routes.js",
+      "language": "js",
+      "PLOC": 9,
+      "NCLOC": 9,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/progreso.routes.js",
+      "language": "js",
+      "PLOC": 8,
+      "NCLOC": 8,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/progresoAreas.routes.js",
+      "language": "js",
+      "PLOC": 9,
+      "NCLOC": 9,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    },
+    {
+      "file": "backend/routes/simulacros.routes.js",
+      "language": "js",
+      "PLOC": 35,
+      "NCLOC": 35,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 2,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "<callback>",
+          "line": 7,
+          "complexity": 21
+        },
+        {
+          "name": "<callback>",
+          "line": 31,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/server.js",
+      "language": "js",
+      "PLOC": 55,
+      "NCLOC": 53,
+      "CLOC": 2,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 13,
+      "classes": 0,
+      "functionDetails": [
+        {
+          "name": "createApp",
+          "line": 7,
+          "complexity": 3
+        },
+        {
+          "name": "<callback>",
+          "line": 10,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 17,
+          "complexity": 5
+        },
+        {
+          "name": "origin",
+          "line": 24,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 26,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 28,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 33,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 36,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 41,
+          "complexity": 11
+        },
+        {
+          "name": "<callback>",
+          "line": 52,
+          "complexity": 2
+        },
+        {
+          "name": "<callback>",
+          "line": 53,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 53,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 53,
+          "complexity": 1
+        }
+      ],
+      "classDetails": []
+    },
+    {
+      "file": "backend/test-env.js",
+      "language": "js",
+      "PLOC": 2,
+      "NCLOC": 2,
+      "CLOC": 0,
+      "BLOC": 0,
+      "mixed": 0,
+      "functions": 0,
+      "classes": 0,
+      "functionDetails": [],
+      "classDetails": []
+    }
+  ]
+}

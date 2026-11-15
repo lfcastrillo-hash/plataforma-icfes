@@ -1,36 +1,19 @@
-const jwt = require("jsonwebtoken");
-const SECRET_KEY = "icfes_secreto_123_ultra_seguro";
-
-function verificarToken(req, res, next) {
-  // 1. Intentar leer desde cookie
-  let token = req.cookies.token_acceso;
-
-  // 2. Si no hay cookie, intentar desde el header Authorization: Bearer <token>
-  if (!token) {
-    const authHeader = req.headers["authorization"];
-    if (authHeader && authHeader.startsWith("Bearer ")) {
-      token = authHeader.substring(7);
-    }
-  }
-
-  // 3. Si no hay token por ningún lado, rechazar
-  if (!token) {
-    return res.status(401).json({
-      success: false,
-      mensaje: "Acceso denegado. No tienes autorización (Token faltante).",
-    });
-  }
-
-  try {
-    const payloadDecodificado = jwt.verify(token, SECRET_KEY);
-    req.usuario = payloadDecodificado;
-    next();
-  } catch (error) {
-    return res.status(403).json({
-      success: false,
-      mensaje: "Token inválido o expirado. Por favor, inicia sesión de nuevo.",
-    });
-  }
-}
-
-module.exports = verificarToken;
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+const { fail } = require('../lib/validation');
+module.exports = async function verificarToken(req, res, next) {
+ const token = req.cookies?.token_acceso || req.headers.authorization?.match(/^Bearer (.+)$/)?.[1];
+ if (!token) return fail(res, 401, 'Inicia sesión para continuar.');
+ let payload;
+ try { payload = jwt.verify(token, config.jwtSecret, { algorithms: ['HS256'], issuer: 'prepicfes', audience: 'prepicfes-web' }); }
+ catch { return fail(res, 401, 'Sesión inválida o expirada.'); }
+ if (!payload.jti || !Number.isInteger(payload.id_usuario)) return fail(res, 401, 'Sesión inválida.');
+ try {
+  const result = await req.app.locals.pool.query('SELECT u.id_usuario, u.email AS correo, u.rol FROM usuarios u JOIN sesiones s ON s.id_usuario = u.id_usuario WHERE u.id_usuario = $1 AND s.id_sesion = $2 AND s.expira > NOW()', [payload.id_usuario, payload.jti]);
+  if (!result.rows.length) return fail(res, 401, 'Sesión cerrada o expirada.');
+  if (req.get('X-Prep-User') && req.get('X-Prep-User') !== String(result.rows[0].id_usuario)) return fail(res, 403, 'La cuenta cambió. Recarga esta página.');
+  req.usuario = result.rows[0]; req.sessionId = payload.jti;
+  if(req.app.locals.accountLimiter)return req.app.locals.accountLimiter(req,res,next);
+  next();
+ } catch (error) { next(error); }
+};

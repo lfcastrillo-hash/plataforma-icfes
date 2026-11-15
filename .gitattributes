@@ -1,0 +1,4 @@
+# Preservar los bytes del script local original, incluidos sus finales de línea.
+scripts/metrics/historico/medir-codigo-original.cjs -text whitespace=cr-at-eol
+# Conservar SHA-256 de las evidencias publicadas sin conversion CRLF/LF.
+evidencias/resumen-versionado-20261115/** -text

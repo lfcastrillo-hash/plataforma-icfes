@@ -1,0 +1,361 @@
+{
+  "date": "2026-11-15T14:35:57.515Z",
+  "baseCommit": "785be5edc3ee70bcc9f03b0c7387d9823874af23",
+  "reference": "evidencias/verificacion-final/visual/actual",
+  "environment": {
+    "browser": "157.0.8103.78",
+    "viewport": "1440x1000",
+    "api": "Fixtures solo para comparación visual"
+  },
+  "authorizedChange": "Retirar los 13 botones IA/✨: autorización explícita del usuario",
+  "cases": [
+    {
+      "file": "areas.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "clases.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "clases_grabadas.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "cuadernillos.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "entrenando.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "filtros.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "index.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "mas-material.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "modulo-ciencias.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "modulo-ingles.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1360,
+          "y": 920,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "modulo-lectura.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "modulo-matematicas.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1360,
+          "y": 920,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "modulo-sociales.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1360,
+          "y": 920,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "panel-estudiante.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6980,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1355,
+          "y": 915,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "panel-profesor.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "perfil-estudiante.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 6624,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 1,
+      "authorizedRegions": [
+        {
+          "x": 1360,
+          "y": 920,
+          "width": 60,
+          "height": 60
+        }
+      ],
+      "actualPageErrors": []
+    },
+    {
+      "file": "perfil-profesor.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "registro.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "simulacro-nuevo.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    },
+    {
+      "file": "simulacro-selector.html",
+      "status": "PASS",
+      "referenceMatches": true,
+      "sameDimensions": true,
+      "changedPixels": 0,
+      "unexpectedPixels": 0,
+      "unexpectedSamples": [],
+      "authorizedRemovedButtons": 0,
+      "authorizedRegions": [],
+      "actualPageErrors": []
+    }
+  ],
+  "css": [
+    {
+      "file": "dashboard.css",
+      "contentUnchanged": true,
+      "sha256": "482666566f19f82e7db4e3f87880d8afef9535901cb77fc6d03abcbde881935e"
+    },
+    {
+      "file": "global.css",
+      "contentUnchanged": true,
+      "sha256": "20ff2e1c0929472f7f9da7b9fcf7f1a5608bb12535c7d2795641232c514ca2c4"
+    },
+    {
+      "file": "modulos.css",
+      "contentUnchanged": true,
+      "sha256": "2d34ccf72c20eaaa8af1825a4fdc8a80dbb62ef16a97c81e64250433413294f2"
+    }
+  ]
+}
