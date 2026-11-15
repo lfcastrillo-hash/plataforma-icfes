@@ -83,6 +83,8 @@ siguiendo la guía, sin compartir secretos ni utilizar producción.
 Los E2E usan Playwright con Chrome/Edge instalados; BROWSER_EXECUTABLE permite elegir
 otro ejecutable Chromium. Se pueden descargar binarios con npx playwright install chromium.
 La comparación visual tiene fixtures de API; los E2E funcionales no interceptan la red.
+El comprobador visual conserva las capturas y el conteo real de píxeles distintos; admite solo
+cuantización de un nivel RGB (1/255), con dimensiones y alfa exactos. No equivale a un cambio de CSS.
 
 Los reportes nuevos pueden incluir JUnit/JSON/LCOV/texto, capturas y métricas JSON/CSV.
 Las evidencias públicas seleccionadas y su procedencia se describen en
