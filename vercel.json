@@ -1,9 +1,18 @@
 {
   "version": 2,
   "builds": [
-    { "src": "backend/api.js", "use": "@vercel/node", "config": { "includeFiles": ["frontend/**"] } }
+    {
+      "src": "backend/api.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["frontend/**", "backend/certs/**"]
+      }
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "backend/api.js" }
+    {
+      "src": "/(.*)",
+      "dest": "backend/api.js"
+    }
   ]
 }
