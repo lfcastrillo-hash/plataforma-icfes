@@ -1,11 +1,11 @@
 {
-  "date": "2026-11-15T19:37:06.191Z",
+  "date": "2026-11-15T19:39:49.565Z",
   "algorithm": "SHA-256",
   "scope": "Selección pública; no pretende contener los paquetes íntegros externos",
   "files": {
     "INDICE.md": {
-      "bytes": 4193,
-      "sha256": "02c31bfc8ec6f669500b6900aae7c4a7281e7f603af1bf71aafaa6232caf1936"
+      "bytes": 4162,
+      "sha256": "94184e7ec1c4d192163661603bf37fdf86e33f383b4aede87e14cb56ab958f4d"
     },
     "integracion/calidad-instalacion.json": {
       "bytes": 873,
@@ -68,12 +68,12 @@
       "sha256": "c1cb9d0ac79c8b2b1599eefed15d9a936d31d7eb0e4ffc093ea6060a7fc17c4c"
     },
     "rama/ciencias/resultados.json": {
-      "bytes": 691,
-      "sha256": "668644b8c73385959e15240e034777a0db2d81581d72f2f12646e951e44ab67c"
+      "bytes": 671,
+      "sha256": "832c5b5b8fa2df9467b0cbf9126b52179c215361737bb340ce4984e60389d2ae"
     },
     "rama/diagnostico-cuantizacion.json": {
-      "bytes": 462,
-      "sha256": "812e1a07d01fd501e90d4deb3e3faa9b08c7043ff1858c76ee5468eaedd6623f"
+      "bytes": 445,
+      "sha256": "a47a839db1c67d447b02a94f87514ca909cc9deeb3ceb3a6c6e7050056d10a7e"
     },
     "rama/e2e/chrome-CA01.png": {
       "bytes": 36988,
@@ -132,60 +132,60 @@
       "sha256": "b01ffe2c40afed1698064bbbb7df40231369b2e250933e086033e9a06a31cf00"
     },
     "rama/e2e/resultados.json": {
-      "bytes": 3941,
-      "sha256": "f28ef4919de92d5aba58adb2cda100d81ef945118d50a11b5e52bc5f75d84e56"
+      "bytes": 3806,
+      "sha256": "586001cd0c6b22a415fedab917f65fc6f9dd28df8f70d637ae320dc95e49f5ad"
     },
     "rama/integridad-academica.json": {
-      "bytes": 502,
-      "sha256": "a26d47f91d1e067cbf8285f438c76ae89aa45d309a14ef52669ddf04f7cc6d29"
+      "bytes": 471,
+      "sha256": "d593441ea9c1e46da7a9020a0797257e5ec800cdb92a9b67c583eeccea3fa3d6"
     },
     "rama/intentos-visuales/exacto-inicial.json": {
-      "bytes": 3997,
-      "sha256": "46b1991b5779ab25bc3367543bab7d92b700935107eff1357cc0d54e855b5c28"
+      "bytes": 3839,
+      "sha256": "1bd4e2fe140fa70be93fb93c51a177a28a26671b739915ea1f83c35be620dfec"
     },
     "rama/intentos-visuales/fuentes-listas.json": {
-      "bytes": 3997,
-      "sha256": "bdee1bde68a4e49e68f05b60dbbf9dc24f8a5c1bcee4d305bf9d60f817d468b1"
+      "bytes": 3839,
+      "sha256": "2a7aef7aacf0b6e27f6eb885446340e7b5df197c5762dd6de5af869b4bccef14"
     },
     "rama/postgresql/junit.xml": {
-      "bytes": 2441,
-      "sha256": "371bdc994b9e0f242f1ebb47ea28ff6153d57b6bfd62c6fd79e602a0217aee80"
+      "bytes": 2440,
+      "sha256": "f7c553ec8c00b798b4c488e68e21389340ac1dc257cd9598b372a831d92f6857"
     },
     "rama/postgresql/resultados.json": {
-      "bytes": 3749,
-      "sha256": "234d653f4ef844038f6eb0fa4d275c6038427e4107727fb2e98fd016081ec2bc"
+      "bytes": 3624,
+      "sha256": "15f715decbb11a033d4fba8bc3969dbab5e22d872ef13c6f1991c8510a77e62e"
     },
     "rama/recursos-get.json": {
-      "bytes": 7978,
-      "sha256": "ea94998bd81960cb2b8b2d30090b1a631f11dd02fee28c2ad4a3fb0f9fab1769"
+      "bytes": 7654,
+      "sha256": "ba3a1c484f7d8bc443e776c4c3ae2bbee960b256cea065b716a26eb60f9082b0"
     },
     "rama/RESUMEN.json": {
-      "bytes": 12567,
-      "sha256": "6ce9c0a125d67ab7306a0ac1a375fbdc4681b14dfbae36a59a4035d0e54541e4"
+      "bytes": 12308,
+      "sha256": "2a9169b57912c293d5ad977294088693b93ff21630d00263b8aa77a5cde32afe"
     },
     "rama/seguridad-dependencias.json": {
-      "bytes": 1156,
-      "sha256": "22a58f95b21bdab3cc5f0d6d364719003719bc02093edacf50403461740fd310"
+      "bytes": 1107,
+      "sha256": "faba23c560cb02644b9f520439f5b4be644cc0892e4171cae2189ae0a09d6809"
     },
     "rama/unidad-integracion/ejecucion.txt": {
-      "bytes": 9066,
-      "sha256": "bd77159e769b28cdcbf9a7c46edae57920ca3ed3b1506b329b5e371bfc748916"
+      "bytes": 8920,
+      "sha256": "04c3cf01cefa417ae00d8c6d1018c4226852b4f8d8818b87bcd073dbd2a2e9be"
     },
     "rama/unidad-integracion/junit.xml": {
-      "bytes": 13584,
-      "sha256": "ab2605490c5ec202279a11075418500b249f6467740efc6b76b23066c158a6b7"
+      "bytes": 13583,
+      "sha256": "c4079e8eb7fcf2d1f941d76ba57b206d292d2e32f9c75cb32378b48bcc42b163"
     },
     "rama/unidad-integracion/lcov.info": {
-      "bytes": 7755,
-      "sha256": "52b962c38131cc76c363314a935e31430ec7b6bc82b2868c4048fd3b6dbc6344"
+      "bytes": 6975,
+      "sha256": "631748101020d98a14dba8663452500cf19de2f398e2f2784d46fc5da2b939b9"
     },
     "rama/unidad-integracion/resultados.json": {
-      "bytes": 134042,
-      "sha256": "2ba1a4e3f8efa76c33b350c8d3c7a568a25d18bc2cf33ad1806143c1fbdc158c"
+      "bytes": 127641,
+      "sha256": "7062c1e99c94bda5068d9daa04be82a2156bb156b67642af65df705a5cba404e"
     },
     "rama/visual/comparacion.json": {
-      "bytes": 5704,
-      "sha256": "8fb88cea5d1b87175a409081388d9b940905fd3b7dcb15e07d7bbc1c6794e21f"
+      "bytes": 5505,
+      "sha256": "2f90dcf009c981357d14dd9012c06c1ed0a984d72b41178e3bcc1406b2b523d7"
     },
     "rama/visual/mas-material.html.png": {
       "bytes": 26378,
@@ -204,16 +204,17 @@
       "sha256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277"
     },
     "referencia-cierre/integridad-historica.json": {
-      "bytes": 1239,
-      "sha256": "82ef79b2234b5e7535657cf6789a062b6839fd2da5eac687a58097b3494a768b"
+      "bytes": 1195,
+      "sha256": "9143af75881e8fe250b244d1d9b3ab6d7b8f8e9959f2e70b0b6f0e2683160d0c"
     },
     "referencia-cierre/metricas.json": {
-      "bytes": 57349,
-      "sha256": "9f9f6efa0537b3f3b49dcdff26f548e59dc886e17efac5f141d99ca7a5a75f71"
+      "bytes": 54684,
+      "sha256": "265138ad68216129799f102e7654006cbc6a7c5e44a6e46d49cb975a6a7e726c"
     },
     "referencia-cierre/resumen.json": {
-      "bytes": 2028,
-      "sha256": "da5fb79e8345513f9e2878cc29a1813ec7158c6654c6d686fa6792dc29ecb288"
+      "bytes": 1963,
+      "sha256": "2d2b7e089e59c026b17c6238dd045ed6840c54873cfda90885bff55ce93a2ec7"
     }
-  }
+  },
+  "bytePolicy": "Bytes exactos de los archivos públicos; .gitattributes desactiva conversiones CRLF/LF para esta selección. Los paquetes históricos externos no se modifican."
 }

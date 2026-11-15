@@ -2,3 +2,6 @@
 scripts/metrics/historico/medir-codigo-original.cjs -text whitespace=cr-at-eol
 # Conservar SHA-256 de las evidencias publicadas sin conversion CRLF/LF.
 evidencias/resumen-versionado-20261115/** -text
+
+# Selección nueva: hashes reproducibles también en checkout Windows.
+evidencias/publicacion-academica/** -text
