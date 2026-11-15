@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-14T23:14:01.668Z",
+  "configuredEnvironmentKeys": [],
+  "removed": [
+    "backend/controllers/ia.controller.js",
+    "backend/routes/ia.routes.js",
+    "frontend/js/chat-ia.js",
+    "frontend/components/ChatIA.jsx"
+  ],
+  "removedDependency": "openai",
+  "dependencyInstalled": false,
+  "retiredRoute": "POST /api/chat → 410",
+  "activeSourceMatches": []
+}

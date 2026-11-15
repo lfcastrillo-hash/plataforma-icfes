@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-15T14:35:49.139Z",
+  "status": "PASS",
+  "tool": "pg_dump/pg_restore nativos PostgreSQL 17",
+  "source": "Contenedor local exclusivo, esquema ficticio qa_902ad85c57d2459b845b07c586ffa1df",
+  "target": "prepicfes_restore_1794753348308_test",
+  "rows": 1,
+  "preservedProgress": 45,
+  "privateBackup": ".qa-native/backups/backup-1794753348367.dump",
+  "limitations": "Respaldo de esquema ficticio con datos; propietarios y ACL se omiten y requieren reaplicación. No incluye roles ni producción."
+}
