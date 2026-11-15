@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-15T19:35:12.453Z",
+  "npmCi": {
+    "root": "Completado: 6 paquetes instalados desde lockfile",
+    "backend": "Completado: 117 paquetes instalados desde lockfile"
+  },
+  "ignored": [
+    {
+      "path": ".env",
+      "ignored": true
+    },
+    {
+      "path": ".env.production",
+      "ignored": true
+    },
+    {
+      "path": "backend/.env.local",
+      "ignored": true
+    },
+    {
+      "path": ".qa-private/report.json",
+      "ignored": true
+    },
+    {
+      "path": ".qa-native/config.json",
+      "ignored": true
+    },
+    {
+      "path": "snapshot.dump",
+      "ignored": true
+    },
+    {
+      "path": "sample.sqlite",
+      "ignored": true
+    },
+    {
+      "path": "certificate.key",
+      "ignored": true
+    }
+  ],
+  "trackedDependencies": 0,
+  "trackedPrivatePaths": [],
+  "cssChangedAgainstBase": "",
+  "providerActivePaths": []
+}

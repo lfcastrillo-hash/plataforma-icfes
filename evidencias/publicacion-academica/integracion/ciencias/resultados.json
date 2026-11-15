@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-15T19:35:14.387Z",
+  "baseCommit": "a28beb7cce3d03560424c52e613ead91d2f081af",
+  "environment": {
+    "database": "PostgreSQL nativo/pg; datos ficticios"
+  },
+  "cases": [
+    {
+      "browser": "chrome",
+      "status": "PASS",
+      "checks": "Cinco temas navegables, 40 respuestas, completar prematuro 409, progreso 100 %, persistencia sin caché y cero errores JS",
+      "version": "157.0.8103.78"
+    },
+    {
+      "browser": "edge",
+      "status": "PASS",
+      "checks": "Cinco temas navegables, 40 respuestas, completar prematuro 409, progreso 100 %, persistencia sin caché y cero errores JS",
+      "version": "157.0.4341.60"
+    }
+  ]
+}

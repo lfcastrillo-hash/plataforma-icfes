@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "area": "matematicas",
+      "topics": 5,
+      "exercises": 40
+    },
+    {
+      "area": "lectura",
+      "topics": 5,
+      "exercises": 40
+    },
+    {
+      "area": "ciencias",
+      "topics": 5,
+      "exercises": 40
+    },
+    {
+      "area": "sociales",
+      "topics": 5,
+      "exercises": 40
+    },
+    {
+      "area": "ingles",
+      "topics": 5,
+      "exercises": 40
+    }
+  ],
+  "bank": 86,
+  "issues": [],
+  "duplicates": []
+}

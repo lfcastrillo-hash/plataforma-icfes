@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-15T19:37:06.179Z",
+  "phase": "integracion",
+  "publicationCodeCommit": "9198ddf03cf2e2c6a3013bad41dbdf5989d542ff",
+  "executionCommits": {
+    "all": "9198ddf03cf2e2c6a3013bad41dbdf5989d542ff"
+  },
+  "productTrees": {
+    "frontend": "ffedcae8e87d33e80c74f38e5a33d634a6d9b24e",
+    "backend": "0226a546c449949279a3a1bc342388889dc7a7d3"
+  },
+  "scope": "Resultado integrado confirmado antes de añadir este reporte; el commit posterior modifica solo evidencias.",
+  "results": {
+    "unitIntegration": 97,
+    "native": 15,
+    "e2ePrincipal": 14,
+    "jsChecks": 2,
+    "scienceBrowsers": 2,
+    "visualPages": 20,
+    "visualNewCardViewports": 2,
+    "visualRawDifferentPixels": 0,
+    "visualAcceptance": "Dimensiones exactas; ningún píxel con diferencia RGB mayor de 1/255 ni cambio alfa. Se conserva el número real de píxeles distintos por cuantización, no se declara cero si difieren.",
+    "activeLinks": 18,
+    "disabledLinks": 13,
+    "failures": 0
+  },
+  "coverage": {
+    "totalLineCount": 650,
+    "totalBranchCount": 516,
+    "totalFunctionCount": 111,
+    "coveredLineCount": 632,
+    "coveredBranchCount": 470,
+    "coveredFunctionCount": 105,
+    "coveredLinePercent": 97.23076923076923,
+    "coveredBranchPercent": 91.08527131782945,
+    "coveredFunctionPercent": 94.5945945945946
+  },
+  "provenance": [
+    {
+      "published": "unidad-integracion/resultados.json",
+      "source": "pruebas-unitarias/resultados.json",
+      "sourceSHA256": "707eb396434d3c01d9a1fd97ed517430e527738811d31db36ec368fe0a433de7",
+      "publishedSHA256": "707eb396434d3c01d9a1fd97ed517430e527738811d31db36ec368fe0a433de7",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/junit.xml",
+      "source": "pruebas-unitarias/junit.xml",
+      "sourceSHA256": "e04788c47ef238d933eece42c8f1c1a9157e23b9a0dd9fe39c8f802f07ee10ac",
+      "publishedSHA256": "e04788c47ef238d933eece42c8f1c1a9157e23b9a0dd9fe39c8f802f07ee10ac",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/lcov.info",
+      "source": "pruebas-unitarias/lcov.info",
+      "sourceSHA256": "5cb72980d5955b26f4e965da865ba7a5a3198666b222357c350827cd9d49e878",
+      "publishedSHA256": "5cb72980d5955b26f4e965da865ba7a5a3198666b222357c350827cd9d49e878",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/ejecucion.txt",
+      "source": "pruebas-unitarias/ejecucion.txt",
+      "sourceSHA256": "499f14a1d6d04b8e03073c89ca775f1473d4807c27a1cc26a7793acedde2e746",
+      "publishedSHA256": "499f14a1d6d04b8e03073c89ca775f1473d4807c27a1cc26a7793acedde2e746",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "postgresql/resultados.json",
+      "source": "nativas/pruebas-unitarias/resultados.json",
+      "sourceSHA256": "8084c70ef1c48dfe2898f2399ea8b4ac5c93e21334d2b7d20625cbfc517d7337",
+      "publishedSHA256": "8084c70ef1c48dfe2898f2399ea8b4ac5c93e21334d2b7d20625cbfc517d7337",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "postgresql/junit.xml",
+      "source": "nativas/pruebas-unitarias/junit.xml",
+      "sourceSHA256": "8b6339344fd6959004428e0604fe3044c7e60972970a65a5d2db4b58d1aefc63",
+      "publishedSHA256": "8b6339344fd6959004428e0604fe3044c7e60972970a65a5d2db4b58d1aefc63",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/resultados.json",
+      "source": "navegador/aceptacion/resultados.json",
+      "sourceSHA256": "e134dcb60b56476882dd4854990ba7e5a99261224ff151220da235c4cbb314c4",
+      "publishedSHA256": "647ffb65ac1e5968637fe078509293deccdcabadcd8370c9faffec254fb8b2b9",
+      "transformation": "Solo se omiten referencias a PNG no publicados; no se modifican cifras, fechas, estados ni duración."
+    },
+    {
+      "published": "ciencias/resultados.json",
+      "source": "navegador/academico-browser/resultados.json",
+      "sourceSHA256": "0a13e95ef4302483127215cd31e1e77fbd3a53ec1272c74c70169fb7c912c19e",
+      "publishedSHA256": "0a13e95ef4302483127215cd31e1e77fbd3a53ec1272c74c70169fb7c912c19e",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/comparacion.json",
+      "source": "visual-validada/visual-academico/comparacion.json",
+      "sourceSHA256": "70a59dc1c6114c8039ec5766ab095ee3903c89a03a98b914f5b5929e40ebfb02",
+      "publishedSHA256": "70a59dc1c6114c8039ec5766ab095ee3903c89a03a98b914f5b5929e40ebfb02",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "recursos-get.json",
+      "source": "recursos/enlaces-get.json",
+      "sourceSHA256": "5a68b082f74cd8b25d7eea5154d02641d07176603828e0697c1295f0ba1476f9",
+      "publishedSHA256": "5a68b082f74cd8b25d7eea5154d02641d07176603828e0697c1295f0ba1476f9",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "calidad-instalacion.json",
+      "source": "calidad-instalacion.json",
+      "sourceSHA256": "bb4c906306236e2b9b6f5193340157bf88f69760513488721a9e68d3d1c5c017",
+      "publishedSHA256": "bb4c906306236e2b9b6f5193340157bf88f69760513488721a9e68d3d1c5c017",
+      "transformation": "Copia íntegra"
+    }
+  ],
+  "limitations": [
+    "Datos ficticios y PostgreSQL nativo local, no producción/Supabase remoto",
+    "Comparación visual neutraliza contenido; tolerancia de cuantización 1 nivel RGB, alfa y dimensiones exactos",
+    "GET PDF parcial confirma acceso y firma, no lectura editorial completa",
+    "La aceptación docente y herramientas externas no se afirman aprobadas"
+  ]
+}

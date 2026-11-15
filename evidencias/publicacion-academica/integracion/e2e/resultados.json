@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-15T19:33:11.662Z",
+  "environment": {
+    "node": "v24.14.1",
+    "database": "PostgreSQL nativo/pg aislado",
+    "networkMocks": false,
+    "chrome": "157.0.8103.78",
+    "edge": "157.0.4341.60"
+  },
+  "cases": [
+    {
+      "id": "CA01",
+      "browser": "chrome",
+      "description": "Estudiante inicia sesión mediante el formulario y accede a su panel",
+      "status": "PASS",
+      "durationMs": 6559
+    },
+    {
+      "id": "CA02",
+      "browser": "chrome",
+      "description": "Completar tema, recargar sin caché de avance y verificar los cinco módulos",
+      "status": "PASS",
+      "durationMs": 17990
+    },
+    {
+      "id": "CA02-pestanas",
+      "browser": "chrome",
+      "description": "Una pestaña anterior no modifica el avance de la nueva cuenta",
+      "status": "PASS",
+      "durationMs": 16144
+    },
+    {
+      "id": "CA03",
+      "browser": "chrome",
+      "description": "Simulacro por área, omisiones, resultado reproducible y revisión",
+      "status": "PASS",
+      "durationMs": 2892
+    },
+    {
+      "id": "CA03-extra",
+      "browser": "chrome",
+      "description": "Modalidad general, por temas y configuración inválida",
+      "status": "PASS",
+      "durationMs": 1237
+    },
+    {
+      "id": "CA04",
+      "browser": "chrome",
+      "description": "Profesor crea clase, agrega estudiante, publica anuncio y retira inscripción",
+      "status": "PASS",
+      "durationMs": 9342
+    },
+    {
+      "id": "CA05",
+      "browser": "chrome",
+      "description": "Actualizar perfil, comprobar persistencia y cerrar sesión",
+      "status": "PASS",
+      "durationMs": 1816
+    },
+    {
+      "id": "JS-errors",
+      "browser": "chrome",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "id": "CA01",
+      "browser": "edge",
+      "description": "Estudiante inicia sesión mediante el formulario y accede a su panel",
+      "status": "PASS",
+      "durationMs": 6479
+    },
+    {
+      "id": "CA02",
+      "browser": "edge",
+      "description": "Completar tema, recargar sin caché de avance y verificar los cinco módulos",
+      "status": "PASS",
+      "durationMs": 18466
+    },
+    {
+      "id": "CA02-pestanas",
+      "browser": "edge",
+      "description": "Una pestaña anterior no modifica el avance de la nueva cuenta",
+      "status": "PASS",
+      "durationMs": 15483
+    },
+    {
+      "id": "CA03",
+      "browser": "edge",
+      "description": "Simulacro por área, omisiones, resultado reproducible y revisión",
+      "status": "PASS",
+      "durationMs": 3462
+    },
+    {
+      "id": "CA03-extra",
+      "browser": "edge",
+      "description": "Modalidad general, por temas y configuración inválida",
+      "status": "PASS",
+      "durationMs": 1728
+    },
+    {
+      "id": "CA04",
+      "browser": "edge",
+      "description": "Profesor crea clase, agrega estudiante, publica anuncio y retira inscripción",
+      "status": "PASS",
+      "durationMs": 9022
+    },
+    {
+      "id": "CA05",
+      "browser": "edge",
+      "description": "Actualizar perfil, comprobar persistencia y cerrar sesión",
+      "status": "PASS",
+      "durationMs": 1879
+    },
+    {
+      "id": "JS-errors",
+      "browser": "edge",
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "publication": {
+    "scope": "Resultados de la ejecución integrada; capturas completas en respaldo externo. Galería de rama publicada por separado, sin atribuirla a esta ejecución.",
+    "rawSHA256": "e134dcb60b56476882dd4854990ba7e5a99261224ff151220da235c4cbb314c4",
+    "transformation": "Solo se omiten referencias a PNG no publicados; no se modifican cifras, fechas, estados ni duración."
+  }
+}

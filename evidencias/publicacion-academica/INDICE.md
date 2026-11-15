@@ -29,3 +29,19 @@ Commit de código confirmado: `53a8bdadf2d583a68f740f157a7fe6d4d08549ff`. [Resum
 Se conservan los [fallos de comparación exacta](rama/intentos-visuales/exacto-inicial.json) y la [repetición con fuentes listas](rama/intentos-visuales/fuentes-listas.json); no se cuentan como aprobados. El [diagnóstico](rama/diagnostico-cuantizacion.json) identificó cuantización de un nivel en PNG, sin cambio de fuente o CSS. Se publican los resultados validados con criterio explícito y capturas seleccionadas.
 
 Galería seleccionada: [Ciencias](rama/visual/modulo-ciencias.html.png), [recursos](rama/visual/mas-material.html.png), [profesor](rama/visual/panel-profesor.html.png), [simulacro](rama/visual/simulacro-selector.html.png). Las 14 capturas de escenarios E2E están junto a su JSON; no se publican capturas intermedias ni referencias a archivos ausentes. [Dependencias y revisión de seguridad](rama/seguridad-dependencias.json).
+
+## Verificación nueva del merge en main
+
+Commit de código confirmado: `9198ddf03cf2e2c6a3013bad41dbdf5989d542ff`. [Resumen y procedencia](integracion/RESUMEN.json).
+
+| Evidencia | Resultado |
+|---|---|
+| [Unidad/integración](integracion/unidad-integracion/resultados.json), [JUnit](integracion/unidad-integracion/junit.xml), [LCOV](integracion/unidad-integracion/lcov.info) | 97 aprobadas |
+| [PostgreSQL nativo](integracion/postgresql/resultados.json), [JUnit](integracion/postgresql/junit.xml) | 15 aprobadas |
+| [E2E](integracion/e2e/resultados.json) | 14 principales + 2 controles JS |
+| [Ciencias](integracion/ciencias/resultados.json) | 2 recorridos completos |
+| [Comparación visual](integracion/visual/comparacion.json) | 20 páginas; conteo real y criterio incluidos |
+| [Recursos GET](integracion/recursos-get.json) | 18 destinos activos, 13 acciones no disponibles sin href |
+| [Integridad académica](integracion/integridad-academica.json) | 200 ejercicios y banco 86, sin incidencias estructurales/duplicados exactos |
+
+Los resultados integrados no duplican la galería de rama. El JSON E2E seleccionado omite solo referencias a capturas no publicadas y conserva todos los resultados; el hash del original completo figura en su procedencia. No se atribuyen capturas anteriores a una ejecución posterior.
