@@ -12,7 +12,7 @@ test('SEC progreso: no acreditar porcentajes, estados, booleanos ni ejercicios i
    {...answer('matematicas'),progreso:100},
    {area:'matematicas',respuesta:{tema:0,ejercicio:0,opcion:0,correcta:true}},
    {area:'matematicas',respuesta:{tema:0,ejercicio:0,opcion:'0'}},
-   {area:'ciencias',respuesta:{tema:2,ejercicio:0,opcion:0}},
+   {area:'ciencias',respuesta:{tema:5,ejercicio:0,opcion:0}},
    {area:'matematicas',respuesta:{tema:0,ejercicio:0,opcion:4}},
   ])assert.equal((await send(body)).status,400);
   assert.equal((await send({area:'matematicas',completarTema:0})).status,409);

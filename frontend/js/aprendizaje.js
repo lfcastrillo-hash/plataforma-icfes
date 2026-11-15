@@ -98,7 +98,8 @@ async function completarTema(idx){
  if(!Prep.sameSession(sesion)||temasCompletados.includes(idx)||correctasTema(idx)<PREGUNTAS_POR_TEMA)return;
  const result=await submitAction({completarTema:idx});if(!result)return;
  marcarUICompletado(idx);actualizarProgreso();actualizarBotonesCompletar();
- if(temasCompletados.length===TOTAL_TEMAS)document.getElementById('moduloCompletado').style.display='block';
+ const avisoCompletado=document.getElementById('moduloCompletado');
+ if(temasCompletados.length===TOTAL_TEMAS&&avisoCompletado)avisoCompletado.style.display='block';
 }
       function marcarUICompletado(idx) {
         const btn = document.getElementById(`btnCompletar-${idx}`);
