@@ -2,7 +2,6 @@
 process.env.NODE_ENV='development';
 process.env.DATABASE_URL='postgresql://fixture:fixture@127.0.0.1:1/prepicfes_test';
 process.env.DATABASE_SSL='false';
-process.env.OPENROUTER_API_KEY='';process.env.OPENROUTER_MODEL='';
 process.env.JWT_SECRET=require('node:crypto').randomBytes(48).toString('hex');
 const fs=require('node:fs');const assert=require('node:assert/strict');
 const {createApp}=require('../../backend/server');

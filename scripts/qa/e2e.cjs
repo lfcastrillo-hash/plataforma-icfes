@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const { fixture } = require('../../tests/fixtures/app.cjs');
 const { browser, paths } = require('./browser.cjs');
-const dir = 'evidencias/aceptacion';
+const dir = require('node:path').join(process.env.QA_EVIDENCE_ROOT||'evidencias','aceptacion');
 fs.mkdirSync(dir,{recursive:true});
 const report = { date:new Date().toISOString(), environment:{ node:process.version, database:'PGlite/PostgreSQL WASM aislado', networkMocks:false }, cases:[] };
 async function run(name) {
@@ -39,6 +39,7 @@ async function run(name) {
         await page.goto(f.base+'/modulo-'+area+'.html');await page.waitForFunction(()=>document.documentElement.dataset.learningReady==='true');
         if(area==='lectura'){
           await page.click('#ej-0-0 button[onclick*="false"] >> nth=0');
+          await page.waitForFunction(()=>document.querySelector('#fb-0-0')?.classList.contains('incorrecto'));
           assert.equal(await page.locator('#fb-0-0').evaluate(el=>el.classList.contains('incorrecto')),true);
           await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.learningReady==='true');
         }

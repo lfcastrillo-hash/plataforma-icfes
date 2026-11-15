@@ -1,9 +1,10 @@
 const fs=require('node:fs');
+const {answer}=require('../../tests/fixtures/aprendizaje.cjs');
 const xml=v=>v.replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'})[c]);
 function sample(name,path,body){return `<HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${name}" enabled="true"><elementProp name="HTTPsampler.Arguments" elementType="Arguments"><collectionProp name="Arguments.arguments">${body?`<elementProp name="" elementType="HTTPArgument"><boolProp name="HTTPArgument.always_encode">false</boolProp><stringProp name="Argument.value">${xml(JSON.stringify(body))}</stringProp><stringProp name="Argument.metadata">=</stringProp></elementProp>`:''}</collectionProp></elementProp><stringProp name="HTTPSampler.domain">127.0.0.1</stringProp><stringProp name="HTTPSampler.port">3001</stringProp><stringProp name="HTTPSampler.protocol">http</stringProp><stringProp name="HTTPSampler.path">/api${path}</stringProp><stringProp name="HTTPSampler.method">${body?'POST':'GET'}</stringProp><boolProp name="HTTPSampler.postBodyRaw">true</boolProp><boolProp name="HTTPSampler.use_keepalive">true</boolProp><stringProp name="HTTPSampler.connect_timeout">5000</stringProp><stringProp name="HTTPSampler.response_timeout">30000</stringProp></HTTPSamplerProxy><hashTree/>`;}
 const groups=[
  ['M1-login','estudiante',[]],
- ['M2-aprendizaje','estudiante',[['Guardar progreso','/progreso-area',{area:'matematicas',progreso:20}],['Consultar progreso','/progreso-areas/estudiante@example.test']]],
+ ['M2-aprendizaje','estudiante',[['Registrar respuesta','/progreso-area',answer('matematicas')],['Consultar progreso','/progreso-areas/estudiante@example.test']]],
  ['M3-simulacro','estudiante',[['Resultado recalculado','/simulacros',{id_resultado:'${__UUID()}',modalidad:'area',segundos:10,respuestas:[{id:'ingles:0',seleccionada:null}]}]]],
  ['M4-clases','profesor',[['Crear clase','/clases',{nombre_clase:'Grupo JMeter'}],['Consultar clases','/clases']]],
  ['M5-perfil','estudiante',[['Actualizar perfil','/perfil/actualizar',{nombre:'Estudiante JMeter',biografia:'Datos ficticios'}],['Consultar perfil','/perfil/estudiante@example.test']]],

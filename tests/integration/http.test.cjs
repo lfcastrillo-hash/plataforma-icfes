@@ -4,6 +4,7 @@ const { randomUUID } = require('node:crypto');
 const jwt = require('../../backend/node_modules/jsonwebtoken');
 const config = require('../../backend/config');
 const { fixture } = require('../fixtures/app.cjs');
+const {answer}=require('../fixtures/aprendizaje.cjs');
 let f, s, other, p, p2, classId;
 before(async()=>{
   f=await fixture();
@@ -30,14 +31,16 @@ test('IT01 negativos de autenticación y entrada obligatoria',async()=>{
   assert.equal((await f.request('/login',{method:'POST',body:{}})).status,400);
 });
 test('IT02/CU03 progreso aislado, monotónico, persistente e idempotente',async()=>{
-  const body={area:'matematicas',progreso:20,estado:{correctas:Object.fromEntries(Array.from({length:8},(_,i)=>['0-'+i,true])),completados:[0]}};
+  const body=answer('matematicas');
+  for(let i=0;i<8;i++)assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:answer('matematicas',0,i)})).status,200);
+  assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{area:'matematicas',completarTema:0}})).status,200);
   for(let i=0;i<2;i++)assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body})).status,200);
   assert.equal((await f.request('/progreso-general/a@example.test',{cookie:s})).data.progreso,4);
   assert.equal((await f.request('/progreso-general/b@example.test',{cookie:other})).data.progreso,0);
   assert.equal((await f.request('/progreso-areas/b@example.test',{cookie:s})).status,403);
   assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{...body,correo:'b@example.test'}})).status,403);
   assert.equal((await f.request('/progreso-area',{method:'POST',cookie:other,headers:{'X-Prep-User':'1'},body})).status,403);
-  assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{area:'matematicas',progreso:0}})).status,200);
+  assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{area:'matematicas',progreso:0}})).status,400);
   const areas=(await f.request('/progreso-areas/a@example.test',{cookie:s})).data;
   assert.equal(areas.areas.matematicas,20);assert.equal(areas.estados.matematicas.completados[0],0);
   const fresh=(await f.login('a@example.test')).cookie;
@@ -47,7 +50,7 @@ test('IT02 límites y tipos de aprendizaje',async()=>{
   for(const progreso of [-1,101,'50',null])assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{area:'ingles',progreso}})).status,400);
   assert.equal((await f.request('/progreso-area',{method:'POST',cookie:s,body:{area:'unknown',progreso:50}})).status,400);
   assert.equal((await f.request('/progreso-area',{method:'POST',cookie:p,body:{area:'ingles',progreso:50}})).status,403);
-  assert.equal((await f.request('/progreso',{method:'POST',cookie:s,body:{matematicas:10}})).status,400);
+  assert.equal((await f.request('/progreso',{method:'POST',cookie:s,body:{matematicas:10}})).status,410);
 });
 test('IT03/CU11 crear clases, rol y propietario',async()=>{
   assert.equal((await f.request('/clases',{method:'POST',cookie:s,body:{nombre_clase:'Intrusa'}})).status,403);
@@ -95,7 +98,7 @@ test('IT06/CU08 perfil, cambio correo conserva clases y progreso por ID',async()
 test('IT07 foto persistida en BD, límites y archivos peligrosos rechazados',async()=>{
   const form=new FormData();form.append('foto',new Blob(['<svg onload=alert(1)>'],{type:'image/png'}),'fake.png');
   assert.equal((await f.request('/perfil/actualizar',{method:'POST',cookie:s,body:form})).status,400);
-  const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a23cAAAAASUVORK5CYII=','base64');
+  const png=await require('../fixtures/images.cjs').png();
   const valid=new FormData();valid.append('foto',new Blob([png],{type:'image/png'}),'../avatar.png');
   const result=await f.request('/perfil/actualizar',{method:'POST',cookie:s,body:valid});assert.equal(result.status,200);
   const response=await fetch(f.base+result.data.foto);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'image/png');
@@ -141,6 +144,6 @@ test('SEC origen, endpoints desconocidos y health',async()=>{
   assert.equal((await f.request('/health')).status,200);
   assert.equal((await f.request('/unknown')).status,404);
   assert.equal((await f.request('/login',{method:'POST',headers:{Origin:'https://evil.example'},body:{}})).status,403);
-  assert.equal((await f.request('/chat',{method:'POST',cookie:other,body:{mensaje:' '}})).status,400);
-  assert.equal((await f.request('/chat',{method:'POST',cookie:other,body:{mensaje:'¿Qué es una función?'}})).status,503);
+  assert.equal((await f.request('/chat',{method:'POST',cookie:other,body:{mensaje:' '}})).status,410);
+  assert.equal((await f.request('/chat',{method:'POST',cookie:other,body:{mensaje:'¿Qué es una función?'}})).status,410);
 });

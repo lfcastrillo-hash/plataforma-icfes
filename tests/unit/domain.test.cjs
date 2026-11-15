@@ -55,7 +55,7 @@ test('M3-REANUDAR estado recuperable y cachés inválidas',()=>{
  for(const patch of [{ids:[]},{ids:['bad']},{ids:['matematicas:9']},{idx:-1},{seconds:-1},{selected:2},{resultId:'bad'},{idx:1,selected:null,answers:[{idx:0,seleccionada:2}]},{idx:1,selected:null,answers:[{idx:0,seleccionada:0},{idx:0,seleccionada:0}]}])assert.equal(validAttempt({...state,...patch},cfg,banks),false);
  assert.equal(validAttempt(null,cfg,banks),false);
 });
-test('M5-CE imágenes y archivos disfrazados',()=>{
+test('M5-CE clasificación de firma (no acredita decodificación de contenido)',()=>{
   assert.equal(imageType(null),null);assert.equal(imageType({buffer:Buffer.from('<script>x</script>')}),null);
   const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a23cAAAAASUVORK5CYII=','base64');
   assert.equal(imageType({buffer:png}),'image/png');

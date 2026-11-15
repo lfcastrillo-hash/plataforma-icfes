@@ -2,7 +2,7 @@ const { database } = require('./database.cjs');
 const { createApp } = require('../../backend/server');
 async function fixture(options = {}) {
   const pool = await database(options);
-  const app = createApp({ pool, rateLimitOptions: { limit: 10000 }, ...options });
+  const app = createApp({ pool, rateLimitOptions: { limit: 10000 }, accountLimitOptions:{profile:{limit:10000}}, ...options });
   const server = await new Promise(resolve => { const s = app.listen(options.port || 0,'127.0.0.1',()=>resolve(s)); });
   const base = 'http://127.0.0.1:' + server.address().port;
   async function request(url, { method = 'GET', body, cookie, headers = {} } = {}) {

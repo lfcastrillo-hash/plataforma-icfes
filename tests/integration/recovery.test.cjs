@@ -4,6 +4,7 @@ const fs=require('node:fs/promises');
 const path=require('node:path');
 const os=require('node:os');
 const { fixture }=require('../fixtures/app.cjs');
+const {answer}=require('../fixtures/aprendizaje.cjs');
 const { database }=require('../fixtures/database.cjs');
 const { createApp }=require('../../backend/server');
 const transaction=require('../../backend/lib/transaction');
@@ -32,13 +33,13 @@ test('INT-ASC migración repetible y persistencia en disco después de reiniciar
  let f=await fixture({directory});
  try{
   await f.register('restart@example.test');const cookie=(await f.login('restart@example.test')).cookie;
-  await f.request('/progreso-area',{method:'POST',cookie,body:{area:'ingles',progreso:100}});
-  const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a23cAAAAASUVORK5CYII=','base64');
+  await f.request('/progreso-area',{method:'POST',cookie,body:answer('ingles')});
+  const png=await require('../fixtures/images.cjs').png();
   const form=new FormData();form.append('foto',new Blob([png],{type:'image/png'}),'restart.png');
   const foto=(await f.request('/perfil/actualizar',{method:'POST',cookie,body:form})).data.foto;
   await f.close();f=null;
   f=await fixture({directory});const fresh=(await f.login('restart@example.test')).cookie;
-  assert.equal((await f.request('/progreso-general/restart@example.test',{cookie:fresh})).data.progreso,20);
+  assert.equal((await f.request('/progreso-general/restart@example.test',{cookie:fresh})).data.progreso,1);
   assert.deepEqual(Buffer.from(await (await fetch(f.base+foto)).arrayBuffer()),png);
  }finally{
   await f?.close();
@@ -48,19 +49,15 @@ test('INT-ASC migración repetible y persistencia en disco después de reiniciar
   await fs.rm(resolved,{recursive:true,force:true});
  }
 });
-test('INT-DESC API → controlador IA con proveedor stub (no llamada real)',async()=>{
- const oldKey=process.env.OPENROUTER_API_KEY,oldModel=process.env.OPENROUTER_MODEL;
- process.env.OPENROUTER_API_KEY='test-placeholder';process.env.OPENROUTER_MODEL='test-model';
- const aiClient={chat:{completions:{create:async()=>({choices:[{message:{content:'Respuesta de prueba del stub'}}]})}}};
- const f=await fixture({aiClient});
- try{
-  await f.register('ai@example.test');const cookie=(await f.login('ai@example.test')).cookie;
-  const result=await f.request('/chat',{method:'POST',cookie,body:{mensaje:'Funciones'}});assert.equal(result.status,200);assert.equal(result.data.respuesta,'Respuesta de prueba del stub');
-  aiClient.chat.completions.create=async()=>{throw {status:429,message:'secret-never-return'};};
-  const failure=await f.request('/chat',{method:'POST',cookie,body:{mensaje:'Funciones'}});assert.equal(failure.status,503);assert.ok(!JSON.stringify(failure.data).includes('secret-never-return'));
-  aiClient.chat.completions.create=async()=>({choices:[]});assert.equal((await f.request('/chat',{method:'POST',cookie,body:{mensaje:'Funciones'}})).status,502);
- }finally{await f.close();if(oldKey===undefined)delete process.env.OPENROUTER_API_KEY;else process.env.OPENROUTER_API_KEY=oldKey;if(oldModel===undefined)delete process.env.OPENROUTER_MODEL;else process.env.OPENROUTER_MODEL=oldModel;}
+test('SCOPE IA retirada: /chat responde 410 sin proveedor ni credenciales',async()=>{
+ const f=await fixture();try{
+  for(const body of [{},{mensaje:'Funciones'}]){
+   const r=await f.request('/chat',{method:'POST',body});assert.equal(r.status,410);assert.match(r.data.mensaje,/excluido/);
+  }
+  assert.equal(require('../../backend/package.json').dependencies.openai,undefined);
+ }finally{await f.close();}
 });
+
 test('SEC límite de intentos y recuperación de fallo de BD sin exponer SQL',async()=>{
  const f=await fixture({rateLimitOptions:{limit:2}});
  try{
