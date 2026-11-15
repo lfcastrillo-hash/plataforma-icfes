@@ -1,0 +1,260 @@
+{
+  "date": "2026-11-15T19:28:29.906Z",
+  "phase": "rama",
+  "publicationCodeCommit": "53a8bdadf2d583a68f740f157a7fe6d4d08549ff",
+  "executionCommits": {
+    "unitIntegration": "371291a447a20f190ec31e66f7498533f06e321e",
+    "native": "371291a447a20f190ec31e66f7498533f06e321e",
+    "e2e": "371291a447a20f190ec31e66f7498533f06e321e",
+    "visual": "53a8bdadf2d583a68f740f157a7fe6d4d08549ff",
+    "resources": "53a8bdadf2d583a68f740f157a7fe6d4d08549ff"
+  },
+  "productTrees": {
+    "frontend": "ffedcae8e87d33e80c74f38e5a33d634a6d9b24e",
+    "backend": "0226a546c449949279a3a1bc342388889dc7a7d3"
+  },
+  "scope": "Las fuentes frontend/backend son idénticas entre los commits funcionales y el comprobador visual; solo cambiaron README y QA visual.",
+  "results": {
+    "unitIntegration": 97,
+    "native": 15,
+    "e2ePrincipal": 14,
+    "jsChecks": 2,
+    "scienceBrowsers": 2,
+    "visualPages": 20,
+    "visualNewCardViewports": 2,
+    "visualRawDifferentPixels": 5,
+    "visualAcceptance": "Dimensiones exactas; ningún píxel con diferencia RGB mayor de 1/255 ni cambio alfa. Se conserva el número real de píxeles distintos por cuantización, no se declara cero si difieren.",
+    "activeLinks": 18,
+    "disabledLinks": 13,
+    "failures": 0
+  },
+  "coverage": {
+    "totalLineCount": 650,
+    "totalBranchCount": 516,
+    "totalFunctionCount": 111,
+    "coveredLineCount": 632,
+    "coveredBranchCount": 470,
+    "coveredFunctionCount": 105,
+    "coveredLinePercent": 97.23076923076923,
+    "coveredBranchPercent": 91.08527131782945,
+    "coveredFunctionPercent": 94.5945945945946
+  },
+  "provenance": [
+    {
+      "published": "unidad-integracion/resultados.json",
+      "source": "pruebas-unitarias/resultados.json",
+      "sourceSHA256": "7062c1e99c94bda5068d9daa04be82a2156bb156b67642af65df705a5cba404e",
+      "publishedSHA256": "7062c1e99c94bda5068d9daa04be82a2156bb156b67642af65df705a5cba404e",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/junit.xml",
+      "source": "pruebas-unitarias/junit.xml",
+      "sourceSHA256": "c4079e8eb7fcf2d1f941d76ba57b206d292d2e32f9c75cb32378b48bcc42b163",
+      "publishedSHA256": "c4079e8eb7fcf2d1f941d76ba57b206d292d2e32f9c75cb32378b48bcc42b163",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/lcov.info",
+      "source": "pruebas-unitarias/lcov.info",
+      "sourceSHA256": "631748101020d98a14dba8663452500cf19de2f398e2f2784d46fc5da2b939b9",
+      "publishedSHA256": "631748101020d98a14dba8663452500cf19de2f398e2f2784d46fc5da2b939b9",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "unidad-integracion/ejecucion.txt",
+      "source": "pruebas-unitarias/ejecucion.txt",
+      "sourceSHA256": "04c3cf01cefa417ae00d8c6d1018c4226852b4f8d8818b87bcd073dbd2a2e9be",
+      "publishedSHA256": "04c3cf01cefa417ae00d8c6d1018c4226852b4f8d8818b87bcd073dbd2a2e9be",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "postgresql/resultados.json",
+      "source": "nativas/pruebas-unitarias/resultados.json",
+      "sourceSHA256": "15f715decbb11a033d4fba8bc3969dbab5e22d872ef13c6f1991c8510a77e62e",
+      "publishedSHA256": "15f715decbb11a033d4fba8bc3969dbab5e22d872ef13c6f1991c8510a77e62e",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "postgresql/junit.xml",
+      "source": "nativas/pruebas-unitarias/junit.xml",
+      "sourceSHA256": "f7c553ec8c00b798b4c488e68e21389340ac1dc257cd9598b372a831d92f6857",
+      "publishedSHA256": "f7c553ec8c00b798b4c488e68e21389340ac1dc257cd9598b372a831d92f6857",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/resultados.json",
+      "source": "navegador/aceptacion/resultados.json",
+      "sourceSHA256": "586001cd0c6b22a415fedab917f65fc6f9dd28df8f70d637ae320dc95e49f5ad",
+      "publishedSHA256": "586001cd0c6b22a415fedab917f65fc6f9dd28df8f70d637ae320dc95e49f5ad",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA01.png",
+      "source": "navegador/aceptacion/chrome-CA01.png",
+      "sourceSHA256": "f0cd52d916af52488d95efcc61a90b1ed31770abe324b1edeb54c664f21a206f",
+      "publishedSHA256": "f0cd52d916af52488d95efcc61a90b1ed31770abe324b1edeb54c664f21a206f",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA02.png",
+      "source": "navegador/aceptacion/chrome-CA02.png",
+      "sourceSHA256": "82ce1ed3ba44a281f366e9bd24c1a32f3ad429835fea15b093a599788e68fe4c",
+      "publishedSHA256": "82ce1ed3ba44a281f366e9bd24c1a32f3ad429835fea15b093a599788e68fe4c",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA02-pestanas.png",
+      "source": "navegador/aceptacion/chrome-CA02-pestanas.png",
+      "sourceSHA256": "522a542c069257752c97989881c2d07c9f540038302d2e755de94f54c88087ab",
+      "publishedSHA256": "522a542c069257752c97989881c2d07c9f540038302d2e755de94f54c88087ab",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA03.png",
+      "source": "navegador/aceptacion/chrome-CA03.png",
+      "sourceSHA256": "37774b428cfce4213850ea3668b27b85432917177ff4c7d9f97c7da267d6c1fa",
+      "publishedSHA256": "37774b428cfce4213850ea3668b27b85432917177ff4c7d9f97c7da267d6c1fa",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA03-extra.png",
+      "source": "navegador/aceptacion/chrome-CA03-extra.png",
+      "sourceSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "publishedSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA04.png",
+      "source": "navegador/aceptacion/chrome-CA04.png",
+      "sourceSHA256": "5fa2ca5d52f93bc894df758cbff38725573d0d3c979ded792eedbf200cd6cab3",
+      "publishedSHA256": "5fa2ca5d52f93bc894df758cbff38725573d0d3c979ded792eedbf200cd6cab3",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/chrome-CA05.png",
+      "source": "navegador/aceptacion/chrome-CA05.png",
+      "sourceSHA256": "aef05aa43c2d3a8ea7aae8b5c19d182d8607506e5c7ede8205e516cf06f7fe90",
+      "publishedSHA256": "aef05aa43c2d3a8ea7aae8b5c19d182d8607506e5c7ede8205e516cf06f7fe90",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA01.png",
+      "source": "navegador/aceptacion/edge-CA01.png",
+      "sourceSHA256": "8015d9e23d637bf929cf04b7799d8be7e7025d3e23b752c543a235a8a6d76359",
+      "publishedSHA256": "8015d9e23d637bf929cf04b7799d8be7e7025d3e23b752c543a235a8a6d76359",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA02.png",
+      "source": "navegador/aceptacion/edge-CA02.png",
+      "sourceSHA256": "82ce1ed3ba44a281f366e9bd24c1a32f3ad429835fea15b093a599788e68fe4c",
+      "publishedSHA256": "82ce1ed3ba44a281f366e9bd24c1a32f3ad429835fea15b093a599788e68fe4c",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA02-pestanas.png",
+      "source": "navegador/aceptacion/edge-CA02-pestanas.png",
+      "sourceSHA256": "589a1d7d786d5d289bab8564ea5e12813ecd1e53b9703a0fcfec6f1c1801f647",
+      "publishedSHA256": "589a1d7d786d5d289bab8564ea5e12813ecd1e53b9703a0fcfec6f1c1801f647",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA03.png",
+      "source": "navegador/aceptacion/edge-CA03.png",
+      "sourceSHA256": "6d78de8b427f7a898dc867d55f40152c8d3921ad50ade4dd83cf2cb5d0f630b8",
+      "publishedSHA256": "6d78de8b427f7a898dc867d55f40152c8d3921ad50ade4dd83cf2cb5d0f630b8",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA03-extra.png",
+      "source": "navegador/aceptacion/edge-CA03-extra.png",
+      "sourceSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "publishedSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA04.png",
+      "source": "navegador/aceptacion/edge-CA04.png",
+      "sourceSHA256": "9c47cae57fb202b081235833ccf5966fa0517efc59dc37887ebda2804f8ed8a8",
+      "publishedSHA256": "9c47cae57fb202b081235833ccf5966fa0517efc59dc37887ebda2804f8ed8a8",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "e2e/edge-CA05.png",
+      "source": "navegador/aceptacion/edge-CA05.png",
+      "sourceSHA256": "b01ffe2c40afed1698064bbbb7df40231369b2e250933e086033e9a06a31cf00",
+      "publishedSHA256": "b01ffe2c40afed1698064bbbb7df40231369b2e250933e086033e9a06a31cf00",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "ciencias/resultados.json",
+      "source": "navegador/academico-browser/resultados.json",
+      "sourceSHA256": "832c5b5b8fa2df9467b0cbf9126b52179c215361737bb340ce4984e60389d2ae",
+      "publishedSHA256": "832c5b5b8fa2df9467b0cbf9126b52179c215361737bb340ce4984e60389d2ae",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "ciencias/chrome-tema-4.png",
+      "source": "navegador/academico-browser/chrome-tema-4.png",
+      "sourceSHA256": "3b27435d8433a5ac84734d13485b796d07f32f45897efcfcabcb051d50d26693",
+      "publishedSHA256": "3b27435d8433a5ac84734d13485b796d07f32f45897efcfcabcb051d50d26693",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "ciencias/edge-tema-4.png",
+      "source": "navegador/academico-browser/edge-tema-4.png",
+      "sourceSHA256": "c1cb9d0ac79c8b2b1599eefed15d9a936d31d7eb0e4ffc093ea6060a7fc17c4c",
+      "publishedSHA256": "c1cb9d0ac79c8b2b1599eefed15d9a936d31d7eb0e4ffc093ea6060a7fc17c4c",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/comparacion.json",
+      "source": "visual-validada/visual-academico/comparacion.json",
+      "sourceSHA256": "2f90dcf009c981357d14dd9012c06c1ed0a984d72b41178e3bcc1406b2b523d7",
+      "publishedSHA256": "2f90dcf009c981357d14dd9012c06c1ed0a984d72b41178e3bcc1406b2b523d7",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/modulo-ciencias.html.png",
+      "source": "visual-validada/visual-academico/modulo-ciencias.html.actual.png",
+      "sourceSHA256": "1d9f9379a6ca0f6e641406a93ceeb8b11083c6569176b0799881739135b35c40",
+      "publishedSHA256": "1d9f9379a6ca0f6e641406a93ceeb8b11083c6569176b0799881739135b35c40",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/mas-material.html.png",
+      "source": "visual-validada/visual-academico/mas-material.html.actual.png",
+      "sourceSHA256": "a2feea9d5182d3d3a2989c8b17b708a178b091eb261813306a5c17e8fa754019",
+      "publishedSHA256": "a2feea9d5182d3d3a2989c8b17b708a178b091eb261813306a5c17e8fa754019",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/panel-profesor.html.png",
+      "source": "visual-validada/visual-academico/panel-profesor.html.actual.png",
+      "sourceSHA256": "1efdd7e61573749907b5c6a590c435e661dc202774b82bdb7d1804c180348e71",
+      "publishedSHA256": "1efdd7e61573749907b5c6a590c435e661dc202774b82bdb7d1804c180348e71",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "visual/simulacro-selector.html.png",
+      "source": "visual-validada/visual-academico/simulacro-selector.html.actual.png",
+      "sourceSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "publishedSHA256": "2ce325457aa71e6a2f8a4c6b8bb3260c05b5b02b7c83acc8bca6c117d91b6277",
+      "transformation": "Copia íntegra"
+    },
+    {
+      "published": "recursos-get.json",
+      "source": "recursos/enlaces-get.json",
+      "sourceSHA256": "ba3a1c484f7d8bc443e776c4c3ae2bbee960b256cea065b716a26eb60f9082b0",
+      "publishedSHA256": "ba3a1c484f7d8bc443e776c4c3ae2bbee960b256cea065b716a26eb60f9082b0",
+      "transformation": "Copia íntegra"
+    }
+  ],
+  "limitations": [
+    "Datos ficticios y PostgreSQL nativo local, no producción/Supabase remoto",
+    "Comparación visual neutraliza contenido; tolerancia de cuantización 1 nivel RGB, alfa y dimensiones exactos",
+    "GET PDF parcial confirma acceso y firma, no lectura editorial completa",
+    "La aceptación docente y herramientas externas no se afirman aprobadas"
+  ]
+}
