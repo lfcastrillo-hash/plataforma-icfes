@@ -1,6 +1,6 @@
 # Insumo técnico para 3.2.2 y correcciones de calidad
 
-Base cbf45e8; código medido 88fbbc646297b5388902f169fe0d5bb70119c6d8. Generado con node scripts/metrics/quality-report.cjs. El PDF no se modifica.
+Base cbf45e8; código medido dae2c8eadc8e39ff2e050bac09f892858fb13ac6. Generado con node scripts/metrics/quality-report.cjs. El PDF no se modifica.
 
 ## Tabla 1. Componentes reales
 
@@ -15,16 +15,16 @@ La responsabilidad se conserva por módulos: controladores HTTP, validadores, au
 | frontend/js/clases.js | 2 funciones; 0 métodos de clase | 21 | 5 |
 | frontend/js/panel-estudiante.js | 6 funciones; 0 métodos de clase | 179 | 33 |
 | frontend/js/panel-profesor.js | 45 funciones; 0 métodos de clase | 468 | 110 |
-| frontend/js/perfil-estudiante.js | 19 funciones; 0 métodos de clase | 194 | 46 |
+| frontend/js/perfil-estudiante.js | 19 funciones; 0 métodos de clase | 195 | 47 |
 | frontend/js/perfil-profesor.js | 15 funciones; 0 métodos de clase | 139 | 35 |
-| frontend/js/perfil.js | 4 funciones; 0 métodos de clase | 67 | 15 |
+| frontend/js/perfil.js | 4 funciones; 0 métodos de clase | 68 | 16 |
 | frontend/js/prep.js | 31 funciones; 0 métodos de clase | 109 | 68 |
 | frontend/js/progreso.js | 5 funciones; 0 métodos de clase | 46 | 11 |
-| frontend/js/simulacro-core.js | 11 funciones; 0 métodos de clase | 58 | 65 |
+| frontend/js/simulacro-core.js | 11 funciones; 0 métodos de clase | 58 | 64 |
 | frontend/js/simulacro.js | 4 funciones; 0 métodos de clase | 40 | 8 |
 | frontend/js/water-loader.js | 7 funciones; 0 métodos de clase | 80 | 14 |
 | frontend/simulacro-nuevo.html | 41 funciones; 0 métodos de clase | 827 | 112 |
-| frontend/simulacro-selector.html | 10 funciones; 0 métodos de clase | 654 | 16 |
+| frontend/simulacro-selector.html | 10 funciones; 0 métodos de clase | 653 | 16 |
 | backend/controllers/auth.controller.js | 4 funciones; 0 métodos de clase | 41 | 21 |
 | backend/controllers/clases.controller.js | 17 funciones; 0 métodos de clase | 75 | 37 |
 | backend/controllers/perfil.controller.js | 5 funciones; 0 métodos de clase | 44 | 29 |
@@ -33,7 +33,7 @@ La responsabilidad se conserva por módulos: controladores HTTP, validadores, au
 | backend/db.js | 1 funciones; 0 métodos de clase | 5 | 1 |
 | backend/lib/catalogo-aprendizaje.js | 7 funciones; 0 métodos de clase | 30 | 25 |
 | backend/lib/csp.js | 6 funciones; 0 métodos de clase | 19 | 19 |
-| backend/lib/database-config.js | 3 funciones; 0 métodos de clase | 25 | 34 |
+| backend/lib/database-config.js | 6 funciones; 0 métodos de clase | 37 | 36 |
 | backend/lib/images.js | 2 funciones; 0 métodos de clase | 22 | 25 |
 | backend/lib/passwords.js | 2 funciones; 0 métodos de clase | 23 | 16 |
 | backend/lib/progress.js | 11 funciones; 0 métodos de clase | 40 | 47 |
@@ -44,7 +44,7 @@ La responsabilidad se conserva por módulos: controladores HTTP, validadores, au
 | backend/middlewares/rateLimit.js | 4 funciones; 0 métodos de clase | 17 | 12 |
 | backend/middlewares/verificarToken.js | 1 funciones; 0 métodos de clase | 19 | 11 |
 | backend/routes/simulacros.routes.js | 4 funciones; 0 métodos de clase | 42 | 27 |
-| backend/server.js | 16 funciones; 0 métodos de clase | 62 | 41 |
+| backend/server.js | 16 funciones; 0 métodos de clase | 65 | 39 |
 
 ## Tabla 2. Aplicabilidad de métricas
 
@@ -61,14 +61,14 @@ Mantener arquitectura funcional: los controladores y utilidades no requieren ins
 
 ## Tabla 3. Antes y después
 
-| Medición | Base cbf45e8 | Código 88fbbc6 |
+| Medición | Base cbf45e8 | Código dae2c8e |
 |---|---:|---:|
 | files | 68 | 68 |
-| PLOC | 18701 | 18720 |
-| NCLOC | 17235 | 17260 |
+| PLOC | 18701 | 18731 |
+| NCLOC | 17235 | 17270 |
 | CLOC | 317 | 317 |
-| BLOC | 1149 | 1143 |
-| functions | 342 | 354 |
+| BLOC | 1149 | 1144 |
+| functions | 342 | 357 |
 | classes | 0 | 0 |
 
 La reorganización incorpora control de concurrencia y cola de resultados, sin cambiar tablas SQL ni contratos de respuesta. Duplicación Sonar después: pendiente de nuevo análisis, no se deduce del número de líneas. Los JSON incluyen archivos, funciones, líneas, complejidad y SHA-256 de fuentes.

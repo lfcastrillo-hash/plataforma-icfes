@@ -1,10 +1,10 @@
 {
-  "date": "2026-11-22T14:42:19.953Z",
+  "date": "2026-11-22T19:41:44.348Z",
   "version": "1.1.0",
-  "commit": "88fbbc646297b5388902f169fe0d5bb70119c6d8",
+  "commit": "dae2c8eadc8e39ff2e050bac09f892858fb13ac6",
   "workingTree": true,
   "sourceDirty": false,
-  "sourceSha256": "7985c87f97a56ed3ed56d9cc8978d5e8a4e424dc6856b2e522ac3fcf854c6576",
+  "sourceSha256": "a93febdc4b6f1fd472085a6c5c605830209627e4c631b1efbf0cb07c2a4c38eb",
   "node": "v24.14.1",
   "scope": [
     "frontend",
@@ -21,12 +21,12 @@
   "criteria": "PLOC=NCLOC+CLOC+BLOC; CLOC solo líneas exclusivamente de comentarios; mixtas incluidas en NCLOC. AST Acorn para JS/JSX e inline HTML. CSS/SQL escáner léxico. Funciones incluyen callbacks; complejidad=1+decisiones+operadores lógicos, excluye funciones anidadas. Clases AST reales.",
   "totals": {
     "files": 68,
-    "PLOC": 18720,
-    "NCLOC": 17260,
+    "PLOC": 18731,
+    "NCLOC": 17270,
     "CLOC": 317,
-    "BLOC": 1143,
+    "BLOC": 1144,
     "mixed": 16,
-    "functions": 354,
+    "functions": 357,
     "classes": 0,
     "commentDensity": 1.8
   },
@@ -102,10 +102,10 @@
     {
       "file": "frontend/css/global.css",
       "language": "css",
-      "PLOC": 1415,
-      "NCLOC": 1141,
+      "PLOC": 1410,
+      "NCLOC": 1135,
       "CLOC": 99,
-      "BLOC": 175,
+      "BLOC": 176,
       "mixed": 14,
       "functions": 0,
       "classes": 0,
@@ -739,8 +739,8 @@
     {
       "file": "frontend/js/perfil-estudiante.js",
       "language": "js",
-      "PLOC": 239,
-      "NCLOC": 194,
+      "PLOC": 240,
+      "NCLOC": 195,
       "CLOC": 14,
       "BLOC": 31,
       "mixed": 0,
@@ -805,41 +805,41 @@
         {
           "name": "<callback>",
           "line": 64,
-          "complexity": 1
+          "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 75,
+          "line": 76,
           "complexity": 14
         },
         {
           "name": "guardarPerfil",
-          "line": 149,
+          "line": 150,
           "complexity": 4
         },
         {
           "name": "guardarSeguridad",
-          "line": 168,
+          "line": 169,
           "complexity": 3
         },
         {
           "name": "enviarActualizacion",
-          "line": 185,
+          "line": 186,
           "complexity": 1
         },
         {
           "name": "cargarClasesEstudiante",
-          "line": 190,
+          "line": 191,
           "complexity": 5
         },
         {
           "name": "<callback>",
-          "line": 208,
+          "line": 209,
           "complexity": 1
         },
         {
           "name": "cerrarSesion",
-          "line": 231,
+          "line": 232,
           "complexity": 2
         }
       ],
@@ -937,8 +937,8 @@
     {
       "file": "frontend/js/perfil.js",
       "language": "js",
-      "PLOC": 99,
-      "NCLOC": 67,
+      "PLOC": 100,
+      "NCLOC": 68,
       "CLOC": 16,
       "BLOC": 16,
       "mixed": 1,
@@ -958,11 +958,11 @@
         {
           "name": "<callback>",
           "line": 42,
-          "complexity": 1
+          "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 53,
+          "line": 54,
           "complexity": 7
         }
       ],
@@ -1230,7 +1230,7 @@
         {
           "name": "validAttempt",
           "line": 37,
-          "complexity": 32
+          "complexity": 31
         },
         {
           "name": "<callback>",
@@ -1693,8 +1693,8 @@
     {
       "file": "frontend/simulacro-selector.html",
       "language": "html",
-      "PLOC": 688,
-      "NCLOC": 654,
+      "PLOC": 687,
+      "NCLOC": 653,
       "CLOC": 11,
       "BLOC": 23,
       "mixed": 0,
@@ -1728,27 +1728,27 @@
         },
         {
           "name": "<callback>",
-          "line": 649,
+          "line": 648,
           "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 656,
+          "line": 655,
           "complexity": 1
         },
         {
           "name": "iniciarGeneral",
-          "line": 662,
+          "line": 661,
           "complexity": 1
         },
         {
           "name": "iniciarArea",
-          "line": 670,
+          "line": 669,
           "complexity": 1
         },
         {
           "name": "iniciarTemas",
-          "line": 678,
+          "line": 677,
           "complexity": 2
         }
       ],
@@ -2150,28 +2150,43 @@
     {
       "file": "backend/lib/database-config.js",
       "language": "js",
-      "PLOC": 25,
-      "NCLOC": 25,
+      "PLOC": 37,
+      "NCLOC": 37,
       "CLOC": 0,
       "BLOC": 0,
       "mixed": 0,
-      "functions": 3,
+      "functions": 6,
       "classes": 0,
       "functionDetails": [
         {
-          "name": "databaseConfig",
-          "line": 3,
-          "complexity": 27
-        },
-        {
           "name": "fail",
-          "line": 4,
+          "line": 3,
           "complexity": 1
         },
         {
-          "name": "number",
-          "line": 21,
+          "name": "parseConnection",
+          "line": 4,
+          "complexity": 9
+        },
+        {
+          "name": "connectionMode",
+          "line": 11,
+          "complexity": 9
+        },
+        {
+          "name": "sslConfiguration",
+          "line": 19,
+          "complexity": 10
+        },
+        {
+          "name": "boundedNumber",
+          "line": 28,
           "complexity": 6
+        },
+        {
+          "name": "databaseConfig",
+          "line": 33,
+          "complexity": 1
         }
       ],
       "classDetails": []
@@ -2618,8 +2633,8 @@
     {
       "file": "backend/server.js",
       "language": "js",
-      "PLOC": 64,
-      "NCLOC": 62,
+      "PLOC": 67,
+      "NCLOC": 65,
       "CLOC": 2,
       "BLOC": 0,
       "mixed": 0,
@@ -2674,36 +2689,36 @@
         {
           "name": "<callback>",
           "line": 46,
-          "complexity": 11
+          "complexity": 9
         },
         {
           "name": "start",
-          "line": 56,
+          "line": 59,
           "complexity": 4
         },
         {
           "name": "<callback>",
-          "line": 59,
+          "line": 62,
           "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 60,
-          "complexity": 1
-        },
-        {
-          "name": "<callback>",
-          "line": 60,
-          "complexity": 1
-        },
-        {
-          "name": "<callback>",
-          "line": 60,
+          "line": 63,
           "complexity": 1
         },
         {
           "name": "<callback>",
           "line": 63,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 63,
+          "complexity": 1
+        },
+        {
+          "name": "<callback>",
+          "line": 66,
           "complexity": 2
         }
       ],

@@ -20,7 +20,13 @@ async function run(name) {
   async function scenario(id,description,action) {
     const start=Date.now();
     try { await action(); await page.screenshot({path:dir+'/'+name+'-'+id+'.png',fullPage:true}); report.cases.push({id,browser:name,description,status:'PASS',durationMs:Date.now()-start,evidence:name+'-'+id+'.png'}); console.log(name+' '+id+' PASS'); }
-    catch(error){await page.screenshot({path:dir+'/'+name+'-'+id+'-fallo.png',fullPage:true});report.cases.push({id,browser:name,description,status:'FAIL',error:error.message});console.error(name+' '+id+' FAIL '+error.message);throw error;}
+    catch(error){
+      const failure={id,browser:name,description,status:'FAIL',error:error.message};
+      report.cases.push(failure);console.error(name+' '+id+' FAIL '+error.message);
+      try{await page.screenshot({path:dir+'/'+name+'-'+id+'-fallo.png',fullPage:true,timeout:10000});}
+      catch(captureError){failure.screenshotError=captureError.message;}
+      throw error;
+    }
   }
   try {
     await scenario('CA01','Estudiante inicia sesión mediante el formulario y accede a su panel',async()=>{
