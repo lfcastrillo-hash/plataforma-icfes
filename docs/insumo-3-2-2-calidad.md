@@ -1,6 +1,6 @@
 # Insumo técnico para 3.2.2 y correcciones de calidad
 
-Base cbf45e8; código medido ab7c8ef012b18928c6ed69ff7dbca691f4106727. Generado con node scripts/metrics/quality-report.cjs. El PDF no se modifica.
+Base cbf45e8; código medido 88fbbc646297b5388902f169fe0d5bb70119c6d8. Generado con node scripts/metrics/quality-report.cjs. El PDF no se modifica.
 
 ## Tabla 1. Componentes reales
 
@@ -15,10 +15,10 @@ La responsabilidad se conserva por módulos: controladores HTTP, validadores, au
 | frontend/js/clases.js | 2 funciones; 0 métodos de clase | 21 | 5 |
 | frontend/js/panel-estudiante.js | 6 funciones; 0 métodos de clase | 179 | 33 |
 | frontend/js/panel-profesor.js | 45 funciones; 0 métodos de clase | 468 | 110 |
-| frontend/js/perfil-estudiante.js | 19 funciones; 0 métodos de clase | 214 | 49 |
-| frontend/js/perfil-profesor.js | 15 funciones; 0 métodos de clase | 159 | 37 |
+| frontend/js/perfil-estudiante.js | 19 funciones; 0 métodos de clase | 194 | 46 |
+| frontend/js/perfil-profesor.js | 15 funciones; 0 métodos de clase | 139 | 35 |
 | frontend/js/perfil.js | 4 funciones; 0 métodos de clase | 67 | 15 |
-| frontend/js/prep.js | 30 funciones; 0 métodos de clase | 96 | 64 |
+| frontend/js/prep.js | 31 funciones; 0 métodos de clase | 109 | 68 |
 | frontend/js/progreso.js | 5 funciones; 0 métodos de clase | 46 | 11 |
 | frontend/js/simulacro-core.js | 11 funciones; 0 métodos de clase | 58 | 65 |
 | frontend/js/simulacro.js | 4 funciones; 0 métodos de clase | 40 | 8 |
@@ -31,16 +31,16 @@ La responsabilidad se conserva por módulos: controladores HTTP, validadores, au
 | backend/controllers/progreso.controller.js | 4 funciones; 0 métodos de clase | 15 | 4 |
 | backend/controllers/progresoAreas.controller.js | 7 funciones; 0 métodos de clase | 27 | 20 |
 | backend/db.js | 1 funciones; 0 métodos de clase | 5 | 1 |
-| backend/lib/catalogo-aprendizaje.js | 7 funciones; 0 métodos de clase | 30 | 26 |
+| backend/lib/catalogo-aprendizaje.js | 7 funciones; 0 métodos de clase | 30 | 25 |
 | backend/lib/csp.js | 6 funciones; 0 métodos de clase | 19 | 19 |
 | backend/lib/database-config.js | 3 funciones; 0 métodos de clase | 25 | 34 |
 | backend/lib/images.js | 2 funciones; 0 métodos de clase | 22 | 25 |
 | backend/lib/passwords.js | 2 funciones; 0 métodos de clase | 23 | 16 |
 | backend/lib/progress.js | 11 funciones; 0 métodos de clase | 40 | 47 |
 | backend/lib/transaction.js | 1 funciones; 0 métodos de clase | 6 | 2 |
-| backend/lib/validation.js | 7 funciones; 0 métodos de clase | 9 | 17 |
+| backend/lib/validation.js | 8 funciones; 0 métodos de clase | 15 | 22 |
 | backend/middlewares/access.js | 3 funciones; 0 métodos de clase | 8 | 8 |
-| backend/middlewares/accountLimit.js | 3 funciones; 0 métodos de clase | 12 | 6 |
+| backend/middlewares/accountLimit.js | 3 funciones; 0 métodos de clase | 15 | 6 |
 | backend/middlewares/rateLimit.js | 4 funciones; 0 métodos de clase | 17 | 12 |
 | backend/middlewares/verificarToken.js | 1 funciones; 0 métodos de clase | 19 | 11 |
 | backend/routes/simulacros.routes.js | 4 funciones; 0 métodos de clase | 42 | 27 |
@@ -61,14 +61,14 @@ Mantener arquitectura funcional: los controladores y utilidades no requieren ins
 
 ## Tabla 3. Antes y después
 
-| Medición | Base cbf45e8 | Código ab7c8ef |
+| Medición | Base cbf45e8 | Código 88fbbc6 |
 |---|---:|---:|
 | files | 68 | 68 |
-| PLOC | 18701 | 18744 |
-| NCLOC | 17235 | 17278 |
+| PLOC | 18701 | 18720 |
+| NCLOC | 17235 | 17260 |
 | CLOC | 317 | 317 |
-| BLOC | 1149 | 1149 |
-| functions | 342 | 352 |
+| BLOC | 1149 | 1143 |
+| functions | 342 | 354 |
 | classes | 0 | 0 |
 
 La reorganización incorpora control de concurrencia y cola de resultados, sin cambiar tablas SQL ni contratos de respuesta. Duplicación Sonar después: pendiente de nuevo análisis, no se deduce del número de líneas. Los JSON incluyen archivos, funciones, líneas, complejidad y SHA-256 de fuentes.

@@ -1,10 +1,10 @@
 {
-  "date": "2026-11-22T14:36:07.069Z",
+  "date": "2026-11-22T14:42:19.953Z",
   "version": "1.1.0",
-  "commit": "ab7c8ef012b18928c6ed69ff7dbca691f4106727",
+  "commit": "88fbbc646297b5388902f169fe0d5bb70119c6d8",
   "workingTree": true,
   "sourceDirty": false,
-  "sourceSha256": "9934ad22f471d72e2ea01e263215700b512392a474c5252d921cd295816577e2",
+  "sourceSha256": "7985c87f97a56ed3ed56d9cc8978d5e8a4e424dc6856b2e522ac3fcf854c6576",
   "node": "v24.14.1",
   "scope": [
     "frontend",
@@ -21,12 +21,12 @@
   "criteria": "PLOC=NCLOC+CLOC+BLOC; CLOC solo líneas exclusivamente de comentarios; mixtas incluidas en NCLOC. AST Acorn para JS/JSX e inline HTML. CSS/SQL escáner léxico. Funciones incluyen callbacks; complejidad=1+decisiones+operadores lógicos, excluye funciones anidadas. Clases AST reales.",
   "totals": {
     "files": 68,
-    "PLOC": 18744,
-    "NCLOC": 17278,
+    "PLOC": 18720,
+    "NCLOC": 17260,
     "CLOC": 317,
-    "BLOC": 1149,
-    "mixed": 18,
-    "functions": 352,
+    "BLOC": 1143,
+    "mixed": 16,
+    "functions": 354,
     "classes": 0,
     "commentDensity": 1.8
   },
@@ -739,11 +739,11 @@
     {
       "file": "frontend/js/perfil-estudiante.js",
       "language": "js",
-      "PLOC": 261,
-      "NCLOC": 214,
+      "PLOC": 239,
+      "NCLOC": 194,
       "CLOC": 14,
-      "BLOC": 33,
-      "mixed": 1,
+      "BLOC": 31,
+      "mixed": 0,
       "functions": 19,
       "classes": 0,
       "functionDetails": [
@@ -825,21 +825,21 @@
         {
           "name": "enviarActualizacion",
           "line": 185,
-          "complexity": 4
+          "complexity": 1
         },
         {
           "name": "cargarClasesEstudiante",
-          "line": 212,
+          "line": 190,
           "complexity": 5
         },
         {
           "name": "<callback>",
-          "line": 230,
+          "line": 208,
           "complexity": 1
         },
         {
           "name": "cerrarSesion",
-          "line": 253,
+          "line": 231,
           "complexity": 2
         }
       ],
@@ -848,11 +848,11 @@
     {
       "file": "frontend/js/perfil-profesor.js",
       "language": "js",
-      "PLOC": 204,
-      "NCLOC": 159,
+      "PLOC": 180,
+      "NCLOC": 139,
       "CLOC": 12,
-      "BLOC": 33,
-      "mixed": 1,
+      "BLOC": 29,
+      "mixed": 0,
       "functions": 15,
       "classes": 0,
       "functionDetails": [
@@ -929,7 +929,7 @@
         {
           "name": "enviarActualizacion",
           "line": 178,
-          "complexity": 3
+          "complexity": 1
         }
       ],
       "classDetails": []
@@ -971,12 +971,12 @@
     {
       "file": "frontend/js/prep.js",
       "language": "js",
-      "PLOC": 98,
-      "NCLOC": 96,
+      "PLOC": 111,
+      "NCLOC": 109,
       "CLOC": 2,
       "BLOC": 0,
       "mixed": 1,
-      "functions": 30,
+      "functions": 31,
       "classes": 0,
       "functionDetails": [
         {
@@ -1090,43 +1090,48 @@
           "complexity": 1
         },
         {
-          "name": "clearSession",
+          "name": "updateProfile",
           "line": 73,
+          "complexity": 4
+        },
+        {
+          "name": "clearSession",
+          "line": 86,
           "complexity": 1
         },
         {
           "name": "<callback>",
-          "line": 74,
+          "line": 87,
           "complexity": 1
         },
         {
           "name": "escapeHTML",
-          "line": 77,
+          "line": 90,
           "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 77,
+          "line": 90,
           "complexity": 1
         },
         {
           "name": "<callback>",
-          "line": 78,
+          "line": 91,
           "complexity": 1
         },
         {
           "name": "<callback>",
-          "line": 79,
+          "line": 92,
           "complexity": 2
         },
         {
           "name": "<callback>",
-          "line": 80,
+          "line": 93,
           "complexity": 1
         },
         {
           "name": "importLegacyProgress",
-          "line": 85,
+          "line": 98,
           "complexity": 6
         }
       ],
@@ -2073,7 +2078,7 @@
         {
           "name": "<callback>",
           "line": 13,
-          "complexity": 4
+          "complexity": 3
         },
         {
           "name": "evaluateAnswer",
@@ -2310,12 +2315,12 @@
     {
       "file": "backend/lib/validation.js",
       "language": "js",
-      "PLOC": 9,
-      "NCLOC": 9,
+      "PLOC": 15,
+      "NCLOC": 15,
       "CLOC": 0,
       "BLOC": 0,
       "mixed": 0,
-      "functions": 7,
+      "functions": 8,
       "classes": 0,
       "functionDetails": [
         {
@@ -2326,31 +2331,36 @@
         {
           "name": "email",
           "line": 3,
-          "complexity": 3
+          "complexity": 6
+        },
+        {
+          "name": "<callback>",
+          "line": 6,
+          "complexity": 2
         },
         {
           "name": "normalizeEmail",
-          "line": 4,
+          "line": 10,
           "complexity": 1
         },
         {
           "name": "password",
-          "line": 5,
+          "line": 11,
           "complexity": 3
         },
         {
           "name": "percentage",
-          "line": 6,
+          "line": 12,
           "complexity": 4
         },
         {
           "name": "id",
-          "line": 7,
+          "line": 13,
           "complexity": 2
         },
         {
           "name": "fail",
-          "line": 8,
+          "line": 14,
           "complexity": 1
         }
       ],
@@ -2388,8 +2398,8 @@
     {
       "file": "backend/middlewares/accountLimit.js",
       "language": "js",
-      "PLOC": 12,
-      "NCLOC": 12,
+      "PLOC": 15,
+      "NCLOC": 15,
       "CLOC": 0,
       "BLOC": 0,
       "mixed": 0,
