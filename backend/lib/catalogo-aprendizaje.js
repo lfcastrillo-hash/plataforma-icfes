@@ -7,11 +7,11 @@ const catalog=Object.fromEntries(AREAS.map(area=>{
  const cards=[...html.matchAll(/id="ej-(\d+)-(\d+)"/g)].map(m=>m[1]+'-'+m[2]);
  const answers={};
  for(const m of html.matchAll(/onclick="responder\(\s*this,\s*(\d+),\s*(\d+),\s*(true|false)\s*\)"/g)){
-  const key=m[1]+'-'+m[2];(answers[key]||=[]).push(m[3]==='true');
+  const key=m[1]+'-'+m[2];answers[key] ||= [];answers[key].push(m[3]==='true');
  }
  if(new Set(cards).size!==cards.length || Object.keys(answers).length!==cards.length)throw new Error('Catálogo inconsistente: '+area);
  const questions=Object.fromEntries(cards.map(key=>{
-  const options=answers[key];if(!options || options.length!==4 || options.filter(Boolean).length!==1)throw new Error('Opciones inconsistentes: '+area+'/'+key);
+  const options=answers[key];if(options?.length!==4 || options.filter(Boolean).length!==1)throw new Error('Opciones inconsistentes: '+area+'/'+key);
   return [key,Object.freeze({options:options.length,correct:options.indexOf(true)})];
  }));
  return [area,Object.freeze(questions)];

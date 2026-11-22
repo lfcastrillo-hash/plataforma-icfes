@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     datosActuales.correo = sesion.correo;
   }
 
-  cargarClasesEstudiante();
+  await cargarClasesEstudiante();
 });
 
 // --- Guardar Perfil (nombre, bio, foto) ---
@@ -183,29 +183,7 @@ async function guardarSeguridad() {
 
 // --- Función común de envío al backend ---
 async function enviarActualizacion(formData) {
-  try {
-    const response = await fetch(`${API}/perfil/actualizar`, {
-      method: "POST",
-      credentials: "include",
-      headers: getAuthHeaders(), // Sin Content-Type, FormData lo pone solo
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert("¡Datos guardados correctamente!");
-      sesion.correo = data.correo;
-      sesion.nombre = data.nombre;
-      localStorage.setItem("datosVisionales", JSON.stringify(sesion));
-      window.location.reload();
-    } else {
-      alert(data.mensaje || "Error al guardar los datos.");
-    }
-  } catch (error) {
-    console.error("Error al actualizar:", error);
-    alert("Error de conexión con el servidor.");
-  }
+  return Prep.updateProfile(formData, sesion, '¡Datos guardados correctamente!', 'Error al guardar los datos.');
 }
 
 // --- Cargar clases del estudiante desde la BD ---

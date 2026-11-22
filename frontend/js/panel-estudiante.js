@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  cargarAnunciosEstudiante();
+  await cargarAnunciosEstudiante();
 });
 
 // ─────────────────────────────────────────────────────────────

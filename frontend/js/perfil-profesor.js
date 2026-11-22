@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         formData.append("foto", fotoInput.files[0]);
       }
 
-      enviarActualizacion(formData);
+      await enviarActualizacion(formData);
     });
   }
 
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         formData.append("password", password);
       }
 
-      enviarActualizacion(formData);
+      await enviarActualizacion(formData);
     });
   }
 });
@@ -176,29 +176,5 @@ function cerrarModalSeguridad() {
 // FUNCIÓN COMÚN DE ENVÍO
 // ==========================================
 async function enviarActualizacion(formData) {
-  try {
-    const response = await fetch(`${API}/perfil/actualizar`, {
-      method: "POST",
-      credentials: "include",
-      headers: getAuthHeaders(), // Sin Content-Type porque FormData lo pone solo
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert("Datos guardados correctamente.");
-
-      sesion.correo = data.correo;
-      sesion.nombre = data.nombre;
-      localStorage.setItem("datosVisionales", JSON.stringify(sesion));
-
-      window.location.reload();
-    } else {
-      alert(data.mensaje);
-    }
-  } catch (error) {
-    console.error("Error al actualizar:", error);
-    alert("Error de conexión con el servidor.");
-  }
+  return Prep.updateProfile(formData, sesion, 'Datos guardados correctamente.', undefined);
 }

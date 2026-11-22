@@ -70,6 +70,19 @@
     global.addEventListener('online', retryResults);
     document.addEventListener('DOMContentLoaded', retryResults);
   }
+  async function updateProfile(formData, user, successMessage, fallback) {
+    try {
+      const data = await api('/api/perfil/actualizar', {method:'POST', body:formData});
+      alert(successMessage);
+      user.correo = data.correo;
+      user.nombre = data.nombre;
+      localStorage.setItem('datosVisionales', JSON.stringify(user));
+      global.location.reload();
+    } catch (error) {
+      console.error('Error al actualizar:', error);
+      alert(error.status ? error.message || fallback : 'Error de conexión con el servidor.');
+    }
+  }
   function clearSession() {
     ['datosVisionales', 'usuarioActivo', 'token', 'id_usuario'].forEach(key => localStorage.removeItem(key));
     sessionStorage.removeItem('simulacro_config');
@@ -94,5 +107,5 @@
     }
     // Los originales se conservan. Ejecutar solo tras confirmar quién es el propietario.
   }
-  global.Prep = { queueResult, syncResults, hasPendingResult, parse, session, storage, forUser, sameSession, api, clearSession, escapeHTML, importLegacyProgress };
+  global.Prep = { updateProfile, queueResult, syncResults, hasPendingResult, parse, session, storage, forUser, sameSession, api, clearSession, escapeHTML, importLegacyProgress };
 })(window);
