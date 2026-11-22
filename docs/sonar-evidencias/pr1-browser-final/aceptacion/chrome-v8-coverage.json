@@ -1,0 +1,483 @@
+{
+  "browser": "chrome",
+  "scope": "Solo la p?gina principal del recorrido; no incluye otras pesta?as/contextos",
+  "scripts": [
+    {
+      "url": "http://127.0.0.1:64220/js/prep.js",
+      "scriptId": "5260",
+      "source": "(function (global) {\r\n  'use strict';\r\n  const parse = (raw, fallback) => { try { return JSON.parse(raw) ?? fallback; } catch { return fallback; } };\r\n  function session() { return parse(localStorage.getItem('datosVisionales') || localStorage.getItem('usuarioActivo'), {}); }\r\n  function prefix(user = session()) {\r\n    return 'prepicfes:u:' + (user.id_usuario || user.correo || 'anonymous') + ':';\r\n  }\r\n  const storage = {\r\n    getItem: key => localStorage.getItem(prefix() + key),\r\n    setItem: (key, value) => localStorage.setItem(prefix() + key, value),\r\n  };\r\n  function forUser(user) {\r\n    const base = prefix(user);\r\n    return { getItem:key=>localStorage.getItem(base+key), setItem:(key,value)=>localStorage.setItem(base+key,value), removeItem:key=>localStorage.removeItem(base+key) };\r\n  }\r\n  const pageUser = session();\r\n  function sameSession(user = pageUser) {\r\n    const now = session();\r\n    return String(now.id_usuario || now.correo || '') === String(user.id_usuario || user.correo || '');\r\n  }\r\n  // Una pestaña abierta con otra cuenta no puede escribir sobre la sesión nueva.\r\n  if (typeof global.fetch === 'function') {\r\n    const nativeFetch = global.fetch.bind(global);\r\n    global.fetch = (input, options = {}) => {\r\n      const url = new URL(typeof input === 'string' ? input : input.url, location.href);\r\n      if (url.origin === location.origin && url.pathname.startsWith('/api/') && !['/api/login','/api/registro','/api/health'].includes(url.pathname)) {\r\n        if (!sameSession()) return Promise.reject(new Error('La cuenta cambió en otra pestaña. Recarga esta página.'));\r\n        const headers = new Headers(options.headers || (typeof input === 'object' ? input.headers : undefined));\r\n        if (pageUser.id_usuario) headers.set('X-Prep-User', String(pageUser.id_usuario));\r\n        options = { ...options, headers };\r\n        return nativeFetch(input, options).then(response => {\r\n          if (!sameSession()) throw new Error('La cuenta cambió durante la solicitud. Recarga esta página.');\r\n          return response;\r\n        });\r\n      }\r\n      return nativeFetch(input, options);\r\n    };\r\n  }\r\n  async function api(path, options = {}) {\r\n    const response = await fetch(path, { credentials: 'include', ...options });\r\n    const data = await response.json();\r\n    if (!response.ok) { const error=new Error(data.mensaje || data.error || 'No se pudo completar la operación.');error.status=response.status;throw error; }\r\n    return data;\r\n  }\r\n  const resultStore = forUser(pageUser);\r\n  const resultKey = 'resultados_pendientes';\r\n  const pendingResults = () => parse(resultStore.getItem(resultKey), {});\r\n  function queueResult(payload) {\r\n    const pending = pendingResults();\r\n    pending[payload.id_resultado] = payload;\r\n    resultStore.setItem(resultKey, JSON.stringify(pending));\r\n  }\r\n  function hasPendingResult(id) { return Object.hasOwn(pendingResults(), id); }\r\n  async function sendPendingResults(payloads, index = 0) {\n    if (index >= payloads.length || !sameSession() || !pageUser.id_usuario) return;\n    const payload = payloads[index];\n    await api('/api/simulacros', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});\n    const remaining = pendingResults();\n    delete remaining[payload.id_resultado];\n    resultStore.setItem(resultKey, JSON.stringify(remaining));\n    return sendPendingResults(payloads, index + 1);\n  }\n  let syncing;\n  function syncResults() {\n    if (syncing) return syncing;\n    syncing = sendPendingResults(Object.values(pendingResults())).finally(() => { syncing = undefined; });\n    return syncing;\n  }\n  function retryResults() { syncResults().catch(() => { /* Se conserva la cola para el próximo intento. */ }); }\r\n  if (typeof global.addEventListener === 'function') {\r\n    global.addEventListener('online', retryResults);\r\n    document.addEventListener('DOMContentLoaded', retryResults);\r\n  }\r\n  async function updateProfile(formData, user, successMessage, fallback) {\r\n    try {\r\n      const data = await api('/api/perfil/actualizar', {method:'POST', body:formData});\r\n      alert(successMessage);\r\n      user.correo = data.correo;\r\n      user.nombre = data.nombre;\r\n      localStorage.setItem('datosVisionales', JSON.stringify(user));\r\n      global.location.reload();\r\n    } catch (error) {\r\n      console.error('Error al actualizar:', error);\r\n      alert(error.status ? error.message || fallback : 'Error de conexión con el servidor.');\r\n    }\r\n  }\r\n  function clearSession() {\r\n    ['datosVisionales', 'usuarioActivo', 'token', 'id_usuario'].forEach(key => localStorage.removeItem(key));\r\n    sessionStorage.removeItem('simulacro_config');\r\n  }\r\n  const escapeHTML = value => String(value ?? '').replace(/[&<>\"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;', \"'\":'&#39;' })[c]);\r\n  document.addEventListener('DOMContentLoaded', () => {\r\n    document.querySelectorAll('a[href]').forEach(a => {\r\n      if (/^(LINK_|pdfs\\/)/.test(a.getAttribute('href'))) a.addEventListener('click', event => {\r\n        event.preventDefault(); alert('Este recurso todavía no está disponible. Solicítalo a tu profesor.');\r\n      });\r\n    });\r\n  });\r\n  function importLegacyProgress() {\r\n    const user = session();\r\n    if (!user.id_usuario) throw new Error('Inicia sesión e identifica al propietario antes de importar.');\r\n    for (const area of ['mat', 'lec', 'cie', 'soc', 'ing']) {\r\n      for (const suffix of ['correctas', 'completados']) {\r\n        const key = area + '_' + suffix;\r\n        const legacy = localStorage.getItem(key);\r\n        if (legacy && !storage.getItem(key)) storage.setItem(key, legacy);\r\n      }\r\n    }\r\n    // Los originales se conservan. Ejecutar solo tras confirmar quién es el propietario.\r\n  }\r\n  global.Prep = { updateProfile, queueResult, syncResults, hasPendingResult, parse, session, storage, forUser, sameSession, api, clearSession, escapeHTML, importLegacyProgress };\r\n})(window);\r\n",
+      "functions": [
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 0,
+              "endOffset": 5950,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 1,
+              "endOffset": 5938,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "parse",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 55,
+              "endOffset": 148,
+              "count": 4
+            }
+          ]
+        },
+        {
+          "functionName": "session",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 153,
+              "endOffset": 275,
+              "count": 3
+            }
+          ]
+        },
+        {
+          "functionName": "prefix",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 279,
+              "endOffset": 403,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "getItem",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 439,
+              "endOffset": 482,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "setItem",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 498,
+              "endOffset": 557,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "forUser",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 568,
+              "endOffset": 800,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "getItem",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 647,
+              "endOffset": 682,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "setItem",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 692,
+              "endOffset": 741,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "removeItem",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 754,
+              "endOffset": 792,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "sameSession",
+          "isBlockCoverage": true,
+          "ranges": [
+            {
+              "startOffset": 835,
+              "endOffset": 1012,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 1213,
+              "endOffset": 2126,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": true,
+          "ranges": [
+            {
+              "startOffset": 1902,
+              "endOffset": 2065,
+              "count": 1
+            },
+            {
+              "startOffset": 1947,
+              "endOffset": 2026,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "api",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2136,
+              "endOffset": 2480,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "pendingResults",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2595,
+              "endOffset": 2642,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "queueResult",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2647,
+              "endOffset": 2830,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "hasPendingResult",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2834,
+              "endOffset": 2911,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "sendPendingResults",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2915,
+              "endOffset": 3421,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "syncResults",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3439,
+              "endOffset": 3627,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3571,
+              "endOffset": 3601,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "retryResults",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3630,
+              "endOffset": 3740,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3676,
+              "endOffset": 3736,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "updateProfile",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3925,
+              "endOffset": 4481,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "clearSession",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 4485,
+              "endOffset": 4678,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "escapeHTML",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 4701,
+              "endOffset": 4827,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 4878,
+              "endOffset": 5175,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 4936,
+              "endOffset": 5168,
+              "count": 2
+            }
+          ]
+        },
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 5030,
+              "endOffset": 5159,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "importLegacyProgress",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 5181,
+              "endOffset": 5755,
+              "count": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:64220/js/auth.js",
+      "scriptId": "5261",
+      "source": "// ==========================================================================\r\n// 1. CONTROL DE INTERFAZ DIRECTA EN EL HERO\r\n// ==========================================================================\r\n\r\nfunction alternarHeroForm(tipo) {\r\n  const loginForm = document.getElementById(\"hero-login-form\");\r\n  const registroForm = document.getElementById(\"hero-registro-form\");\r\n  limpiarMensajes();\r\n\r\n  if (!loginForm || !registroForm) { window.location.href=\"index.html\"; return; }\r\n  if (tipo === \"login\") {\r\n    loginForm.style.display = \"block\";\r\n    registroForm.style.display = \"none\";\r\n  } else if (tipo === \"registro\") {\r\n    loginForm.style.display = \"none\";\r\n    registroForm.style.display = \"block\";\r\n  }\r\n}\r\n\r\nfunction mostrarFeedback(contenedorId, texto, esExito = false) {\r\n  const contenedor = document.getElementById(contenedorId) || document.getElementById(\"mensajeRegistro\");\r\n  if (!contenedor) return;\r\n\r\n  let msgElement = contenedor.querySelector(\".auth-msg\");\r\n\r\n  if (!msgElement) {\r\n    msgElement = document.createElement(\"p\");\r\n    msgElement.className = \"auth-msg\";\r\n    msgElement.style.fontSize = \"14px\";\r\n    msgElement.style.marginTop = \"12px\";\r\n    msgElement.style.textAlign = \"center\";\r\n    msgElement.style.fontWeight = \"bold\";\r\n    contenedor.appendChild(msgElement);\r\n  }\r\n\r\n  msgElement.textContent = texto;\r\n  msgElement.style.color = esExito ? \"#2e7d32\" : \"#c62828\";\r\n}\r\n\r\nfunction limpiarMensajes() {\r\n  document.querySelectorAll(\".auth-msg\").forEach((el) => el.remove());\r\n}\r\n\r\n// ==========================================================================\r\n// 2. LOGICA DE PETICIONES (FETCH API) - JWT UPDATE\r\n// ==========================================================================\r\n\r\n// --- REGISTRO DE USUARIOS ---\r\nasync function registrarUsuario() {\r\n  limpiarMensajes();\r\n\r\n  const nombre = (document.getElementById(\"reg-nombre\") || document.getElementById(\"nombreRegistro\")).value.trim();\r\n  const correo = (document.getElementById(\"reg-correo\") || document.getElementById(\"correoRegistro\")).value.trim();\r\n  const password = (document.getElementById(\"reg-password\") || document.getElementById(\"passwordRegistro\")).value;\r\n\r\n  const selectRol = (document.querySelector(\"#hero-registro-form select\") || document.getElementById(\"rolRegistro\"));\r\n  const rol = selectRol ? selectRol.value : \"estudiante\";\r\n\r\n  if (!nombre || !correo || !password) {\r\n    mostrarFeedback(\"hero-registro-form\", \"Todos los campos son obligatorios\");\r\n    return;\r\n  }\r\n\r\n  try {\r\n    const respuesta = await fetch(\"/api/registro\", {\r\n      method: \"POST\",\r\n      headers: { \"Content-Type\": \"application/json\" },\r\n      body: JSON.stringify({ nombre, correo, password, rol }),\r\n    });\r\n\r\n    const data = await respuesta.json();\r\n\r\n    if (!data.success) {\r\n      mostrarFeedback(\"hero-registro-form\", data.mensaje);\r\n      return;\r\n    }\r\n\r\n    mostrarFeedback(\r\n      \"hero-registro-form\",\r\n      \"¡Registro exitoso! Ya puedes ingresar.\",\r\n      true,\r\n    );\r\n\r\n    (document.getElementById(\"reg-nombre\") || document.getElementById(\"nombreRegistro\")).value = \"\";\r\n    (document.getElementById(\"reg-correo\") || document.getElementById(\"correoRegistro\")).value = \"\";\r\n    (document.getElementById(\"reg-password\") || document.getElementById(\"passwordRegistro\")).value = \"\";\r\n    if (selectRol) selectRol.value = \"estudiante\";\r\n\r\n    setTimeout(() => alternarHeroForm(\"login\"), 1500);\r\n  } catch (error) {\r\n    console.error(\"Error en registro:\", error);\r\n    mostrarFeedback(\"hero-registro-form\", \"Error de conexión con el servidor\");\r\n  }\r\n}\r\n\r\n// --- INICIO DE SESIÓN CON JWT Y COOKIES ---\r\nasync function iniciarSesion() {\r\n  limpiarMensajes();\r\n\r\n  const correo = document.getElementById(\"correo\").value.trim();\r\n  const password = document.getElementById(\"password\").value;\r\n  const rol = document.getElementById(\"rol\").value;\r\n\r\n  if (!correo || !password) {\r\n    mostrarFeedback(\"hero-login-form\", \"Completa todos los campos\");\r\n    return;\r\n  }\r\n\r\n  mostrarWaterLoader();\r\n\r\n  try {\r\n    const respuesta = await fetch(\"/api/login\", {\r\n      method: \"POST\",\r\n      headers: { \"Content-Type\": \"application/json\" },\r\n      // IMPORTANTE: 'include' asegura que el navegador acepte y guarde la cookie HttpOnly\r\n      credentials: \"include\",\r\n      body: JSON.stringify({ correo, password, rol }),\r\n    });\r\n\r\n    const data = await respuesta.json();\r\n\r\n    if (!data.success) {\r\n      waterLoaderError(data.mensaje);\r\n      return;\r\n    }\r\n\r\n    // AQUÍ ESTABA EL ERROR: Agregamos el tipo_usuario para que el panel lo reconozca\r\n    localStorage.setItem(\r\n      \"datosVisionales\",\r\n      JSON.stringify({\r\n        id_usuario: data.usuario.id_usuario,\r\n        correo: data.usuario.correo,\r\n        nombre: data.usuario.nombre,\r\n        tipo_usuario: rol,\r\n\r\n      }),\r\n    );\r\n\r\n    // === RUTAS ACTUALIZADAS ===\r\n    const destino =\r\n      rol === \"estudiante\" ? \"panel-estudiante.html\" : \"panel-profesor.html\";\r\n\r\n    waterLoaderExito(destino);\r\n  } catch (error) {\r\n    console.error(\"Error en login:\", error);\r\n    waterLoaderError(\"Error de conexión con el servidor\");\r\n  }\r\n}\r\n",
+      "functions": [
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 0,
+              "endOffset": 5118,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "alternarHeroForm",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 206,
+              "endOffset": 718,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "mostrarFeedback",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 722,
+              "endOffset": 1410,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "limpiarMensajes",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 1414,
+              "endOffset": 1517,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "registrarUsuario",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 1767,
+              "endOffset": 3574,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "iniciarSesion",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3625,
+              "endOffset": 5116,
+              "count": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:64220/js/water-loader.js",
+      "scriptId": "5262",
+      "source": "/* ==========================================================================\r\n   water-loader.js\r\n   ========================================================================== */\r\n\r\nlet _animFrame          = null;\r\nlet _waveOffset         = 0;\r\nlet _animando           = false;\r\nlet _resultadoPendiente = null;\r\n\r\nconst DURACION = 5000;\r\n\r\n// Lista de mensajes que irán cambiando suavemente a lo largo de los 5 segundos\r\nconst MENSAJES_CARGA = [\r\n  'Activando tu progreso...',\r\n  'Construyendo tu futuro...',\r\n  'Ajustando todo para ti...',\r\n  'Un paso más cerca de tus metas...',\r\n  'Tu futuro está cargando...'\r\n];\r\n\r\nfunction mostrarWaterLoader() {\r\n  document.getElementById('hero-login-form').style.display = 'none';\r\n  document.getElementById('water-loader').style.display    = 'flex';\r\n\r\n  _waveOffset         = 0;\r\n  _animando           = true;\r\n  _resultadoPendiente = null;\r\n\r\n  document.getElementById('water-rect').setAttribute('y', '110');\r\n  document.getElementById('wave-path').setAttribute('d', '');\r\n  \r\n  // Mensaje inicial limpio\r\n  document.getElementById('loader-msg').textContent = MENSAJES_CARGA[0];\r\n\r\n  const inicio = performance.now();\r\n\r\n  function frame(ts) {\r\n    const progress = Math.min((ts - inicio) / DURACION, 1);\r\n\r\n    // Sube lineal y constante\r\n    const yRect = 110 - (progress * 110);\r\n\r\n    // Ola suave: amplitud pequeña, frecuencia baja\r\n    _waveOffset += 0.5;\r\n    let d = 'M -10 ' + yRect;\r\n    for (let x = -10; x <= 230; x += 6) {\r\n      const y = yRect - 3 * Math.sin((x * 0.04 + _waveOffset * 0.06) * Math.PI);\r\n      d += ' L ' + x + ' ' + y;\r\n    }\r\n    d += ' L 230 120 L -10 120 Z';\r\n\r\n    document.getElementById('water-rect').setAttribute('y', yRect);\r\n    document.getElementById('wave-path').setAttribute('d', d);\r\n\r\n    // === NUEVO: Control de Mensajes Dinámicos ===\r\n    // Divide equitativamente los 5 segundos entre la cantidad de mensajes\r\n    const indiceMensaje = Math.min(\r\n      Math.floor(progress * MENSAJES_CARGA.length),\r\n      MENSAJES_CARGA.length - 1\r\n    );\r\n    document.getElementById('loader-msg').textContent = MENSAJES_CARGA[indiceMensaje];\r\n\r\n    if (progress < 1) {\r\n      _animFrame = requestAnimationFrame(frame);\r\n    } else {\r\n      _animando = false;\r\n      if (_resultadoPendiente) _resultadoPendiente();\r\n    }\r\n  }\r\n\r\n  _animFrame = requestAnimationFrame(frame);\r\n}\r\n\r\nfunction waterLoaderExito(urlDestino) {\r\n  const accion = function() {\r\n    document.getElementById('water-rect').setAttribute('y', '0');\r\n    document.getElementById('wave-path').setAttribute('d', '');\r\n    setTimeout(function() {\r\n      window.location.href = urlDestino || 'dashboard.html';\r\n    }, 400);\r\n  };\r\n\r\n  if (_animando) {\r\n    _resultadoPendiente = accion;\r\n  } else {\r\n    accion();\r\n  }\r\n}\r\n\r\nfunction waterLoaderError(mensajeError) {\r\n  _animando           = false;\r\n  _resultadoPendiente = null;\r\n  cancelAnimationFrame(_animFrame);\r\n\r\n  document.getElementById('water-loader').style.display    = 'none';\r\n  document.getElementById('hero-login-form').style.display = 'block';\r\n\r\n  mostrarFeedback('hero-login-form', mensajeError || 'Correo o contraseña incorrectos.');\r\n}\r\n\r\nfunction alternarHeroForm(cual) {\r\n  document.getElementById('water-loader').style.display = 'none';\r\n  if (cual === 'registro') {\r\n    document.getElementById('hero-login-form').style.display    = 'none';\r\n    document.getElementById('hero-registro-form').style.display = 'block';\r\n  } else {\r\n    document.getElementById('hero-registro-form').style.display = 'none';\r\n    document.getElementById('hero-login-form').style.display    = 'block';\r\n  }\r\n}",
+      "functions": [
+        {
+          "functionName": "",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 0,
+              "endOffset": 3607,
+              "count": 1
+            }
+          ]
+        },
+        {
+          "functionName": "mostrarWaterLoader",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 621,
+              "endOffset": 2358,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "waterLoaderExito",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2362,
+              "endOffset": 2767,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "waterLoaderError",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 2771,
+              "endOffset": 3151,
+              "count": 0
+            }
+          ]
+        },
+        {
+          "functionName": "alternarHeroForm",
+          "isBlockCoverage": false,
+          "ranges": [
+            {
+              "startOffset": 3155,
+              "endOffset": 3607,
+              "count": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "browser": "chrome",
+    "status": "PASS",
+    "checks": "Space selects, Enter deselects, five native area buttons"
+  },
+  {
+    "browser": "edge",
+    "status": "PASS",
+    "checks": "Space selects, Enter deselects, five native area buttons"
+  }
+]
