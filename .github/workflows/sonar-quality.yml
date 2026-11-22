@@ -1,0 +1,46 @@
+name: SonarQube Cloud manual
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      QA_DATABASE_ENGINE: pglite
+      QA_EVIDENCE_ROOT: .qa-sonar
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+      - run: npm ci
+      - run: npm --prefix backend ci
+      - run: npm run test:coverage
+      - run: node scripts/qa/validate-lcov.cjs .qa-sonar/pruebas-unitarias/lcov.info
+      - name: Validate configuration without exposing secrets
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+        run: |
+          test -n "$SONAR_TOKEN" || { echo 'Configure SONAR_TOKEN'; exit 1; }
+          test -n "$SONAR_ORGANIZATION" || { echo 'Configure SONAR_ORGANIZATION'; exit 1; }
+      - uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >-
+            -Dproject.settings=.sonarcloud.properties
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.projectKey=lfcastrillo-hash_plataforma-icfes
+            -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            -Dsonar.javascript.lcov.reportPaths=.qa-sonar/pruebas-unitarias/lcov.info
+            -Dsonar.qualitygate.wait=true
