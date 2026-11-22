@@ -1,18 +1,17 @@
 name: SonarQube Cloud OIDC
 on:
-  workflow_dispatch:
-  # Primera ejecución sin instalar este archivo en main. Publicar únicamente con autorización.
-  push:
-    branches: ['ci/sonar-oidc-validation']
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
 permissions:
   contents: read
   id-token: write
 concurrency:
-  group: sonar-quality-${{ github.ref }}
+  group: sonar-quality-${{ github.event.pull_request.number }}
   cancel-in-progress: false
 jobs:
   quality:
-    if: github.ref == 'refs/heads/ci/sonar-oidc-validation' || github.ref == 'refs/heads/codex/sonar-metricas-20261122'
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'ci/sonar-oidc-validation'
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
@@ -21,6 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v4

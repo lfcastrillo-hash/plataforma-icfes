@@ -1,78 +1,66 @@
-# Activación autorizada del análisis OIDC
+﻿# Preparación final OIDC y publicación controlada — 22/11/2026
 
-El workflow local se adaptó al ejemplo oficial de SonarSource consultado el 22/11/2026: auth-action@v1 y scan-action@v8. Se conservan checkout@v4 y setup-node@v4, compatibles con el runner hospedado Linux y Node 24 instalado para las pruebas. No se añadieron dependencias al producto.
+Este informe sustituye la secuencia anterior de publicación por push. No se ha publicado la rama ni creado un PR. Se conserva 84c9bc1 y sus antecesores.
 
-## Autenticación y configuración
+## Diagnóstico
 
-Permisos: contents: read e id-token: write. auth-action se ejecuta inmediatamente antes del scanner. Solicita el proyecto lfcastrillo-hash_plataforma-icfes en la región EU y entrega organization y project-key al scanner mediante sus outputs. No se requiere SONAR_TOKEN ni SONAR_ORGANIZATION almacenados en GitHub. Internamente la acción exporta SONAR_TOKEN temporal al entorno: esto es parte del protocolo oficial, no una credencial fija incluida en el archivo. No se imprime ni se persiste.
+- Automatic Analysis desactivado, OIDC activado y exclusión Vercel configurada en plataforma-icfes-backend, plataforma-icfes y plataforma-icfes-zivu: confirmados por el usuario, no verificados desde sus paneles en esta revisión.
+- La rama remota ci/sonar-oidc-validation no existe según git ls-remote. La rama local de trabajo sigue siendo codex/sonar-metricas-20261122. No se puede afirmar que una rama remota inexistente ya contiene los cambios: se publicará HEAD exactamente en esa ref cuando se autorice.
+- Free admite análisis de main y PR cuyo destino es main. OSS/Team tienen otras capacidades. Para Free se sustituye el trigger push por pull_request hacia main. El borrador es una medida de revisión, no un requisito de Sonar. No hace falta fusionarlo ni modificar main.
+- Solo se admite el head ci/sonar-oidc-validation del mismo repositorio; forks y otras ramas no ejecutan el job. Se incluyen opened/synchronize/reopened/ready_for_review y no se excluyen borradores. Se usa pull_request, nunca pull_request_target. Se analiza el SHA del head, con historial completo. GitHub expone el contexto PR al scanner para detectar número/base/head sin fingir main.
+- El push futuro publica el código, pero ya NO ejecuta este workflow. La creación posterior del PR en borrador activa el análisis. No se depende de workflow_dispatch ni de instalar el workflow en main. Un conflicto de merge bloquea el evento PR: debe revisarse localmente, sin modificar main.
+- Acciones oficiales auth@v1 y scan@v8; permisos contents: read e id-token: write; Linux ubuntu-latest, Node 24; sin secreto fijo SONAR_TOKEN. La acción exporta una credencial efímera para el scanner.
+- npm ci en raíz y backend no tiene scripts de despliegue/migración propios. test:coverage ejecuta pruebas locales con PGlite y genera LCOV. Las fixtures sí cargan backend/migrations/001_esquema.sql en una BD WASM temporal aislada: no se ejecutan migraciones sobre Supabase ni bases persistentes. No hay credenciales de producción en el job.
+- Se conserva .sonarcloud.properties, fuentes/exclusiones y Gate original. El override LCOV apunta al reporte del mismo job. Las 104 pruebas y el LCOV de 26 archivos/685 líneas fueron ejecutados en el lote anterior; en esta revisión se revalida el LCOV y YAML, sin afirmar una nueva ejecución Linux ni cobertura global.
+- Los archivos no rastreados de evidencias permanecen locales y no viajan con git push. No usar git add . ni incluir directorios temporales. Los reportes JSON/XML/TXT/LCOV ya versionados son evidencias intencionales. La plantilla backend/.env.example contiene datos ficticios de localhost y JWT_SECRET vacío; no es un .env de producción.
+- main local y remoto no se modifican. El remoto main consultado sigue en cbf45e85ac1f3a50a1520f23374eea54a1a99416. No hay modificaciones en PDF, SQL de migraciones ni vercel.json en este lote. La ausencia de despliegues futuros depende de la exclusión Vercel confirmada por el usuario; un PR en borrador por sí solo no bloquea Vercel.
 
-Se conserva project.settings=.sonarcloud.properties, origen sonarcloud.io, fuentes y exclusiones originales, generación de cobertura, validación del LCOV y espera del Quality Gate. La ruta LCOV se sobreescribe únicamente para usar .qa-sonar/pruebas-unitarias/lcov.info, generado en el mismo job. No se toca ninguna regla, condición de Gate o umbral. Un Gate fallido hará fallar el job; una autenticación correcta no implica aprobación del Gate.
+## Comandos futuros — solo con autorización expresa
 
-La habilitación de Secretless Analysis fue confirmada por el usuario. Aún debe verificarse el vínculo repositorio-proyecto y que CI-based Analysis no compita con Automatic Analysis. Esta preparación no cambió esos ajustes del servidor. El soporte del plan para análisis de la rama de validación también debe comprobarse; no se fuerza sonar.branch.name=main para eludirlo.
-
-## Por qué existe una rama remota exclusiva
-
-El workflow no existe en origin/main. GitHub exige que el archivo esté en la rama predeterminada para workflow_dispatch; por eso no se promete que aparezca ahora el botón Run workflow. El evento push se limita exactamente a ci/sonar-oidc-validation para permitir la primera ejecución sin editar main. Un push a codex/sonar-metricas-20261122 no lo dispara. No se configuraron pull_request, pull_request_target, schedule ni triggers de despliegue.
-
-El job acepta solo la rama de validación o la rama local de calidad para un eventual dispatch. La concurrencia agrupa por ref y no cancela un scanner en curso. En esta revisión hay un único archivo en .github/workflows, sin otro job que compita. Esto no controla la integración Git de Vercel.
-
-## Secuencia exacta futura, solo después de autorización
-
-1. Confirmar acceso Actions habilitado, vinculación del repositorio con el proyecto Sonar y Secretless Analysis habilitado. Confirmar CI-based Analysis y soporte de la rama. No crear un secreto SONAR_TOKEN.
-2. ANTES del primer push, evitar despliegues de TODOS los proyectos Vercel conectados al repositorio. Una opción es desconectarlos temporalmente desde Settings > Git > Connected Git Repository > Disconnect, únicamente con aprobación del propietario. No usar Ignored Build Step como garantía de ausencia de despliegues: puede crear ejecuciones canceladas.
-3. Como alternativa autorizada a la desconexión, integrar en la configuración Vercel efectiva de cada proyecto una prohibición exacta para ci/sonar-oidc-validation. El objeto que debe fusionarse, conservando builds/routes/includeFiles, es:
-
-```json
-{"git":{"deploymentEnabled":{"ci/sonar-oidc-validation":false}}}
-```
-
-Verificar que ninguna regla coincidente true la anule y que la configuración aplique a las raíces de todos los proyectos conectados. No publicar si esa protección no está confirmada. El vercel.json real NO fue modificado por esta tarea.
-
-4. En la carpeta work/prepicfes-calidad, confirmar rama, estado y SHA a analizar. Si se elige el bloqueo por archivo Vercel, revisar y confirmar su cambio en un commit local antes de publicar. Estos son comandos futuros, no ejecutados:
+Desde PowerShell, en work/prepicfes-calidad:
 
 ```powershell
-git status --short --branch
 git branch --show-current
+git status --short --branch
 git log -1 --oneline
-git ls-remote --heads origin refs/heads/ci/sonar-oidc-validation
+git merge-base --is-ancestor 84c9bc1 HEAD
+# Debe terminar con código 0.
+git ls-remote --heads origin main ci/sonar-oidc-validation
+git diff --check
+git log --oneline origin/main..HEAD
 ```
 
-Si la rama remota ya existe, revisar primero su historial; no utilizar force ni reemplazar trabajo ajeno. Si no existe y el propietario autoriza explícitamente push y análisis:
+Revisar que main no avanzó respecto a la referencia registrada y que no existe la rama remota. Si existe o main avanzó, detenerse y revisar antes de publicar. No hacer force push. Confirmar también las exclusiones Vercel en los tres proyectos antes de crear rama o PR.
 
 ```powershell
 git push origin HEAD:refs/heads/ci/sonar-oidc-validation
 ```
 
-Este único push crea la rama remota y dispara el workflow por su evento push. No modifica main. No abrir PR como paso previo, porque podría activar integraciones de Preview.
-
-5. Abrir Actions > SonarQube Cloud OIDC, seleccionar la ejecución de ci/sonar-oidc-validation y comprobar: instalación, pruebas, LCOV, Authenticate with GitHub OIDC y scanner. También se puede observar con GitHub CLI:
+Este comando no cambia main ni requiere cambiar la rama local. Verificar que el SHA remoto coincide con git rev-parse HEAD:
 
 ```powershell
-gh run list --repo lfcastrillo-hash/plataforma-icfes --branch ci/sonar-oidc-validation --limit 5
+git rev-parse HEAD
+git ls-remote --heads origin ci/sonar-oidc-validation
+```
+
+Después, usando GitHub CLI instalado y autenticado (no se verificó su disponibilidad en esta sesión):
+
+```powershell
+gh pr create --repo lfcastrillo-hash/plataforma-icfes --base main --head ci/sonar-oidc-validation --draft --title "Validar calidad PrepICFES mediante OIDC" --body "Validación de SonarQube Cloud con OIDC y LCOV. Mantener en borrador; no fusionar ni desplegar."
+gh run list --repo lfcastrillo-hash/plataforma-icfes --branch ci/sonar-oidc-validation --event pull_request --limit 5
 gh run watch RUN_ID --repo lfcastrillo-hash/plataforma-icfes --exit-status
 ```
 
-Sustituir RUN_ID por el identificador real. Para repetir el mismo commit autorizado sin otro push:
+Sustituir RUN_ID por el real. Alternativa sin CLI: abrir https://github.com/lfcastrillo-hash/plataforma-icfes/compare/main...ci/sonar-oidc-validation y seleccionar Create draft pull request. Luego abrir Actions > SonarQube Cloud OIDC. No activar auto-merge ni pulsar Merge. Las futuras actualizaciones autorizadas al head disparan synchronize; rerun del mismo análisis no requiere otro push.
 
-```powershell
-gh run rerun RUN_ID --repo lfcastrillo-hash/plataforma-icfes
-```
+## Evidencia remota que faltará obtener
 
-No confundir esta repetición con analizar cambios locales nuevos. Los cambios nuevos requieren publicación autorizada a esa rama, que volverá a activar el evento push.
-
-6. Registrar commit evaluado, URL de Actions, URL/tarea Compute Engine e identificador del análisis. Confirmar el Gate y la importación de LCOV en ese análisis exacto. Si el plan rechaza ramas, informar el impedimento: no cambiar main ni la rama principal del proyecto Sonar para sortearlo.
-
-## Verificaciones y límites
-
-El archivo se comprobó con actionlint 1.7.12 (binario del release oficial, SHA-256 cotejado con checksums del mismo release), validando YAML y expresiones Actions. La comprobación es estática; no valida OIDC real ni una ejecución Linux. Las pruebas locales usan PostgreSQL WASM temporal, no Supabase. El PDF académico y la configuración de Vercel permanecen intactos. No se publicó ni ejecutó un análisis remoto.
-
-Resultado local: 104 pruebas aprobadas y 0 fallidas. LCOV validado: 26 archivos y 685 líneas instrumentadas; corresponde al ámbito ejecutado, no a la cobertura global del repositorio. actionlint terminó con código 0. Los detalles y la huella del workflow están en docs/sonar-evidencias/oidc-verificaciones.json.
+Comprobar autenticación OIDC, 104 pruebas, validación/importación LCOV sin advertencias de rutas, SHA analizado, tarea Compute Engine y resultado oficial del Gate del PR. El análisis PR evalúa código nuevo y no reemplaza el análisis global de main; no permite declarar actualizadas las 371 incidencias generales ni el Gate histórico de main. No se atribuye éxito remoto a la validación estática.
 
 ## Fuentes oficiales
 
 - https://github.com/SonarSource/sonarqube-auth-action
-- https://github.com/SonarSource/sonarqube-auth-action/blob/v1/action.yml
 - https://github.com/SonarSource/sonarqube-scan-action/blob/v8/action.yml
-- https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow
-- https://vercel.com/docs/project-configuration/git-configuration
-- https://vercel.com/docs/project-configuration/git-settings
+- https://docs.sonarsource.com/sonarqube-cloud/administering-sonarcloud/managing-subscription/subscription-plans
+- https://docs.sonarsource.com/sonarqube-cloud/analyzing-source-code/pull-request-analysis
+- https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
