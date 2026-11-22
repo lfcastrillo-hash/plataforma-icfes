@@ -372,12 +372,7 @@ button:hover {
   width: 40%;
 }
 
-.progreso-celda {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 160px;
-}
+
 
 /* El riel o fondo de la barra */
 .barra-fondo {

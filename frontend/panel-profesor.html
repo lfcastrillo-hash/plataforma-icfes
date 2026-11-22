@@ -80,7 +80,7 @@
             id="busquedaClases"
             placeholder="Buscar clase..."
             oninput="filtrarClasesSidebar(this.value)"
-          />
+           aria-label="Buscar clase..."/>
           <button>🔍</button>
         </div>
         <nav class="sidebar-nav" id="listaClasesSidebar"></nav>
@@ -128,7 +128,7 @@
                   id="busquedaEstudiantes"
                   placeholder="Buscar estudiante..."
                   oninput="filtrarEstudiantesTabla(this.value)"
-                />
+                 aria-label="Buscar estudiante..."/>
               </div>
               <button
                 class="btn btn-secondary"
@@ -189,7 +189,7 @@
                     onclick="ordenarColumna('nombre')"
                     style="cursor: pointer; user-select: none"
                     title="Ordenar por Nombre"
-                  >
+                   role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                     Nombre
                     <span
                       id="icon-sort-nombre"
@@ -202,7 +202,7 @@
                     onclick="ordenarColumna('puntaje')"
                     style="cursor: pointer; user-select: none"
                     title="Ordenar por Progreso"
-                  >
+                   role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
                     Progreso
                     <span
                       id="icon-sort-puntaje"
@@ -243,7 +243,7 @@
               border: 1px solid #ccc;
               border-radius: 6px;
             "
-          ></textarea>
+           aria-label="Escribe el anuncio para tus estudiantes..."></textarea>
         </div>
         <div class="modal-footer">
           <button
@@ -271,13 +271,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <label>Nombre del grupo</label>
+          <label for="input-nombre-clase">Nombre del grupo</label>
           <input
             type="text"
             id="input-nombre-clase"
             placeholder="Ej: 11U1, Grupo A, Matemáticas..."
             maxlength="40"
-          />
+           aria-label="Ej: 11U1, Grupo A, Matemáticas..."/>
           <p
             id="error-crear-clase"
             class="modal-error"
@@ -314,12 +314,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <label>Correo del estudiante registrado</label>
+          <label for="input-correo-estudiante">Correo del estudiante registrado</label>
           <input
             type="email"
             id="input-correo-estudiante"
             placeholder="correo@ejemplo.com"
-          />
+           aria-label="correo@ejemplo.com"/>
           <p
             id="error-agregar-estudiante"
             class="modal-error"

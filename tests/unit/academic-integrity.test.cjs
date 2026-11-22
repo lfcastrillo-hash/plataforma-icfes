@@ -12,7 +12,16 @@ test('AC02 se conservan las claves válidas anteriores; solo se corrige la clave
 });
 test('AC03 CSS, estilos inline e imágenes existentes conservados',()=>{
  for(const name of fs.readdirSync('frontend').filter(f=>f.endsWith('.html'))){const p='frontend/'+name,a=fs.readFileSync(p,'utf8').replace(/\r/g,''),b=execFileSync('git',['show','a28beb7:'+p],{encoding:'utf8'}).replace(/\r/g,'');assert.deepEqual([...a.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),[...b.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),p);assert.deepEqual([...a.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),[...b.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),p);}
- for(const file of fs.readdirSync('frontend/css'))assert.equal(fs.readFileSync('frontend/css/'+file,'utf8').replace(/\r/g,''),execFileSync('git',['show','a28beb7:frontend/css/'+file],{encoding:'utf8'}).replace(/\r/g,''));
+ for(const file of fs.readdirSync('frontend/css')){
+  let expected=execFileSync('git',['show','a28beb7:frontend/css/'+file],{encoding:'utf8'}).replace(/\r/g,'');
+  if(file==='global.css'){
+   const blocks=[...expected.matchAll(/\.progreso-celda\s*\{[^{}]*\}/g)];
+   assert.equal(blocks.length,2);assert.equal(blocks[0][0],blocks[1][0]);
+   // La última regla idéntica ya prevalecía sobre la primera para todos sus elementos.
+   expected=expected.slice(0,blocks[0].index)+expected.slice(blocks[0].index+blocks[0][0].length);
+  }
+  assert.equal(fs.readFileSync('frontend/css/'+file,'utf8').replace(/\r/g,''),expected);
+ }
 });
 test('AC04 soluciones numéricas nuevas y correcciones algebraicas comprobadas de forma independiente',()=>{
  const r=inventory(),questions=area=>r.modules.find(m=>m.area===area).topics.flatMap(t=>t.exercises),correct=q=>q.options.find(o=>o.correct).text.replace(/^[A-D]\)\s*/,'');

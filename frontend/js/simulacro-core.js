@@ -35,13 +35,13 @@
       && cfg.temas.every(t => t && Object.hasOwn(banks, t.area) && banks[t.area].some(p => p.tema === t.tema));
   }
   function validAttempt(state, config, banks) {
-    if (!state || state.config !== JSON.stringify(config) || !Array.isArray(state.ids) || !state.ids.length || state.ids.length > 200
+    if (state?.config !== JSON.stringify(config) || !Array.isArray(state.ids) || !state.ids.length || state.ids.length > 200
       || new Set(state.ids).size !== state.ids.length || !Number.isInteger(state.idx) || state.idx < 0 || state.idx > state.ids.length
       || !Number.isInteger(state.seconds) || state.seconds < 0 || state.seconds > 86400 || !Array.isArray(state.answers)
       || typeof state.finished !== 'boolean'
       || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(state.resultId || '')) return false;
     const questions = state.ids.map(id => {
-      const m = typeof id === 'string' && id.match(/^(matematicas|lectura|ciencias|sociales|ingles):(\d+)$/);
+      const m = typeof id === 'string' && /^(matematicas|lectura|ciencias|sociales|ingles):(\d+)$/.exec(id);
       return m && banks[m[1]]?.[Number(m[2])];
     });
     if (questions.some(q=>!q)) return false;

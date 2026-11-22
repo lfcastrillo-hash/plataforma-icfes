@@ -248,11 +248,11 @@
                   id="input-foto"
                   accept="image/*"
                   style="display: none"
-                />
+                 aria-label="input-foto"/>
               </div>
 
               <label style="font-size: 13px; font-weight: bold; color: #555"
-                >Nombre Completo</label
+                 for="update-nombre">Nombre Completo</label
               >
               <input
                 type="text"
@@ -265,10 +265,10 @@
                   border: 1px solid #ccc;
                   border-radius: 8px;
                 "
-              />
+               aria-label="update-nombre"/>
 
               <label style="font-size: 13px; font-weight: bold; color: #555"
-                >Biografía (Metas, intereses...)</label
+                 for="update-biografia">Biografía (Metas, intereses...)</label
               >
               <textarea
                 id="update-biografia"
@@ -283,7 +283,7 @@
                   resize: vertical;
                   font-family: Arial;
                 "
-              ></textarea>
+               aria-label="update-biografia"></textarea>
 
               <button
                 type="button"
@@ -326,7 +326,7 @@
 
             <form id="form-seguridad">
               <label style="font-size: 13px; font-weight: bold; color: #555"
-                >Correo Electrónico Actual</label
+                 for="update-correo">Correo Electrónico Actual</label
               >
               <input
                 type="email"
@@ -339,10 +339,10 @@
                   border: 1px solid #ccc;
                   border-radius: 8px;
                 "
-              />
+               aria-label="update-correo"/>
 
               <label style="font-size: 13px; font-weight: bold; color: #555"
-                >Nueva Contraseña (Opcional)</label
+                 for="update-password">Nueva Contraseña (Opcional)</label
               >
               <input
                 type="password"
@@ -356,7 +356,7 @@
                   border: 1px solid #ccc;
                   border-radius: 8px;
                 "
-              />
+               aria-label="Déjalo en blanco si no cambias"/>
 
               <button
                 type="button"

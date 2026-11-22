@@ -47,9 +47,12 @@ function createApp({pool,rateLimitOptions,accountLimitOptions,requestLimitOption
   if(res.headersSent)return next(error);
   const tooLarge=error.code==='LIMIT_FILE_SIZE'||error.type==='entity.too.large';
   const bad=error instanceof SyntaxError || error.name==='MulterError';
-  const status=tooLarge?413:bad?400:503;
+  let status=503;
+  let mensaje='Servicio temporalmente no disponible.';
+  if (tooLarge) { status=413; mensaje='Archivo o solicitud demasiado grande.'; }
+  else if (bad) { status=400; mensaje='Solicitud inválida.'; }
   if(status===503)console.error('Solicitud fallida:',error.code || error.name || 'Error');
-  res.status(status).json({success:false,mensaje:tooLarge?'Archivo o solicitud demasiado grande.':bad?'Solicitud inválida.':'Servicio temporalmente no disponible.'});
+  res.status(status).json({success:false,mensaje});
  });
  return app;
 }
