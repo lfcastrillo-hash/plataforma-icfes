@@ -5,13 +5,13 @@ const transaction = require('../lib/transaction');
 async function guardarProgresoArea(req, res) {
  const {area,respuesta,completarTema}=req.body;
  if(!v.AREAS.includes(area) || Object.keys(req.body).some(k=>!['area','respuesta','completarTema','correo'].includes(k))
-   || (Object.hasOwn(req.body,'respuesta')===Object.hasOwn(req.body,'completarTema')))return v.fail(res,400,'Envía una respuesta o una solicitud de completar tema, nunca porcentajes ni aciertos.');
+   || (Object.hasOwn(req.body,'respuesta')===Object.hasOwn(req.body,'completarTema'))){return v.fail(res,400,'Envía una respuesta o una solicitud de completar tema, nunca porcentajes ni aciertos.');}
  const answer=respuesta===undefined?null:evaluateAnswer(area,respuesta);
- if((respuesta!==undefined&&!answer)||(completarTema!==undefined&&topicKeys(area,completarTema).length!==8))return v.fail(res,400,'Ejercicio, opción o tema inválidos.');
+ if((respuesta!==undefined&&!answer)||(completarTema!==undefined&&topicKeys(area,completarTema).length!==8)){return v.fail(res,400,'Ejercicio, opción o tema inválidos.');}
  try{
   const result=await transaction(req.app.locals.pool,client=>applyAction(client,req.usuario,area,{answer,...(completarTema!==undefined?{complete:completarTema}:{})}));
   res.json(result);
- }catch(error){if(error.status===409)return v.fail(res,409,error.message);throw error;}
+ }catch(error){if(error.status===409){return v.fail(res,409,error.message);}throw error;}
 }
 async function readAreas(req) {
  const result = await req.app.locals.pool.query('SELECT area,progreso,estado FROM progreso_areas WHERE id_usuario=$1',[req.usuario.id_usuario]);
