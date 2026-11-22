@@ -1,10 +1,18 @@
-name: SonarQube Cloud manual
+name: SonarQube Cloud OIDC
 on:
   workflow_dispatch:
+  # Primera ejecución sin instalar este archivo en main. Publicar únicamente con autorización.
+  push:
+    branches: ['ci/sonar-oidc-validation']
 permissions:
   contents: read
+  id-token: write
+concurrency:
+  group: sonar-quality-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
   quality:
+    if: github.ref == 'refs/heads/ci/sonar-oidc-validation' || github.ref == 'refs/heads/codex/sonar-metricas-20261122'
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
@@ -26,21 +34,19 @@ jobs:
       - run: npm --prefix backend ci
       - run: npm run test:coverage
       - run: node scripts/qa/validate-lcov.cjs .qa-sonar/pruebas-unitarias/lcov.info
-      - name: Validate configuration without exposing secrets
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
-        run: |
-          test -n "$SONAR_TOKEN" || { echo 'Configure SONAR_TOKEN'; exit 1; }
-          test -n "$SONAR_ORGANIZATION" || { echo 'Configure SONAR_ORGANIZATION'; exit 1; }
-      - uses: SonarSource/sonarqube-scan-action@v6
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Authenticate with GitHub OIDC
+        uses: SonarSource/sonarqube-auth-action@v1
+        id: auth
+        with:
+          project-key: lfcastrillo-hash_plataforma-icfes
+          sonar-region: eu
+      - name: Analyze and wait for the original Quality Gate
+        uses: SonarSource/sonarqube-scan-action@v8
         with:
           args: >-
             -Dproject.settings=.sonarcloud.properties
             -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.projectKey=lfcastrillo-hash_plataforma-icfes
-            -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            -Dsonar.projectKey=${{ steps.auth.outputs.project-key }}
+            -Dsonar.organization=${{ steps.auth.outputs.organization }}
             -Dsonar.javascript.lcov.reportPaths=.qa-sonar/pruebas-unitarias/lcov.info
             -Dsonar.qualitygate.wait=true

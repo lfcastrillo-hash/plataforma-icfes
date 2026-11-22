@@ -1,0 +1,18 @@
+{
+  "actionlint": "1.7.12",
+  "actionlintExit": 0,
+  "workflowSha256": "7afc56e33a4cca10dbccd31c568f2b78cb6c4114a7d42557d8538cf974ce6e3b",
+  "tests": 104,
+  "failures": 0,
+  "lcov": {
+    "files": 26,
+    "lines": 685,
+    "scope": "Solo archivos ejecutados; no es cobertura de todo el producto. LCOV disponible por línea, sin ramas ni funciones."
+  },
+  "workflows": 1,
+  "storedSonarTokenRequired": false,
+  "sonarConfigUnchanged": true,
+  "vercelConfigUnchanged": true,
+  "remoteAnalysisExecuted": false,
+  "linuxRunnerExecuted": false
+}
