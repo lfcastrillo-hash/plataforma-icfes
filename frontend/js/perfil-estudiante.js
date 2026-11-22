@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-      if (typeof e.target.result !== 'string') return;
+          if (typeof e.target.result !== 'string') {
+            return;
+          }
           document.getElementById("foto-preview-main").innerHTML =
             `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
         };

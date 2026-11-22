@@ -10,6 +10,7 @@ async function run(name) {
   report.environment[name]=b.version();
   const context=await b.newContext({viewport:{width:1440,height:1000}});
   const page=await context.newPage();const errors=[];
+  await page.coverage.startJSCoverage({resetOnNavigation:false});
   page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
   const mail=name+'@example.test', teacher='teacher-'+mail;
   await f.register(mail);await f.register(teacher,'profesor');
@@ -117,7 +118,10 @@ async function run(name) {
     });
     assert.deepEqual(errors,[]);report.cases.push({id:'JS-errors',browser:name,status:'PASS',errors});
   } finally {
-    await b.close();await f.close();
+    try {
+      const coverage=await page.coverage.stopJSCoverage();
+      fs.writeFileSync(dir+'/'+name+'-v8-coverage.json',JSON.stringify({browser:name,scope:'Solo la p?gina principal del recorrido; no incluye otras pesta?as/contextos',scripts:coverage},null,2));
+    } finally { await b.close();await f.close(); }
   }
 }
 (async()=>{

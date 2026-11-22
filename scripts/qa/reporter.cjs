@@ -9,7 +9,7 @@ module.exports=async function* reporter(source){
   if(event.type==='test:summary')summary=d;
  }
  if(coverage){coverage.workingDirectory='.';for(const f of coverage.files)f.path=f.path.replace(process.cwd(),'').replace(/\\/g,'/').replace(/^\//,'');}
- const report={date:new Date().toISOString(),node:process.version,environment:process.env.QA_DATABASE_ENGINE==='postgres'?'Windows; HTTP local + PostgreSQL nativo/pg; datos ficticios; PGlite bloqueado':'Windows; HTTP local + PostgreSQL WASM aislado; datos ficticios',cases,summary,coverage};
+ const report={date:new Date().toISOString(),node:process.version,environment:process.env.QA_DATABASE_ENGINE==='postgres'?process.platform+'; HTTP local + PostgreSQL nativo/pg; datos ficticios; PGlite bloqueado':process.platform+'; HTTP local + PostgreSQL WASM aislado; datos ficticios',cases,summary,coverage};
  fs.mkdirSync(dir,{recursive:true});
  fs.writeFileSync(dir+'/resultados.json',JSON.stringify(report,null,2));
  const xml=s=>String(s??'').replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'})[c]);

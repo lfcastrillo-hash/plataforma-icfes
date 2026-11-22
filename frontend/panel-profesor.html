@@ -186,30 +186,28 @@
                 <tr>
                   <th style="width: 50px">#</th>
                   <th
-                    onclick="ordenarColumna('nombre')"
                     style="cursor: pointer; user-select: none"
                     title="Ordenar por Nombre"
-                   role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                  ><button type="button" class="sort-column" onclick="ordenarColumna('nombre')">
                     Nombre
                     <span
                       id="icon-sort-nombre"
                       style="font-size: 11px; color: #aaa"
                       >⇅</span
                     >
-                  </th>
+                  </button></th>
                   <th style="color: #444; font-weight: bold">Correo</th>
                   <th
-                    onclick="ordenarColumna('puntaje')"
                     style="cursor: pointer; user-select: none"
                     title="Ordenar por Progreso"
-                   role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                  ><button type="button" class="sort-column" onclick="ordenarColumna('puntaje')">
                     Progreso
                     <span
                       id="icon-sort-puntaje"
                       style="font-size: 11px; color: #aaa"
                       >⇅</span
                     >
-                  </th>
+                  </button></th>
                   <th style="width: 80px">Acción</th>
                 </tr>
               </thead>

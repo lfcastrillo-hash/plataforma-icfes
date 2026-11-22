@@ -51,18 +51,19 @@
     resultStore.setItem(resultKey, JSON.stringify(pending));
   }
   function hasPendingResult(id) { return Object.hasOwn(pendingResults(), id); }
+  async function sendPendingResults(payloads, index = 0) {
+    if (index >= payloads.length || !sameSession() || !pageUser.id_usuario) return;
+    const payload = payloads[index];
+    await api('/api/simulacros', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+    const remaining = pendingResults();
+    delete remaining[payload.id_resultado];
+    resultStore.setItem(resultKey, JSON.stringify(remaining));
+    return sendPendingResults(payloads, index + 1);
+  }
   let syncing;
   function syncResults() {
     if (syncing) return syncing;
-    syncing = (async () => {
-      for (const payload of Object.values(pendingResults())) {
-        if (!sameSession() || !pageUser.id_usuario) return;
-        await api('/api/simulacros', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-        const remaining = pendingResults();
-        delete remaining[payload.id_resultado];
-        resultStore.setItem(resultKey, JSON.stringify(remaining));
-      }
-    })().finally(() => { syncing = undefined; });
+    syncing = sendPendingResults(Object.values(pendingResults())).finally(() => { syncing = undefined; });
     return syncing;
   }
   function retryResults() { syncResults().catch(() => { /* Se conserva la cola para el próximo intento. */ }); }

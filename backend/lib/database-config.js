@@ -16,14 +16,14 @@ function connectionMode(env,url){
  if(env.NODE_ENV==='production'&&mode!=='production')fail('NODE_ENV=production requiere DATABASE_MODE=production.');
  return {mode,local};
 }
-function sslConfiguration(env,mode,local){
+function connectionSecurityOptions(env,mode,local){
  if(env.DATABASE_SSL!==undefined&&!['true','false'].includes(env.DATABASE_SSL))fail('DATABASE_SSL debe ser true o false.');
  const tls=env.DATABASE_SSL==='true';
  if((!local||mode==='production')&&!tls)fail('TLS verificado es obligatorio para conexiones remotas o producción.');
- if(!env.DATABASE_CA_FILE)return tls?{rejectUnauthorized:true}:false;
+ if(!env.DATABASE_CA_FILE)return {ssl:tls?{rejectUnauthorized:true}:false};
  if(!tls)fail('DATABASE_CA_FILE requiere DATABASE_SSL=true.');
  let ca;try{ca=fs.readFileSync(env.DATABASE_CA_FILE,'utf8');new X509Certificate(ca);}catch{fail('no se pudo cargar un certificado CA válido.');}
- return {rejectUnauthorized:true,ca};
+ return {ssl:{rejectUnauthorized:true,ca}};
 }
 function boundedNumber(env,name,fallback,min,max){
  const raw=env[name];if(raw===undefined||raw==='')return fallback;
@@ -32,6 +32,6 @@ function boundedNumber(env,name,fallback,min,max){
 }
 function databaseConfig(env=process.env){
  const url=parseConnection(env.DATABASE_URL),{mode,local}=connectionMode(env,url);
- return {connectionString:url.href,ssl:sslConfiguration(env,mode,local),max:boundedNumber(env,'DATABASE_POOL_MAX',10,1,50),connectionTimeoutMillis:boundedNumber(env,'DATABASE_CONNECT_TIMEOUT_MS',5000,100,60000),idleTimeoutMillis:10000};
+ return {connectionString:url.href,...connectionSecurityOptions(env,mode,local),max:boundedNumber(env,'DATABASE_POOL_MAX',10,1,50),connectionTimeoutMillis:boundedNumber(env,'DATABASE_CONNECT_TIMEOUT_MS',5000,100,60000),idleTimeoutMillis:10000};
 }
 module.exports={databaseConfig};

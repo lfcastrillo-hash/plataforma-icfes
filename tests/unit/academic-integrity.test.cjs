@@ -10,8 +10,13 @@ test('AC02 se conservan las claves válidas anteriores; solo se corrige la clave
  for(const m of before.modules)for(const t of m.topics)for(const q of t.exercises){const a=after.modules.find(x=>x.area===m.area).topics.flatMap(x=>x.exercises).find(x=>x.id===q.id);const expected=m.area==='matematicas'&&q.id==='ej-1-5'?0:q.options.findIndex(o=>o.correct);assert.equal(a.options.findIndex(o=>o.correct),expected,m.area+'/'+q.id);}
  for(let i=0;i<before.bank.length;i++)assert.equal(after.bank[i].correcta,before.bank[i].correcta);
 });
+function nativeControlStyles(text, file) {
+ if(file==='frontend/simulacro-selector.html') return text.replace('.card-area h4 {','.card-area .card-heading {\n        display: block;\n        font-weight: bold;').replace('.card-area p {','.card-area .card-description {\n        display: block;').replace('.card-area .icono {','.card-area .icono {\n        display: block;').replace('</style>','button.card-area, button.tema-chip { font-family: inherit; color: inherit; }\n    </style>');
+ if(file==='frontend/panel-profesor.html') return text.replace('</style>','.sort-column { appearance: none; background: transparent; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: inherit; }\n  </style>');
+ return text;
+}
 test('AC03 CSS, estilos inline e imágenes existentes conservados',()=>{
- for(const name of fs.readdirSync('frontend').filter(f=>f.endsWith('.html'))){const p='frontend/'+name,a=fs.readFileSync(p,'utf8').replace(/\r/g,''),b=execFileSync('git',['show','a28beb7:'+p],{encoding:'utf8'}).replace(/\r/g,'');assert.deepEqual([...a.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),[...b.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),p);assert.deepEqual([...a.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),[...b.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),p);}
+ for(const name of fs.readdirSync('frontend').filter(f=>f.endsWith('.html'))){const p='frontend/'+name,a=fs.readFileSync(p,'utf8').replace(/\r/g,''),b=execFileSync('git',['show','a28beb7:'+p],{encoding:'utf8'}).replace(/\r/g,'');assert.deepEqual([...a.matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),[...nativeControlStyles(b,p).matchAll(/<style\b[^>]*>[\s\S]*?<\/style>/g)].map(m=>m[0]),p);assert.deepEqual([...a.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),[...b.matchAll(/<img\b[^>]*>/g)].map(m=>m[0]),p);}
  for(const file of fs.readdirSync('frontend/css')){
   let expected=execFileSync('git',['show','a28beb7:frontend/css/'+file],{encoding:'utf8'}).replace(/\r/g,'');
   if(file==='global.css'){
