@@ -21,11 +21,15 @@ async function login(req, res) {
  const valid = usuario ? await verifyPassword(password, usuario.password, config.legacyPasswords) : (await hashPassword(password), false);
  if (!valid) {return v.fail(res, 401, 'Credenciales incorrectas.');}
  const sessionId = randomUUID();
- await transaction(pool, async client => {
+ const created = await transaction(pool, async client => {
+  const current = await client.query('SELECT password FROM usuarios WHERE id_usuario=$1 FOR UPDATE', [usuario.id_usuario]);
+  if (!current.rows.length || current.rows[0].password !== usuario.password) return false;
   if (!usuario.password.startsWith('scrypt$')) {await client.query('UPDATE usuarios SET password = $1 WHERE id_usuario = $2 AND password = $3', [await hashPassword(password), usuario.id_usuario, usuario.password]);}
   await client.query('DELETE FROM sesiones WHERE expira <= NOW()');
   await client.query("INSERT INTO sesiones (id_sesion,id_usuario,expira) VALUES ($1,$2,NOW() + INTERVAL '24 hours')", [sessionId, usuario.id_usuario]);
+  return true;
  });
+ if (!created) return v.fail(res, 401, 'Credenciales incorrectas.');
  const token = jwt.sign({ id_usuario: usuario.id_usuario }, config.jwtSecret, { algorithm:'HS256', expiresIn:'24h', jwtid:sessionId, issuer:'prepicfes', audience:'prepicfes-web' });
  res.cookie('token_acceso', token, { ...config.cookie, maxAge:86400000 });
  res.json({ success:true, usuario:{ id_usuario:usuario.id_usuario, nombre:usuario.nombre, correo:usuario.email, rol:usuario.rol } });

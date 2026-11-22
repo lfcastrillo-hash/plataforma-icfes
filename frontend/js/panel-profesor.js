@@ -208,6 +208,7 @@ async function cargarEstudiantesDeClase(idClase) {
       headers: getAuthHeaders(),
     });
     const data = await res.json();
+    if (String(idClase) !== String(claseActivaId)) return;
 
     if (!data.success) {
       mostrarToast("No se pudieron cargar los estudiantes.", "error");
@@ -218,6 +219,7 @@ async function cargarEstudiantesDeClase(idClase) {
     renderizarTabla(listaEstudiantesOriginal);
     actualizarStats(listaEstudiantesOriginal);
   } catch (err) {
+    if (String(idClase) !== String(claseActivaId)) return;
     console.error("Error cargando estudiantes:", err);
     mostrarToast("Error de conexión.", "error");
   }

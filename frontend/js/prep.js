@@ -42,6 +42,34 @@
     if (!response.ok) { const error=new Error(data.mensaje || data.error || 'No se pudo completar la operación.');error.status=response.status;throw error; }
     return data;
   }
+  const resultStore = forUser(pageUser);
+  const resultKey = 'resultados_pendientes';
+  const pendingResults = () => parse(resultStore.getItem(resultKey), {});
+  function queueResult(payload) {
+    const pending = pendingResults();
+    pending[payload.id_resultado] = payload;
+    resultStore.setItem(resultKey, JSON.stringify(pending));
+  }
+  function hasPendingResult(id) { return Object.hasOwn(pendingResults(), id); }
+  let syncing;
+  function syncResults() {
+    if (syncing) return syncing;
+    syncing = (async () => {
+      for (const payload of Object.values(pendingResults())) {
+        if (!sameSession() || !pageUser.id_usuario) return;
+        await api('/api/simulacros', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        const remaining = pendingResults();
+        delete remaining[payload.id_resultado];
+        resultStore.setItem(resultKey, JSON.stringify(remaining));
+      }
+    })().finally(() => { syncing = undefined; });
+    return syncing;
+  }
+  function retryResults() { syncResults().catch(() => { /* Se conserva la cola para el próximo intento. */ }); }
+  if (typeof global.addEventListener === 'function') {
+    global.addEventListener('online', retryResults);
+    document.addEventListener('DOMContentLoaded', retryResults);
+  }
   function clearSession() {
     ['datosVisionales', 'usuarioActivo', 'token', 'id_usuario'].forEach(key => localStorage.removeItem(key));
     sessionStorage.removeItem('simulacro_config');
@@ -66,5 +94,5 @@
     }
     // Los originales se conservan. Ejecutar solo tras confirmar quién es el propietario.
   }
-  global.Prep = { parse, session, storage, forUser, sameSession, api, clearSession, escapeHTML, importLegacyProgress };
+  global.Prep = { queueResult, syncResults, hasPendingResult, parse, session, storage, forUser, sameSession, api, clearSession, escapeHTML, importLegacyProgress };
 })(window);

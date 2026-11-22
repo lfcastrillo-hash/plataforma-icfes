@@ -833,7 +833,7 @@
         });
 
         // Guardar progreso
-        guardarProgreso(puntajesArea);
+        guardarProgreso();
       }
 
       async function guardarProgreso() {
@@ -841,8 +841,10 @@
         const payload={id_resultado:resultadoId,modalidad:config.tipo,segundos:timerSeg,
           respuestas:preguntas.map((p,i)=>({id:p.id,seleccionada:respuestas.find(r=>r.idx===i)?.seleccionada??null}))};
         Prep.storage.setItem('ultimo_simulacro',JSON.stringify(payload));
+        Prep.queueResult(payload);
         try {
-          await Prep.api('/api/simulacros',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+          await Prep.syncResults();
+          if (Prep.hasPendingResult(payload.id_resultado)) throw new Error('Resultado pendiente de sincronización.');
           document.documentElement.dataset.resultSync='saved';
         } catch(error){document.documentElement.dataset.resultSync='pending';console.warn('Resultado conservado localmente:',error.message);}
       }
