@@ -4,7 +4,7 @@ const path=require('node:path');
 const outputDir=path.join(process.env.QA_EVIDENCE_ROOT||'evidencias','pruebas-unitarias');
 fs.mkdirSync(outputDir,{recursive:true});
 const args=['--experimental-test-coverage','--test','--test-concurrency=1',
- '--test-coverage-include=backend/**/*.js','--test-coverage-include=frontend/js/simulacro-core.js',
+ '--test-coverage-include=backend/**/*.js','--test-coverage-include=frontend/js/**/*.js',
  '--test-coverage-exclude=**/node_modules/**',
  '--test-reporter=spec','--test-reporter-destination='+path.join(outputDir,'ejecucion.txt'),
  '--test-reporter=./scripts/qa/reporter.cjs','--test-reporter-destination=stdout',

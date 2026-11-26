@@ -116,10 +116,10 @@ function renderizarClasesSidebar(clases) {
     a.href = "#";
     a.className =
       "nav-item" + (claseActivaId === clase.id_clase ? " activa" : "");
-    a.textContent = `Grupo ${Prep.escapeHTML(clase.nombre_clase)}`;
-    a.onclick = (e) => {
+    a.textContent = `Grupo ${clase.nombre_clase}`;
+    a.onclick = async (e) => {
       e.preventDefault();
-      seleccionarClase(clase.id_clase, clase.nombre_clase, a);
+      await seleccionarClase(clase.id_clase, clase.nombre_clase, a);
     };
     nav.appendChild(a);
   });
@@ -208,6 +208,7 @@ async function cargarEstudiantesDeClase(idClase) {
       headers: getAuthHeaders(),
     });
     const data = await res.json();
+    if (String(idClase) !== String(claseActivaId)) return;
 
     if (!data.success) {
       mostrarToast("No se pudieron cargar los estudiantes.", "error");
@@ -218,6 +219,7 @@ async function cargarEstudiantesDeClase(idClase) {
     renderizarTabla(listaEstudiantesOriginal);
     actualizarStats(listaEstudiantesOriginal);
   } catch (err) {
+    if (String(idClase) !== String(claseActivaId)) return;
     console.error("Error cargando estudiantes:", err);
     mostrarToast("Error de conexión.", "error");
   }
@@ -536,15 +538,15 @@ function ocultarError(id) {
   document.getElementById(id).style.display = "none";
 }
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", async (e) => {
   if (e.key === "Enter") {
     if (document.getElementById("modal-crear-clase").style.display === "flex")
-      crearClase();
+      await crearClase();
     if (
       document.getElementById("modal-agregar-estudiante").style.display ===
       "flex"
     )
-      agregarEstudiante();
+      await agregarEstudiante();
   }
   if (e.key === "Escape") {
     document

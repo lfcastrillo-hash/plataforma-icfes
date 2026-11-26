@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-22",
+  "actionlint": "1.7.12",
+  "actionlintExit": 0,
+  "workflowSha256": "bbad45fa616f53c7534bb9da20c520f25d6ce89fda1e63b09bfbac0814840898",
+  "trigger": "pull_request to main; same-repository ci/sonar-oidc-validation head only",
+  "preservedCommit": "84c9bc1",
+  "remoteMain": "cbf45e85ac1f3a50a1520f23374eea54a1a99416",
+  "remoteValidationBranchExists": false,
+  "secretReview": {
+    "unpublishedCommitsScanned": 9,
+    "highConfidencePatternHits": 0,
+    "method": "git grep on all tracked text per commit: private keys, GitHub, AWS and Sonar tokens",
+    "limitations": "Pattern review is not a guarantee of absence of arbitrary credentials; localhost fixture credentials are intentional."
+  },
+  "lcovRevalidated": {
+    "files": 26,
+    "lines": 685
+  },
+  "previousTestRun": {
+    "passed": 104,
+    "failed": 0
+  },
+  "testsRerunThisReview": false,
+  "remoteAnalysisExecuted": false,
+  "pushExecuted": false,
+  "prCreated": false,
+  "vercelExclusions": "Confirmed by user for all three projects; not inspected in panels",
+  "schema": "SQL loaded only in temporary PGlite fixture; no Supabase migration"
+}

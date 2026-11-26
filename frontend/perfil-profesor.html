@@ -58,15 +58,15 @@
           <form id="form-perfil" enctype="multipart/form-data">
               <div style="text-align: center; margin-bottom: 20px;">
                   <label for="input-foto" style="cursor: pointer; color: #0ea5e9; font-weight: bold; font-size: 14px;">📷 Cambiar foto de perfil</label>
-                  <input type="file" id="input-foto" accept="image/*" style="display: none;" />
+                  <input type="file" id="input-foto" accept="image/*" style="display: none;"  aria-label="input-foto"/>
                   <div id="mini-preview" style="margin-top: 5px; font-size: 12px; color: #888;"></div>
               </div>
 
-              <label style="font-size: 13px; font-weight: bold;">Nombre Completo</label>
-              <input type="text" id="update-nombre" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px;" />
+              <label style="font-size: 13px; font-weight: bold;" for="update-nombre">Nombre Completo</label>
+              <input type="text" id="update-nombre" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px;"  aria-label="update-nombre"/>
 
-              <label style="font-size: 13px; font-weight: bold;">Sobre mí (Descripción)</label>
-              <textarea id="update-biografia" rows="3" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;"></textarea>
+              <label style="font-size: 13px; font-weight: bold;" for="update-biografia">Sobre mí (Descripción)</label>
+              <textarea id="update-biografia" rows="3" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;" aria-label="update-biografia"></textarea>
 
               <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; background: #123c73; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Guardar Perfil</button>
           </form>
@@ -81,11 +81,11 @@
           <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Actualiza tus credenciales de entrada.</p>
 
           <form id="form-seguridad">
-              <label style="font-size: 13px; font-weight: bold;">Correo Electrónico Actual</label>
-              <input type="email" id="update-correo" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px;" />
+              <label style="font-size: 13px; font-weight: bold;" for="update-correo">Correo Electrónico Actual</label>
+              <input type="email" id="update-correo" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px;"  aria-label="update-correo"/>
 
-              <label style="font-size: 13px; font-weight: bold;">Nueva Contraseña (Opcional)</label>
-              <input type="password" id="update-password" placeholder="Déjalo en blanco si no quieres cambiarla" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px;" />
+              <label style="font-size: 13px; font-weight: bold;" for="update-password">Nueva Contraseña (Opcional)</label>
+              <input type="password" id="update-password" placeholder="Déjalo en blanco si no quieres cambiarla" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 6px;"  aria-label="Déjalo en blanco si no quieres cambiarla"/>
 
               <button type="submit" class="btn btn-danger" style="width: 100%; padding: 14px; background: #c62828; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Actualizar Accesos</button>
           </form>

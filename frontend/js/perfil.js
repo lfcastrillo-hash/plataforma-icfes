@@ -40,6 +40,7 @@ document.getElementById('input-foto').addEventListener('change', function(event)
   if (file) {
     const reader = new FileReader();
     reader.onload = function(e) {
+      if (typeof e.target.result !== 'string') return;
       document.getElementById('foto-preview').innerHTML =
         `<img src="${e.target.result}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
     }

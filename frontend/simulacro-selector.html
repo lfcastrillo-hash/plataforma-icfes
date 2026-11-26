@@ -175,15 +175,19 @@
         box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
       }
       .card-area .icono {
+        display: block;
         font-size: 40px;
         margin-bottom: 12px;
       }
-      .card-area h4 {
+      .card-area .card-heading {
+        display: block;
+        font-weight: bold;
         color: #0f2a4a;
         font-size: 17px;
         margin-bottom: 6px;
       }
-      .card-area p {
+      .card-area .card-description {
+        display: block;
         color: #64748b;
         font-size: 13px;
       }
@@ -257,6 +261,7 @@
         font-size: 13px;
         margin-top: 12px;
       }
+    button.card-area, button.tema-chip { font-family: inherit; color: inherit; }
     </style>
   </head>
   <body>
@@ -353,51 +358,51 @@
     <!-- TAB: POR ÁREA -->
     <div class="tab-content" id="tab-area">
       <div class="grid-areas">
-        <div class="card-area" onclick="iniciarArea('matematicas')">
-          <div class="icono">📐</div>
-          <h4>Matemáticas</h4>
-          <p>
+        <button type="button" class="card-area" onclick="iniciarArea('matematicas')">
+          <span class="icono">📐</span>
+          <span class="card-heading">Matemáticas</span>
+          <span class="card-description">
             Álgebra, geometría, estadística, cálculo y pensamiento numérico.
-          </p>
+          </span>
           <span class="badge-area" style="background: #dbeafe; color: #1e40af"
             >40 preguntas</span
           >
-        </div>
-        <div class="card-area" onclick="iniciarArea('lectura')">
-          <div class="icono">📖</div>
-          <h4>Lectura Crítica</h4>
-          <p>
+        </button>
+        <button type="button" class="card-area" onclick="iniciarArea('lectura')">
+          <span class="icono">📖</span>
+          <span class="card-heading">Lectura Crítica</span>
+          <span class="card-description">
             Comprensión, tipos de texto, retórica, literatura y pensamiento
             crítico.
-          </p>
+          </span>
           <span class="badge-area" style="background: #f3e8ff; color: #7c3aed"
             >40 preguntas</span
           >
-        </div>
-        <div class="card-area" onclick="iniciarArea('ciencias')">
-          <div class="icono">🔬</div>
-          <h4>Ciencias Naturales</h4>
-          <p>Biología, química, física y ciencia, tecnología y sociedad.</p>
+        </button>
+        <button type="button" class="card-area" onclick="iniciarArea('ciencias')">
+          <span class="icono">🔬</span>
+          <span class="card-heading">Ciencias Naturales</span>
+          <span class="card-description">Biología, química, física y ciencia, tecnología y sociedad.</span>
           <span class="badge-area" style="background: #dcfce7; color: #16a34a"
             >30 preguntas</span
           >
-        </div>
-        <div class="card-area" onclick="iniciarArea('sociales')">
-          <div class="icono">🌍</div>
-          <h4>Sociales y Ciudadanas</h4>
-          <p>Historia, geografía, constitución y competencias ciudadanas.</p>
+        </button>
+        <button type="button" class="card-area" onclick="iniciarArea('sociales')">
+          <span class="icono">🌍</span>
+          <span class="card-heading">Sociales y Ciudadanas</span>
+          <span class="card-description">Historia, geografía, constitución y competencias ciudadanas.</span>
           <span class="badge-area" style="background: #fef9c3; color: #ca8a04"
             >30 preguntas</span
           >
-        </div>
-        <div class="card-area" onclick="iniciarArea('ingles')">
-          <div class="icono">🇺🇸</div>
-          <h4>Inglés</h4>
-          <p>Grammar, vocabulary, reading comprehension and language use.</p>
+        </button>
+        <button type="button" class="card-area" onclick="iniciarArea('ingles')">
+          <span class="icono">🇺🇸</span>
+          <span class="card-heading">Inglés</span>
+          <span class="card-description">Grammar, vocabulary, reading comprehension and language use.</span>
           <span class="badge-area" style="background: #fee2e2; color: #dc2626"
             >30 preguntas</span
           >
-        </div>
+        </button>
       </div>
     </div>
 
@@ -406,198 +411,198 @@
       <div class="selector-area">
         <h4>📐 Matemáticas</h4>
         <div class="temas-grid" id="temas-mat">
-          <div
+          <button type="button"
             class="tema-chip"
             data-area="matematicas"
             data-tema="numerico"
             onclick="toggleTema(this)"
           >
             Pensamiento Numérico
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="matematicas"
             data-tema="algebra"
             onclick="toggleTema(this)"
           >
             Álgebra
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="matematicas"
             data-tema="geometria"
             onclick="toggleTema(this)"
           >
             Geometría
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="matematicas"
             data-tema="estadistica"
             onclick="toggleTema(this)"
           >
             Estadística
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="matematicas"
             data-tema="calculo"
             onclick="toggleTema(this)"
           >
             Cálculo y Funciones
-          </div>
+          </button>
         </div>
       </div>
 
       <div class="selector-area">
         <h4>📖 Lectura Crítica</h4>
         <div class="temas-grid" id="temas-lec">
-          <div
+          <button type="button"
             class="tema-chip"
             data-area="lectura"
             data-tema="comprension"
             onclick="toggleTema(this)"
           >
             Comprensión Textual
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="lectura"
             data-tema="tipos"
             onclick="toggleTema(this)"
           >
             Tipos de Texto
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="lectura"
             data-tema="retorica"
             onclick="toggleTema(this)"
           >
             Retórica y Discurso
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="lectura"
             data-tema="literatura"
             onclick="toggleTema(this)"
           >
             Literatura y Contexto
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="lectura"
             data-tema="critico"
             onclick="toggleTema(this)"
           >
             Pensamiento Crítico
-          </div>
+          </button>
         </div>
       </div>
 
       <div class="selector-area">
         <h4>🔬 Ciencias Naturales</h4>
         <div class="temas-grid">
-          <div
+          <button type="button"
             class="tema-chip"
             data-area="ciencias"
             data-tema="biologia"
             onclick="toggleTema(this)"
           >
             Biología
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="ciencias"
             data-tema="quimica"
             onclick="toggleTema(this)"
           >
             Química
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="ciencias"
             data-tema="fisica"
             onclick="toggleTema(this)"
           >
             Física
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="ciencias"
             data-tema="cts"
             onclick="toggleTema(this)"
           >
             CTS
-          </div>
+          </button>
         </div>
       </div>
 
       <div class="selector-area">
         <h4>🌍 Sociales y Ciudadanas</h4>
         <div class="temas-grid">
-          <div
+          <button type="button"
             class="tema-chip"
             data-area="sociales"
             data-tema="historia"
             onclick="toggleTema(this)"
           >
             Historia de Colombia
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="sociales"
             data-tema="geografia"
             onclick="toggleTema(this)"
           >
             Geografía
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="sociales"
             data-tema="constitucion"
             onclick="toggleTema(this)"
           >
             Constitución Política
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="sociales"
             data-tema="ciudadanas"
             onclick="toggleTema(this)"
           >
             Competencias Ciudadanas
-          </div>
+          </button>
         </div>
       </div>
 
       <div class="selector-area">
         <h4>🇺🇸 Inglés</h4>
         <div class="temas-grid">
-          <div
+          <button type="button"
             class="tema-chip"
             data-area="ingles"
             data-tema="grammar"
             onclick="toggleTema(this)"
           >
             Grammar
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="ingles"
             data-tema="vocabulary"
             onclick="toggleTema(this)"
           >
             Vocabulary
-          </div>
-          <div
+          </button>
+          <button type="button"
             class="tema-chip"
             data-area="ingles"
             data-tema="reading"
             onclick="toggleTema(this)"
           >
             Reading Comprehension
-          </div>
+          </button>
         </div>
       </div>
 
@@ -637,7 +642,6 @@
 
       function toggleTema(el) {
         el.classList.toggle("sel");
-        const key = el.dataset.area + "|" + el.dataset.tema;
         if (el.classList.contains("sel")) {
           temasSeleccionados.push({
             area: el.dataset.area,

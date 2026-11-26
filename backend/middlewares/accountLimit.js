@@ -6,7 +6,10 @@ module.exports=function accountLimit(options={}){
  const write=rateLimit({limit:120,key,...options.write});
  const profile=rateLimit({limit:12,key,...options.profile});
  return (req,res,next)=>{
-  const limiter=req.method==='GET'?read:req.path==='/perfil/actualizar'?profile:req.path==='/progreso-area'?learning:write;
+  let limiter = write;
+  if (req.method === 'GET') limiter = read;
+  else if (req.path === '/perfil/actualizar') limiter = profile;
+  else if (req.path === '/progreso-area') limiter = learning;
   return limiter(req,res,next);
  };
 };

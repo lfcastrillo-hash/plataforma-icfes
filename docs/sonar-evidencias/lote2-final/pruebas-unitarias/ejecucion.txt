@@ -1,0 +1,152 @@
+✔ SEC CSP de las 20 páginas: sin unsafe-inline/eval para scripts; API restrictiva (1767.6572ms)
+✔ IT01/CU02 registro, duplicado normalizado y hash en PostgreSQL (6814.9ms)
+✔ IT01 negativos de autenticación y entrada obligatoria (69.6304ms)
+✔ IT02/CU03 progreso aislado, monotónico, persistente e idempotente (579.5299ms)
+✔ IT02 límites y tipos de aprendizaje (85.775ms)
+✔ IT03/CU11 crear clases, rol y propietario (80.7133ms)
+✔ IT04 inscripciones, duplicados y promedio entre cinco áreas (140.9263ms)
+✔ IT05 anuncios disponibles solo para inscritos (59.2249ms)
+✔ IT06/CU08 perfil, cambio correo conserva clases y progreso por ID (697.2096ms)
+✔ IT07 foto persistida en BD, límites y archivos peligrosos rechazados (157.0113ms)
+✔ IT08 contraseña revoca otras sesiones; logout revoca también JWT copiado (1238.1389ms)
+✔ CU05 simulacro: calificación servidor, idempotencia y aislamiento (378.4085ms)
+✔ IT09 retiro, eliminación transaccional y sin huérfanos (67.8938ms)
+✔ SEC origen, endpoints desconocidos y health (40.9717ms)
+✔ DB-MIG copia del esquema inferido: migración idempotente conserva avances y correo deja de ser identidad (2111.6297ms)
+✔ DB-MIG duplicados normalizados abortan sin borrar cuentas (1074.1763ms)
+✔ SEC progreso: no acreditar porcentajes, estados, booleanos ni ejercicios inexistentes (2912.817ms)
+✔ SEC progreso: conservar agregado y estado históricos sin aceptar otro estado desde el cliente (1859.9138ms)
+✔ Regresión: general completo y rechazo de parcial e identificadores no canónicos (2933.5291ms)
+✔ Regresión: contraseña cambiada antes de crear sesión invalida login anterior (2598.3505ms)
+✔ SEC cuota general pública y autenticaciones exitosas no consumen intentos fallidos (5150.1578ms)
+✔ SEC cuotas por usuario: lecturas, aprendizaje, perfil y escrituras independientes (2499.677ms)
+✔ M1-LEGACY conversión en login solo con compatibilidad explícita; no modifica clave incorrecta (2270.4922ms)
+✔ INT-ASC repositorio PostgreSQL → transacción → rollback real (921.873ms)
+✔ INT-ASC migración repetible y persistencia en disco después de reiniciar (4624.1781ms)
+✔ SCOPE IA retirada: /chat responde 410 sin proveedor ni credenciales (972.4214ms)
+✔ SEC límite de intentos y recuperación de fallo de BD sin exponer SQL (929.0363ms)
+✔ SEC archivos históricos HTML no se sirven; imágenes conservan compatibilidad (1002.5068ms)
+✔ AC01 cinco módulos: 25 temas, 200 preguntas, cuatro opciones distintas, feedback y navegación (635.8402ms)
+✔ AC02 se conservan las claves válidas anteriores; solo se corrige la clave errónea autorizada (1391.2933ms)
+✔ AC03 CSS, estilos inline e imágenes existentes conservados (1501.9964ms)
+✔ AC04 soluciones numéricas nuevas y correcciones algebraicas comprobadas de forma independiente (523.1349ms)
+✔ CSP autoriza hashes exactos de scripts y handlers normalizados por HTML (7.7721ms)
+✔ DB configuración: local aislado y pool acotado (1.4327ms)
+✔ DB configuración: falta URL y datos incompletos no se filtran (0.6766ms)
+✔ DB configuración: local-test no admite remoto ni nombre no dedicado (0.2198ms)
+✔ DB configuración: TLS remoto y producción siempre verifican certificado (0.3172ms)
+✔ DB configuración: rechaza SSL ambiguo, CA ausente y pool inválido (0.8815ms)
+✔ M1-CE correo "" (1.4906ms)
+✔ M1-CE correo "x" (0.1255ms)
+✔ M1-CE correo "a@example.test" (0.191ms)
+✔ M1-CE correo " a@example.test " (0.1231ms)
+✔ M1-CE correo "a@b" (0.0797ms)
+✔ M1-CE correo null (0.062ms)
+✔ M1-CE correo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (0.0778ms)
+✔ M1-VL contraseña longitud 0 (0.233ms)
+✔ M1-VL contraseña longitud 1 (0.1245ms)
+✔ M1-VL contraseña longitud 7 (0.0655ms)
+✔ M1-VL contraseña longitud 8 (0.0479ms)
+✔ M1-VL contraseña longitud 9 (0.0429ms)
+✔ M1-VL contraseña longitud 127 (0.0412ms)
+✔ M1-VL contraseña longitud 128 (0.0406ms)
+✔ M1-VL contraseña longitud 129 (0.0389ms)
+✔ M2-VL porcentaje -1 (0.1137ms)
+✔ M2-VL porcentaje 0 (0.0424ms)
+✔ M2-VL porcentaje 0.1 (0.0661ms)
+✔ M2-VL porcentaje 99.9 (0.0475ms)
+✔ M2-VL porcentaje 100 (0.0339ms)
+✔ M2-VL porcentaje 101 (0.0633ms)
+✔ M2-VL porcentaje NaN (0.0339ms)
+✔ M2-VL porcentaje Infinity (0.0403ms)
+✔ M2-VL porcentaje 50 (0.0461ms)
+✔ M2-VL porcentaje null (0.0482ms)
+✔ M4/M5-VL nombre 0 (0.0974ms)
+✔ M4/M5-VL nombre 1 (0.057ms)
+✔ M4/M5-VL nombre 119 (0.0372ms)
+✔ M4/M5-VL nombre 120 (0.033ms)
+✔ M4/M5-VL nombre 121 (0.0505ms)
+✔ M5-VL biografía 0 (0.0793ms)
+✔ M5-VL biografía 1 (0.036ms)
+✔ M5-VL biografía 1999 (0.1019ms)
+✔ M5-VL biografía 2000 (0.0413ms)
+✔ M5-VL biografía 2001 (0.0338ms)
+✔ M4-VL anuncio 0 (0.0716ms)
+✔ M4-VL anuncio 1 (0.0367ms)
+✔ M4-VL anuncio 4999 (0.0525ms)
+✔ M4-VL anuncio 5000 (0.0348ms)
+✔ M4-VL anuncio 5001 (0.0317ms)
+✔ M4-CE identificador 0 (0.1249ms)
+✔ M4-CE identificador -1 (0.0708ms)
+✔ M4-CE identificador abc (0.0303ms)
+✔ M4-CE identificador 1 OR 1=1 (0.031ms)
+✔ M4-CE identificador 1 (0.0303ms)
+✔ M4-CE identificador 1 (0.0261ms)
+✔ M4-CE identificador 1.2 (0.0305ms)
+✔ M4-CE identificador 9007199254740992 (0.0297ms)
+✔ M1-CB scrypt, sal única y verificación segura (1358.1665ms)
+✔ M2-CB estado, duplicados y límites reales 5x8 (0.8067ms)
+✔ M3-CE/VL cero, todos, omitidos, repetidos y respuestas falsificadas (0.7267ms)
+✔ M3-CB configuración válida y caminos inválidos (0.2692ms)
+✔ M3-REANUDAR estado recuperable y cachés inválidas (1.0593ms)
+✔ M5-CE clasificación de firma (no acredita decodificación de contenido) (0.6435ms)
+✔ Imagen: decodifica PNG/JPEG/WebP y conserva dimensiones y píxeles PNG (22.3969ms)
+✔ Imagen: rechaza cabeceras falsas, truncados, SVG, exceso y demasiados píxeles (89.7269ms)
+✔ Catálogo del servidor: 200 ejercicios existentes, cuatro opciones y evaluación de selección (3.0432ms)
+✔ QA métricas distinguen regex, cadenas, comentarios, funciones y clases reales (10.1837ms)
+✔ Regresión: respuesta atrasada de clase no reemplaza estudiantes activos (3.1822ms)
+✔ Regresión: cola conserva varios UUID, reintenta y aísla cuentas (24.9192ms)
+✔ Límites: ventana, Retry-After, cuentas separadas y mapa acotado (1.3197ms)
+✔ Límite de autenticación descuenta respuestas exitosas (0.2526ms)
+✔ Correo: mantiene dominio, longitud y rechazo de entradas peligrosas (1.1373ms)
+✔ Perfil compartido: FormData, identidad y mensajes conservados (2.0987ms)
+✔ M2 aislamiento en el mismo navegador, datos dañados y compatibilidad sin adjudicar dueño (2.7093ms)
+ℹ tests 103
+ℹ suites 0
+ℹ pass 103
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54120.3821
+ℹ start of coverage report
+ℹ ------------------------------------------------------------------------------
+ℹ file                          | line % | branch % | funcs % | uncovered lines
+ℹ ------------------------------------------------------------------------------
+ℹ backend                       |        |          |         |
+ℹ  config.js                    | 100.00 |    33.33 |  100.00 |
+ℹ  controllers                  |        |          |         |
+ℹ   auth.controller.js          | 100.00 |   100.00 |  100.00 |
+ℹ   clases.controller.js        | 100.00 |    95.92 |   94.12 |
+ℹ   perfil.controller.js        | 100.00 |    88.89 |   80.00 |
+ℹ   progreso.controller.js      |  46.67 |   100.00 |   33.33 | 4-7 11-14
+ℹ   progresoAreas.controller.js | 100.00 |   100.00 |  100.00 |
+ℹ  lib                          |        |          |         |
+ℹ   catalogo-aprendizaje.js     | 100.00 |    83.33 |  100.00 |
+ℹ   csp.js                      | 100.00 |    94.44 |  100.00 |
+ℹ   database-config.js          | 100.00 |    86.05 |  100.00 |
+ℹ   images.js                   | 100.00 |    94.74 |  100.00 |
+ℹ   passwords.js                | 100.00 |    90.48 |  100.00 |
+ℹ   progress.js                 | 100.00 |    90.00 |  100.00 |
+ℹ   transaction.js              | 100.00 |    80.00 |  100.00 |
+ℹ   validation.js               | 100.00 |   100.00 |  100.00 |
+ℹ  middlewares                  |        |          |         |
+ℹ   access.js                   | 100.00 |   100.00 |  100.00 |
+ℹ   accountLimit.js             | 100.00 |   100.00 |  100.00 |
+ℹ   rateLimit.js                | 100.00 |   100.00 |  100.00 |
+ℹ   verificarToken.js           |  89.47 |    86.67 |  100.00 | 17-18
+ℹ  routes                       |        |          |         |
+ℹ   auth.routes.js              | 100.00 |   100.00 |  100.00 |
+ℹ   clases.routes.js            | 100.00 |   100.00 |  100.00 |
+ℹ   perfil.routes.js            | 100.00 |   100.00 |  100.00 |
+ℹ   progreso.routes.js          | 100.00 |   100.00 |  100.00 |
+ℹ   progresoAreas.routes.js     | 100.00 |   100.00 |  100.00 |
+ℹ   simulacros.routes.js        | 100.00 |    90.48 |  100.00 |
+ℹ  server.js                    |  89.06 |    66.67 |   83.33 | 56-62
+ℹ frontend                      |        |          |         |
+ℹ  js                           |        |          |         |
+ℹ   simulacro-core.js           |  98.28 |    95.08 |  100.00 | 4
+ℹ ------------------------------------------------------------------------------
+ℹ all files                     |  97.31 |    91.56 |   94.74 |
+ℹ ------------------------------------------------------------------------------
+ℹ end of coverage report

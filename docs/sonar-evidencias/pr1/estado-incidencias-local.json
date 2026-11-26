@@ -1,0 +1,250 @@
+[
+  {
+    "key": "AaIFEao5a6Y_-8adSXiR",
+    "rule": "javascript:S3800",
+    "file": "backend/lib/database-config.js",
+    "line": 19,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "Opciones TLS retornan siempre un objeto; contrato pg ssl:false preservado"
+  },
+  {
+    "key": "AaIFEarna6Y_-8adSXiU",
+    "rule": "Web:S6819",
+    "file": "frontend/panel-profesor.html",
+    "line": 188,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEarna6Y_-8adSXiV",
+    "rule": "Web:S6819",
+    "file": "frontend/panel-profesor.html",
+    "line": 201,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiW",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 356,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiX",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 366,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiY",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 377,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiZ",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 385,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXia",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 393,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXib",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 409,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXic",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 417,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXid",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 425,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXie",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 433,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXif",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 441,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXig",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 455,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXih",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 463,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXii",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 471,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXij",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 479,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXik",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 487,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXil",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 501,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXim",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 509,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXin",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 517,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXio",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 525,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXip",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 539,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiq",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 547,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXir",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 555,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXis",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 563,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXit",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 577,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiu",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 585,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEar8a6Y_-8adSXiv",
+    "rule": "Web:S6819",
+    "file": "frontend/simulacro-selector.html",
+    "line": 593,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "28 controles reemplazados por botones nativos; teclado del navegador, sin role redundante"
+  },
+  {
+    "key": "AaIFEaqka6Y_-8adSXiS",
+    "rule": "javascript:S9382",
+    "file": "frontend/js/prep.js",
+    "line": 60,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "Envio secuencial mediante recursion asincrona; conserva orden y rechazo ante fallo"
+  },
+  {
+    "key": "AaIFEaqqa6Y_-8adSXiT",
+    "rule": "javascript:S2681",
+    "file": "frontend/js/perfil-estudiante.js",
+    "line": 66,
+    "status": "Correccion local candidata; pendiente confirmacion oficial",
+    "action": "Guardia de FileReader con llaves e indentacion correcta"
+  }
+]

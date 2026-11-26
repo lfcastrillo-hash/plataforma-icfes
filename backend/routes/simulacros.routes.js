@@ -11,11 +11,18 @@ router.post('/simulacros', auth, role('estudiante'), async (req, res) => {
     || !Number.isInteger(segundos) || segundos < 0 || segundos > 86400) return fail(res, 400, 'Resultado inválido.');
   const questions = [], answers = [], seen = new Set();
   for (const r of respuestas) {
-    const match = typeof r?.id === 'string' && r.id.match(/^(matematicas|lectura|ciencias|sociales|ingles):(\d+)$/);
+    const match = typeof r?.id === 'string' && r.id.match(/^(matematicas|lectura|ciencias|sociales|ingles):(0|[1-9]\d*)$/);
     const p = match && BANCOS[match[1]][Number(match[2])];
     if (!p || seen.has(r.id) || (r.seleccionada !== null && (!Number.isInteger(r.seleccionada) || r.seleccionada < 0 || r.seleccionada >= p.opciones.length))) return fail(res, 400, 'Pregunta o respuesta inválida.');
     seen.add(r.id); questions.push({ ...p, area: match[1] });
     answers.push({ idx: answers.length, seleccionada: r.seleccionada, omitida: r.seleccionada === null });
+  }
+  if (modalidad === 'general') {
+    const counts = Object.fromEntries(Object.keys(CONFIG_AREAS).map(area => [area, 0]));
+    for (const question of questions) counts[question.area]++;
+    if (Object.entries(CONFIG_AREAS).some(([area, config]) => counts[area] !== config.nGeneral)) {
+      return fail(res, 400, 'El simulacro general requiere las preguntas de sus cinco áreas.');
+    }
   }
   const resultado = { ...score(questions, answers, CONFIG_AREAS), segundos, respuestas };
   const pool = req.app.locals.pool;

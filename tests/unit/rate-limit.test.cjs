@@ -8,5 +8,5 @@ test('Límites: ventana, Retry-After, cuentas separadas y mapa acotado',()=>{
 });
 test('Límite de autenticación descuenta respuestas exitosas',()=>{
  const middleware=rateLimit({limit:1,skipSuccessfulRequests:true});
- for(let i=0;i<3;i++){const res=new EventEmitter();res.statusCode=200;middleware({ip:'a'},res,()=>{});res.emit('finish');}
+ for(let i=0;i<3;i++){const res=new EventEmitter();res.statusCode=200;let allowed=false;middleware({ip:'a'},res,()=>{allowed=true;});assert.equal(allowed,true);res.emit('finish');}
 });

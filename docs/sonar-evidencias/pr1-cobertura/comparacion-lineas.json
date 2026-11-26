@@ -1,0 +1,174 @@
+{
+  "rows": [
+    {
+      "file": "backend/lib/database-config.js",
+      "previousUncovered": [
+        26,
+        31
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        26,
+        31
+      ]
+    },
+    {
+      "file": "backend/server.js",
+      "previousUncovered": [
+        53
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        53
+      ]
+    },
+    {
+      "file": "frontend/js/panel-estudiante.js",
+      "previousUncovered": [
+        128
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        128
+      ]
+    },
+    {
+      "file": "frontend/js/panel-profesor.js",
+      "previousUncovered": [
+        119,
+        120,
+        122,
+        211,
+        222,
+        541,
+        544,
+        549
+      ],
+      "nowExecuted": [
+        211,
+        541
+      ],
+      "remaining": [
+        119,
+        120,
+        122,
+        222,
+        544,
+        549
+      ]
+    },
+    {
+      "file": "frontend/js/perfil-estudiante.js",
+      "previousUncovered": [
+        65,
+        146,
+        187
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        65,
+        146,
+        187
+      ]
+    },
+    {
+      "file": "frontend/js/perfil-profesor.js",
+      "previousUncovered": [
+        129,
+        153,
+        179
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        129,
+        153,
+        179
+      ]
+    },
+    {
+      "file": "frontend/js/perfil.js",
+      "previousUncovered": [
+        43
+      ],
+      "nowExecuted": [],
+      "remaining": [
+        43
+      ]
+    },
+    {
+      "file": "frontend/js/prep.js",
+      "previousUncovered": [
+        45,
+        46,
+        47,
+        49,
+        50,
+        51,
+        53,
+        54,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        65,
+        66,
+        68,
+        69,
+        70,
+        71,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        82,
+        83,
+        110
+      ],
+      "nowExecuted": [
+        45,
+        46,
+        47,
+        49,
+        50,
+        51,
+        53,
+        54,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        65,
+        66,
+        68,
+        69,
+        70,
+        71,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        82,
+        83,
+        110
+      ],
+      "remaining": []
+    }
+  ],
+  "total": 51,
+  "hit": 34,
+  "projectionOriginal128": 86.71875
+}
