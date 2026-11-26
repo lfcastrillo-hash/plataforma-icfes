@@ -1,28 +1,37 @@
 name: SonarQube Cloud OIDC
+
 on:
+  push:
+    branches: [main]
+  workflow_dispatch:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened, ready_for_review]
+
 permissions:
   contents: read
   id-token: write
+
 concurrency:
-  group: sonar-quality-${{ github.event.pull_request.number }}
+  group: sonar-quality-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: false
+
 jobs:
   quality:
-    if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'ci/sonar-oidc-validation'
+    if: (github.event_name != 'pull_request' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'ci/sonar-oidc-validation')
     runs-on: ubuntu-latest
     env:
       NODE_ENV: test
       QA_DATABASE_ENGINE: pglite
       QA_EVIDENCE_ROOT: .qa-sonar
+
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -30,16 +39,19 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             backend/package-lock.json
+
       - run: npm ci
       - run: npm --prefix backend ci
       - run: npm run test:coverage
       - run: node scripts/qa/validate-lcov.cjs .qa-sonar/pruebas-unitarias/lcov.info
+
       - name: Authenticate with GitHub OIDC
         uses: SonarSource/sonarqube-auth-action@v1
         id: auth
         with:
           project-key: lfcastrillo-hash_plataforma-icfes
           sonar-region: eu
+
       - name: Analyze and wait for the original Quality Gate
         uses: SonarSource/sonarqube-scan-action@v8
         with:
